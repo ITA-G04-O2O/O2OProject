@@ -1,0 +1,28 @@
+1使用的时候 首先把classpath 改成公司的1.7版本  
+  步骤 右键properties --> java complier ,java built path
+  
+2 改springmvc-servlet 位于web-inf 目录下
+    我使用的是mysql  改成你的oracle
+   <!-- 配置数据源 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:mysql://localhost:3306/o2olocal</value>
+		</property>
+		<property name="username">
+			<value>admin</value>
+		</property>
+		<property name="password">
+			<value>admin</value>
+		</property>
+	</bean>
+	
+	
+	改databaseplatform 为oracle 方言
+	 <!--指定实现JPA的适配器-->  
+    <bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">  
+        <property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" />  
+    </bean>  
+ 
