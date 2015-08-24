@@ -1,3 +1,6 @@
+ body{
+ 	background: #FAFAFA;
+ }
  .border {
  	border: 1px solid #000;
  }
@@ -66,7 +69,7 @@
  	margin-top: 150px;
  }
  .jumbotron {
- 	height: 1000px;
+ 	height: 800px;
  }
  .table-right {
  	text-align: right;
