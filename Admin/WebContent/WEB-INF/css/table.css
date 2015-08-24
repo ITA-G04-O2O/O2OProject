@@ -1,0 +1,25 @@
+body {
+	background: #FAFAFA;
+}
+
+.map-footer {
+	bottom: 42px;
+	left: 0;
+	position: absolute;
+	text-align: center;
+	width: 100%;
+}
+
+#searchBarDiv {
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+.title {
+	text-align: center;
+	position: absolute;
+	top: 18%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}

@@ -4,7 +4,7 @@
 $(function () {
 
 	$("#searchBtn").on("click", function () {
-		location.href = 'home.html';
+		location.href = 'WEB-INF/html/home.html';
 	});
 
 

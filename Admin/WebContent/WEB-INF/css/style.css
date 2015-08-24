@@ -1,0 +1,94 @@
+ body{
+ 	background: #FAFAFA;
+ }
+ .border {
+ 	border: 1px solid #000;
+ }
+ .mealBox {
+ 	margin-bottom: 50px;
+ 	padding: 0 10px;
+ 	word-wrap: break-word;
+ }
+ .mealBox img {
+ 	width: 100%;
+ }
+ .mealBox {
+ 	padding: 20px;
+ }
+ .container {} .container-main {
+ 	margin: 20px 10px;
+ }
+ .map-footer-entry {
+ 	padding: 20px 10px;
+ 	bottom: 42px;
+ 	margin: 0 auto;
+ 	text-align: center;
+ }
+ .container-logo {
+ 	height: 100px;
+ }
+ .mainbody {
+ 	margin-top: 50px;
+ }
+ .main-message {
+ 	height: 1000px;
+ 	margin-bottom: 50px;
+ }
+ .cart {
+ 	height: 1000px;
+ 	margin-bottom: 50px;
+ }
+ .merchant-message {
+ 	text-align: center;
+ 	height: 110px;
+ }
+ .small-logo {
+ 	text-align: center;
+ }
+ #small-logo {
+ 	height: 100%;
+ 	padding-top: 30px;
+ }
+ .content-center {
+ 	height: auto;
+ 	padding: 20px;
+ 	align-content: center;
+ }
+ .input-sm {
+ 	width: 50%;
+ }
+ .back_top {
+ 	position: absolute;
+ 	bottom: 0px;
+ }
+ .goodbody {
+ 	text-align: center;
+ 	margin-top: 50px;
+ }
+ .good-message {
+ 	margin-top: 150px;
+ }
+ .jumbotron {
+ 	height: 800px;
+ }
+ .table-right {
+ 	text-align: right;
+ }
+ .buss-notice {
+ 	color: red;
+ }
+ .tbody-scoll {
+ 	height: 800px;
+ 	overflow-y: scroll;
+ }
+ .restaurant {
+ 	margin-top: 30px;
+ 	padding: 10px;
+ }
+ .userbox {
+ 	padding: 10px;
+ 	margin: 10px;
+ }
+ .input-group {
+ 	margin-bottom: 20px;
+ }
