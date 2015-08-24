@@ -23,3 +23,9 @@ body {
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
+.map-footer{
+	border-top: 1px solid black;
+}
+.map-footer-entry{
+	margin-top: 30px;
+}

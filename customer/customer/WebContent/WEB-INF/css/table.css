@@ -23,3 +23,20 @@ body {
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
+.table{
+	background: #FFFFFF;
+}
+.orderlist{
+	background: url(http://xs01.meituan.net/waimai_web/img/order-bot-bg1.png) no-repeat;
+}
+.titleDiv{
+	text-align: center;
+	font-size: 28px;
+	height: 100px;
+}
+.map-footer{
+	border-top: 1px solid black;
+}
+.map-footer-entry{
+	margin-top: 30px;
+}
