@@ -78,3 +78,7 @@
  	height: 800px;
  	overflow-y: scroll;
  }
+ .restaurant {
+ 	margin-top: 30px;
+ 	padding: 10px;
+ }
