@@ -1,10 +1,192 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>welcome</title>
+    <meta charset="UTF-8">
+    <title>SMS - home</title>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .clear {
+            clear: both;
+        }
+
+        body {
+            background: #fafafa;
+        }
+
+        .container-main {
+            background: #fff;
+            border: 1px solid #ddd;
+            width: 1100px;
+            margin-bottom: 50px;
+            padding-bottom: 50px;
+        }
+
+        .container-main .text-muted {
+            color: #bbb;
+        }
+
+        .mealBox {
+            margin-bottom: 50px;
+            padding: 0 10px;
+            word-wrap: break-word;
+        }
+
+        .mealBox img {
+            width: 100%;
+        }
+
+        .breadcrumb-wrapper {
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb {
+            background: #fff;
+            margin-bottom: 0;
+        }
+
+        .main-wrapper {
+            border-right: 1px solid #ddd;
+            border-left: 1px solid #ddd;
+        }
+
+        .myCart {
+            position: relative;
+            padding: 5px 0 0 10px;
+        }
+
+        .myCart i {
+            font-size: 35px;
+            margin-right: 10px;
+        }
+
+        .myCart .badge {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: #e00;
+        }
+
+        .orders {
+            margin-top: 40px;
+            padding: 0 10px 50px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .orders .orderBox {
+            word-wrap: break-word;
+            margin-top: 40px;
+        }
+
+        .orders .orderBox input {
+            width: 60px;
+            display: inline-block;
+        }
+
+        .orders .orderBox button {
+            width: 30px;
+        }
+
+        .orders .orderBox .price {
+            font-weight: bold;
+            font-size: 23px;
+            float: right;
+        }
+
+        .pay .total {
+            font-weight: bold;
+            font-size: 40px;
+            position: relative;
+            top: -5px;
+        }
+
+    </style>
 </head>
+
 <body>
-fuck
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="index.html"><img src="img/title_client.png" width="70px" style="margin-top:8px"></a>
+        </div>
+        <div class="collapse navbar-collapse" id="main-nav">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Hello Elvis</a></li>
+                <li><a href="#"><i class="glyphicon glyphicon-log-out"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container container-main">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="row breadcrumb-wrapper">
+                <div class="col-xs-12">
+                    <ol class="breadcrumb">
+                        <li><a href="#"><img src="img/1.jpg"></a></li>
+                        <li class="active">Confirm</li>
+                        <li class="active">Success</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3">
+                    <ul class="nav nav-pills nav-stacked">
+                        <div class="list-group">
+                            <li role="presentation" class="list-group-item"><b class="text-info"><i
+                                    class="glyphicon glyphicon-fire"></i>&emsp;订单中心</b>
+                            </li>
+                            <li role="presentation" class="list-group-item" id="newOrder"><b class="text-info"><i
+                                    class="glyphicon glyphicon-cutlery"></i>&emsp;新订单</b>
+                            </li>
+                            <li role="presentation" class="list-group-item" id="successOrder"><b class="text-info"><i
+                                    class="glyphicon glyphicon-fire"></i>&emsp;已完成订单</b></li>
+
+                            <li role="presentation" class="list-group-item"><b class="text-info"><i
+                                    class="glyphicon glyphicon-cutlery"></i>&emsp;餐品中心</b>
+                            </li>
+                            <li role="presentation" class="list-group-item" id="menuManager"><b class="text-info"><i
+                                    class="glyphicon glyphicon-cutlery"></i>&emsp;餐品管理</b></li>
+
+                            <li role="presentation" class="list-group-item"><b class="text-info"><i
+                                    class="glyphicon glyphicon-cutlery"></i>&emsp;账户中心</b>
+                            </li>
+                            <li role="presentation" class="list-group-item" id="accountInfo"><b class="text-info"><i
+                                    class="glyphicon glyphicon-fire"></i>&emsp;个人信息</b>
+                            </li>
+                            <li role="presentation" class="list-group-item" id="storeInfo"><b class="text-info"><i
+                                    class="glyphicon glyphicon-cutlery"></i>&emsp;店铺信息</b>
+                            </li>
+                            <li role="presentation" class="list-group-item" id="basicInfo"><b class="text-info "><i
+                                    class="glyphicon glyphicon-cutlery"></i>&emsp;基本信息</b>
+                            </li>
+                        </div>
+                    </ul>
+                </div>
+                <div class="col-xs-9 main-wrapper" id="change">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script>
+    $('.list-group li').on('click', function () {
+        var loadhtml = $(this).attr('id');
+        if (loadhtml) {
+            $('#change').load(loadhtml + '.html');
+        }
+    })
+</script>
 </body>
+
 </html>
