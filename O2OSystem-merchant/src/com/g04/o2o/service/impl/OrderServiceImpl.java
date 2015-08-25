@@ -3,10 +3,15 @@ package com.g04.o2o.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.g04.o2o.dao.OrderDao;
 import com.g04.o2o.entity.Order;
 import com.g04.o2o.service.OrderService;
 
 public class OrderServiceImpl implements OrderService {
+	@Autowired
+	private OrderDao od;
 
 	@Override
 	public List<Order> getAllOrders() {
