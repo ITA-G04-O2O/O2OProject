@@ -19,11 +19,12 @@ public interface MerchantService {
 	 * @return
 	 */
 	public int addMerchant(Merchant merchant);
-	
+
 	/**
 	 * 找到所有商家
+	 * 
 	 * @return
 	 */
 	public List<Merchant> findAllMerchant();
-	
+
 }
