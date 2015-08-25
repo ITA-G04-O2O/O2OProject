@@ -5,7 +5,86 @@
 		<meta charset="UTF-8">
 		<title>SMS - home</title>
 		<link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-		<link rel="stylesheet" href="../css/regist.css">
+		<style>
+			.clear {
+				clear: both;
+			}
+			body {
+				background: #fafafa;
+			}
+			.container-main {
+				background: #fff;
+				border: 1px solid #ddd;
+				width: 1100px;
+				margin-bottom: 50px;
+				padding-bottom: 50px;
+			}
+			.container-main .text-muted {
+				color: #bbb;
+			}
+			.mealBox {
+				margin-bottom: 50px;
+				padding: 0 10px;
+				word-wrap: break-word;
+			}
+			.mealBox img {
+				width: 100%;
+			}
+			.breadcrumb-wrapper {
+				border-bottom: 1px solid #ddd;
+				margin-bottom: 20px;
+			}
+			.breadcrumb {
+				background: #fff;
+				margin-bottom: 0;
+			}
+			.main-wrapper {
+				border-right: 1px solid #ddd;
+				border-left: 1px solid #ddd;
+			}
+			.myCart {
+				position: relative;
+				padding: 5px 0 0 10px;
+			}
+			.myCart i {
+				font-size: 35px;
+				margin-right: 10px;
+			}
+			.myCart .badge {
+				position: absolute;
+				left: 0;
+				top: 0;
+				background-color: #e00;
+			}
+			.orders {
+				margin-top: 40px;
+				padding: 0 10px 50px;
+				overflow-y: auto;
+				overflow-x: hidden;
+			}
+			.orders .orderBox {
+				word-wrap: break-word;
+				margin-top: 40px;
+			}
+			.orders .orderBox input {
+				width: 60px;
+				display: inline-block;
+			}
+			.orders .orderBox button {
+				width: 30px;
+			}
+			.orders .orderBox .price {
+				font-weight: bold;
+				font-size: 23px;
+				float: right;
+			}
+			.pay .total {
+				font-weight: bold;
+				font-size: 40px;
+				position: relative;
+				top: -5px;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -17,7 +96,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a href="storeRegist.html"><img src="../img/logoshow.ico" width="50px" style="margin-top:8px"></a>
+					<a href="index.html"><img src="../img/logoshow.ico" width="50px" style="margin-top:8px"></a>
 				</div>
 				<div class="collapse navbar-collapse" id="main-nav">
 					<ul class="nav navbar-nav navbar-right">
@@ -46,8 +125,9 @@
 							<div id="section1">
 								<div class="form-group">
 									<label class="col-sm-3 col-md-3 control-label">店名:</label>
+
 									<div class="col-sm-6 col-md-6">
-										<input type="text" class="form-control" id="mName" name="mName">
+										<input type="text" class="form-control" id="author" name="author">
 									</div>
 
 								</div>
@@ -56,16 +136,13 @@
 
 									<div class="col-sm-6 col-md-6">
 										<label class="radio-inline">
-											<input type="radio" id="inlineCheckbox1" name="option1" value="1" checked="checked"> 西餐厅
+											<input type="radio" id="inlineCheckbox1" name="option1" checked="checked"> 中餐
 										</label>
-										<label class="radio-inline">
-											<input type="radio" id="inlineCheckbox2" name="option1" value="2"> 中餐厅
+										<label class="checkbox-inline">
+											<input type="radio" id="inlineCheckbox2" name="option1"> 西餐
 										</label>
-										<label class="radio-inline">
-											<input type="radio" id="inlineCheckbox3" name="option1" value="3"> 法式餐厅
-										</label>
-										<label class="radio-inline">
-											<input type="radio" id="inlineCheckbox3" name="option1" value="4"> 泰国餐厅
+										<label class="checkbox-inline">
+											<input type="radio" id="inlineCheckbox3" name="option1"> 饮料
 										</label>
 									</div>
 
@@ -76,18 +153,18 @@
 									<div class="col-sm-6 col-md-6">
 										<div class="input-group">
 											<div class="input-group-btn">
-												<button type="button" id="proBtn" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-													省份<span class="caret"></span></button>
-												<ul class="dropdown-menu" id="province" role="menu" aria-labelledby="province">
-													<!--<li><a href="#">珠海</a></li>
+												<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+													城市<span class="caret"></span></button>
+												<ul class="dropdown-menu">
+													<li><a href="#">珠海</a></li>
 													<li><a href="#">广州</a></li>
 													<li><a href="#">中山</a></li>
-													<li><a href="#">江门</a></li>-->
+													<li><a href="#">江门</a></li>
 												</ul>
 											</div>
 											<div class="input-group-btn">
 												<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-													城市<span class="caret"></span></button>
+													地区<span class="caret"></span></button>
 												<ul class="dropdown-menu">
 													<li><a href="#">高新区</a></li>
 													<li><a href="#">香洲区</a></li>
@@ -101,21 +178,12 @@
 
 								</div>
 								<div class="form-group">
-									<label class="col-sm-3 col-md-3 control-label">营业执照:</label>
-
-									<div class="col-sm-6 col-md-6">
-										<input type="file" class="form-control" id="author" name="author">
-									</div>
-
-								</div>
-								<div class="form-group">
 									<label for="author" class="col-sm-4 col-md-4 control-label"></label>
 
 									<div class="col-sm-4 col-md-4">
 										<button class="btn btn-lg btn-block btn-info nextStep" id="updateSubmit">下一步</button>
 									</div>
 								</div>
-
 							</div>
 							<div id="section2">
 								<div class="form-group">
@@ -143,10 +211,22 @@
 
 								</div>
 								<div class="form-group">
-									<label for="author" class="col-sm-4 col-md-4 control-label"></label>
+									<label class="col-sm-3 col-md-3 control-label">营业执照:</label>
+
+									<div class="col-sm-6 col-md-6">
+										<input type="file" class="form-control" id="author" name="author">
+									</div>
+
+								</div>
+								<div class="form-group">
+									<label for="author" class="col-sm-3 col-md-3 control-label"></label>
 
 									<div class="col-sm-4 col-md-4">
-										<button class="btn btn-lg btn-block btn-info nextStep" id="updateSubmit">下一步</button>
+										<button class="btn btn-lg  btn-info preStep" id="updateSubmit">上一步</button>
+									</div>
+									<div class="col-sm-4 col-md-4">
+
+										<button class="btn btn-lg  btn-info nextStep" id="updateSubmit">确定</button>
 									</div>
 								</div>
 							</div>
@@ -166,7 +246,29 @@
 		</div>
 		<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
 		<script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="../js/regist.js"></script>
+		<script>
+			$(document).ready(function() {
+				$('#section2').hide();
+				$('#section3').hide();
+				var count = 1;
+				$('.nextStep').click(function(index) {
+					$('#section' + count).hide();
+					count++;
+					$('#section' + (count)).show();
+				});
+				$('.preStep').click(function(index) {
+					$('#section' + count).hide();
+					count--;
+					$('#section' + (count)).show();
+				})
+			});
+			$('.list-group li').on('click', function() {
+				var loadhtml = $(this).attr('id');
+				if (loadhtml) {
+					$('#change').load(loadhtml + '.html');
+				}
+			})
+		</script>
 	</body>
 
 </html>
