@@ -10,6 +10,7 @@ import com.g04.o2o.entity.Order;
  * @author OUOK
  *
  */
+
 public interface OrderService {
 	/**
 	 * 獲取所有訂單
