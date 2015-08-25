@@ -14,22 +14,11 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	@Override
-	public String findMenuType() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public boolean addMenuType(String menuType) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
-	public boolean delMenuType(String menuType) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public boolean updMenuType(Integer id, String menuType) {
@@ -93,6 +82,20 @@ public class MenuServiceImpl implements MenuService {
 
 	@Override
 	public boolean updMenuItemScore(Integer id, Double score) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
+	@Override
+	public String findMenuTypeById(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean delMenuType(Integer id) {
 		// TODO Auto-generated method stub
 		return false;
 	}
