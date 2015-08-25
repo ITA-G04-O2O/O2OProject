@@ -50,6 +50,7 @@ public class Order {
 	private Address address;
 	private String userDefineAddress;
 	private Double score;
+	private String comment;
 	/**
 	 * @return the userDefineAddress
 	 */
@@ -201,6 +202,20 @@ public class Order {
 	 */
 	public void setScore(Double score) {
 		this.score = score;
+	}
+
+	/**
+	 * @return the comment
+	 */
+	public String getComment() {
+		return comment;
+	}
+
+	/**
+	 * @param comment the comment to set
+	 */
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 }
