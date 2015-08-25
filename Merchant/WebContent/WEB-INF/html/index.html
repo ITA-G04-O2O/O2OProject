@@ -1,202 +1,231 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="UTF-8">
-    <title>SMS - home</title>
-    <link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .clear {
-            clear: both;
-        }
+	<head>
+		<meta charset="UTF-8">
+		<title>SMS - home</title>
+		<link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+		<style>
+			.clear {
+				clear: both;
+			}
+			body {
+				background: #fafafa;
+			}
+			h3 {
+				text-align: center;
+			}
+			.container-main {
+				background: #fff;
+				border: 1px solid #ddd;
+				/*width: 1100px;*/
+				margin-bottom: 50px;
+				padding-bottom: 50px;
+				height: 800px;
+			}
+			.container-main .text-muted {
+				color: #bbb;
+			}
+			.mealBox {
+				margin-bottom: 50px;
+				padding: 0 10px;
+				word-wrap: break-word;
+			}
+			.mealBox img {
+				width: 100%;
+			}
+			.breadcrumb-wrapper {
+				border-bottom: 1px solid #ddd;
+				margin-bottom: 20px;
+			}
+			.breadcrumb {
+				background: #fff;
+				margin-bottom: 0;
+			}
+			.main-wrapper {
+				border-right: 1px solid #ddd;
+				border-left: 1px solid #ddd;
+			}
+			.myCart {
+				position: relative;
+				padding: 5px 0 0 10px;
+			}
+			.myCart i {
+				font-size: 35px;
+				margin-right: 10px;
+			}
+			.myCart .badge {
+				position: absolute;
+				left: 0;
+				top: 0;
+				background-color: #e00;
+			}
+			.orders {
+				margin-top: 40px;
+				padding: 0 10px 50px;
+				overflow-y: auto;
+				overflow-x: hidden;
+			}
+			.orders .orderBox {
+				word-wrap: break-word;
+				margin-top: 40px;
+			}
+			.orders .orderBox input {
+				width: 60px;
+				display: inline-block;
+			}
+			.orders .orderBox button {
+				width: 30px;
+			}
+			.orders .orderBox .price {
+				font-weight: bold;
+				font-size: 23px;
+				float: right;
+			}
+			.pay .total {
+				font-weight: bold;
+				font-size: 40px;
+				position: relative;
+				top: -5px;
+			}
+			.map-footer {
+				border-top: 1px solid black;
+				text-align: center;
+				width: 100%;
+			}
+			.map-footer-entry {
+				margin-top: 30px;
+			}
+			.center {
+				margin-top: 20px;
+			}
+		</style>
+	</head>
 
-        body {
-            background: #fafafa;
-        }
+	<body>
+		<nav class="navbar navbar-default">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a href="index.html"><img src="../img/logoshow.ico" width="50px" style="margin-top:8px"></a>
+				</div>
+				<div class="collapse navbar-collapse" id="main-nav">
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<a href="#">Hello Okar</a>
+						</li>
+						<li>
+							<a href="#"><i class="glyphicon glyphicon-log-out"></i></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="container container-main">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="row breadcrumb-wrapper">
+						<div class="col-xs-12">
+							<div class="col-xs-2"><img src="../img/logoshow.ico">
+							</div>
+							<div class="col-xs-6">
+								<h2 class="col-xs-6">Okar之家</h2>
+								<div class="center">
+									<span class="label label-default col-xs-6">评分</span>
+									<span class="label label-default col-xs-6">4.0</span>
+								</div>
+							</div>
+							<div class="col-xs-2">
+								<div class="center">
+									<span class="label label-default col-xs-12">平均送餐时间</span>
+									<span class="label label-default col-xs-12">20分</span>
+								</div>
+							</div>
+							<div class="col-xs-2">
+								<div class="row center">
+									<i class="glyphicon glyphicon-star "></i><span class="label label-default col-xs-10">收藏数</span><span class="label label-default col-xs-12">666666</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-3">
+							<ul class="nav nav-pills nav-stacked">
+								<div class="list-group">
+									<li role="presentation" class="list-group-item">
+										<b class="text-info"><i
+										class="glyphicon glyphicon-fire"></i>&emsp;订单中心</b>
+									</li>
+									<li role="presentation" class="list-group-item" id="newOrder">
+										<b class="text-info"><i
+										class="glyphicon glyphicon-cutlery"></i>&emsp;新订单</b>
+									</li>
+									<li role="presentation" class="list-group-item" id="successOrder">
+										<b class="text-info"><i
+										class="glyphicon glyphicon-fire"></i>&emsp;已完成订单</b>
+									</li>
 
-        .container-main {
-            background: #fff;
-            border: 1px solid #ddd;
-            width: 1100px;
-            margin-bottom: 50px;
-            padding-bottom: 50px;
-        }
+									<li role="presentation" class="list-group-item">
+										<b class="text-info"><i
+										class="glyphicon glyphicon-cutlery"></i>&emsp;餐品中心</b>
+									</li>
+									<li role="presentation" class="list-group-item" id="menuManager">
+										<b class="text-info"><i
+										class="glyphicon glyphicon-cutlery"></i>&emsp;餐品管理</b>
+									</li>
 
-        .container-main .text-muted {
-            color: #bbb;
-        }
+									<li role="presentation" class="list-group-item">
+										<b class="text-info"><i
+										class="glyphicon glyphicon-cutlery"></i>&emsp;账户中心</b>
+									</li>
+									<li role="presentation" class="list-group-item" id="accountInfo">
+										<b class="text-info"><i
+										class="glyphicon glyphicon-fire"></i>&emsp;个人信息</b>
+									</li>
+									<li role="presentation" class="list-group-item" id="storeInfo">
+										<b class="text-info"><i
+										class="glyphicon glyphicon-cutlery"></i>&emsp;店铺信息</b>
+									</li>
+									<li role="presentation" class="list-group-item" id="basicInfo">
+										<b class="text-info "><i
+										class="glyphicon glyphicon-cutlery"></i>&emsp;基本信息</b>
+									</li>
+								</div>
+							</ul>
+						</div>
+						<div class="col-xs-9 main-wrapper" id="change">
 
-        .mealBox {
-            margin-bottom: 50px;
-            padding: 0 10px;
-            word-wrap: break-word;
-        }
-
-        .mealBox img {
-            width: 100%;
-        }
-
-        .breadcrumb-wrapper {
-            border-bottom: 1px solid #ddd;
-            margin-bottom: 20px;
-        }
-
-        .breadcrumb {
-            background: #fff;
-            margin-bottom: 0;
-        }
-
-        .main-wrapper {
-            border-right: 1px solid #ddd;
-            border-left: 1px solid #ddd;
-        }
-
-        .myCart {
-            position: relative;
-            padding: 5px 0 0 10px;
-        }
-
-        .myCart i {
-            font-size: 35px;
-            margin-right: 10px;
-        }
-
-        .myCart .badge {
-            position: absolute;
-            left: 0;
-            top: 0;
-            background-color: #e00;
-        }
-
-        .orders {
-            margin-top: 40px;
-            padding: 0 10px 50px;
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
-
-        .orders .orderBox {
-            word-wrap: break-word;
-            margin-top: 40px;
-        }
-
-        .orders .orderBox input {
-            width: 60px;
-            display: inline-block;
-        }
-
-        .orders .orderBox button {
-            width: 30px;
-        }
-
-        .orders .orderBox .price {
-            font-weight: bold;
-            font-size: 23px;
-            float: right;
-        }
-
-        .pay .total {
-            font-weight: bold;
-            font-size: 40px;
-            position: relative;
-            top: -5px;
-        }
-
-    </style>
-</head>
-
-<body>
-<nav class="navbar navbar-default">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="index.html"><img src="../img/logoshow.ico" width="50px" style="margin-top:8px"></a>
-        </div>
-        <div class="collapse navbar-collapse" id="main-nav">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Hello Okar</a></li>
-                <li><a href="#"><i class="glyphicon glyphicon-log-out"></i></a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<div class="container container-main">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="row breadcrumb-wrapper">
-                <div class="col-xs-12">
-                    <div class="col-xs-2"><img src="../img/logoshow.ico"></div>
-                    <div class="col-xs-6"><h2 class="col-xs-6">Okar之家</h2><span
-                            class="label label-default col-xs-6">评分</span><span
-                            class="label label-default col-xs-6">4.0</span></div>
-                    <div class="col-xs-2"><span class="label label-default col-xs-12">平均送餐时间</span><span
-                            class="label label-default col-xs-12">20分</span></div>
-                    <div class="col-xs-2">
-                        <div class="row"><i
-                                class="glyphicon glyphicon-star "></i><span
-                                class="label label-default col-xs-10">收藏数</span><span
-                                class="label label-default col-xs-12">666666</span></div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-3">
-                    <ul class="nav nav-pills nav-stacked">
-                        <div class="list-group">
-                            <li role="presentation" class="list-group-item"><b class="text-info"><i
-                                    class="glyphicon glyphicon-fire"></i>&emsp;订单中心</b>
-                            </li>
-                            <li role="presentation" class="list-group-item" id="newOrder"><b class="text-info"><i
-                                    class="glyphicon glyphicon-cutlery"></i>&emsp;新订单</b>
-                            </li>
-                            <li role="presentation" class="list-group-item" id="successOrder"><b class="text-info"><i
-                                    class="glyphicon glyphicon-fire"></i>&emsp;已完成订单</b></li>
-
-                            <li role="presentation" class="list-group-item"><b class="text-info"><i
-                                    class="glyphicon glyphicon-cutlery"></i>&emsp;餐品中心</b>
-                            </li>
-                            <li role="presentation" class="list-group-item" id="menuManager"><b class="text-info"><i
-                                    class="glyphicon glyphicon-cutlery"></i>&emsp;餐品管理</b></li>
-
-                            <li role="presentation" class="list-group-item"><b class="text-info"><i
-                                    class="glyphicon glyphicon-cutlery"></i>&emsp;账户中心</b>
-                            </li>
-                            <li role="presentation" class="list-group-item" id="accountInfo"><b class="text-info"><i
-                                    class="glyphicon glyphicon-fire"></i>&emsp;个人信息</b>
-                            </li>
-                            <li role="presentation" class="list-group-item" id="storeInfo"><b class="text-info"><i
-                                    class="glyphicon glyphicon-cutlery"></i>&emsp;店铺信息</b>
-                            </li>
-                            <li role="presentation" class="list-group-item" id="basicInfo"><b class="text-info "><i
-                                    class="glyphicon glyphicon-cutlery"></i>&emsp;基本信息</b>
-                            </li>
-                        </div>
-                    </ul>
-                </div>
-                <div class="col-xs-9 main-wrapper" id="change">
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
-<script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#change').load('newOrder.html');
-    });
-    $('.list-group li').on('click', function () {
-        var loadhtml = $(this).attr('id');
-        if (loadhtml) {
-            $('#change').load(loadhtml + '.html');
-        }
-    })
-</script>
-</body>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="map-footer" class="map-footer">
+			<div class="map-footer-entry">
+				<a rel="nofollow" target="_blank" href="http://weibo.com/u/3949575070" class="map-footer-link">关注微博</a>
+				<i class="map-footer-separator">|</i>
+				<a rel="nofollow" href="javascript:;" class="map-footer-link map-footer-weixing">关注微信</a>
+				<i class="map-footer-separator">|</i>
+				<a rel="nofollow" target="_blank" href="http://kaidian.waimai.meituan.com" class="map-footer-link">我要开店</a>
+			</div>
+		</div>
+		<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+		<script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				$('#change').load('newOrder.html');
+			});
+			$('.list-group li').on('click', function() {
+				var loadhtml = $(this).attr('id');
+				if (loadhtml) {
+					$('#change').load(loadhtml + '.html');
+				}
+			})
+		</script>
+	</body>
 
 </html>
