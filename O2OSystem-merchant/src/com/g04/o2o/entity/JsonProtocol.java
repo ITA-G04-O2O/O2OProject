@@ -4,19 +4,22 @@ import java.util.List;
 
 public class JsonProtocol {
 	private Boolean result;
-	private List<Object> proList;
+	private Object object;
 	public Boolean getResult() {
 		return result;
 	}
 	public void setResult(Boolean result) {
 		this.result = result;
 	}
-	public List<Object> getProList() {
-		return proList;
+
+
+	public Object getObject() {
+		return object;
 	}
-	public void setProList(List<Object> proList) {
-		this.proList = proList;
+	public void setObject(Object object) {
+		this.object = object;
 	}
+	
 	public JsonProtocol() {
 		super();
 	}
