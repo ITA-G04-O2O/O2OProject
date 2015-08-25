@@ -21,7 +21,7 @@ public interface MenuService {
 	 * 获取某一个菜品种类
 	 * @return
 	 */
-	String findMenuType();
+	String findMenuTypeById(Integer id);
 	/**
 	 * 添加菜品种类
 	 * @param menuType
@@ -33,7 +33,7 @@ public interface MenuService {
 	 * @param menuType
 	 * @return
 	 */
-	boolean delMenuType(String menuType);
+	boolean delMenuType(Integer id);
 	/**
 	 * 更新菜品种类
 	 * @param menuType

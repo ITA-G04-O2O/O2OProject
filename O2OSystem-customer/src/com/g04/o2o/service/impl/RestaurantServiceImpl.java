@@ -77,7 +77,12 @@ public class RestaurantServiceImpl implements RestaurantService {
 
 	@Override
 	public Set<MenuItem> getMenuItems(Integer id) {
+<<<<<<< HEAD
 		return dao.search(Restaurant.class, id).getMenus();
+=======
+		// TODO Auto-generated method stub
+		return null;
+>>>>>>> f9718c87fab240cd26340eda0a279053a2446c13
 	}
 
 	@Override

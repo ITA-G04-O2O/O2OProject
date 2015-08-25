@@ -26,7 +26,7 @@ public interface RestaurantService {
 	 * 
 	 * @return
 	 */
-	public int updateRestaurant(Integer restId, String property, Object obj);
+	public int updateRestName(Integer restId, String name);
 
 	/**
 	 * 添加菜单项
@@ -61,5 +61,41 @@ public interface RestaurantService {
 	 * @return
 	 */
 	public Restaurant getRestById(Integer restId);
+
+	/**
+	 * 更新商店公告
+	 * 
+	 * @param restId
+	 * @param notice
+	 * @return
+	 */
+	public int updateRestNotice(Integer restId, String notice);
+
+	/**
+	 * 更改起送价
+	 * 
+	 * @param restId
+	 * @param price
+	 * @return
+	 */
+	public int updateRestPlayPrice(Integer restId, Integer price);
+
+	/**
+	 * 更改配送费
+	 * 
+	 * @param restId
+	 * @param disCharge
+	 * @return
+	 */
+	public int updateRestDisCharge(Integer restId, Integer disCharge);
+
+	/**
+	 * 更改营业时间
+	 * 
+	 * @param restId
+	 * @param openTime
+	 * @return
+	 */
+	public int updateOpenTime(Integer restId, String openTime);
 
 }
