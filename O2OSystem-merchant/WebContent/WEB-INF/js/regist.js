@@ -26,7 +26,8 @@ var addBook = function() {
 		type: 'POST',
 		dataType: 'json',
 		data: {
-			isbn: $('input[name=mName]').val(),
+			mName: $('input[name=mName]').val(),
+			type:$('input:radio:checked').val(),
 			name: $('input[name=name]').val(),
 			author: $('input[name=author]').val(),
 			publisher: $('input[name=publisher]').val(),

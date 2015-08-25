@@ -7,6 +7,7 @@
 		<link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="../css/regist.css">
 	</head>
+
 	<body>
 		<nav class="navbar navbar-default">
 			<div class="container">
@@ -55,13 +56,16 @@
 
 									<div class="col-sm-6 col-md-6">
 										<label class="radio-inline">
-											<input type="radio" id="inlineCheckbox1" name="option1" checked="checked"> 中餐
+											<input type="radio" id="inlineCheckbox1" name="option1" value="1" checked="checked"> 西餐厅
 										</label>
 										<label class="radio-inline">
-											<input type="radio" id="inlineCheckbox2" name="option1"> 西餐
+											<input type="radio" id="inlineCheckbox2" name="option1" value="2"> 中餐厅
 										</label>
 										<label class="radio-inline">
-											<input type="radio" id="inlineCheckbox3" name="option1"> 饮料
+											<input type="radio" id="inlineCheckbox3" name="option1" value="3"> 法式餐厅
+										</label>
+										<label class="radio-inline">
+											<input type="radio" id="inlineCheckbox3" name="option1" value="4"> 泰国餐厅
 										</label>
 									</div>
 
@@ -74,7 +78,7 @@
 											<div class="input-group-btn">
 												<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 													城市<span class="caret"></span></button>
-												<ul class="dropdown-menu">
+												<ul class="dropdown-menu" id="city" role="menu" aria-labelledby="city">
 													<li><a href="#">珠海</a></li>
 													<li><a href="#">广州</a></li>
 													<li><a href="#">中山</a></li>
