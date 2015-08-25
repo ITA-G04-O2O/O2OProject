@@ -24,6 +24,7 @@ public interface RestaurantService {
 	 * @return
 	 */
 	int registRestaurant(Restaurant r);
+<<<<<<< HEAD
 	/**
 	 * 根据地址、种类查询餐厅
 	 * @param type
@@ -34,6 +35,11 @@ public interface RestaurantService {
 	 * 获取餐厅种类
 	 * @return
 	 */
+=======
+	
+	Set<Restaurant> getRestByType(String type);
+	
+>>>>>>> fcee95803d507f5de4e7b6aaf26d8304eae06401
 	Set<String> getRestTypes();
 	/**
 	 * 获取餐厅具体信息
