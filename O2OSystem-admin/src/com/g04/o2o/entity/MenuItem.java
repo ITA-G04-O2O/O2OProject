@@ -33,7 +33,7 @@ public class MenuItem {
 	@JoinColumn(name="menuType")
 	private MenuType type;// 菜品类别
 	private Integer salesVolume;// 销量
-	private double score; // 评分
+	private Double score; // 评分
 	
 	/**
 	 * @return the salesVolume
