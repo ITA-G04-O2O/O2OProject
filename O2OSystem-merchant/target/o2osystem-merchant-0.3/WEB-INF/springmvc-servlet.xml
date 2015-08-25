@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+       
+	    
+    <!-- mvc 注解驱动加载 -->
+	<mvc:annotation-driven />
+
+    <!-- 包扫描注解bean -->
+	<context:component-scan base-package="com.*" />
+
+    <!-- 处理静态资源 -->	
+	<mvc:default-servlet-handler />
+
+    <!-- 配置内部资源访问 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="WEB-INF/html/" />
+		<property name="suffix" value=".html" />
+	</bean>
+	
+	<!-- 文件上传处理 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize">
+			<value>4194304</value>
+		</property>
+		<property name="maxInMemorySize">
+			<value>4096</value>
+		</property>
+	</bean>
+
+    <!-- 配置数据源 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:mysql://localhost:3306/o2olocal</value>
+		</property>
+		<property name="username">
+			<value>root</value>
+		</property>
+		<property name="password">
+			<value>root</value>
+		</property>
+	</bean>
+	
+	<!-- spring orm jpa 注解基于hibernate 配置 -->
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">   
+        <property name="dataSource" ref="dataSource"/>  
+        <property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter"/>  
+        <property name="packagesToScan" value="com.*"/><!--待扫描的实体类包，不再需要persistence.xml了-->  
+        <property name="jpaProperties">  
+            <props>  
+                <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>  
+                <prop key="hibernate.show_sql">true</prop>  
+                <prop key="hibernate.hbm2ddl.auto">update</prop>  
+            </props>  
+        </property>  
+    </bean>  
+      
+    <!--指定实现JPA的适配器-->  
+    <bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">  
+        <property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" />  
+    </bean>  
+    
+	<!-- Jpa 事务配置 -->  
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">  
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>  
+    </bean>  
+    <!-- 使用annotation定义事务 -->  
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />  
+    
+    
+    <!-- 以下部分是采用spring jms  -->
+    <bean id="targetFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<constructor-arg name="brokerURL" value="tcp://localhost:61616"></constructor-arg>
+	</bean>
+	<bean id="connectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
+		<property name="targetConnectionFactory" ref="targetFactory"></property>
+	</bean>
+	<!-- Spring提供的JMS工具类，它可以进行消息发送、接收等 -->
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<!-- 这个connectionFactory对应的是我们定义的Spring提供的那个ConnectionFactory对象 -->
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="defaultDestination" ref="merchant2Admin"/>
+	</bean>
+    <!--这个是队列目的地，点对点的-->  
+    <bean id="merchant2Admin" class="org.apache.activemq.command.ActiveMQQueue">  
+      <constructor-arg>  
+        <value>merchant2Admin</value>  
+      </constructor-arg>  
+    </bean>
+     <!--这个是队列目的地，点对点的-->  
+    <bean id="customer2merchant" class="org.apache.activemq.command.ActiveMQQueue">  
+      <constructor-arg>  
+        <value>customer2merchant</value>  
+      </constructor-arg>  
+    </bean>
+     <!-- 消息监听器 -->  
+    <bean id="consumerMessageListener" class="com.g04.o2o.jms.ConsumerMessageListener"/>      
+      
+    <!-- 消息监听容器 -->  
+    <bean id="jmsContainer"  class="org.springframework.jms.listener.DefaultMessageListenerContainer">  
+        <property name="connectionFactory" ref="connectionFactory" />  
+        <property name="destination" ref="customer2merchant" />  
+        <property name="messageListener" ref="consumerMessageListener" />  
+    </bean>  
+</beans>
