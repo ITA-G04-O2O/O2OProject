@@ -1,12 +1,15 @@
 package com.g04.o2o.service;
 
 
+import org.springframework.stereotype.Service;
+
 import com.g04.o2o.entity.Order;
 /**
- * Order服务接口
+ * 订单服务接口
  * @author CHENJA9
  *
  */
+@Service
 public interface OrderService {
 
 	int addOrder(Order o);
