@@ -49,7 +49,7 @@ public class Order {
 	@JoinColumn(name = "receiveAddress", nullable = false)
 	private Address address;
 	private String userDefineAddress;
-
+	private Double score;
 	/**
 	 * @return the userDefineAddress
 	 */
@@ -187,6 +187,20 @@ public class Order {
 	 */
 	public void setTel(String tel) {
 		this.tel = tel;
+	}
+
+	/**
+	 * @return the score
+	 */
+	public Double getScore() {
+		return score;
+	}
+
+	/**
+	 * @param score the score to set
+	 */
+	public void setScore(Double score) {
+		this.score = score;
 	}
 
 }
