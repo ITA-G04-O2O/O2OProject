@@ -4,6 +4,11 @@ import java.util.List;
 
 import com.g04.o2o.entity.MenuItem;
 
+/**
+ * MenuService
+ * @author OUOK
+ *
+ */
 public interface MenuService {
 	//menuType
 	

@@ -1,3 +1,8 @@
 eclipse.preferences.version=1
 encoding//src/com/g04/o2o/action/HomeAction.java=UTF-8
+encoding//src/com/g04/o2o/dao/AbstractDao.java=UTF-8
+encoding//src/com/g04/o2o/dao/impl/AbstractDaoImpl.java=UTF-8
+encoding//src/com/g04/o2o/entity/Address.java=UTF-8
+encoding//src/com/g04/o2o/entity/MenuItem.java=UTF-8
 encoding//src/com/g04/o2o/jms/ConsumerMessageListener.java=UTF-8
+encoding//src/com/g04/o2o/tools/SetterReflect.java=UTF-8
