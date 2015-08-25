@@ -20,7 +20,7 @@ import com.g04.o2o.tools.SetterReflect;
  *
  * @param <T>
  */
-@Transactional
+
 @Repository
 public abstract  class  AbstractDaoImpl<T> implements AbstractDao<T>{
 	@Autowired
