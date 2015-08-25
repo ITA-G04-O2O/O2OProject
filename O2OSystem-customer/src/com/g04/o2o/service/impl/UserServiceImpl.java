@@ -56,4 +56,16 @@ public class UserServiceImpl implements UserService{
 		return 1;
 	}
 
+	@Override
+	public int regist(String loginName, String psd) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int login(String loginName, String psd) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

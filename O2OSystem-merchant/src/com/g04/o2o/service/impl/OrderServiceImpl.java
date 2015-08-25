@@ -3,6 +3,8 @@ package com.g04.o2o.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Transient;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,11 @@ import com.g04.o2o.dao.OrderDao;
 import com.g04.o2o.entity.Order;
 import com.g04.o2o.service.OrderService;
 
+/**
+ * OrderService實現類
+ * @author OUOK
+ *
+ */
 @Service
 public class OrderServiceImpl implements OrderService {
 	@Autowired
@@ -17,32 +24,45 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public List<Order> getAllOrders() {
-		// TODO Auto-generated method stub
-		return null;
+		return od.searchAll(Order.class);
 	}
 
 	@Override
 	public Order getOrderById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		return od.search(Order.class, id);
 	}
 
 	@Override
+	@Transient
 	public boolean updOrderReceiveTime(Integer id, Date recevieTime) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			od.search(Order.class, id).setReceiveTime(recevieTime);
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override
+	@Transient
 	public boolean updOrderCompleteTime(Integer id, Date completedTime) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			od.search(Order.class, id).setCompletedTime(completedTime);
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override
+	@Transient
 	public boolean updOrderStatus(Integer id, Integer status) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			od.search(Order.class, id).setStatus(status);;
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
 	}
 
 }
