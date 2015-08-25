@@ -1,18 +1,12 @@
 package com.g04.o2o.action;
 
-import java.util.List;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.g04.o2o.entity.MenuItem;
-import com.g04.o2o.entity.MenuType;
-import com.g04.o2o.entity.Order;
-import com.g04.o2o.entity.Restaurant;
+import com.g04.o2o.entity.JsonProtocol;
 import com.g04.o2o.service.RestaurantService;
 @RequestMapping()
 @RestController
@@ -21,42 +15,58 @@ public class RestAction {
 	private RestaurantService restService;
 	
 	@RequestMapping(value="/restaurantType",method=RequestMethod.GET)
-	public Set<String> getRestTypes(){
-		return restService.getRestTypes();
+	public JsonProtocol getRestTypes(){
+		JsonProtocol jp = new JsonProtocol();
+		jp.setObject(restService.getRestTypes());
+		return jp;
 	}
 	
-	public Set<Restaurant> getRestList(String type){
-		return restService.getRestByType(type);
-	}
-	
-	@RequestMapping(value="/restaurant/{id}",method=RequestMethod.GET)
-	public Restaurant getRestInfo(@PathVariable(value="id") Integer id){
-		return restService.getRestInfo(id);
-	}
-	
-	@RequestMapping(value="/restaurant/{id}",method=RequestMethod.GET)
-	public Set<MenuType> getMenuType(@PathVariable(value="id") Integer id){
-		return restService.getMenuType(id);
+	public JsonProtocol getRestList(String type){
+		JsonProtocol jp = new JsonProtocol();
+		jp.setObject(restService.getRestByType(type));
+		return jp;
 	}
 	
 	@RequestMapping(value="/restaurant/{id}",method=RequestMethod.GET)
-	public Set<MenuItem> getMenuItems(@PathVariable(value="id") Integer id){
-		return restService.getMenuItems(id);
+	public JsonProtocol getRestInfo(@PathVariable(value="id") Integer id){
+		JsonProtocol jp = new JsonProtocol();
+		jp.setObject(restService.getRestInfo(id));
+		return jp;
 	}
 	
 	@RequestMapping(value="/restaurant/{id}",method=RequestMethod.GET)
-	public List<Order> getHighOrders(Integer id){
-		return restService.getHighOrders(id);
+	public JsonProtocol getMenuType(@PathVariable(value="id") Integer id){
+		JsonProtocol jp = new JsonProtocol();
+		jp.setObject(restService.getMenuType(id));
+		return jp;
 	}
 	
 	@RequestMapping(value="/restaurant/{id}",method=RequestMethod.GET)
-	public List<Order> getMidOrders(Integer id){
-		return restService.getMidOrders(id);
+	public JsonProtocol getMenuItems(@PathVariable(value="id") Integer id){
+		JsonProtocol jp = new JsonProtocol();
+		jp.setObject(restService.getMenuItems(id));
+		return jp;
 	}
 	
 	@RequestMapping(value="/restaurant/{id}",method=RequestMethod.GET)
-	public List<Order> getLowOrders(Integer id){
-		return restService.getLowOrders(id);
+	public JsonProtocol getHighOrders(Integer id){
+		JsonProtocol jp = new JsonProtocol();
+		jp.setObject(restService.getHighOrders(id));
+		return jp;
+	}
+	
+	@RequestMapping(value="/restaurant/{id}",method=RequestMethod.GET)
+	public JsonProtocol getMidOrders(Integer id){
+		JsonProtocol jp = new JsonProtocol();
+		jp.setObject(restService.getMidOrders(id));
+		return jp;
+	}
+	
+	@RequestMapping(value="/restaurant/{id}",method=RequestMethod.GET)
+	public JsonProtocol getLowOrders(Integer id){
+		JsonProtocol jp = new JsonProtocol();
+		jp.setObject(restService.getLowOrders(id));
+		return jp;
 	}
 	
 }
