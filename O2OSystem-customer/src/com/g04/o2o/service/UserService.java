@@ -3,17 +3,27 @@ package com.g04.o2o.service;
 import java.util.List;
 import java.util.Set;
 
+<<<<<<< HEAD
+import javax.transaction.Transactional;
+
+=======
+>>>>>>> f9718c87fab240cd26340eda0a279053a2446c13
 import org.springframework.stereotype.Service;
 
 import com.g04.o2o.entity.Order;
 import com.g04.o2o.entity.Restaurant;
 import com.g04.o2o.entity.User;
+<<<<<<< HEAD
+@Transactional
+@Service
+=======
 /**
  * 用户服务接口
  * @author CHENJA9
  *
  */
 
+>>>>>>> f9718c87fab240cd26340eda0a279053a2446c13
 public interface UserService {
 
 	/**

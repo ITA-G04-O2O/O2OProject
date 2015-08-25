@@ -3,7 +3,11 @@ package com.g04.o2o.service;
 import java.util.List;
 import java.util.Set;
 
+<<<<<<< HEAD
+import javax.transaction.Transactional;
+=======
 import org.springframework.stereotype.Service;
+>>>>>>> f9718c87fab240cd26340eda0a279053a2446c13
 
 import com.g04.o2o.entity.MenuItem;
 import com.g04.o2o.entity.MenuType;
@@ -15,7 +19,11 @@ import com.g04.o2o.entity.Restaurant;
  * @author CHENJA9
  *
  */
+<<<<<<< HEAD
+@Transactional
+=======
 
+>>>>>>> f9718c87fab240cd26340eda0a279053a2446c13
 public interface RestaurantService {
 
 	/**
@@ -47,6 +55,11 @@ public interface RestaurantService {
 	 * @return
 	 */
 	Set<MenuType> getMenuType(Integer id);
+<<<<<<< HEAD
+	
+	Set<MenuItem> getMenuItems(Integer id);
+	
+=======
 	/**
 	 * 获取菜品具体信息
 	 * @param id
@@ -58,6 +71,7 @@ public interface RestaurantService {
 	 * @param id
 	 * @return
 	 */
+>>>>>>> f9718c87fab240cd26340eda0a279053a2446c13
 	List<Order> getHighOrders(Integer id);
 	/**
 	 * 获取中评信息

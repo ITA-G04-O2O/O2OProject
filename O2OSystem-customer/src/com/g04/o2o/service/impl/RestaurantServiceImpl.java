@@ -1,8 +1,11 @@
 package com.g04.o2o.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,17 +29,20 @@ public class RestaurantServiceImpl implements RestaurantService {
 	@Autowired
 	private MenuTypeDao menuTypeDao;
 
+	@Transactional
 	@Override
 	public int registRestaurant(Restaurant r) {
 		return dao.add(r);
 	}
 
+	@Transactional
 	@Override
 	public Set<Restaurant> getRestByType(String type) {
 		return restTypeDao.getRestByTpe(type);
 
 	}
 
+	@Transactional
 	@Override
 	public Set<String> getRestTypes() {
 		List<RestaurantType> restTypes = restTypeDao.searchAll(RestaurantType.class);
@@ -71,26 +77,48 @@ public class RestaurantServiceImpl implements RestaurantService {
 
 	@Override
 	public Set<MenuItem> getMenuItems(Integer id) {
+<<<<<<< HEAD
+		return dao.search(Restaurant.class, id).getMenus();
+=======
 		// TODO Auto-generated method stub
 		return null;
+>>>>>>> f9718c87fab240cd26340eda0a279053a2446c13
 	}
 
 	@Override
 	public List<Order> getHighOrders(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Order> allOrders= dao.search(Restaurant.class, id).getOrders();
+		List<Order> rs=new ArrayList<>();
+		for(Order order:allOrders){
+			if(order.getScore()>=4){
+				rs.add(order);
+			}
+		}
+		return rs;
 	}
 
 	@Override
 	public List<Order> getMidOrders(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Order> rs=new ArrayList<>();
+		List<Order> allOrders=dao.search(Restaurant.class, id).getOrders();
+		for(Order order:allOrders){
+			if(order.getScore()<4&&order.getScore()>3){
+				rs.add(order);
+			}
+		}
+		return rs;
 	}
 
 	@Override
 	public List<Order> getLowOrders(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Order> rs=new ArrayList<>();
+		List<Order> allOrders=dao.search(Restaurant.class, id).getOrders();
+		for(Order order:allOrders){
+			if(order.getScore()<=2&&order.getScore()>1){
+				rs.add(order);
+			}
+		}
+		return rs;
 	}
 
 }
