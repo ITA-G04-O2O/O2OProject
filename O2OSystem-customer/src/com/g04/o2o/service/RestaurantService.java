@@ -22,7 +22,7 @@ public interface RestaurantService {
 	 */
 	int registRestaurant(Restaurant r);
 	
-	List<Restaurant> getRestByType(String type);
+	Set<Restaurant> getRestByType(String type);
 	
 	Set<String> getRestTypes();
 	
