@@ -13,7 +13,7 @@ import com.g04.o2o.entity.User;
  * @author CHENJA9
  *
  */
-@Service
+
 public interface UserService {
 
 	/**

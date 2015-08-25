@@ -9,7 +9,7 @@ import com.g04.o2o.entity.Order;
  * @author CHENJA9
  *
  */
-@Service
+
 public interface OrderService {
 
 	/**
@@ -25,14 +25,14 @@ public interface OrderService {
 	 */
 	Order getOrder(Integer oid);
 	/**
-	 * 
+	 * 添加评价内容
 	 * @param oId
 	 * @param notice
 	 * @return
 	 */
 	int updateMessage(Integer oId,String notice);
 	/**
-	 * 
+	 * 添加评分
 	 * @param oId
 	 * @param sc
 	 * @return
