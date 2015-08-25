@@ -16,6 +16,13 @@ public interface UserService {
 	 * @return
 	 */
 	public int addUser(User user);
+	
+	/**
+	 * 获得某个用户
+	 * @param id
+	 * @return
+	 */
+	public User getUserById(Integer id);
 
 	/**
 	 * 重置用户密码

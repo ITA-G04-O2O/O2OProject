@@ -54,4 +54,12 @@ public interface RestaurantService {
 	 */
 	public int updateRestAddr(Integer restId, Address addr);
 
+	/**
+	 * 获取某个商店
+	 * 
+	 * @param restId
+	 * @return
+	 */
+	public Restaurant getRestById(Integer restId);
+
 }
