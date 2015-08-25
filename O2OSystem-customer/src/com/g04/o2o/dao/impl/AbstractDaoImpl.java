@@ -6,10 +6,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
 import com.g04.o2o.dao.AbstractDao;
 import com.g04.o2o.tools.SetterReflect;
@@ -20,8 +18,8 @@ import com.g04.o2o.tools.SetterReflect;
  *
  * @param <T>
  */
-@Transactional
-@Repository
+
+
 public abstract  class  AbstractDaoImpl<T> implements AbstractDao<T>{
 	@Autowired
 	private SetterReflect reflect;
