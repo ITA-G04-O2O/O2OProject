@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.g04.o2o.entity.JsonProtocol;
+import com.g04.o2o.entity.Restaurant;
 import com.g04.o2o.service.RestaurantService;
 
 @RestController
@@ -18,9 +20,12 @@ public class RestaurantAction {
 	}
 
 	@RequestMapping(value = "/restaurant", method = RequestMethod.POST)
-	public String regist() {
-		
-		return "fail";
+	public JsonProtocol regist() {
+		JsonProtocol js = new JsonProtocol();
+		Restaurant rest = new Restaurant();
+		int result = restaurantService.addRestaurant(rest);
+		boolean res = (result == 1 ? true : false);
+		js.setResult(res);
+		return js;
 	}
-
 }

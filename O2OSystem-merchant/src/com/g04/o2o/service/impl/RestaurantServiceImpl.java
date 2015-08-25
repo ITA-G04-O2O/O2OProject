@@ -2,6 +2,8 @@ package com.g04.o2o.service.impl;
 
 import javax.persistence.Transient;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.g04.o2o.dao.RestaurantDao;
 import com.g04.o2o.entity.Address;
 import com.g04.o2o.entity.MenuItem;
@@ -10,6 +12,7 @@ import com.g04.o2o.entity.RestaurantType;
 import com.g04.o2o.service.RestaurantService;
 
 public class RestaurantServiceImpl implements RestaurantService {
+	@Autowired
 	private RestaurantDao dao;
 
 	@Override
