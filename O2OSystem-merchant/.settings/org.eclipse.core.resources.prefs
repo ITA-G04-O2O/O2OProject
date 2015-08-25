@@ -1,0 +1,7 @@
+eclipse.preferences.version=1
+encoding//src/com/g04/o2o/action/HomeAction.java=UTF-8
+encoding//src/com/g04/o2o/entity/Address.java=UTF-8
+encoding//src/com/g04/o2o/entity/MainSystem.java=UTF-8
+encoding//src/com/g04/o2o/entity/Order.java=utf-8
+encoding//src/com/g04/o2o/entity/Restaurant.java=UTF-8
+encoding//src/com/g04/o2o/jms/ConsumerMessageListener.java=UTF-8
