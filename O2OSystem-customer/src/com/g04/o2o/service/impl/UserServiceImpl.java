@@ -16,7 +16,7 @@ import com.g04.o2o.entity.Restaurant;
 import com.g04.o2o.entity.User;
 import com.g04.o2o.service.UserService;
 @Service
-@Transactional
+
 public class UserServiceImpl implements UserService{
 	@Autowired
 	private UserDao dao;

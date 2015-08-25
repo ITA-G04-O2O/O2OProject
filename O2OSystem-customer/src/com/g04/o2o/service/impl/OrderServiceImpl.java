@@ -27,13 +27,27 @@ public class OrderServiceImpl implements OrderService {
 	@Transactional
 	@Override
 	public int updateMessage(Integer oId, String notice) {
-		return dao.updateValue(oId, Order.class, "message", notice);
+		try{
+			Order order=dao.search(Order.class, oId);
+			order.setMessage(notice);
+		}catch(Exception e){
+			e.printStackTrace();
+			return -1;
+		}
+		return 1;
 	}
 
 	@Transactional
 	@Override
 	public int updateScore(Integer oId, Integer sc) {
-		return dao.updateValue(oId, Order.class, "score", Double.parseDouble(sc.toString()));
+		try{
+			Order order=dao.search(Order.class, oId);
+			order.setScore(2.0);
+			
+		}catch(Exception e){
+			return -1;
+		}
+		return 1;
 	}
 
 }

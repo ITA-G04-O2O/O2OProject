@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,17 +29,20 @@ public class RestaurantServiceImpl implements RestaurantService {
 	@Autowired
 	private MenuTypeDao menuTypeDao;
 
+	@Transactional
 	@Override
 	public int registRestaurant(Restaurant r) {
 		return dao.add(r);
 	}
 
+	@Transactional
 	@Override
 	public Set<Restaurant> getRestByType(String type) {
 		return restTypeDao.getRestByTpe(type);
 
 	}
 
+	@Transactional
 	@Override
 	public Set<String> getRestTypes() {
 		List<RestaurantType> restTypes = restTypeDao.searchAll(RestaurantType.class);
