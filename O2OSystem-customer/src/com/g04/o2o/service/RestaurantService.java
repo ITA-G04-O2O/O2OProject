@@ -24,22 +24,16 @@ public interface RestaurantService {
 	 * @return
 	 */
 	int registRestaurant(Restaurant r);
-<<<<<<< HEAD
 	/**
 	 * 根据地址、种类查询餐厅
 	 * @param type
 	 * @return
-	 */
-	List<Restaurant> getRestByType(String type);
+	 */	
+	Set<Restaurant> getRestByType(String type);
 	/**
-	 * 获取餐厅种类
+	 * 获取餐厅类型
 	 * @return
 	 */
-=======
-	
-	Set<Restaurant> getRestByType(String type);
-	
->>>>>>> fcee95803d507f5de4e7b6aaf26d8304eae06401
 	Set<String> getRestTypes();
 	/**
 	 * 获取餐厅具体信息
@@ -58,7 +52,7 @@ public interface RestaurantService {
 	 * @param id
 	 * @return
 	 */
-	List<MenuItem> getMenuItems(Integer id);
+	Set<MenuItem> getMenuItems(Integer id);
 	/**
 	 * 获取好评信息
 	 * @param id

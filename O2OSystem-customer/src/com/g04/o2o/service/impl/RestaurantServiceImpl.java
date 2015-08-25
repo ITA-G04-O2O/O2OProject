@@ -70,7 +70,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 	}
 
 	@Override
-	public List<MenuItem> getMenuItems(Integer id) {
+	public Set<MenuItem> getMenuItems(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
