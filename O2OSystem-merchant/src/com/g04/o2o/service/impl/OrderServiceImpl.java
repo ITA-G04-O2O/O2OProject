@@ -3,9 +3,11 @@ package com.g04.o2o.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.g04.o2o.entity.Order;
 import com.g04.o2o.service.OrderService;
-
+@Service
 public class OrderServiceImpl implements OrderService {
 
 	@Override
