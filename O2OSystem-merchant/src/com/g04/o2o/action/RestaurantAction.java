@@ -20,7 +20,8 @@ public class RestaurantAction {
 	}
 
 	@RequestMapping(value = "/restaurant", method = RequestMethod.POST)
-	public JsonProtocol regist() {
+	public JsonProtocol regist(String mName) {
+		System.out.println(mName);
 		JsonProtocol js = new JsonProtocol();
 		Restaurant rest = new Restaurant();
 		int result = restaurantService.addRestaurant(rest);
