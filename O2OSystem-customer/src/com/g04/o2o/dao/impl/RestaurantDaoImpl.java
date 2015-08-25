@@ -1,9 +1,6 @@
 package com.g04.o2o.dao.impl;
 
 
-
-import java.util.List;
-
 import org.springframework.stereotype.Repository;
 
 import com.g04.o2o.dao.RestaurantDao;
