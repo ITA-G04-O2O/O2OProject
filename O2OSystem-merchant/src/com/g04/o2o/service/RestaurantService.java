@@ -1,5 +1,7 @@
 package com.g04.o2o.service;
 
+import org.springframework.stereotype.Service;
+
 import com.g04.o2o.entity.Address;
 import com.g04.o2o.entity.MenuItem;
 import com.g04.o2o.entity.Restaurant;
@@ -11,6 +13,7 @@ import com.g04.o2o.entity.RestaurantType;
  * @author LILE8
  * 
  */
+@Service
 public interface RestaurantService {
 
 	/**
@@ -26,7 +29,7 @@ public interface RestaurantService {
 	 * 
 	 * @return
 	 */
-	public int updateRestaurant(Integer restId, String property, Object obj);
+	public int updateRestName(Integer restId, String name);
 
 	/**
 	 * 添加菜单项
