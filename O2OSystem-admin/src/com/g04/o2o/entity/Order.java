@@ -33,7 +33,9 @@ public class Order {
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date crDate;
 	@Temporal(value = TemporalType.TIMESTAMP)
-	private Date receiveTime; 
+	private Date receiveTime; //店家确认订单时间
+	@Temporal(value = TemporalType.TIMESTAMP)
+	private Date completedTime; //订单完成时间
 	@ManyToOne
 	@JoinColumn(name = "restId", nullable = false)
 	private Restaurant resturant;
@@ -49,7 +51,8 @@ public class Order {
 	@JoinColumn(name = "receiveAddress", nullable = false)
 	private Address address;
 	private String userDefineAddress;
-
+	private Double score;
+	private String comment;
 	/**
 	 * @return the userDefineAddress
 	 */
@@ -187,6 +190,34 @@ public class Order {
 	 */
 	public void setTel(String tel) {
 		this.tel = tel;
+	}
+
+	/**
+	 * @return the score
+	 */
+	public Double getScore() {
+		return score;
+	}
+
+	/**
+	 * @param score the score to set
+	 */
+	public void setScore(Double score) {
+		this.score = score;
+	}
+
+	/**
+	 * @return the comment
+	 */
+	public String getComment() {
+		return comment;
+	}
+
+	/**
+	 * @param comment the comment to set
+	 */
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 }
