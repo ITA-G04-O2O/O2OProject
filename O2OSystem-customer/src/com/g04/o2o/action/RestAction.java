@@ -24,5 +24,8 @@ public class RestAction {
 		return service.getRestByType(type);
 	}
 	
+	public Restaurant getRestInfo(Integer id){
+		return service.getRestInfo(id);
+	}
 	
 }
