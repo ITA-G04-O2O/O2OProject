@@ -15,8 +15,10 @@ public class RestAction {
 	
 	@RequestMapping(value="/restaurantType",method=RequestMethod.GET)
 	public JsonProtocol getRestTypes(){
+		System.out.println("get restType...");
 		JsonProtocol jp = new JsonProtocol();
 		jp.setObject(restService.getRestTypes());
+		System.out.println(restService.getRestTypes().toString());
 		return jp;
 	}
 	
