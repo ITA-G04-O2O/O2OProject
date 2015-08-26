@@ -16,9 +16,7 @@ public class AdminAction {
 	@RequestMapping(value = "/sysSetting", method = RequestMethod.GET)
 	public JsonProtocol getSystemTimes() {
 		JsonProtocol jp = new JsonProtocol();
-		MainSystem m = new MainSystem();
-		m.setAutoExpirationTime(systemService.getAutoExpirationTime());
-		m.setAutoCompleteTime(systemService.getAutoCompleteTime());
+		MainSystem m = systemService.getSystemTimes();
 		jp.setResult(true);
 		jp.setObject(m);
 		return jp;
@@ -98,4 +96,10 @@ public class AdminAction {
 		return jp;
 	}
 
+	@RequestMapping(value = "/hot/{id}", method = RequestMethod.PUT)
+	public JsonProtocol setHot(@PathVariable int id, boolean isHot) {
+		JsonProtocol jp = new JsonProtocol();
+		jp.setResult(systemService.setHot(id, isHot));
+		return jp;
+	}
 }
