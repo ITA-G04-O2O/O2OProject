@@ -5,20 +5,20 @@ $(document).ready(function() {
 	$.ajax({
 		url : 'http://localhost:8888/o2osystem-merchant/area',
 		type : 'GET',
-	}).done(function(data, status, xhr) {
-		for ( var i in data) {
-			var province = data[i];
-			alert(province);
-			$('#province').append("<li>"+广州+"</li>");
-			var li = $("<li></li>");
-			li.appendTo($("#tbody"));
-			var td = $(province);
-			td.appendTo(li);
+		dataType : 'json',
+		success : function(data) {
+			console.log(data);
+			for ( var i in data) {
+				alert(data[i]);
+				var province = data[i];
+				alert(province);
+				$('#province').append("<li>" + 广州 + "</li>");
+				var li = $("<li></li>");
+				li.appendTo($("#tbody"));
+				var td = $(province);
+				td.appendTo(li);
+			}
 		}
-		var proList = data.proList;
-		alert(proList.length);
-	}).fail(function(xhr, status, error) {
-		console.log('fail');
 	});
 	$('.nextStep').click(function(index) {
 
