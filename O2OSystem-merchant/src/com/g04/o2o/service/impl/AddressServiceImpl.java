@@ -2,9 +2,12 @@ package com.g04.o2o.service.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.g04.o2o.entity.Address;
 import com.g04.o2o.service.AddressService;
 
+@Service
 public class AddressServiceImpl implements AddressService {
 
 	@Override

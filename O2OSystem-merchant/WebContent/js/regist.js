@@ -3,11 +3,20 @@ $(document).ready(function() {
 	$('#section3').hide();
 	var count = 1;
 	$.ajax({
-		url : 'http://localhost:8888/o2osystem-merchant/address',
+		url : 'http://localhost:8888/o2osystem-merchant/area',
 		type : 'GET',
 	}).done(function(data, status, xhr) {
-		var addrList = data.addrList;
-		alert(addrList.length);
+		for ( var i in data) {
+			var province = data[i];
+			alert(province);
+			$('#province').append("<li>"+广州+"</li>");
+			var li = $("<li></li>");
+			li.appendTo($("#tbody"));
+			var td = $(province);
+			td.appendTo(li);
+		}
+		var proList = data.proList;
+		alert(proList.length);
 	}).fail(function(xhr, status, error) {
 		console.log('fail');
 	});
@@ -26,7 +35,6 @@ $('.list-group li').on('click', function() {
 });
 
 $("#proBtn").click(function() {
-	alert($('input[name=mName]').val());
 	$.ajax({
 		url : 'http://localhost:8888/o2osystem-merchant/restaurant',
 		type : 'POST',
