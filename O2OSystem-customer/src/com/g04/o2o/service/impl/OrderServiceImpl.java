@@ -42,7 +42,7 @@ public class OrderServiceImpl implements OrderService {
 	public int updateScore(Integer oId, Integer sc) {
 		try{
 			Order order=dao.search(Order.class, oId);
-			order.setScore(2.0);
+			order.setScore(Double.parseDouble(sc.toString()));
 			
 		}catch(Exception e){
 			return -1;
@@ -52,9 +52,15 @@ public class OrderServiceImpl implements OrderService {
 
 	@Transactional
 	@Override
-	public int updateStatus(Integer oId, String status) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateStatus(Integer oId, Integer status) {
+		try {
+			Order order = dao.search(Order.class, oId);
+			order.setStatus(status);
+
+		} catch (Exception e) {
+			return -1;
+		}
+		return 1;
 	}
 
 }
