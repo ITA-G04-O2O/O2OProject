@@ -6,13 +6,12 @@ import java.util.List;
 import javax.persistence.Transient;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.g04.o2o.dao.MenuItemDao;
 import com.g04.o2o.dao.MenuTypeDao;
 import com.g04.o2o.entity.MenuItem;
 import com.g04.o2o.entity.MenuType;
-import com.g04.o2o.entity.Order;
-import com.g04.o2o.entity.Restaurant;
 import com.g04.o2o.service.MenuService;
 
 /**
@@ -20,6 +19,7 @@ import com.g04.o2o.service.MenuService;
  * @author OUOK
  *
  */
+@Service
 public class MenuServiceImpl implements MenuService {
 	@Autowired
 	private MenuTypeDao mtd;
