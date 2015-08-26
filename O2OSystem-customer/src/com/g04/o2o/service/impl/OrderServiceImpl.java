@@ -50,4 +50,11 @@ public class OrderServiceImpl implements OrderService {
 		return 1;
 	}
 
+	@Transactional
+	@Override
+	public int updateStatus(Integer oId, String status) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
