@@ -23,7 +23,7 @@ public class TsOrderServie {
 	
 	private static OrderService service;
 	private static AreaDao areaDao;
-
+	private static OrderService orderService;
 	
 	
 	@BeforeClass
@@ -31,6 +31,7 @@ public class TsOrderServie {
 		context = new FileSystemXmlApplicationContext("file:WebContent/WEB-INF/springmvc-servlet.xml");
 		service=context.getBean(OrderServiceImpl.class);
 		areaDao= context.getBean(AreaDao.class);
+		orderService = context.getBean(OrderServiceImpl.class);
 		
 	}
 	
@@ -60,7 +61,8 @@ public class TsOrderServie {
 	}
 	@Test
 	public void tss() throws Exception{
-		
+		Order order=orderService.getOrder(1);
+		System.out.println(order.getMessage());
 	}
 	
 	
