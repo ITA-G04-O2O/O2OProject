@@ -68,6 +68,14 @@ public class Order {
 		this.userDefineAddress = userDefineAddress;
 	}
 
+	public Date getCompletedTime() {
+		return completedTime;
+	}
+
+	public void setCompletedTime(Date completedTime) {
+		this.completedTime = completedTime;
+	}
+
 	/**
 	 * @return the address
 	 */

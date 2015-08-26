@@ -6,5 +6,7 @@ encoding//src/com/g04/o2o/entity/Address.java=UTF-8
 encoding//src/com/g04/o2o/entity/MenuItem.java=UTF-8
 encoding//src/com/g04/o2o/entity/Restaurant.java=UTF-8
 encoding//src/com/g04/o2o/jms/ConsumerMessageListener.java=UTF-8
+encoding//src/com/g04/o2o/service/OrderService.java=UTF-8
 encoding//src/com/g04/o2o/service/RestaurantService.java=UTF-8
+encoding//src/com/g04/o2o/service/UserService.java=UTF-8
 encoding//src/com/g04/o2o/tools/SetterReflect.java=UTF-8

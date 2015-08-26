@@ -3,7 +3,7 @@ package com.g04.o2o.service;
 import java.util.List;
 import java.util.Set;
 
-import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.g04.o2o.entity.MenuItem;
 import com.g04.o2o.entity.MenuType;
@@ -15,6 +15,7 @@ import com.g04.o2o.entity.Restaurant;
  * @author CHENJA9
  *
  */
+@Transactional
 
 public interface RestaurantService {
 

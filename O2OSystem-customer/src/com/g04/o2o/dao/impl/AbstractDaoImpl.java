@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,9 +19,9 @@ import com.g04.o2o.tools.SetterReflect;
  *
  * @param <T>
  */
-@Transactional
-@Repository
-public abstract  class  AbstractDaoImpl<T> implements AbstractDao<T>{
+
+
+public class  AbstractDaoImpl<T> implements AbstractDao<T>{
 	@Autowired
 	private SetterReflect reflect;
 	@PersistenceContext
@@ -100,10 +99,10 @@ public abstract  class  AbstractDaoImpl<T> implements AbstractDao<T>{
 	/* (non-Javadoc)
 	 * @see com.g04.o2o.dao.AbstractDao#search(java.lang.Integer)
 	 */
-	@SuppressWarnings("unchecked")
+	
 	@Override
 	public T search(Class<T> clazz,Integer id) {
-		return (T) manager.find(clazz.getClass(), id);
+		return (T) manager.find(clazz,id);
 	}
 
 

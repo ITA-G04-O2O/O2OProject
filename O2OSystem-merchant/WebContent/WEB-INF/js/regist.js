@@ -21,6 +21,7 @@ $('.list-group li').on('click', function() {
 });
 
 $("#proBtn").click(function(){
+	alert("Hello");
 	$.ajax({
 		url: 'http://localhost:8888/O2OSystem-merchant/restaurant',
 		type: 'POST',

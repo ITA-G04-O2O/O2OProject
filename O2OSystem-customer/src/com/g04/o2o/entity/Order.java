@@ -36,6 +36,14 @@ public class Order {
 	private Date receiveTime; //店家确认订单时间
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date completedTime; //订单完成时间
+	public Date getCompletedTime() {
+		return completedTime;
+	}
+
+	public void setCompletedTime(Date completedTime) {
+		this.completedTime = completedTime;
+	}
+
 	@ManyToOne
 	@JoinColumn(name = "restId", nullable = false)
 	private Restaurant resturant;
