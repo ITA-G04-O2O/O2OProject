@@ -14,8 +14,6 @@ import com.g04.o2o.dao.MenuTypeDao;
 import com.g04.o2o.dao.RestaurantDao;
 import com.g04.o2o.entity.MenuItem;
 import com.g04.o2o.entity.MenuType;
-import com.g04.o2o.entity.Order;
-import com.g04.o2o.entity.Restaurant;
 import com.g04.o2o.service.MenuService;
 
 /**

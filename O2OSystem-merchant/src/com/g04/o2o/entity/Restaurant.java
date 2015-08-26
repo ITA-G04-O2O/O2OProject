@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -75,6 +76,21 @@ public class Restaurant {
 	private Integer playPrice;// 起送价
 	private Integer disCharge;// 配送费
 	private String openTime;// 营业时间
+	@Lob
+	private byte[] imageBytes;
+	/**
+	 * @return the imageBytes
+	 */
+	public byte[] getImageBytes() {
+		return imageBytes;
+	}
+
+	/**
+	 * @param imageBytes the imageBytes to set
+	 */
+	public void setImageBytes(byte[] imageBytes) {
+		this.imageBytes = imageBytes;
+	}
 
 	/**
 	 * @return the collectionTimes
