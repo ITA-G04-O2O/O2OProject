@@ -1,6 +1,6 @@
 package com.g04.o2o.entity;
 
-import java.util.List;
+
 
 public class JsonProtocol {
 	private Boolean result;

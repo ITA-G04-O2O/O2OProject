@@ -10,7 +10,7 @@ import com.g04.o2o.entity.JsonProtocol;
 import com.g04.o2o.entity.Order;
 import com.g04.o2o.service.OrderService;
 
-@RequestMapping()
+
 @RestController
 public class OrderAction {
 	@Autowired
@@ -30,14 +30,14 @@ public class OrderAction {
 		return jp;
 	}
 	
-	@RequestMapping(value="/orders",method=RequestMethod.POST)
+	@RequestMapping(value="/orders/{id}",method=RequestMethod.POST)
 	public JsonProtocol updateMessage(Integer oId,String notice){
 		JsonProtocol jp = new JsonProtocol();
 		jp.setObject(orderService.updateMessage(oId, notice));
 		return jp;
 	}
 	
-	@RequestMapping(value="/orders",method=RequestMethod.POST)
+	@RequestMapping(value="/orders/ss",method=RequestMethod.POST)
 	public JsonProtocol updateScore(Integer oId,Integer sc){
 		JsonProtocol jp = new JsonProtocol();
 		jp.setObject(orderService.updateScore(oId, sc));
