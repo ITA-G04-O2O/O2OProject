@@ -1,5 +1,7 @@
 package com.g04.o2o.action;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,13 +25,14 @@ public class RestaurantAction {
 	}
 
 	@RequestMapping(value = "/restaurant", method = RequestMethod.POST)
-	public JsonProtocol regist(String mName, int type, Address addr) {
+	public JsonProtocol regist(String mName, RestaurantType type, Address addr,HttpSession session) {
 		System.out.println(mName);
 		JsonProtocol js = new JsonProtocol();
 		Restaurant rest = new Restaurant();
-		int result = restaurantService.addRestaurant(rest);
-		boolean res = (result == 1 ? true : false);
-		js.setResult(res);
+		rest.setName(mName);
+		rest.setType(type);
+		rest.setAddress(addr);
+		session.setAttribute("restaurant", rest);
 		return js;
 	}
 
