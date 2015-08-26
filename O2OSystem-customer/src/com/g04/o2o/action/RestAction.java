@@ -1,5 +1,7 @@
 package com.g04.o2o.action;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.g04.o2o.entity.JsonProtocol;
+import com.g04.o2o.entity.RestaurantType;
 import com.g04.o2o.service.RestaurantService;
 @RestController
 public class RestAction {
@@ -20,10 +23,13 @@ public class RestAction {
 		return jp;
 	}
 	
-	@RequestMapping(value="/restaurant/{type}",method=RequestMethod.GET)
+	@RequestMapping(value="/restaurant/restaurantType/{type}",method=RequestMethod.GET,produces = { "application/json;charset=UTF-8" })
 	public JsonProtocol getRestList(@PathVariable(value="type") String type){
+		System.out.println(type);
 		JsonProtocol jp = new JsonProtocol();
-		jp.setObject(restService.getRestByType(type));
+		jp.setObject("aaa");
+//		System.out.println(restService.getRestByType(type));
+		System.out.println("sss");
 		return jp;
 	}
 	
@@ -36,7 +42,7 @@ public class RestAction {
 	
 	@RequestMapping(value="/restaurant/{id}/menuType",method=RequestMethod.GET)
 	public JsonProtocol getMenuType(@PathVariable(value="id") Integer id){
-		JsonProtocol jp = new JsonProtocol();
+		JsonProtocol jp = new JsonProtocol(); 
 		jp.setObject(restService.getMenuType(id));
 		return jp;
 	}
