@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3acc255e-3f3a-4f1a-bd62-3b466402d871" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/O2OSystem-merchant/src/com/g04/o2o/action/MenuAction.java" afterPath="$PROJECT_DIR$/O2OSystem-merchant/src/com/g04/o2o/action/MenuAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/O2OSystem-merchant/src/com/g04/o2o/service/MenuService.java" afterPath="$PROJECT_DIR$/O2OSystem-merchant/src/com/g04/o2o/service/MenuService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/O2OSystem-merchant/src/com/g04/o2o/service/impl/MenuServiceImpl.java" afterPath="$PROJECT_DIR$/O2OSystem-merchant/src/com/g04/o2o/service/impl/MenuServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/O2OSystem-merchant/src/com/g04/o2o/service/OrderService.java" afterPath="$PROJECT_DIR$/O2OSystem-merchant/src/com/g04/o2o/service/OrderService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/O2OSystem-merchant/WebContent/WEB-INF/html/index.html" afterPath="$PROJECT_DIR$/O2OSystem-merchant/WebContent/WEB-INF/html/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/O2OSystem-admin/target/m2e-wtp/web-resources/META-INF/maven/G04O2OSystem/O2OSystem-admin/pom.properties" afterPath="$PROJECT_DIR$/O2OSystem-admin/target/m2e-wtp/web-resources/META-INF/maven/G04O2OSystem/O2OSystem-admin/pom.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/O2OSystem-customer/target/m2e-wtp/web-resources/META-INF/maven/G04O2OSystem/O2OSystem-customer/pom.properties" afterPath="$PROJECT_DIR$/O2OSystem-customer/target/m2e-wtp/web-resources/META-INF/maven/G04O2OSystem/O2OSystem-customer/pom.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/O2OSystem-merchant/target/m2e-wtp/web-resources/META-INF/maven/com.o2osystem/o2osystem-merchant/pom.properties" afterPath="$PROJECT_DIR$/O2OSystem-merchant/target/m2e-wtp/web-resources/META-INF/maven/com.o2osystem/o2osystem-merchant/pom.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="O2OProject.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,11 +23,83 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/O2OSystem-merchant/WebContent/WEB-INF/html/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.39503387">
-              <caret line="215" column="67" selection-start-line="215" selection-start-column="67" selection-end-line="215" selection-end-column="67" />
+            <state vertical-scroll-proportion="-12.764706">
+              <caret line="221" column="15" selection-start-line="221" selection-start-column="15" selection-end-line="221" selection-end-column="15" />
+              <folding>
+                <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="accountInfo.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/O2OSystem-merchant/WebContent/WEB-INF/html/accountInfo.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="9.235294">
+              <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="basicInfo.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/O2OSystem-merchant/WebContent/WEB-INF/html/basicInfo.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="menuManager.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/O2OSystem-merchant/WebContent/WEB-INF/html/menuManager.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="1.1470588">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="newOrder.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/O2OSystem-merchant/WebContent/WEB-INF/html/newOrder.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="2.6176472">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="storeInfo.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/O2OSystem-merchant/WebContent/WEB-INF/html/storeInfo.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="15.441176">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="storeRegist.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/O2OSystem-merchant/WebContent/WEB-INF/html/storeRegist.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="90.44118">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="successOrder.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/O2OSystem-merchant/WebContent/WEB-INF/html/successOrder.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.2945824">
+              <caret line="18" column="6" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -143,32 +207,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="WEB-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="O2OProject" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="G04_O2O" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="O2OSystem-merchant" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebContent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WEB-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -327,8 +365,66 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/O2OSystem-merchant/WebContent/WEB-INF/html/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39503387">
-          <caret line="215" column="67" selection-start-line="215" selection-start-column="67" selection-end-line="215" selection-end-column="67" />
+        <state vertical-scroll-proportion="-12.764706">
+          <caret line="221" column="15" selection-start-line="221" selection-start-column="15" selection-end-line="221" selection-end-column="15" />
+          <folding>
+            <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/O2OSystem-merchant/WebContent/WEB-INF/html/accountInfo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="9.235294">
+          <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/O2OSystem-merchant/WebContent/WEB-INF/html/basicInfo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/O2OSystem-merchant/WebContent/WEB-INF/html/menuManager.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.1470588">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/O2OSystem-merchant/WebContent/WEB-INF/html/newOrder.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.6176472">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/O2OSystem-merchant/WebContent/WEB-INF/html/storeInfo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="15.441176">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/O2OSystem-merchant/WebContent/WEB-INF/html/storeRegist.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="90.44118">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/O2OSystem-merchant/WebContent/WEB-INF/html/successOrder.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2945824">
+          <caret line="18" column="6" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
           <folding />
         </state>
       </provider>
