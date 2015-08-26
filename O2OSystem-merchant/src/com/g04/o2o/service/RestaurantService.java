@@ -107,4 +107,12 @@ public interface RestaurantService {
 	 */
 	public int updateOpenTime(Integer restId, String openTime);
 
+	/**
+	 * 通过restaurant的Id获得类型
+	 * 
+	 * @param restTypeId
+	 * @return
+	 */
+	public RestaurantType getRestTypeById(Integer restTypeId);
+
 }
