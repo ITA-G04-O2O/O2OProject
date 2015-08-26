@@ -18,7 +18,6 @@ $(document).ready(
 				}
 			});
 			$('.nextStep').click(function(index) {
-
 				$('#section' + count).hide();
 				count++;
 				$('#section' + (count)).show();

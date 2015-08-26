@@ -43,7 +43,7 @@ public class Order {
 	@JoinColumn(name = "item")
 	private List<MenuItem> items = new ArrayList<MenuItem>();
 	private String message; 
-	private Integer status; //1: user add order. 2:merchant received order. 3:merchant refused order. 4:on the way. 5: order finished.
+	private Integer status; //1: user add order. 2:merchant received order. 3:merchant refused order.  4: order finished.
 	@ManyToOne
 	@JoinColumn(name = "receiver", nullable = false)
 	private User user;

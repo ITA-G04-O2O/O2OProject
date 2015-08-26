@@ -1,3 +1,4 @@
 $(function(){
-	console.log('dsdsds');
+	console.log('New Order');
+	
 });
