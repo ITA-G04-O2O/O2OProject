@@ -18,6 +18,7 @@ public class RestAction {
 		System.out.println("get restType...");
 		JsonProtocol jp = new JsonProtocol();
 		jp.setObject(restService.getRestTypes());
+		System.out.println(restService.getRestTypes().toString());
 		return jp;
 	}
 	
