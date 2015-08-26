@@ -60,10 +60,10 @@ public class MenuAction {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "/menuTypes/{id}", method = RequestMethod.DELETE)
-	public JsonProtocol delMenuType(@PathVariable Integer id) {
+	@RequestMapping(value = "/restaurant/{restId}/menuTypes/{menuTypeId}", method = RequestMethod.DELETE)
+	public JsonProtocol delMenuType(@PathVariable Integer restId, @PathVariable Integer menuTypeId) {
 		JsonProtocol jp = new JsonProtocol();
-		jp.setResult(ms.delMenuType(id));
+		jp.setResult(ms.delMenuType(restId, menuTypeId));
 		return jp;
 	}
 	
@@ -73,10 +73,10 @@ public class MenuAction {
 	 * @param menuType
 	 * @return
 	 */
-	@RequestMapping(value = "/menuTypes/{id}", method = RequestMethod.PUT)
-	public JsonProtocol updMenuType(@PathVariable Integer id, String menuType) {
+	@RequestMapping(value = "/restaurant/{restId}/menuTypes/{menuTypeId}", method = RequestMethod.PUT)
+	public JsonProtocol updMenuType(@PathVariable Integer restId, @PathVariable Integer menuTypeId, String menuType) {
 		JsonProtocol jp = new JsonProtocol();
-		jp.setResult(ms.updMenuType(id, menuType));
+		jp.setResult(ms.updMenuType(restId, menuTypeId, menuType));
 		return jp;
 	}
 	
@@ -132,7 +132,7 @@ public class MenuAction {
 	 * @param itemName
 	 * @return
 	 */
-	@RequestMapping(value = "/menuItems/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/menuItems/{id}/name", method = RequestMethod.PUT)
 	public JsonProtocol updMenuItemName(@PathVariable Integer id, String itemName) {
 		JsonProtocol jp = new JsonProtocol();
 		jp.setResult(ms.updMenuItemName(id, itemName));
@@ -145,7 +145,7 @@ public class MenuAction {
 	 * @param price
 	 * @return
 	 */
-	@RequestMapping(value = "/menuItems/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/menuItems/{id}/price", method = RequestMethod.PUT)
 	public JsonProtocol updMenuItemPrice(@PathVariable Integer id, Double price) {
 		JsonProtocol jp = new JsonProtocol();
 		jp.setResult(ms.updMenuItemPrice(id, price));
@@ -158,7 +158,7 @@ public class MenuAction {
 	 * @param description
 	 * @return
 	 */
-	@RequestMapping(value = "/menuItems/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/menuItems/{id}/descr", method = RequestMethod.PUT)
 	public JsonProtocol updMenuItemDescription(@PathVariable Integer id, String description) {
 		JsonProtocol jp = new JsonProtocol();
 		jp.setResult(ms.updMenuItemDescription(id, description));
@@ -171,7 +171,7 @@ public class MenuAction {
 	 * @param type
 	 * @return
 	 */
-	@RequestMapping(value = "/menuItems/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/menuItems/{id}/type", method = RequestMethod.PUT)
 	public JsonProtocol updMenuItemType(@PathVariable Integer id, String type) {
 		JsonProtocol jp = new JsonProtocol();
 		jp.setResult(ms.updMenuItemDescription(id, type));
@@ -184,7 +184,7 @@ public class MenuAction {
 	 * @param volume
 	 * @return
 	 */
-	@RequestMapping(value = "/menuItems/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/menuItems/{id}/volume", method = RequestMethod.PUT)
 	public JsonProtocol updMenuItemSalesVolume(@PathVariable Integer id, Integer volume) {
 		JsonProtocol jp = new JsonProtocol();
 		jp.setResult(ms.updMenuItemSalesVolume(id, volume));
@@ -197,7 +197,7 @@ public class MenuAction {
 	 * @param score
 	 * @return
 	 */
-	@RequestMapping(value = "/menuItems/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/menuItems/{id}/score", method = RequestMethod.PUT)
 	public JsonProtocol updMenuItemScore(@PathVariable Integer id, Double score) {
 		JsonProtocol jp = new JsonProtocol();
 		jp.setResult(ms.updMenuItemScore(id, score));
