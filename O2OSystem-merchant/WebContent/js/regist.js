@@ -1,9 +1,18 @@
 $(document).ready(function() {
-	alert("ready");
 	$('#section2').hide();
 	$('#section3').hide();
 	var count = 1;
+	$.ajax({
+		url : 'http://localhost:8888/o2osystem-merchant/address',
+		type : 'GET',
+	}).done(function(data, status, xhr) {
+		var addrList = data.addrList;
+		alert(addrList.length);
+	}).fail(function(xhr, status, error) {
+		console.log('fail');
+	});
 	$('.nextStep').click(function(index) {
+
 		$('#section' + count).hide();
 		count++;
 		$('#section' + (count)).show();
@@ -17,43 +26,17 @@ $('.list-group li').on('click', function() {
 });
 
 $("#proBtn").click(function() {
-	alert("Hello");
+	alert($('input[name=mName]').val());
 	$.ajax({
-		url : 'http://localhost:8888/O2OSystem-merchant/restaurant',
+		url : 'http://localhost:8888/o2osystem-merchant/restaurant',
 		type : 'POST',
 		dataType : 'json',
 		data : {
-			mName : $('input[name=mName]').val(),
-			type : $('input:radio:checked').val(),
-			name : $('input[name=name]').val(),
-			author : $('input[name=author]').val(),
-			publisher : $('input[name=publisher]').val(),
-			others : $('input[name=other]').val()
+			mName : $('input[name=mName]').val()
 		}
 	}).done(function(data, status, xhr) {
-		getBook();
-		$('#updateBook').modal('hide');
+
 	}).fail(function(xhr, status, error) {
 		console.log('fail');
 	});
 });
-var addBook = function() {
-	$.ajax({
-		url : 'http://localhost:8888/O2OSystem-merchant/restaurant',
-		type : 'POST',
-		dataType : 'json',
-		data : {
-			mName : $('input[name=mName]').val(),
-			type : $('input:radio:checked').val(),
-			name : $('input[name=name]').val(),
-			author : $('input[name=author]').val(),
-			publisher : $('input[name=publisher]').val(),
-			others : $('input[name=other]').val()
-		}
-	}).done(function(data, status, xhr) {
-		getBook();
-		$('#updateBook').modal('hide');
-	}).fail(function(xhr, status, error) {
-		console.log('fail');
-	});
-};
