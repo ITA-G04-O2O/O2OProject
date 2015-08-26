@@ -4,19 +4,33 @@ import java.util.List;
 
 import javax.persistence.Transient;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.g04.o2o.dao.HotLineDao;
 import com.g04.o2o.dao.MainSystemDao;
+import com.g04.o2o.dao.RestaurantDao;
 import com.g04.o2o.dao.RestaurantTypeDao;
+import com.g04.o2o.dao.UserDao;
 import com.g04.o2o.entity.HotLine;
 import com.g04.o2o.entity.MainSystem;
+import com.g04.o2o.entity.Restaurant;
 import com.g04.o2o.entity.RestaurantType;
+import com.g04.o2o.entity.User;
 import com.g04.o2o.service.AdminService;
 
 @Service
 public class AdminServiceImpl implements AdminService {
+	@Autowired
 	private MainSystemDao mainSystemDao;
+	@Autowired
 	private RestaurantTypeDao restaurantTypeDao;
+	@Autowired
+	private HotLineDao hotLineDao;
+	@Autowired
+	private UserDao userDao;
+	@Autowired
+	private RestaurantDao restaurantDao;
 
 	@Override
 	@Transient
@@ -26,9 +40,10 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
+	@Transient
 	public boolean updateSystemTimes(MainSystem mainSystem) {
-		// TODO Auto-generated method stub
-		return false;
+		return mainSystemDao.update(MainSystem.class, mainSystem.getId(),
+				mainSystem) == -1;
 	}
 
 	@Override
@@ -48,57 +63,67 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	@Transient
 	public boolean updateRestaurantType(Integer id, String type) {
-		restaurantTypeDao.search(RestaurantType.class, id).setType(type);
-		return false;
+		try {
+			restaurantTypeDao.search(RestaurantType.class, id).setType(type);
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override
 	@Transient
 	public boolean updateHotLines(Integer id, String tel) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			hotLineDao.search(HotLine.class, id).setTel(tel);
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override
 	@Transient
 	public boolean addHotLines(String tel) {
-		// TODO Auto-generated method stub
-		return false;
+		HotLine hotLine = new HotLine();
+		hotLine.setTel(tel);
+		return hotLineDao.add(hotLine) == -1;
 	}
 
 	@Override
 	@Transient
-	public HotLine getHotLines() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<HotLine> getHotLines() {
+		return hotLineDao.searchAll(HotLine.class);
 	}
 
 	@Override
 	@Transient
 	public boolean deleteHotLine(Integer id) {
-		// mainSystemDao.search(HotLine.class, id);
-		return false;
+		return hotLineDao.del(HotLine.class, id) == -1;
 	}
 
 	@Override
 	@Transient
 	public boolean verifyRestaurant(Integer id, Integer state) {
-		// TODO Auto-generated method stub
-		return false;
+		return restaurantDao
+				.updateValue(id, Restaurant.class, "examine", state) == -1;
 	}
 
 	@Override
 	@Transient
 	public boolean resetPsd(String tel) {
-		// TODO Auto-generated method stub
+		for (User u : userDao.searchAll(User.class)) {
+			if (u.getTel().equals(tel)) {
+				return userDao.updateValue(u.getId(), User.class, "password",
+						"123456") == -1;
+			}
+		}
 		return false;
 	}
 
-	public MainSystemDao getMainSystemDao() {
-		return mainSystemDao;
-	}
-
-	public void setMainSystemDao(MainSystemDao mainSystemDao) {
-		this.mainSystemDao = mainSystemDao;
+	@Override
+	public boolean setHot(Integer id,boolean isHot) {
+		restaurantDao.updateValue(id, Restaurant.class, "hot", isHot);
+		return false;
 	}
 }

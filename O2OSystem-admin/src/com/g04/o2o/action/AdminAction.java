@@ -96,4 +96,10 @@ public class AdminAction {
 		return jp;
 	}
 
+	@RequestMapping(value = "/hot/{id}", method = RequestMethod.PUT)
+	public JsonProtocol setHot(@PathVariable int id, boolean isHot) {
+		JsonProtocol jp = new JsonProtocol();
+		jp.setResult(systemService.setHot(id, isHot));
+		return jp;
+	}
 }

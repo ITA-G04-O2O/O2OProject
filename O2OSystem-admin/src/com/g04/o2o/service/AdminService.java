@@ -31,11 +31,13 @@ public interface AdminService {
 
 	public boolean addHotLines(String tel);
 
-	public HotLine getHotLines();
+	public List<HotLine> getHotLines();
 
 	public boolean deleteHotLine(Integer id);
 
 	public boolean verifyRestaurant(Integer id, Integer state);
 
 	public boolean resetPsd(String tel);
+
+	public boolean setHot(Integer id, boolean isHot);
 }
