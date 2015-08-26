@@ -16,9 +16,7 @@ public class AdminAction {
 	@RequestMapping(value = "/sysSetting", method = RequestMethod.GET)
 	public JsonProtocol getSystemTimes() {
 		JsonProtocol jp = new JsonProtocol();
-		MainSystem m = new MainSystem();
-		m.setAutoExpirationTime(systemService.getAutoExpirationTime());
-		m.setAutoCompleteTime(systemService.getAutoCompleteTime());
+		MainSystem m = systemService.getSystemTimes();
 		jp.setResult(true);
 		jp.setObject(m);
 		return jp;
