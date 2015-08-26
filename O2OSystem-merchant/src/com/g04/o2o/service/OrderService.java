@@ -53,9 +53,20 @@ public interface OrderService {
 	public List<Order> getAllNewOrders();
 	
 	/**
-	 * 获取所有历史订单
+	 * 获取所有正在商家已接单订单
+	 * @return
+	 */	
+	public List<Order> getAllReceiveOrders();
+	
+	/**
+	 * 获取所有已完成订单
 	 * @return
 	 */
-	public List<Order> getAllHistoryOrders();
+	public List<Order> getAllFinishedOrders();
 	
+	/**
+	 * 获取所有失败订单
+	 * @return
+	 */
+	public List<Order> getAllFailOrders();
 }

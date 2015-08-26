@@ -35,7 +35,6 @@ public class RestaurantServiceImpl implements RestaurantService {
 		return dao.add(r);
 	}
 
-	@Transactional
 	@Override
 	public Set<Restaurant> getRestByType(String type) {
 		return restTypeDao.getRestByTpe(type);
