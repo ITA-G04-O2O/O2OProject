@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Transient;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -70,19 +71,21 @@ public class OrderAction {
 		return jp;
 	}
 	
-	@Transient
+	@Transactional
 	@RequestMapping(value = "/orders/fail", method = RequestMethod.GET)
 	public JsonProtocol getAllFailOrders() {
-//		System.out.println("fail order");
 		JsonProtocol jp = new JsonProtocol();
-		System.out.println("newOrders size is "+os.getAllFailOrders().size());
+//		System.out.println("newOrders size is "+os.getAllFailOrders().size());
 		
 		List<GetOrderVO> goVoList = new ArrayList<GetOrderVO>();
 		for (Order order : os.getAllFailOrders()) {
-			System.out.println("order size is:"+order.getItems().size());
-//			goVoList.add(GetOrderVOHelper.setOrder2VO(order));
+//			System.out.println("order size is:"+order.getItems().size());
+			GetOrderVO getVo = GetOrderVOHelper.setOrder2VO(order);
+//			getVo.setMenuItemMap(GetOrderVOHelper.corventListToMap(order.getItems()));
+			System.out.println("order message is:"+order.getMessage());
+
+			goVoList.add(getVo);
 		}
-		
 		jp.setObject(goVoList);
 		return jp;
 	}

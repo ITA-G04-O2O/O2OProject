@@ -12,14 +12,6 @@ import com.g04.o2o.vo.GetOrderVO;
 public class GetOrderVOHelper {
 	public static GetOrderVO setOrder2VO(Order order){
 		GetOrderVO goVo = new GetOrderVO();
-//		private Integer id;
-//		private Date createDate;
-//		private Integer status;
-//		private String connectPeople;
-//		private String tel;
-//		private String address;
-//		private Map<MenuItem,Integer> menuItemMap; 
-//		private Double totalPrices;
 		goVo.setId(order.getId());
 		goVo.setCreateDate(order.getCrDate());
 		goVo.setStatus(order.getStatus());
@@ -32,6 +24,7 @@ public class GetOrderVOHelper {
 	}
 	
 	public static Map<MenuItem, Integer> corventListToMap(List<MenuItem> mil){
+		System.out.println("mil="+mil.size());
 		Map<MenuItem,Integer> menuItemMap = new HashMap<MenuItem, Integer>();
 		for (MenuItem menuItem : mil) {
 			menuItemMap.put(menuItem, Collections.frequency(mil, menuItem));
@@ -42,6 +35,7 @@ public class GetOrderVOHelper {
 	public static Double getTotalPirce(List<MenuItem> mil){
 		Double totalPrice = null;
 		for (MenuItem menuItem : mil) {
+			System.out.println("::::::::"+menuItem.getPrice());
 			totalPrice = totalPrice + menuItem.getPrice();
 		}
 		return totalPrice;

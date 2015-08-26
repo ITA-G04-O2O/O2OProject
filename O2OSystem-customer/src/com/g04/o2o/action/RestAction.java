@@ -1,15 +1,7 @@
 package com.g04.o2o.action;
 
-<<<<<<< HEAD
 import java.util.Set;
 
-=======
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.transaction.Transactional;
-
->>>>>>> f9aa65251d48b468983436cfec3e67f7fdbcae80
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,10 +12,7 @@ import vo.RestaurantVo;
 
 import com.g04.o2o.entity.JsonProtocol;
 import com.g04.o2o.entity.Restaurant;
-<<<<<<< HEAD
-=======
 import com.g04.o2o.entity.RestaurantType;
->>>>>>> f9aa65251d48b468983436cfec3e67f7fdbcae80
 import com.g04.o2o.service.RestaurantService;
 @RestController
 public class RestAction {
