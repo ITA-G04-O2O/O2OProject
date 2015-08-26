@@ -2,6 +2,7 @@ package com.g04.o2o.entity;
 
 
 
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
 
 @Entity
 /**
@@ -27,7 +27,18 @@ public class MenuType {
 	@JoinColumn(name="restID")
 	private Restaurant rest;
 	
-	
+	/**
+	 * @return the rest
+	 */
+	public Restaurant getRest() {
+		return rest;
+	}
+	/**
+	 * @param rest the rest to set
+	 */
+	public void setRest(Restaurant rest) {
+		this.rest = rest;
+	}
 	public Integer getId() {
 		return id;
 	}

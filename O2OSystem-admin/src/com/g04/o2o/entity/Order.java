@@ -53,6 +53,16 @@ public class Order {
 	private String userDefineAddress;
 	private Double score;
 	private String comment;
+	private String tel;
+	
+	public Date getCompletedTime() {
+		return completedTime;
+	}
+
+	public void setCompletedTime(Date completedTime) {
+		this.completedTime = completedTime;
+	}
+	
 	/**
 	 * @return the userDefineAddress
 	 */
@@ -66,14 +76,6 @@ public class Order {
 	 */
 	public void setUserDefineAddress(String userDefineAddress) {
 		this.userDefineAddress = userDefineAddress;
-	}
-
-	public Date getCompletedTime() {
-		return completedTime;
-	}
-
-	public void setCompletedTime(Date completedTime) {
-		this.completedTime = completedTime;
 	}
 
 	/**
@@ -91,7 +93,7 @@ public class Order {
 		this.address = address;
 	}
 
-	private String tel;
+
 
 	/**
 	 * @return the receiveTime

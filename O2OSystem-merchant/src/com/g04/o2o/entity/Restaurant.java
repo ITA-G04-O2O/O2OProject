@@ -2,6 +2,7 @@ package com.g04.o2o.entity;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -36,12 +37,12 @@ public class Restaurant {
 	private String name;
 	@Temporal(value = TemporalType.TIMESTAMP)
 	@CreationTimestamp
-	@Column(updatable=false)
+	@Column(updatable = false)
 	// 创建时间
 	private Date crt;
 	// 拥有菜单
 	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "resturant")
-	private Set<MenuItem> menus;
+	private Set<MenuItem> menus=new HashSet<>();
 	// 所有订单
 	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "resturant")
 	private List<Order> orders = new ArrayList<Order>();
@@ -52,14 +53,17 @@ public class Restaurant {
 	@OneToOne(fetch = FetchType.LAZY)
 	// 拥有者
 	private Merchant owner;
-	// 承诺送达时间
 
+	@OneToMany(mappedBy = "rest", cascade = { CascadeType.REMOVE, CascadeType.MERGE, CascadeType.PERSIST })
+	private List<MenuType> menuTypes = new ArrayList<>();// 持有的菜单类型
+
+	// 承诺送达时间
 	private Double expectArrivalTime;
 	// 实际送达时间
 	private Double actualArrivalTime;
 	// 餐厅地址
 	@OneToOne(cascade = { CascadeType.ALL })
-	@JoinColumn(name="addressId",nullable=false)
+	@JoinColumn(name = "addressId", nullable = false)
 	private Address address;
 	// 是否营业中
 	private boolean online;
@@ -71,13 +75,29 @@ public class Restaurant {
 	// 是否繁忙
 	private boolean busy;
 	private Integer examine; // 审核状态 0：待审核 1：审核通过 2：审核未通过 3：暂停营业
-	private Integer collectionTimes;//被收藏次数 这个字段可以省略
+	private Integer collectionTimes;// 被收藏次数 这个字段可以省略
 	private String notice;// 公告
 	private Integer playPrice;// 起送价
 	private Integer disCharge;// 配送费
 	private String openTime;// 营业时间
 	@Lob
 	private byte[] imageBytes;
+
+	/**
+	 * @return the menuTypes
+	 */
+	public List<MenuType> getMenuTypes() {
+		return menuTypes;
+	}
+
+	/**
+	 * @param menuTypes
+	 *            the menuTypes to set
+	 */
+	public void setMenuTypes(List<MenuType> menuTypes) {
+		this.menuTypes = menuTypes;
+	}
+
 	/**
 	 * @return the imageBytes
 	 */
@@ -86,7 +106,8 @@ public class Restaurant {
 	}
 
 	/**
-	 * @param imageBytes the imageBytes to set
+	 * @param imageBytes
+	 *            the imageBytes to set
 	 */
 	public void setImageBytes(byte[] imageBytes) {
 		this.imageBytes = imageBytes;
@@ -100,7 +121,8 @@ public class Restaurant {
 	}
 
 	/**
-	 * @param collectionTimes the collectionTimes to set
+	 * @param collectionTimes
+	 *            the collectionTimes to set
 	 */
 	public void setCollectionTimes(Integer collectionTimes) {
 		this.collectionTimes = collectionTimes;
@@ -114,7 +136,8 @@ public class Restaurant {
 	}
 
 	/**
-	 * @param notice the notice to set
+	 * @param notice
+	 *            the notice to set
 	 */
 	public void setNotice(String notice) {
 		this.notice = notice;
@@ -128,7 +151,8 @@ public class Restaurant {
 	}
 
 	/**
-	 * @param playPrice the playPrice to set
+	 * @param playPrice
+	 *            the playPrice to set
 	 */
 	public void setPlayPrice(Integer playPrice) {
 		this.playPrice = playPrice;
@@ -142,7 +166,8 @@ public class Restaurant {
 	}
 
 	/**
-	 * @param disCharge the disCharge to set
+	 * @param disCharge
+	 *            the disCharge to set
 	 */
 	public void setDisCharge(Integer disCharge) {
 		this.disCharge = disCharge;
@@ -156,7 +181,8 @@ public class Restaurant {
 	}
 
 	/**
-	 * @param openTime the openTime to set
+	 * @param openTime
+	 *            the openTime to set
 	 */
 	public void setOpenTime(String openTime) {
 		this.openTime = openTime;
@@ -312,7 +338,8 @@ public class Restaurant {
 	}
 
 	/**
-	 * @param examine the examine to set
+	 * @param examine
+	 *            the examine to set
 	 */
 	public void setExamine(Integer examine) {
 		this.examine = examine;

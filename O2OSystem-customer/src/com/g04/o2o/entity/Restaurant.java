@@ -2,6 +2,7 @@ package com.g04.o2o.entity;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -41,7 +42,7 @@ public class Restaurant {
 	private Date crt;
 	// 拥有菜单
 	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "resturant")
-	private Set<MenuItem> menus;
+	private Set<MenuItem> menus=new HashSet<>();
 	// 所有订单
 	@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "resturant")
 	private List<Order> orders = new ArrayList<Order>();
