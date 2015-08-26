@@ -24,14 +24,15 @@ public class RestaurantAction {
 		this.restaurantService = restaurantService;
 	}
 
-	@RequestMapping(value = "/restaurant", method = RequestMethod.POST)
-	public JsonProtocol regist(String mName, RestaurantType type, Address addr,HttpSession session) {
+	@RequestMapping(value = "/restaurant", method = RequestMethod.POST, produces = { "application/json;charset=UTF-8" })
+	public JsonProtocol regist(String mName, HttpSession session) {
+		System.out.println("RestaurantAction");
 		System.out.println(mName);
 		JsonProtocol js = new JsonProtocol();
 		Restaurant rest = new Restaurant();
 		rest.setName(mName);
-		rest.setType(type);
-		rest.setAddress(addr);
+		// rest.setType(type);
+		// rest.setAddress(addr);
 		session.setAttribute("restaurant", rest);
 		return js;
 	}

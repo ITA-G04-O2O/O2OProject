@@ -57,28 +57,18 @@ public class MenuServiceImpl implements MenuService {
 
 	@Override
 	@Transient
-	public boolean updMenuType(Integer restId, Integer menuTypeId, String menuType) {
-		try {
-			mtd.search(MenuType.class, menuTypeId).setMenuTypeName(menuType);
-		} catch (Exception e) {
+	public boolean updMenuType(Integer restId, Integer menuTypeId,
+			String menuType) {
+		if (mtd.search(MenuType.class, menuTypeId).getRest().getId() == restId) {
+			try {
+				mtd.del(MenuType.class, menuTypeId);
+			} catch (Exception e) {
+				return false;
+			}
+		} else {
 			return false;
 		}
 		return true;
-		
-		/*Restaurant rest = rd.search(Restaurant.class, restId);
-		Set<MenuItem> misSet = rest.getMenus();
-//		List<MenuItem> typeList = new ArrayList<MenuItem>();
-		for (MenuItem item : misSet) {
-			if (item.getType().getId() == id) {
-				typeList.add(item);
-			}
-		}
-		if (typeList.size() == 0) {
-			mtd.del(MenuType.class, id);
-			return true;
-		}
-		return false;*/
-		
 	}
 
 	@Override
