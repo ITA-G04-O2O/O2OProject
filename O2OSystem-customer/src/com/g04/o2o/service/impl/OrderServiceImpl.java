@@ -53,6 +53,7 @@ public class OrderServiceImpl implements OrderService {
 	@Transactional
 	@Override
 	public int updateStatus(Integer oId, Integer status) {
+
 		try {
 			Order order = dao.search(Order.class, oId);
 			order.setStatus(status);
@@ -61,6 +62,7 @@ public class OrderServiceImpl implements OrderService {
 			return -1;
 		}
 		return 1;
+
 	}
 
 }
