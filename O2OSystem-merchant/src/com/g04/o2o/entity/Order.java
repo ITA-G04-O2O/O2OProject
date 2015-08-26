@@ -33,10 +33,9 @@ public class Order {
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date crDate;
 	@Temporal(value = TemporalType.TIMESTAMP)
-	private Date receiveTime; //ï¿½ï¿½ï¿½È·ï¿½Ï¶ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+	private Date receiveTime; //µê¼ÒÈ·ÈÏ¶©µ¥Ê±¼ä
 	@Temporal(value = TemporalType.TIMESTAMP)
-	private Date completedTime; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
-
+	private Date completedTime; //¶©µ¥Íê³ÉÊ±¼ä
 	@ManyToOne
 	@JoinColumn(name = "restId", nullable = false)
 	private Restaurant resturant;
@@ -54,6 +53,16 @@ public class Order {
 	private String userDefineAddress;
 	private Double score;
 	private String comment;
+	private String tel;
+	
+	public Date getCompletedTime() {
+		return completedTime;
+	}
+
+	public void setCompletedTime(Date completedTime) {
+		this.completedTime = completedTime;
+	}
+	
 	/**
 	 * @return the userDefineAddress
 	 */
@@ -84,7 +93,7 @@ public class Order {
 		this.address = address;
 	}
 
-	private String tel;
+
 
 	/**
 	 * @return the receiveTime
@@ -176,14 +185,6 @@ public class Order {
 
 	public void setItems(List<MenuItem> items) {
 		this.items = items;
-	}
-	
-	public Date getCompletedTime() {
-		return completedTime;
-	}
-
-	public void setCompletedTime(Date completedTime) {
-		this.completedTime = completedTime;
 	}
 
 	/**
