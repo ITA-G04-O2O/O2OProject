@@ -43,6 +43,22 @@ public class User {
 	@OneToMany
 	private Set<Restaurant> restlikes = new HashSet<Restaurant>();
 	
+	@OneToMany(mappedBy="user",cascade={CascadeType.PERSIST,CascadeType.REMOVE,CascadeType.MERGE})
+	private List<Order> historyOrders = new ArrayList<>();
+	/**
+	 * @return the historyOrders
+	 */
+	public List<Order> getHistoryOrders() {
+		return historyOrders;
+	}
+
+	/**
+	 * @param historyOrders the historyOrders to set
+	 */
+	public void setHistoryOrders(List<Order> historyOrders) {
+		this.historyOrders = historyOrders;
+	}
+
 	/**
 	 * @return the restlikes
 	 */

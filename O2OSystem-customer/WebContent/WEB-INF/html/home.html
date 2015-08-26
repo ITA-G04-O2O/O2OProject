@@ -1,6 +1,195 @@
 <!DOCTYPE html>
 <html>
 
+<<<<<<< HEAD
+	<head>
+		<meta charset="utf-8">
+		<title>Take-out Table</title>
+		<link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+		<link rel="stylesheet" href="css/table.css" />
+		<script type="text/javascript" src="js/dist/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="js/dist/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/SearchAddr.js"></script>
+		<script type="text/javascript" src="js/login.js"></script>
+	</head>
+
+	<body>
+		<nav class="navbar navbar-default">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#home-nav-main" aria-expanded="false">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<div>
+						<a href="#"><img src="img/logoshow.ico" width="50px" /></a>
+					</div>
+
+				</div>
+				<div id="home-nav-main" class="collapse navbar-collapse">
+					<ul class="nav navbar-nav pull-right">
+						<!--
+					<li><a href="javascript:void(0)">@login name</a></li>
+					<li><a href="javascript:void(0)"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span></a></li>
+-->
+						<li><a id="loginUrl">登陆</a></li>
+						<li><a id="registUrl">注册</a></li>
+						<li><a id="helpUrl">找客服</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!--	<div>-->
+		<!--
+		<div id="searchBarDiv" align="center">
+			
+			<input type="text" id="search-input" width="100" />
+			<button id="search-btn">搜索</button>
+			<div id="resultTableDiv"></div>
+		</div>
+-->
+		<div class="title">
+			<div class="col-xs-12">
+				<h2>Tomcat<img src="img/logoshow.ico" />外卖</h2>
+			</div>
+		</div>
+		<div id="searchBarDiv">
+			<div class="row">
+				<!--			<div class="col-lg-6">-->
+				<div class="input-group">
+					<div class="input-group-btn">
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">地点 <span class="caret"></span></button>
+						<ul class="dropdown-menu">
+							<li><a href="#">珠海</a></li>
+							<li><a href="#">广州</a></li>
+							<li><a href="#">中山</a></li>
+							<!--							<li role="separator" class="divider"></li>-->
+							<li><a href="#">江门</a></li>
+						</ul>
+					</div>
+					<!-- /btn-group -->
+					<input type="text" id="searchInput" class="form-control" aria-label="..." placeholder="输入地址搜索周边美食">
+					<span class="input-group-btn">
+        				<button id="searchBtn" class="btn btn-default" type="button">搜索</button>
+      				</span>
+				</div>
+				<!-- /input-group -->
+				<!--			</div>-->
+				<!-- /.col-lg-6 -->
+			</div>
+			<div id="resultTableDiv">
+				<table id="addrTable"></table>
+			</div>
+		</div>
+		<div id="map-footer" class="map-footer">
+			<div class="map-footer-entry">
+				<a rel="nofollow" target="_blank" href="http://weibo.com/u/3949575070" class="map-footer-link">关注微博</a>
+				<i class="map-footer-separator">|</i>
+				<a rel="nofollow" href="javascript:;" class="map-footer-link map-footer-weixing">关注微信</a>
+				<i class="map-footer-separator">|</i>
+				<a rel="nofollow" target="_blank" href="http://kaidian.waimai.meituan.com" class="map-footer-link">我要开店</a>
+			</div>
+		</div>
+
+		<!--	LoginModule-->
+		<div class="modal fade bs-example-modal-sm" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">亲,赶快登陆享受下美食</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							
+							<label for="name">用户名</label>
+							<input type="text" class="form-control" id="name" placeholder="输入用户名">
+						</div>
+						<div class="form-group">
+							<label for="password">密码</label>
+							<input type="password" class="form-control" id="password" placeholder="输入密码">
+						</div>
+
+						<div class="checkbox">
+							<label>
+								<input type="checkbox">记住我
+							</label>
+						</div>
+						<button type="submit" class="btn btn-default">登陆...找美食</button>
+						<a href="html/regist.html" style="float:right;">还没有账号?注册</a>
+					</div>
+					<div class="modal-footer">
+						<span>By G04 </span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--	RegisterModule-->
+		<div class="modal fade bs-example-modal-sm" id="registModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">亲,赶快登陆享受下美食</h4>
+					</div>
+					<div class="modal-body">
+						<div class="col-md-4 col-md-offset-4 ">
+							<h3 style="color:red;display:none">注册失败</h3>
+							<div class="form-group">
+								<label for="name">手机号</label>
+								<label style="color:red;display:none" data-target="tip">已被占用</label>
+								<input type="text" class="form-control" id="name" placeholder="输入手机号">
+								<label for="name">用户名</label>
+								<label style="color:red;display:none" data-target="tip">已被占用</label>
+								<input type="text" class="form-control" id="name" placeholder="输入用户名">
+							</div>
+							<div class="form-group">
+								<label for="password">密码</label>
+								<input type="password" class="form-control" id="password" placeholder="输入密码">
+							</div>
+							<div class="form-group">
+								<label for="password2">确认密码</label>
+								<label data-target="psd-tip" style="display:none;color:red">&nbsp;两次密码不一致</label>
+								<input type="password" class="form-control" id="password2" placeholder="确认密码">
+							</div>
+							<div class="form-group">
+								<label for="name">电话号码</label>
+								<input type="text" class="form-control" id="tel" placeholder="输入电话号码">
+							</div>
+						</div>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<input type="button" id="updateBtn" class="btn btn-primary" value="Regist" />
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--	helpModule-->
+		<div class="modal fade bs-example-modal-sm" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">Help</h4>
+					</div>
+					<div class="modal-body">
+						<a>15118788768</a>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+=======
 <head>
     <meta charset="utf-8"/>
     <title></title>
@@ -232,5 +421,6 @@
 </div>
 
 </body>
+>>>>>>> 1b39ff771f5e5cd550e3e3843590acf1db7d3440
 
 </html>
