@@ -1,5 +1,7 @@
 package com.g04.o2o.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ public class RestaurantAction {
 
 	@Autowired
 	private RestaurantService restaurantService;
+	
 
 	public void setRestaurantService(RestaurantService restaurantService) {
 		this.restaurantService = restaurantService;
@@ -36,6 +39,14 @@ public class RestaurantAction {
 		session.setAttribute("restaurant", rest);
 		return js;
 	}
+	
+	@RequestMapping(value = "/resttype", method = RequestMethod.GET, produces = { "application/json;charset=UTF-8" })
+	public List<RestaurantType> resttype() {
+		System.out.println("resttype");
+		List<RestaurantType> restType = restaurantService.getTypes();
+		return restType;
+	}
+	
 
 	@RequestMapping(value = "/restaurant/{id}/name", method = RequestMethod.PUT)
 	public JsonProtocol updateRestName(@PathVariable(value = "id") int id,

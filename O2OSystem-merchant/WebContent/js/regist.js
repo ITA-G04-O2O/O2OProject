@@ -18,7 +18,6 @@ $(document).ready(
 				}
 			});
 			$('.nextStep').click(function(index) {
-
 				$('#section' + count).hide();
 				count++;
 				$('#section' + (count)).show();
@@ -51,7 +50,6 @@ function addClickEvent(province) {
 }
 
 function addClickEvent2(city) {
-	alert(city);
 	$("#city" + city).bind("click", function() {
 		$('#cityBtn').text(city);
 	});
