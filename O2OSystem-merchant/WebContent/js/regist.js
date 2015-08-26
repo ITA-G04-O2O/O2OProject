@@ -51,7 +51,6 @@ function addClickEvent(province) {
 }
 
 function addClickEvent2(city) {
-	alert(city);
 	$("#city" + city).bind("click", function() {
 		$('#cityBtn').text(city);
 	});
