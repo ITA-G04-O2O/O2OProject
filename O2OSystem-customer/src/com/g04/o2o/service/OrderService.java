@@ -39,4 +39,11 @@ public interface OrderService {
 	 * @return
 	 */
 	int updateScore(Integer oId,Integer sc);
+	/**
+	 * 更新订单状态
+	 * @param oId
+	 * @param status
+	 * @return
+	 */
+	int updateStatus(Integer oId,String status);
 }

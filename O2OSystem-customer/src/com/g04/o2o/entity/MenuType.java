@@ -1,17 +1,19 @@
 package com.g04.o2o.entity;
 
-import java.util.HashSet;
-import java.util.Set;
 
+
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 /**
- * 菜品的类别
+ * 
  * @author DINGFR2
  *
  */
@@ -21,20 +23,21 @@ public class MenuType {
 	private Integer id;
 	private String MenuTypeName;
 	private String creater;
-	@OneToMany(mappedBy="type")
-	private Set<Restaurant> hasRestaurants = new HashSet<Restaurant>();
+	@ManyToOne(cascade={CascadeType.MERGE})
+	@JoinColumn(name="restID")
+	private Restaurant rest;
 	
 	/**
-	 * @return the hasRestaurants
+	 * @return the rest
 	 */
-	public Set<Restaurant> getHasRestaurants() {
-		return hasRestaurants;
+	public Restaurant getRest() {
+		return rest;
 	}
 	/**
-	 * @param hasRestaurants the hasRestaurants to set
+	 * @param rest the rest to set
 	 */
-	public void setHasRestaurants(Set<Restaurant> hasRestaurants) {
-		this.hasRestaurants = hasRestaurants;
+	public void setRest(Restaurant rest) {
+		this.rest = rest;
 	}
 	public Integer getId() {
 		return id;

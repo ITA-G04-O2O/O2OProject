@@ -48,4 +48,11 @@ public class OrderAction {
 		return jp;
 	}
 	
+	@RequestMapping(value="/orders/{id}/status",method=RequestMethod.PUT)
+	public JsonProtocol updateStatus(@PathVariable(value="id") Integer oId,String status){
+		JsonProtocol jp = new JsonProtocol();
+		jp.setObject(orderService.updateStatus(oId, status));
+		return jp;
+	}
+	
 }

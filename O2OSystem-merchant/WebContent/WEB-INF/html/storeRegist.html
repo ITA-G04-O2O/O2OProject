@@ -1,162 +1,175 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="UTF-8">
-		<title>SMS - home</title>
-		<link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-		<link rel="stylesheet" href="../css/regist.css">
-	</head>
+<head>
+<meta charset="UTF-8">
+<title>商家注册系统</title>
+<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/regist.css">
+</head>
 
-	<body>
-		<nav class="navbar navbar-default">
-			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a href="storeRegist.html"><img src="../img/logoshow.ico" width="50px" style="margin-top:8px"></a>
-				</div>
-				<div class="collapse navbar-collapse" id="main-nav">
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#">Hello Okar</a></li>
-						<li><a href="#"><i class="glyphicon glyphicon-log-out"></i></a></li>
-					</ul>
-				</div>
+<body>
+	<nav class="navbar navbar-default">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#main-nav">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a href="storeRegist.html"><img src="img/logoshow.ico"
+					width="50px" style="margin-top: 8px"></a>
 			</div>
-		</nav>
-		<div class="container container-main">
-			<div class="row">
-				<div class="col-xs-12">
-					<div class="row breadcrumb-wrapper">
-						<div class="col-xs-12">
-							<ol class="breadcrumb">
-								<li class="active">店铺基本信息</li>
-								<li>资质证明</li>
-								<li>审核状态</li>
-							</ol>
-						</div>
+			<div class="collapse navbar-collapse" id="main-nav">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#">商家注册</a></li>
+					<li><a href="#"><i class="glyphicon glyphicon-log-out"></i></a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="container container-main">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="row breadcrumb-wrapper">
+					<div class="col-xs-12">
+						<ol class="breadcrumb">
+							<li class="active">店铺基本信息</li>
+							<li>资质证明</li>
+							<li>审核状态</li>
+						</ol>
 					</div>
-					<div class="row">
-						<div class="form-horizontal">
-							<input type="hidden" class="form-control" id="id" name="id">
+				</div>
+				<div class="row">
+					<div class="form-horizontal">
+						<input type="hidden" class="form-control" id="id" name="id">
 
-							<div id="section1">
-								<div class="form-group">
-									<label class="col-sm-3 col-md-3 control-label">店名:</label>
-									<div class="col-sm-6 col-md-6">
-										<input type="text" class="form-control" id="mName" name="mName">
-									</div>
-
+						<div id="section1">
+							<div class="form-group">
+								<label class="col-sm-3 col-md-3 control-label">店名:</label>
+								<div class="col-sm-6 col-md-6">
+									<input type="text" class="form-control" id="mName" name="mName">
 								</div>
-								<div class="form-group">
-									<label class="col-sm-3 col-md-3 control-label">经营种类:</label>
 
-									<div class="col-sm-6 col-md-6">
-										<label class="radio-inline">
-											<input type="radio" id="inlineCheckbox1" name="option1" value="1" checked="checked"> 西餐厅
-										</label>
-										<label class="radio-inline">
-											<input type="radio" id="inlineCheckbox2" name="option1" value="2"> 中餐厅
-										</label>
-										<label class="radio-inline">
-											<input type="radio" id="inlineCheckbox3" name="option1" value="3"> 法式餐厅
-										</label>
-										<label class="radio-inline">
-											<input type="radio" id="inlineCheckbox3" name="option1" value="4"> 泰国餐厅
-										</label>
-									</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 col-md-3 control-label">经营种类:</label>
 
+								<div class="col-sm-6 col-md-6">
+									<label class="radio-inline"> <input type="radio"
+										id="inlineCheckbox1" name="option1" value="1"
+										checked="checked"> 西餐厅
+									</label> <label class="radio-inline"> <input type="radio"
+										id="inlineCheckbox2" name="option1" value="2"> 中餐厅
+									</label> <label class="radio-inline"> <input type="radio"
+										id="inlineCheckbox3" name="option1" value="3"> 法式餐厅
+									</label> <label class="radio-inline"> <input type="radio"
+										id="inlineCheckbox3" name="option1" value="4"> 泰国餐厅
+									</label>
 								</div>
-								<div class="form-group">
-									<label for="author" class="col-sm-3 col-md-3 control-label">地址:</label>
 
-									<div class="col-sm-6 col-md-6">
-										<div class="input-group">
-											<div class="input-group-btn">
-												<button type="button" id="proBtn" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-													省份<span class="caret"></span></button>
-												<ul class="dropdown-menu" id="province" role="menu" aria-labelledby="province">
-													<!--<li><a href="#">珠海</a></li>
-													<li><a href="#">广州</a></li>
-													<li><a href="#">中山</a></li>
-													<li><a href="#">江门</a></li>-->
-												</ul>
-											</div>
-											<div class="input-group-btn">
-												<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-													城市<span class="caret"></span></button>
-												<ul class="dropdown-menu">
-													<li><a href="#">高新区</a></li>
-													<li><a href="#">香洲区</a></li>
-													<li><a href="#">金湾区</a></li>
-													<li><a href="#">斗门区</a></li>
-												</ul>
-											</div>
-											<input type="text" id="searchInput" class="form-control" aria-label="..." placeholder="詳細地址">
+							</div>
+							<div class="form-group">
+								<label for="author" class="col-sm-3 col-md-3 control-label">地址:</label>
+
+								<div class="col-sm-6 col-md-6">
+									<div class="input-group">
+										<div class="input-group-btn">
+											<button type="button" id="proBtn"
+												class="btn btn-default dropdown-toggle"
+												data-toggle="dropdown" aria-haspopup="true"
+												aria-expanded="false">
+												省份<span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu" id="province" role="menu"
+												aria-labelledby="province">
+												<li><a href="#">珠海</a></li>
+												<li><a href="#">广州</a></li>
+												<li><a href="#">中山</a></li>
+												<li><a href="#">江门</a></li>
+											</ul>
 										</div>
-									</div>
-
-								</div>
-								<div class="form-group">
-									<label class="col-sm-3 col-md-3 control-label">营业执照:</label>
-
-									<div class="col-sm-6 col-md-6">
-										<input type="file" class="form-control" id="author" name="author">
-									</div>
-
-								</div>
-								<div class="form-group">
-									<label for="author" class="col-sm-4 col-md-4 control-label"></label>
-
-									<div class="col-sm-4 col-md-4">
-										<button class="btn btn-lg btn-block btn-info nextStep" id="updateSubmit">下一步</button>
+										<div class="input-group-btn">
+											<button type="button" class="btn btn-default dropdown-toggle"
+												data-toggle="dropdown" aria-haspopup="true"
+												aria-expanded="false">
+												城市<span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu">
+												<li><a href="#">高新区</a></li>
+												<li><a href="#">香洲区</a></li>
+												<li><a href="#">金湾区</a></li>
+												<li><a href="#">斗门区</a></li>
+											</ul>
+										</div>
+										<input type="text" id="searchInput" class="form-control"
+											aria-label="..." placeholder="詳細地址">
 									</div>
 								</div>
 
 							</div>
-							<div id="section2">
-								<div class="form-group">
-									<label class="col-sm-3 col-md-3 control-label">真实姓名:</label>
+							<div class="form-group">
+								<label class="col-sm-3 col-md-3 control-label">营业执照:</label>
 
-									<div class="col-sm-6 col-md-6">
-										<input type="text" class="form-control" id="author" name="author">
-									</div>
-
+								<div class="col-sm-6 col-md-6">
+									<input type="file" class="form-control" id="author"
+										name="author">
 								</div>
-								<div class="form-group">
-									<label class="col-sm-3 col-md-3 control-label">身份证号:</label>
 
-									<div class="col-sm-6 col-md-6">
-										<input type="text" class="form-control" id="author" name="author">
-									</div>
+							</div>
+							<div class="form-group">
+								<label for="author" class="col-sm-4 col-md-4 control-label"></label>
 
-								</div>
-								<div class="form-group">
-									<label class="col-sm-3 col-md-3 control-label">身份证图片:</label>
-
-									<div class="col-sm-6 col-md-6">
-										<input type="file" class="form-control" id="author" name="author">
-									</div>
-
-								</div>
-								<div class="form-group">
-									<label for="author" class="col-sm-4 col-md-4 control-label"></label>
-
-									<div class="col-sm-4 col-md-4">
-										<button class="btn btn-lg btn-block btn-info nextStep" id="updateSubmit">下一步</button>
-									</div>
+								<div class="col-sm-4 col-md-4">
+									<button class="btn btn-lg btn-block btn-info nextStep"
+										id="updateSubmit">下一步</button>
 								</div>
 							</div>
-							<div id="section3">
-								<div class="form-group">
-									<label for="author" class="col-sm-1 col-md-1 control-label"></label>
-									<div class="jumbotron col-sm-10 col-md-10">
-										<h2>请耐心等待审核。。。。。。。。。。</h2>
-										<!--<button class="btn btn-lg btn-block btn-info nextStep" id="updateSubmit">下一步</button>-->
-									</div>
+
+						</div>
+						<div id="section2">
+							<div class="form-group">
+								<label class="col-sm-3 col-md-3 control-label">真实姓名:</label>
+
+								<div class="col-sm-6 col-md-6">
+									<input type="text" class="form-control" id="author"
+										name="author">
+								</div>
+
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 col-md-3 control-label">身份证号:</label>
+
+								<div class="col-sm-6 col-md-6">
+									<input type="text" class="form-control" id="author"
+										name="author">
+								</div>
+
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 col-md-3 control-label">身份证图片:</label>
+
+								<div class="col-sm-6 col-md-6">
+									<input type="file" class="form-control" id="author"
+										name="author">
+								</div>
+
+							</div>
+							<div class="form-group">
+								<label for="author" class="col-sm-4 col-md-4 control-label"></label>
+
+								<div class="col-sm-4 col-md-4">
+									<button class="btn btn-lg btn-block btn-info nextStep"
+										id="updateSubmit">下一步</button>
+								</div>
+							</div>
+						</div>
+						<div id="section3">
+							<div class="form-group">
+								<label for="author" class="col-sm-1 col-md-1 control-label"></label>
+								<div class="jumbotron col-sm-10 col-md-10">
+									<h2>请耐心等待审核。。。。。。。。。。</h2>
+									<!--<button class="btn btn-lg btn-block btn-info nextStep" id="updateSubmit">下一步</button>-->
 								</div>
 							</div>
 						</div>
@@ -164,9 +177,10 @@
 				</div>
 			</div>
 		</div>
-		<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
-		<script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="../js/regist.js"></script>
-	</body>
+	</div>
+	<script type="text/javascript" src="js/dist/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="js/dist/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/regist.js"></script>
+</body>
 
 </html>

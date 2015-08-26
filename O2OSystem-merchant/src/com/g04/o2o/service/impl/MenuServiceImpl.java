@@ -2,29 +2,35 @@ package com.g04.o2o.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Transient;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.g04.o2o.dao.MenuItemDao;
 import com.g04.o2o.dao.MenuTypeDao;
+import com.g04.o2o.dao.RestaurantDao;
 import com.g04.o2o.entity.MenuItem;
 import com.g04.o2o.entity.MenuType;
-import com.g04.o2o.entity.Order;
 import com.g04.o2o.entity.Restaurant;
 import com.g04.o2o.service.MenuService;
 
 /**
  * MenuService實現類
+ * 
  * @author OUOK
- *
+ * 
  */
+@Service
 public class MenuServiceImpl implements MenuService {
 	@Autowired
 	private MenuTypeDao mtd;
 	@Autowired
 	private MenuItemDao mid;
+	@Autowired
+	private RestaurantDao rd;
 
 	@Override
 	public List<String> findAllMenuTypes() {
@@ -49,13 +55,17 @@ public class MenuServiceImpl implements MenuService {
 		return true;
 	}
 
-
 	@Override
 	@Transient
-	public boolean updMenuType(Integer id, String menuType) {
-		try {
-			mtd.search(MenuType.class, id).setMenuTypeName(menuType);
-		} catch (Exception e) {
+	public boolean updMenuType(Integer restId, Integer menuTypeId,
+			String menuType) {
+		if (mtd.search(MenuType.class, menuTypeId).getRest().getId() == restId) {
+			try {
+				mtd.del(MenuType.class, menuTypeId);
+			} catch (Exception e) {
+				return false;
+			}
+		} else {
 			return false;
 		}
 		return true;
@@ -167,12 +177,19 @@ public class MenuServiceImpl implements MenuService {
 
 	@Override
 	@Transient
-	public boolean delMenuType(Integer id) {
-		if (mid.searchAll(MenuItem.class).size() == 0) {
+	public boolean delMenuType(Integer restID, Integer id) {
+		Restaurant rest = rd.search(Restaurant.class, restID);
+		Set<MenuItem> misSet = rest.getMenus();
+		List<MenuItem> typeList = new ArrayList<MenuItem>();
+		for (MenuItem item : misSet) {
+			if (item.getType().getId() == id) {
+				typeList.add(item);
+			}
+		}
+		if (typeList.size() == 0) {
 			mtd.del(MenuType.class, id);
 			return true;
 		}
 		return false;
 	}
-
 }

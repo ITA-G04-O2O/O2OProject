@@ -1,5 +1,6 @@
 package com.g04.o2o.entity;
 
+
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -7,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -34,7 +36,26 @@ public class MenuItem {
 	private MenuType type;// 菜品类别
 	private Integer salesVolume;// 销量
 	private Double score; // 评分
-	
+	@Lob
+	private byte[] image;
+	/**
+	 * @return the image
+	 */
+	public byte[] getImage() {
+		return image;
+	}
+	/**
+	 * @param image the image to set
+	 */
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+	/**
+	 * @param score the score to set
+	 */
+	public void setScore(Double score) {
+		this.score = score;
+	}
 	/**
 	 * @return the salesVolume
 	 */
