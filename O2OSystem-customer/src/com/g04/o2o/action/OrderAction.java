@@ -10,7 +10,10 @@ import com.g04.o2o.entity.JsonProtocol;
 import com.g04.o2o.entity.Order;
 import com.g04.o2o.service.OrderService;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f9b1bcf495192991884d166171bb2ee24d158023
 @RestController
 public class OrderAction {
 	@Autowired
@@ -30,15 +33,25 @@ public class OrderAction {
 		return jp;
 	}
 	
+<<<<<<< HEAD
 	@RequestMapping(value="/orders/{id}",method=RequestMethod.POST)
 	public JsonProtocol updateMessage(Integer oId,String notice){
+=======
+	@RequestMapping(value="/orders/{id}/notice",method=RequestMethod.PUT)
+	public JsonProtocol updateMessage(@PathVariable(value="id") Integer oId,String notice){
+>>>>>>> f9b1bcf495192991884d166171bb2ee24d158023
 		JsonProtocol jp = new JsonProtocol();
 		jp.setObject(orderService.updateMessage(oId, notice));
 		return jp;
 	}
 	
+<<<<<<< HEAD
 	@RequestMapping(value="/orders/ss",method=RequestMethod.POST)
 	public JsonProtocol updateScore(Integer oId,Integer sc){
+=======
+	@RequestMapping(value="/orders/{id}/sc",method=RequestMethod.PUT)
+	public JsonProtocol updateScore(@PathVariable(value="id") Integer oId,Integer sc){
+>>>>>>> f9b1bcf495192991884d166171bb2ee24d158023
 		JsonProtocol jp = new JsonProtocol();
 		jp.setObject(orderService.updateScore(oId, sc));
 		return jp;
