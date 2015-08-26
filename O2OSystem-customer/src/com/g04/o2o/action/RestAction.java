@@ -15,14 +15,13 @@ public class RestAction {
 	
 	@RequestMapping(value="/restaurantType",method=RequestMethod.GET)
 	public JsonProtocol getRestTypes(){
-		System.out.println("get restType...");
 		JsonProtocol jp = new JsonProtocol();
 		jp.setObject(restService.getRestTypes());
-		System.out.println(restService.getRestTypes().toString());
 		return jp;
 	}
 	
-	public JsonProtocol getRestList(String type){
+	@RequestMapping(value="/restaurant/{type}",method=RequestMethod.GET)
+	public JsonProtocol getRestList(@PathVariable(value="type") String type){
 		JsonProtocol jp = new JsonProtocol();
 		jp.setObject(restService.getRestByType(type));
 		return jp;
