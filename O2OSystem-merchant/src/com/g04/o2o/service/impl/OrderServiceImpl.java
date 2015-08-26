@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.g04.o2o.dao.OrderDao;
+import com.g04.o2o.entity.MenuItem;
 import com.g04.o2o.entity.Order;
 import com.g04.o2o.service.OrderService;
 
@@ -64,5 +65,22 @@ public class OrderServiceImpl implements OrderService {
 		}
 		return true;
 	}
+
+	@Override
+	public List<Order> getAllNewOrders() {
+		List<Order> allOrders = od.searchAll(Order.class);
+		for (Order order : allOrders) {
+			
+		}
+		return null;
+	}
+
+	@Override
+	public List<Order> getAllHistoryOrders() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 }

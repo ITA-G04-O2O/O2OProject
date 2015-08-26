@@ -3,6 +3,7 @@ package com.g04.o2o.service;
 import java.util.Date;
 import java.util.List;
 
+import com.g04.o2o.entity.MenuItem;
 import com.g04.o2o.entity.Order;
 
 /**
@@ -44,4 +45,17 @@ public interface OrderService {
 	 * @return
 	 */
 	public boolean updOrderStatus(Integer id, Integer status);
+	
+	/**
+	 * 获取所有新订单
+	 * @return
+	 */
+	public List<Order> getAllNewOrders();
+	
+	/**
+	 * 获取所有历史订单
+	 * @return
+	 */
+	public List<Order> getAllHistoryOrders();
+	
 }
