@@ -1,5 +1,7 @@
 package com.g04.o2o.action;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.g04.o2o.entity.JsonProtocol;
+import com.g04.o2o.entity.Restaurant;
 import com.g04.o2o.service.RestaurantService;
 @RestController
 public class RestAction {
@@ -23,7 +26,9 @@ public class RestAction {
 	@RequestMapping(value="/restaurant/{type}",method=RequestMethod.GET)
 	public JsonProtocol getRestList(@PathVariable(value="type") String type){
 		JsonProtocol jp = new JsonProtocol();
-		jp.setObject(restService.getRestByType(type));
+		Set<Restaurant> rs=restService.getRestByType(type);
+		
+//		jp.setObject();
 		return jp;
 	}
 	
