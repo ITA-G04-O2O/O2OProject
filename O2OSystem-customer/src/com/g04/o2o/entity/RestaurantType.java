@@ -13,18 +13,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class RestaurantType {
-	/**
-	 * @return the hasRestaurants
-	 */
-	public Set<Restaurant> getHasRestaurants() {
-		return hasRestaurants;
-	}
-	/**
-	 * @param hasRestaurants the hasRestaurants to set
-	 */
-	public void setHasRestaurants(Set<Restaurant> hasRestaurants) {
-		this.hasRestaurants = hasRestaurants;
-	}
+
 	@Column(name="restType")
 	private String type;
 	@Id
@@ -44,5 +33,18 @@ public class RestaurantType {
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	/**
+	 * @return the hasRestaurants
+	 */
+	public Set<Restaurant> getHasRestaurants() {
+		return hasRestaurants;
+	}
+	/**
+	 * @param hasRestaurants the hasRestaurants to set
+	 */
+	public void setHasRestaurants(Set<Restaurant> hasRestaurants) {
+		this.hasRestaurants = hasRestaurants;
 	}
 }
