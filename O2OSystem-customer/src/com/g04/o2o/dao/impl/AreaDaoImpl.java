@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import com.g04.o2o.dao.AreaDao;
 import com.g04.o2o.entity.Area;
 
-
 @Repository
 public class AreaDaoImpl extends AbstractDaoImpl<Area> implements AreaDao{
 
