@@ -149,12 +149,8 @@ public class MenuAction {
 	 * @return
 	 */
 	@RequestMapping(value = "/menuItems/{id}/name", method = RequestMethod.PUT)
-<<<<<<< HEAD
 	public JsonProtocol updMenuItemName(@PathVariable Integer id, String itemName) {
-=======
-	public JsonProtocol updMenuItemName(@PathVariable Integer id,
-			String itemName) {
->>>>>>> 61cf8b95811745ccf3980d13d2f7f7383212c831
+
 		JsonProtocol jp = new JsonProtocol();
 		jp.setResult(ms.updMenuItemName(id, itemName));
 		return jp;
@@ -182,12 +178,7 @@ public class MenuAction {
 	 * @return
 	 */
 	@RequestMapping(value = "/menuItems/{id}/descr", method = RequestMethod.PUT)
-<<<<<<< HEAD
 	public JsonProtocol updMenuItemDescription(@PathVariable Integer id, String description) {
-=======
-	public JsonProtocol updMenuItemDescription(@PathVariable Integer id,
-			String description) {
->>>>>>> 61cf8b95811745ccf3980d13d2f7f7383212c831
 		JsonProtocol jp = new JsonProtocol();
 		jp.setResult(ms.updMenuItemDescription(id, description));
 		return jp;
@@ -215,12 +206,7 @@ public class MenuAction {
 	 * @return
 	 */
 	@RequestMapping(value = "/menuItems/{id}/volume", method = RequestMethod.PUT)
-<<<<<<< HEAD
 	public JsonProtocol updMenuItemSalesVolume(@PathVariable Integer id, Integer volume) {
-=======
-	public JsonProtocol updMenuItemSalesVolume(@PathVariable Integer id,
-			Integer volume) {
->>>>>>> 61cf8b95811745ccf3980d13d2f7f7383212c831
 		JsonProtocol jp = new JsonProtocol();
 		jp.setResult(ms.updMenuItemSalesVolume(id, volume));
 		return jp;
