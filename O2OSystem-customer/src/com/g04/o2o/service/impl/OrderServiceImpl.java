@@ -53,10 +53,7 @@ public class OrderServiceImpl implements OrderService {
 	@Transactional
 	@Override
 	public int updateStatus(Integer oId, Integer status) {
-<<<<<<< HEAD
-		// TODO Auto-generated method stub
-		return 0;
-=======
+
 		try {
 			Order order = dao.search(Order.class, oId);
 			order.setStatus(status);
@@ -65,7 +62,7 @@ public class OrderServiceImpl implements OrderService {
 			return -1;
 		}
 		return 1;
->>>>>>> 222107f6713a8b6d57af90d8e13ffaf297883599
+
 	}
 
 }

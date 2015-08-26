@@ -1,9 +1,5 @@
 Manifest-Version: 1.0
 Build-Jdk: 1.7.0_21
-<<<<<<< HEAD
-Built-By: DINGFR2
-=======
 Built-By: CHENJA9
->>>>>>> 1b39ff771f5e5cd550e3e3843590acf1db7d3440
 Created-By: Maven Integration for Eclipse
 
