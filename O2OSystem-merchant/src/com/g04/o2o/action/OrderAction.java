@@ -1,6 +1,8 @@
 package com.g04.o2o.action;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.g04.o2o.entity.JsonProtocol;
+import com.g04.o2o.entity.Order;
 import com.g04.o2o.service.OrderService;
 
 /**
@@ -33,6 +36,46 @@ public class OrderAction {
 	public JsonProtocol getOrder(@PathVariable Integer id) {
 		JsonProtocol jp = new JsonProtocol();
 		jp.setObject(os.getOrderById(id));
+		return jp;
+	}
+	
+	@RequestMapping(value = "/orders/new", method = RequestMethod.GET)
+	public JsonProtocol getNewOrders() {
+//		System.out.println("newOrders");
+		JsonProtocol jp = new JsonProtocol();
+		
+		List<Order> newOrders = os.getAllNewOrders();
+		
+		System.out.println("newOrders size is "+newOrders.size());
+		
+		jp.setObject(newOrders);
+		return jp;
+	}
+	
+	@RequestMapping(value = "/orders/receive", method = RequestMethod.GET)
+	public JsonProtocol getAllReceiveOrders() {
+		JsonProtocol jp = new JsonProtocol();
+		jp.setObject(os.getAllReceiveOrders());
+		return jp;
+	}
+	
+	@RequestMapping(value = "/orders/finish", method = RequestMethod.GET)
+	public JsonProtocol getAllFinishedOrders() {
+		JsonProtocol jp = new JsonProtocol();
+		jp.setObject(os.getAllFinishedOrders());
+		return jp;
+	}
+	
+	@RequestMapping(value = "/orders/fail", method = RequestMethod.GET)
+	public JsonProtocol getAllFailOrders() {
+//		System.out.println("fail order");
+		JsonProtocol jp = new JsonProtocol();
+		
+		System.out.println("newOrders size is "+os.getAllFailOrders().size());
+
+		
+		
+		jp.setObject(os.getAllFailOrders());
 		return jp;
 	}
 

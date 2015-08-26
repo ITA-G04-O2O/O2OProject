@@ -1,11 +1,14 @@
 package com.g04.o2o.service.impl;
 
+import java.util.List;
+
 import javax.persistence.Transient;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.g04.o2o.dao.RestaurantDao;
+import com.g04.o2o.dao.RestaurantTypeDao;
 import com.g04.o2o.entity.Address;
 import com.g04.o2o.entity.MenuItem;
 import com.g04.o2o.entity.Restaurant;
@@ -16,6 +19,9 @@ import com.g04.o2o.service.RestaurantService;
 public class RestaurantServiceImpl implements RestaurantService {
 	@Autowired
 	private RestaurantDao dao;
+
+	@Autowired
+	private RestaurantTypeDao tdao;
 
 	@Override
 	public int addRestaurant(Restaurant rest) {
@@ -80,6 +86,11 @@ public class RestaurantServiceImpl implements RestaurantService {
 	public int updateOpenTime(Integer restId, String openTime) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public List<RestaurantType> getTypes() {
+		return tdao.searchAll(RestaurantType.class);
 	}
 
 }

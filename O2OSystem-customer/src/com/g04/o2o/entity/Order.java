@@ -33,9 +33,9 @@ public class Order {
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date crDate;
 	@Temporal(value = TemporalType.TIMESTAMP)
-	private Date receiveTime; //µê¼ÒÈ·ÈÏ¶©µ¥Ê±¼ä
+	private Date receiveTime; //ï¿½ï¿½ï¿½È·ï¿½Ï¶ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
 	@Temporal(value = TemporalType.TIMESTAMP)
-	private Date completedTime; //¶©µ¥Íê³ÉÊ±¼ä
+	private Date completedTime; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
 	@ManyToOne
 	@JoinColumn(name = "restId", nullable = false)
 	private Restaurant resturant;
@@ -43,7 +43,7 @@ public class Order {
 	@JoinColumn(name = "item")
 	private List<MenuItem> items = new ArrayList<MenuItem>();
 	private String message; 
-	private Integer status; 
+	private Integer status; //1: user add order. 2:merchant received order. 3:merchant refused order.  4: order finished.
 	@ManyToOne
 	@JoinColumn(name = "receiver", nullable = false)
 	private User user;
