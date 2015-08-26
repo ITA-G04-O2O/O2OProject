@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Transient;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.g04.o2o.entity.JsonProtocol;
 import com.g04.o2o.entity.Order;
 import com.g04.o2o.service.OrderService;
+import com.g04.o2o.vo.GetOrderVO;
+import com.g04.o2o.vo.helper.GetOrderVOHelper;
 
 /**
  * Order handler function
@@ -66,16 +70,20 @@ public class OrderAction {
 		return jp;
 	}
 	
+	@Transient
 	@RequestMapping(value = "/orders/fail", method = RequestMethod.GET)
 	public JsonProtocol getAllFailOrders() {
 //		System.out.println("fail order");
 		JsonProtocol jp = new JsonProtocol();
-		
 		System.out.println("newOrders size is "+os.getAllFailOrders().size());
-
 		
+		List<GetOrderVO> goVoList = new ArrayList<GetOrderVO>();
+		for (Order order : os.getAllFailOrders()) {
+			System.out.println("order size is:"+order.getItems().size());
+//			goVoList.add(GetOrderVOHelper.setOrder2VO(order));
+		}
 		
-		jp.setObject(os.getAllFailOrders());
+		jp.setObject(goVoList);
 		return jp;
 	}
 

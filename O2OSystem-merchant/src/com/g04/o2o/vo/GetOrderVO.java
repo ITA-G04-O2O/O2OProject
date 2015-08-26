@@ -2,11 +2,11 @@ package com.g04.o2o.vo;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.g04.o2o.entity.MenuItem;
-import com.sun.javafx.collections.MappingChange.Map;
 
-public class OrderVO {
+public class GetOrderVO {
 	private Integer id;
 	private Date createDate;
 	private Integer status;
@@ -15,10 +15,9 @@ public class OrderVO {
 	private String address;
 	private Map<MenuItem,Integer> menuItemMap; 
 	private Double totalPrices;
-	public OrderVO(Integer id, Date createDate, Integer status,
+	public GetOrderVO(Integer id, Date createDate, Integer status,
 			String connectPeople, String tel, String address,
 			Map<MenuItem, Integer> menuItemMap, Double totalPrices) {
-		super();
 		this.id = id;
 		this.createDate = createDate;
 		this.status = status;
@@ -28,7 +27,7 @@ public class OrderVO {
 		this.menuItemMap = menuItemMap;
 		this.totalPrices = totalPrices;
 	}
-	public OrderVO() {
+	public GetOrderVO() {
 		super();
 	}
 	public Integer getId() {
@@ -70,8 +69,8 @@ public class OrderVO {
 	public Map<MenuItem, Integer> getMenuItemMap() {
 		return menuItemMap;
 	}
-	public void setMenuItemMap(Map<MenuItem, Integer> menuItemMap) {
-		this.menuItemMap = menuItemMap;
+	public void setMenuItemMap(java.util.Map<MenuItem, Integer> map) {
+		this.menuItemMap = map;
 	}
 	public Double getTotalPrices() {
 		return totalPrices;
