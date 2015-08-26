@@ -1,15 +1,11 @@
 $(document).ready(function() {
+	alert("ready");
 	$('#section2').hide();
 	$('#section3').hide();
 	var count = 1;
 	$('.nextStep').click(function(index) {
 		$('#section' + count).hide();
 		count++;
-		$('#section' + (count)).show();
-	});
-	$('.preStep').click(function(index) {
-		$('#section' + count).hide();
-		count--;
 		$('#section' + (count)).show();
 	});
 });

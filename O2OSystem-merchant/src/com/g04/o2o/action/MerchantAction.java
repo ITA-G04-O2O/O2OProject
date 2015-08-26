@@ -13,7 +13,7 @@ import com.g04.o2o.entity.Merchant;
 import com.g04.o2o.entity.Restaurant;
 import com.g04.o2o.service.MerchantService;
 
-@Controller
+@RestController
 public class MerchantAction {
 
 	@Autowired
@@ -23,11 +23,6 @@ public class MerchantAction {
 		this.merchantService = merchantService;
 	}
 
-	@RequestMapping(value = "/regist", method = RequestMethod.GET)
-	public String regist() {
-		System.out.println("MerchantAction...");
-		return "storeRegist";
-	}
 	@RequestMapping(value = "/merchant", method = RequestMethod.POST)
 	public JsonProtocol regist(Integer uid, String nickName, String idCard,
 			byte[] idPic, HttpSession session) {
