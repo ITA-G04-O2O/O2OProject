@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.g04.o2o.entity.JsonProtocol;
 import com.g04.o2o.service.RestaurantService;
-@RequestMapping()
 @RestController
 public class RestAction {
 	@Autowired
@@ -49,14 +48,14 @@ public class RestAction {
 	}
 	
 	@RequestMapping(value="/restaurant/{id}/highOrders",method=RequestMethod.GET)
-	public JsonProtocol getHighOrders(Integer id){
+	public JsonProtocol getHighOrders(@PathVariable(value="id") Integer id){
 		JsonProtocol jp = new JsonProtocol();
 		jp.setObject(restService.getHighOrders(id));
 		return jp;
 	}
 	
 	@RequestMapping(value="/restaurant/{id}/midOrders",method=RequestMethod.GET)
-	public JsonProtocol getMidOrders(Integer id){
+	public JsonProtocol getMidOrders(@PathVariable(value="id") Integer id){
 		JsonProtocol jp = new JsonProtocol();
 		jp.setObject(restService.getMidOrders(id));
 		return jp;

@@ -14,7 +14,7 @@ import com.g04.o2o.entity.User;
 @Transactional
 @Service
 /**
- * ç”¨æˆ·æœ�åŠ¡æŽ¥å�£
+ * 用户服务接口
  * @author CHENJA9
  *
  */
@@ -22,46 +22,46 @@ import com.g04.o2o.entity.User;
 public interface UserService {
 
 	/**
-	 * ç”¨æˆ·æ³¨å†Œ
+	 * 用户注册
 	 * @param loginName
 	 * @param psd
 	 * @return
 	 */
 	int regist(String loginName, String psd);
 	/**
-	 * ç”¨æˆ·ç™»é™†
+	 * 用户登陆
 	 * @param loginName
 	 * @param psd
 	 * @return
 	 */
 	int login(String loginName, String psd);
 	/**
-	 * èŽ·å�–ç”¨æˆ·ä¿¡æ�¯
+	 * 获取用户信息
 	 * @param uid
 	 * @return
 	 */
 	User getUserInfo(Integer uid);
 	/**
-	 * èŽ·å�–ç”¨æˆ·è®¢å�•ä¿¡æ�¯
+	 * 获取用户订单信息
 	 * @param uid
 	 * @return
 	 */
 	List<Order> getUserOrder(Integer uid);
 	/**
-	 * èŽ·å�–ç”¨æˆ·æ”¶è—�åˆ—è¡¨
+	 * 获取用户
 	 * @param uid
 	 * @return
 	 */
 	Set<Restaurant> getUserRestlikes(Integer uid);
 	/**
-	 * æ·»åŠ æ”¶è—�
+	 * 添加收藏
 	 * @param uid
 	 * @param id
 	 * @return
 	 */
 	int addRestlikes(Integer uid, Integer id);
 	/**
-	 * å�–æ¶ˆæ”¶è—�
+	 * 取消收藏
 	 * @param uid
 	 * @param id
 	 * @return
