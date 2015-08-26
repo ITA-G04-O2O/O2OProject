@@ -45,5 +45,5 @@ public interface OrderService {
 	 * @param status
 	 * @return
 	 */
-	int updateStatus(Integer oId,String status);
+	int updateStatus(Integer oId,Integer status);
 }

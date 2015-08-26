@@ -52,7 +52,7 @@ public class OrderServiceImpl implements OrderService {
 
 	@Transactional
 	@Override
-	public int updateStatus(Integer oId, String status) {
+	public int updateStatus(Integer oId, Integer status) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
