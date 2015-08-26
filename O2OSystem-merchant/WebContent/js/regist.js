@@ -31,6 +31,7 @@ function addClickEvent(province) {
 			function() {
 				$("#proBtn").text(province);
 				$("#city li").empty();
+				$('#cityBtn').text("城市");
 				$.ajax({
 					url : "http://localhost:8888/o2osystem-merchant/city/"
 							+ province,
@@ -40,7 +41,7 @@ function addClickEvent(province) {
 						for ( var i in data) {
 							var city = data[i];
 							$('#city').append(
-									"<li id=\"" + city + "\"><a href=\"#\">"
+									"<li id=\"city" + city + "\"><a href=\"#\">"
 											+ city + "</a></li>");
 							addClickEvent2(city);
 						}
@@ -50,7 +51,8 @@ function addClickEvent(province) {
 }
 
 function addClickEvent2(city) {
-	$("#" + city).bind("click", function() {
+	alert(city);
+	$("#city" + city).bind("click", function() {
 		$('#cityBtn').text(city);
 	});
 }
