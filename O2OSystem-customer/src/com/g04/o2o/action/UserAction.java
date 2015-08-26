@@ -36,14 +36,14 @@ public class UserAction {
 		return jp;
 	}
 	
-	@RequestMapping(value="/users/{id}",method=RequestMethod.GET)
+	@RequestMapping(value="/users/{id}/userOrder",method=RequestMethod.GET)
 	public JsonProtocol getUserOrder(@PathVariable(value="id") Integer uid){
 		JsonProtocol jp = new JsonProtocol();
 		jp.setObject(userService.getUserOrder(uid));
 		return jp;
 	}
 	
-	@RequestMapping(value="/users/{id}",method=RequestMethod.GET)
+	@RequestMapping(value="/users/{id}/userRestlikes",method=RequestMethod.GET)
 	public JsonProtocol getUserRestlikes(@PathVariable(value="id") Integer uid){
 		JsonProtocol jp = new JsonProtocol();
 		jp.setObject(userService.getUserRestlikes(uid));
@@ -57,11 +57,11 @@ public class UserAction {
 		return jp;
 	}
 	
-//	@RequestMapping(value="/users",method=RequestMethod.PUT)
-//	public JsonProtocol delRestlikes(Integer uid, Integer id){
-//		JsonProtocol jp = new JsonProtocol();
-//		jp.setObject(userService.delRestlikes(uid, id));
-//		return jp;
-//	}
+	@RequestMapping(value="/users/{uid}/{id}",method=RequestMethod.DELETE)
+	public JsonProtocol delRestlikes(@PathVariable(value="uid") Integer uid, @PathVariable(value="id") Integer id){
+		JsonProtocol jp = new JsonProtocol();
+		jp.setObject(userService.delRestlikes(uid, id));
+		return jp;
+	}
 	
 }
