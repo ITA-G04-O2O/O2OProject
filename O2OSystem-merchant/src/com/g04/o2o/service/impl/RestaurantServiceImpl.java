@@ -93,4 +93,9 @@ public class RestaurantServiceImpl implements RestaurantService {
 		return tdao.searchAll(RestaurantType.class);
 	}
 
+	@Override
+	public RestaurantType getRestTypeById(Integer restTypeId) {
+		return tdao.search(RestaurantType.class, restTypeId);
+	}
+
 }

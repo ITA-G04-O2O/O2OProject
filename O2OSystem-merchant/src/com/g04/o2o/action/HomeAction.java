@@ -18,7 +18,11 @@ public class HomeAction {
 
 	@RequestMapping(value = "/regist")
 	public String regist() {
-		System.out.println("MerchantAction...");
 		return "storeRegist";
+	}
+
+	@RequestMapping(value = "/waiting")
+	public String waiting() {
+		return "waiting";
 	}
 }

@@ -1,5 +1,6 @@
 package com.g04.o2o.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -69,18 +70,48 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public List<Order> getAllNewOrders() {
 		List<Order> allOrders = od.searchAll(Order.class);
+		List<Order> newOrders = new ArrayList<Order>();
 		for (Order order : allOrders) {
-			
+			if (order.getStatus() == 1) {
+				newOrders.add(order);
+			}
 		}
-		return null;
+		return newOrders;
 	}
 
 	@Override
-	public List<Order> getAllHistoryOrders() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Order> getAllReceiveOrders() {
+		List<Order> allOrders = od.searchAll(Order.class);
+		List<Order> receOrders = new ArrayList<Order>();
+		for (Order order : allOrders) {
+			if (order.getStatus() == 2) {
+				receOrders.add(order);
+			}
+		}
+		return receOrders;
 	}
 
+	@Override
+	public List<Order> getAllFinishedOrders() {
+		List<Order> allOrders = od.searchAll(Order.class);
+		List<Order> finishOrders = new ArrayList<Order>();
+		for (Order order : allOrders) {
+			if (order.getStatus() == 3) {
+				finishOrders.add(order);
+			}
+		}
+		return finishOrders;
+	}
 
-
+	@Override
+	public List<Order> getAllFailOrders() {
+		List<Order> allOrders = od.searchAll(Order.class);
+		List<Order> finishOrders = new ArrayList<Order>();
+		for (Order order : allOrders) {
+			if (order.getStatus() == 4) {
+				finishOrders.add(order);
+			}
+		}
+		return finishOrders;
+	}
 }
