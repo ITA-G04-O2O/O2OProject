@@ -3,6 +3,7 @@ package com.g04.o2o.action;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +13,7 @@ import com.g04.o2o.entity.Merchant;
 import com.g04.o2o.entity.Restaurant;
 import com.g04.o2o.service.MerchantService;
 
-@RestController
+@Controller
 public class MerchantAction {
 
 	@Autowired
@@ -22,9 +23,15 @@ public class MerchantAction {
 		this.merchantService = merchantService;
 	}
 
+	@RequestMapping(value = "/regist", method = RequestMethod.GET)
+	public String regist() {
+		System.out.println("MerchantAction...");
+		return "storeRegist";
+	}
 	@RequestMapping(value = "/merchant", method = RequestMethod.POST)
 	public JsonProtocol regist(Integer uid, String nickName, String idCard,
 			byte[] idPic, HttpSession session) {
+		System.out.println("MerchantAction...");
 		System.out.println(nickName);
 		JsonProtocol js = new JsonProtocol();
 		Merchant mer = new Merchant();
@@ -37,5 +44,4 @@ public class MerchantAction {
 		js.setResult(res);
 		return js;
 	}
-
 }

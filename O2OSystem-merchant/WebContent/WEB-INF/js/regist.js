@@ -1,13 +1,4 @@
 $(document).ready(function() {
-	$('#change').load('newOrder.html');
-});
-$('.list-group li').on('click', function() {
-	var loadhtml = $(this).attr('id');
-	if (loadhtml) {
-		$('#change').load(loadhtml + '.html');
-	}
-});
-$(document).ready(function() {
 	$('#section2').hide();
 	$('#section3').hide();
 	var count = 1;
