@@ -114,6 +114,19 @@ public class MenuAction {
 		jp.setObject(ms.getMenuItemById(id));
 		return jp;
 	}
+	
+	/**
+	 * get menu items by MenuTypeId
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "/menuItems/{menuType}", method = RequestMethod.GET)
+	public JsonProtocol getMenuItemsByMenuTypeId(@PathVariable String menuType) {
+		JsonProtocol jp = new JsonProtocol();
+		jp.setObject(ms.findMenuIeItemsByMenuType(menuType));
+		return jp;
+	}
 
 	/**
 	 * add menu item with a MenuItem entity
