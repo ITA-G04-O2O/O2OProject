@@ -8,7 +8,7 @@ public class HomeAction {
 	@RequestMapping(value={"/","/index","/home"})
 	public String index(){
 		System.out.println("进入首页");
-		return "index";
+		return "manage";
 	}
 	
 	@RequestMapping(value="/login")

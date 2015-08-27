@@ -2,7 +2,7 @@ package com.g04.o2o.service.impl;
 
 import java.util.List;
 
-import javax.persistence.Transient;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ import com.g04.o2o.service.AdminService;
 
 @Service
 public class AdminServiceImpl implements AdminService {
-	@Autowired
+	@Autowired()
 	private MainSystemDao mainSystemDao;
 	@Autowired
 	private RestaurantTypeDao restaurantTypeDao;
@@ -33,27 +33,27 @@ public class AdminServiceImpl implements AdminService {
 	private RestaurantDao restaurantDao;
 
 	@Override
-	@Transient
+	@Transactional
 	public MainSystem getSystemTimes() {
 		List<MainSystem> lists = mainSystemDao.searchAll(MainSystem.class);
 		return lists.get(0);
 	}
 
 	@Override
-	@Transient
+	@Transactional
 	public boolean updateSystemTimes(MainSystem mainSystem) {
 		return mainSystemDao.update(MainSystem.class, mainSystem.getId(),
 				mainSystem) == -1;
 	}
 
 	@Override
-	@Transient
+	@Transactional
 	public List<RestaurantType> getAllRestType() {
 		return restaurantTypeDao.searchAll(RestaurantType.class);
 	}
 
 	@Override
-	@Transient
+	@Transactional
 	public boolean addRestaurantType(String type) {
 		RestaurantType restaurantType = new RestaurantType();
 		restaurantType.setType(type);
@@ -61,7 +61,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	@Transient
+	@Transactional
 	public boolean updateRestaurantType(Integer id, String type) {
 		try {
 			restaurantTypeDao.search(RestaurantType.class, id).setType(type);
@@ -72,7 +72,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	@Transient
+	@Transactional
 	public boolean updateHotLines(Integer id, String tel) {
 		try {
 			hotLineDao.search(HotLine.class, id).setTel(tel);
@@ -83,7 +83,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	@Transient
+	@Transactional
 	public boolean addHotLines(String tel) {
 		HotLine hotLine = new HotLine();
 		hotLine.setTel(tel);
@@ -91,26 +91,26 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	@Transient
+	@Transactional
 	public List<HotLine> getHotLines() {
 		return hotLineDao.searchAll(HotLine.class);
 	}
 
 	@Override
-	@Transient
+	@Transactional
 	public boolean deleteHotLine(Integer id) {
 		return hotLineDao.del(HotLine.class, id) == -1;
 	}
 
 	@Override
-	@Transient
+	@Transactional
 	public boolean verifyRestaurant(Integer id, Integer state) {
 		return restaurantDao
 				.updateValue(id, Restaurant.class, "examine", state) == -1;
 	}
 
 	@Override
-	@Transient
+	@Transactional
 	public boolean resetPsd(String tel) {
 		for (User u : userDao.searchAll(User.class)) {
 			if (u.getTel().equals(tel)) {
@@ -122,8 +122,15 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public boolean setHot(Integer id,boolean isHot) {
+	@Transactional
+	public boolean setHot(Integer id, boolean isHot) {
 		restaurantDao.updateValue(id, Restaurant.class, "hot", isHot);
 		return false;
+	}
+
+	@Override
+	@Transactional
+	public List<User> getUsers() {
+		return userDao.searchAll(User.class);
 	}
 }
