@@ -7,10 +7,19 @@ $(function() {
 		if (loadhtml) {
 			$('#change').load('html/' + loadhtml + '.html');
 		}
-		
 	});
 	$("#accountInfo").live("click",function(){
 		alert("Hello");
+	});
+	
+	$("#newOrder").live("click",function(){
+//		alert("Hello");
+		loadNewOrderFunction();
+	});
+	
+	$("#successOrder").live("click",function(){
+//		alert("Hello");
+		loadOrders();
 	});
 
 });

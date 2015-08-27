@@ -2,6 +2,8 @@ $(function() {
 
 
 	var loadNewOrderFunction = function() {
+				console.log("no");
+
 		$.ajax({
 			url: "http://localhost:17236/o2osystem-merchant/orders/new",
 			type: 'GET',

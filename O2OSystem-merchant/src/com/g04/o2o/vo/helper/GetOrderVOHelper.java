@@ -25,6 +25,9 @@ public class GetOrderVOHelper {
 		if (!("".equals(order.getCompletedTime())||order.getCompletedTime() == null)) {
 			goVo.setCompletedDate(order.getCompletedTime());
 		}
+		if (!("".equals(order.getReceiveTime())||order.getReceiveTime() == null)) {
+			goVo.setCompletedDate(order.getReceiveTime());
+		}
 		return goVo;
 	}
 	
