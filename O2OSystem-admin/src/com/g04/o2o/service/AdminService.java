@@ -23,6 +23,8 @@ public interface AdminService {
 
 	public boolean updateSystemTimes(MainSystem mainSystem);
 
+	public boolean addSystemTimes(MainSystem mainSystem);
+
 	public List<RestaurantType> getAllRestType();
 
 	public boolean addRestaurantType(String type);

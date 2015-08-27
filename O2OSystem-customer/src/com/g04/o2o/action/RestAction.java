@@ -92,7 +92,7 @@ public class RestAction {
 			Integer mid=mt.getId();
 			String mName=mt.getMenuTypeName();
 			Set<MenuItem> mItems = restService.getMenuItemByType(id, mid);
-			System.out.println(mItems.size());
+//			System.out.println(mItems.size());
 			for(MenuItem mi:mItems){
 				Integer menuId=mi.getId();
 				String mitemName=mi.getItemName();

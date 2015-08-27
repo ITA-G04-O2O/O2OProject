@@ -144,4 +144,11 @@ public class AdminServiceImpl implements AdminService {
 		return restaurantDao.updateValue(id, Restaurant.class, "online", false) == 1;
 	}
 
+	@Override
+	@Transactional
+	public boolean addSystemTimes(MainSystem mainSystem) {
+		// TODO Auto-generated method stub
+		return mainSystemDao.add(mainSystem) == 1;
+	}
+
 }

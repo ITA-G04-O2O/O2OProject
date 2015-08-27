@@ -65,4 +65,8 @@ public interface UserService {
 	 * @return
 	 */
 	int delRestlikes(Integer uid, Integer id);
+	
+	Integer changNickName(Integer uid, String nickName);
+	
+	Integer changePwd(Integer uid, String psd);
 }

@@ -113,7 +113,7 @@
                                                         <div class="col-xs-7">
                                                             <h4>$27</h4></div>
                                                         <div class="col-xs-5 text-right">
-                                                            <button class="btn btn-primary addbtn">添加</button>
+                                                            <button class="btn btn-primary addbtn ">添加</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -186,35 +186,15 @@
                             <td>价格</td>
                         </tr>
                         </thead>
-                        <tbody id="addOrderBtn">
-                        <tr>
-                            <td>XX鸡肉卷</td>
-                            <td>
-                                <input type="number" value="1" class="form-control input-sm">
-                            </td>
-                            <td>8</td>
-                        </tr>
-                        <tr>
-                            <td>XX鸡肉卷</td>
-                            <td>
-                                <input type="number" value="1" class="form-control input-sm">
-                            </td>
-                            <td>8</td>
-                        </tr>
-                        <tr>
-                            <td>XX鸡肉卷</td>
-                            <td>
-                                <input type="number" value="1" class="form-control input-sm">
-                            </td>
-                            <td>8</td>
-                        </tr>
+                        <tbody id="orderList">
+                        
                         </tbody>
                         <tfoot>
                         <tr>
                             <td class="table-right" colspan="3"><span id="fee" class="fee">配送费：0</span></td>
                         </tr>
                         <tr>
-                            <td class="table-right" colspan="3"><span>总价：0</span></td>
+                            <td class="table-right" colspan="3"><span>总价：</span><span id="sumPrice"></span></td>
                         </tr>
                         </tfoot>
                     </table>

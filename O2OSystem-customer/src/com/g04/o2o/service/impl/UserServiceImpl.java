@@ -80,4 +80,30 @@ public class UserServiceImpl implements UserService {
 		return dao.login(loginName, psd);
 	}
 
+
+	@Transactional
+	@Override
+	public Integer changNickName(Integer uid, String nickName) {
+		try {
+			User user=dao.search(User.class, uid);
+			user.setNickName(nickName);
+			return 1;
+		} catch (Exception e) {
+			return -1;
+		}
+	}
+
+
+	@Transactional
+	@Override
+	public Integer changePwd(Integer uid, String psd) {
+		try {
+			User user=dao.search(User.class, uid);
+			user.setPassword(psd);
+			return 1;
+		} catch (Exception e) {
+			return -1;
+		}
+	}
+
 }
