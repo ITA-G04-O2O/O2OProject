@@ -3,6 +3,7 @@ package com.g04.o2o.action;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +18,7 @@ import com.g04.o2o.vo.UserVo;
 @RestController
 @RequestMapping(value = "/AdminService")
 public class AdminAction {
+	@Autowired
 	private AdminService systemService;
 
 	@RequestMapping(value = "/sysSetting", method = RequestMethod.GET)
@@ -101,6 +103,7 @@ public class AdminAction {
 		jp.setResult(true);
 		List<UserVo> lists = new ArrayList<>();
 		if (systemService.getUsers() != null) {
+			System.out.println(systemService.getUsers().size());
 			for (User u : systemService.getUsers()) {
 				UserVo uVo = new UserVo();
 				uVo.setId(u.getId());
