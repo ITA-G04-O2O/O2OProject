@@ -209,13 +209,13 @@
                                                         class="form-control" placeholder="输入时间" id="time">
                 </div>
                 <div class="form-group">
-                    <label for="name">时间</label> <input type="text"
-                                                        class="form-control" placeholder="输入时间">
+                    <label for="time1">时间</label> <input type="text"
+                                                        class="form-control" placeholder="输入时间" id="time1">
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="updateTime">确定</button>
             </div>
         </div>
     </div>
@@ -289,14 +289,14 @@
                     <span class="input-group-addon" id="sizing-addon2">店铺名称</span> <input
                         type="text" class="form-control" placeholder="Username"
                         aria-describedby="sizing-addon2" disabled="disabled"
-                        value="云姐大饭店">
+                        value="" id="restaurantName">
                 </div>
                 <br/>
 
                 <div class="input-group">
                     <span class="input-group-addon" id="sizing-addon2">经营种类</span> <input
                         type="text" class="form-control" placeholder="Username"
-                        aria-describedby="sizing-addon2" disabled="disabled" value="中餐">
+                        aria-describedby="sizing-addon2" disabled="disabled" value="" id="restaurantType">
                 </div>
                 <br/>
 
@@ -304,14 +304,14 @@
                     <span class="input-group-addon" id="sizing-addon2">地址</span> <input
                         type="text" class="form-control" placeholder="Username"
                         aria-describedby="sizing-addon2" disabled="disabled"
-                        value="东岸村榕树下">
+                        value="" id="restaurantAddress">
                 </div>
                 <br/>
 
                 <div class="input-group">
                     <span class="input-group-addon" id="sizing-addon2">真实姓名</span> <input
                         type="text" class="form-control" placeholder="Username"
-                        aria-describedby="sizing-addon2" disabled="disabled" value="云云云">
+                        aria-describedby="sizing-addon2" disabled="disabled" value="云云云" id="NickName">
                 </div>
                 <br/>
 
@@ -319,13 +319,12 @@
                     <span class="input-group-addon" id="sizing-addon2">身份证号</span> <input
                         type="text" class="form-control" placeholder="Username"
                         aria-describedby="sizing-addon2" disabled="disabled"
-                        value="445945111111111111">
+                        value="445945111111111111" id="idCard">
                 </div>
                 <br/>
 
                 <div class="row">
                     <div class="panel panel-default col-md-6">
-                        <!--<div class="panel-heading">身份证图片</div>-->
                         <div class="panel-body">
                             <a>身份证图片</a> <a href="#" class="thumbnail"> <img
                                 src="img/idcard.jpg"/>
@@ -333,7 +332,6 @@
                         </div>
                     </div>
                     <div class="panel panel-default col-md-6">
-                        <!--<div class="panel-heading">营业执照</div>-->
                         <div class="panel-body">
                             <a>营业执照</a>
 
@@ -349,7 +347,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <input type="button" id="acceptBtn" class="btn btn-success"
-                       value="Accept"/> <input type="button" id="refuseBtn"
+                       value="Accept" /> <input type="button" id="refuseBtn"
                                                class="btn btn-danger" value="Refuse"/>
             </div>
         </div>
@@ -442,26 +440,39 @@
                 console.log('fail');
             });
         };
-        var renderSystemTime = function (data) {
-            if (data.autoExpirationTime) {
-                $('#autoTime').text('data.autoExpirationTime');
-            } else {
-                $('#autoTime').text('0');
-            }
-            if (data.autoCompleteTime) {
-                $('#exTime').text(data.autoCompleteTime);
-            } else {
-                $('#exTime').text('0');
-            }
+        var renderSystemTime = function (data){
+           if(data.length!=0) {
+               $('#autoTime').text(data[0].autoExpirationTime);
+               $('#time').val(data[0].autoExpirationTime);
+               $('#exTime').text(data[0].autoCompleteTime);
+               $('#time1').val(data[0].autoCompleteTime);
+               $('#autoTime').attr('name', data[0].id);
+           }else {
+               $('#autoTime').text('0');
+               $('#time').val('0');
+               $('#exTime').text('0');
+               $('#time1').val('0');
+               $('#autoTime').attr('name', 'true');
+           }
         };
-        var updateSystemTimes = function () {
+        var updateSystemTimes = function (id,data) {
             $.ajax({
-                url: url,
+                url: 'AdminService/sysSetting/'+id,
                 type: 'POST',
                 dataType: 'json',
-                data: {
-                    _method: 'PUT'
-                }
+                data: data
+            }).done(function (data, status, xhr) {
+                if (data.result) getSystemTime();
+            }).fail(function (xhr, status, error) {
+                console.log('fail');
+            });
+        };
+        var addSystemTimes = function(data){
+            $.ajax({
+                url: 'AdminService/sysSetting',
+                type: 'POST',
+                dataType: 'json',
+                data: data
             }).done(function (data, status, xhr) {
                 if (data.result) getSystemTime();
             }).fail(function (xhr, status, error) {
@@ -491,10 +502,29 @@
                 console.log('fail');
             });
         };
+        var addHotLine = function (data) {
+            $.ajax({
+                url: 'AdminService/hotlines',
+                type: 'POST',
+                dataType: 'json',
+                data: data
+            }).done(function (data, status, xhr) {
+                if (data.result) getHotLine();
+            }).fail(function (xhr, status, error) {
+                console.log('fail');
+            });
+        };
         var renderHotLine = function (data) {
+            if(data.length==0){
+                $('#hotlines').attr('name', 'true');
+            }
             for (var i = 0; i < data.length; i++) {
                 $('#hotlines').text(data[i].tel);
-                $('#hotlines').parent().attr('name', data[i].id);
+                if (data[i].id) {
+                    $('#hotlines').attr('name', data[i].id);
+                } else {
+                    $('#hotlines').attr('name', 'true');
+                }
             }
         };
         var addRestaurantType = function (data) {
@@ -526,16 +556,36 @@
                 $('#mealTypeTable').append('<tr id="' + data[i].id + '"><td><label type="label">' + data[i].type + '</label></td><td><button type="button" class="btn btn-xs btn-danger" disabled>删除</button></td></tr>');
             }
         };
+        var getRestaurant = function(){
+            $.ajax({
+                url: 'AdminService/restaurantTypes',
+                type: 'GET',
+                dataType: 'json'
+            }).done(function (data, status, xhr) {
+                if (data.result) renderRestaurantType(data.object);
+            }).fail(function (xhr, status, error) {
+                console.log('fail');
+            });
+        };
+        var renderRestaurant = function(data){
+            $('#restaurantName').val(data);
+            $('#restaurantType').val();
+            $('#restaurantAddress').val();
+            $('#NickName').val();
+            $('#idCard').val();
+        };
         return {
             getRestaurant: getRestaurant,
             setRestaurantClose: setRestaurantClose,
             setRestaurantHot: setRestaurantHot,
             getSystemTime: getSystemTime,
+            addSystemTimes:addSystemTimes,
             updateSystemTimes: updateSystemTimes,
             addRestaurantType: addRestaurantType,
             getRestaurantType: getRestaurantType,
             updateHotLine: updateHotLine,
-            getHotLine: getHotLine
+            getHotLine: getHotLine,
+            addHotLine:addHotLine
         }
     })();
     $('#userManager').click(function () {
@@ -558,8 +608,27 @@
         controller.addRestaurantType(data);
     });
     $('#updateHotLines').click(function () {
-        var data = {_method: 'PUT', type: $('#hotline').val()};
-        controller.updateHotLine($('#hotlines').parent().attr('name'), data);
+        var isCreate = $('#hotlines').attr('name');
+        if (isCreate == 'true') {
+            var data = {tel: $('#hotline').val()};
+            controller.addHotLine(data);
+        } else {
+            var data = {_method: 'PUT', tel: $('#hotline').val()};
+            controller.updateHotLine(isCreate, data);
+        }
+    });
+    $('#updateTime').click(function () {
+        var isCreate = $('#autoTime').attr('name');
+        if (isCreate == 'true') {
+            var data = {autoTime: $('#time').val(),exTime:$('#time1').val()};
+            controller.addSystemTimes(data);
+        } else {
+            var data = {_method: 'PUT', autoTime: $('#time').val(),exTime:$('#time1').val()};
+            controller.updateSystemTimes(isCreate, data);
+        }
+    });
+    $('#acceptBtn').click(function(){
+
     });
     $(document).ready(function () {
         controller.getRestaurant();
