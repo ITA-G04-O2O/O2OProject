@@ -1,6 +1,7 @@
 
 
 var Order=(function(){
+	
 	var getOrderInfo=function(id){
 		$.ajax({
 			url : 'http://localhost:8888/O2OSystem-customer/orders/'+id,
@@ -34,10 +35,16 @@ var Order=(function(){
 		$("#orderShowTime").text(object.orderShowTime);
 		$('#orderStatus').text(object.orderStatus);
 		$('#receiverTel').text(object.receiverTel);
+		$('#receiver').text(object.receiver);
+		$('#address').text(object.address);
+		$('#score').text(object.myscore);
+		$('#comment').text(object.mycomment);
 	};
+	
 	return {
 		getOrderInfo:getOrderInfo
 	};
+	
 })();
 
 

@@ -33,7 +33,12 @@ public class OrderAction {
 	@RequestMapping(value="/orders/{id}",method=RequestMethod.GET)
 	public JsonProtocol getOrder(@PathVariable(value="id") Integer oid){
 		JsonProtocol jp = new JsonProtocol();
-		OrderVo orderVo= OrderVoHelper.get(orderService.getOrder(oid));
+		Order order=orderService.getOrder(oid);
+		OrderVo orderVo = null;
+		if(order!=null){
+			orderVo= OrderVoHelper.get(order);
+		}
+		
 		jp.setObject(orderVo);
 		return jp;
 	}
