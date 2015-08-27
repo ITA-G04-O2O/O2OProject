@@ -1,0 +1,23 @@
+.paddingBox {
+    padding: 5px;
+}
+
+.margeBox {
+    margin: 5px;
+}
+
+.x-border-layout-ct {
+    background: none;
+}
+
+.title {
+    font-size: 18px;
+}
+
+.closeBtn {
+    background-color: orange;
+}
+
+.highlightBtn {
+    background-color: orange;
+}

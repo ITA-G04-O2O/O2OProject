@@ -1,9 +1,11 @@
 package com.g04.o2o.dao.impl;
 
-import com.g04.o2o.dao.MainSystemDao;
-import com.g04.o2o.entity.MainSystem;
+import org.springframework.stereotype.Repository;
 
-public class HotLineDaoImpl extends AbstractDaoImpl<MainSystem> implements
-		MainSystemDao {
+import com.g04.o2o.dao.HotLineDao;
+import com.g04.o2o.entity.HotLine;
+@Repository
+public class HotLineDaoImpl extends AbstractDaoImpl<HotLine> implements
+HotLineDao {
 
 }

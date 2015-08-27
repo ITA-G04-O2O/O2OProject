@@ -1,5 +1,8 @@
 package com.g04.o2o.action;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -7,9 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.g04.o2o.entity.JsonProtocol;
 import com.g04.o2o.entity.MainSystem;
+import com.g04.o2o.entity.User;
 import com.g04.o2o.service.AdminService;
+import com.g04.o2o.vo.UserVo;
 
 @RestController
+@RequestMapping(value = "/AdminService")
 public class AdminAction {
 	private AdminService systemService;
 
@@ -86,6 +92,24 @@ public class AdminAction {
 	public JsonProtocol updateUserPSD(@PathVariable String tel) {
 		JsonProtocol jp = new JsonProtocol();
 		jp.setResult(systemService.resetPsd(tel));
+		return jp;
+	}
+
+	@RequestMapping(value = "/users", method = RequestMethod.GET)
+	public JsonProtocol getUserlist() {
+		JsonProtocol jp = new JsonProtocol();
+		jp.setResult(true);
+		List<UserVo> lists = new ArrayList<>();
+		if (systemService.getUsers() != null) {
+			for (User u : systemService.getUsers()) {
+				UserVo uVo = new UserVo();
+				uVo.setId(u.getId());
+				uVo.setTel(u.getTel());
+				uVo.setUname(u.getNickName());
+				lists.add(uVo);
+			}
+		}
+		jp.setObject(lists);
 		return jp;
 	}
 

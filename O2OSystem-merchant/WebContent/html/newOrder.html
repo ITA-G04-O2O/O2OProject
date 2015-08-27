@@ -1,9 +1,9 @@
-<div class="panel panel-primary col-xs-12">
+<div class="panel panel-info">
 	<div class="panel-heading">订单基本信息</div>
 	<div class="panel-body">
 		<div class="container col-xs-12">
 			<div id="menusDiv" class="col-xs-5">
-				<div class="panel panel-default">
+				<div class="panel panel-success">
 					<div class="panel-heading"><span>订单</span></div>
 					<div class="panel-body" id="ordertable">
 						<table class="table table-bordered table-hover">
@@ -79,12 +79,14 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<div class="col-sm-offset-2 col-sm-10">
+								<div class="col-sm-offset-2 col-sm-10 row">
 									<span class="label label-default sum">总价：￥</span><span class="label label-default sum">14.00</span>
 									<span class="label label-info">配送费：￥</span><span class="label label-info">0.00</span>
 								</div>
-								<div>
-									<button type="button" id="submitOrderBtn" class="btn btn-primary">确认下单</button>
+								<div class="col-sm-offset-6 col-sm-6 row">
+									<br/>
+									<button type="button" id="submitOrderBtn" class="btn btn-success">確認接單</button>
+									<button type="button" id="rejectOrderBtn" class="btn btn-danger">拒絕接單</button>
 								</div>
 							</div>
 						</form>

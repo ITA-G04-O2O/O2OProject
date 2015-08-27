@@ -39,7 +39,6 @@ public class MerchantAction {
 		System.out.println(nickName);
 		Merchant mer = new Merchant();
 		mer.setIDCard(idCard);
-		// mer.setId(2);
 		User user = userService.getUserById(2);
 		mer.setUser(user);
 		Restaurant restaurant = (Restaurant) session.getAttribute("restaurant");
