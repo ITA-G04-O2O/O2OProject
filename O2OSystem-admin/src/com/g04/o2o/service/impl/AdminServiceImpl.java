@@ -43,7 +43,7 @@ public class AdminServiceImpl implements AdminService {
 	@Transactional
 	public boolean updateSystemTimes(MainSystem mainSystem) {
 		return mainSystemDao.update(MainSystem.class, mainSystem.getId(),
-				mainSystem) == -1;
+				mainSystem) == 1;
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class AdminServiceImpl implements AdminService {
 	public boolean addRestaurantType(String type) {
 		RestaurantType restaurantType = new RestaurantType();
 		restaurantType.setType(type);
-		return restaurantTypeDao.add(restaurantType) == -1;
+		return restaurantTypeDao.add(restaurantType) == 1;
 	}
 
 	@Override
@@ -87,7 +87,7 @@ public class AdminServiceImpl implements AdminService {
 	public boolean addHotLines(String tel) {
 		HotLine hotLine = new HotLine();
 		hotLine.setTel(tel);
-		return hotLineDao.add(hotLine) == -1;
+		return hotLineDao.add(hotLine) == 1;
 	}
 
 	@Override
@@ -106,7 +106,7 @@ public class AdminServiceImpl implements AdminService {
 	@Transactional
 	public boolean verifyRestaurant(Integer id, Integer state) {
 		return restaurantDao
-				.updateValue(id, Restaurant.class, "examine", state) == -1;
+				.updateValue(id, Restaurant.class, "examine", state) == 1;
 	}
 
 	@Override
@@ -115,7 +115,7 @@ public class AdminServiceImpl implements AdminService {
 		for (User u : userDao.searchAll(User.class)) {
 			if (u.getTel().equals(tel)) {
 				return userDao.updateValue(u.getId(), User.class, "password",
-						"123456") == -1;
+						"123456") == 1;
 			}
 		}
 		return false;
@@ -133,4 +133,11 @@ public class AdminServiceImpl implements AdminService {
 	public List<User> getUsers() {
 		return userDao.searchAll(User.class);
 	}
+
+	@Override
+	// @Transactional
+	public List<Restaurant> getRestaurants() {
+		return restaurantDao.searchAll(Restaurant.class);
+	}
+
 }
