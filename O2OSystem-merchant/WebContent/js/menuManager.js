@@ -5,7 +5,8 @@ $(function() {
 		type: 'GET',
 		dataType: 'json',
 		success: function(data) {
-			$("#menuTypeJsonData").text(data[0].MenuTypeName);
+			console.log(data.object[0]);
+			$("#menuTypeJsonData").text(data.object[0]);
 		}
 	});
 });
