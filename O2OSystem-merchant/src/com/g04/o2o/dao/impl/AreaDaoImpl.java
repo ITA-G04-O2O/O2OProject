@@ -31,5 +31,16 @@ public class AreaDaoImpl extends AbstractDaoImpl<Area> implements AreaDao{
 		List<String> rs=query.getResultList();
 		return rs;
 	}
+
+
+	@Override
+	public int getAreaId(String city) {
+		String hql="select id from Area where city=:city";
+		Query query=manager.createQuery(hql);
+		query.setParameter("city", city);
+		@SuppressWarnings("unchecked")
+		int id = (int) query.getSingleResult();
+		return id;
+	}
 	
 }
