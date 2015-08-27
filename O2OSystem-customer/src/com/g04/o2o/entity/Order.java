@@ -5,11 +5,13 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -40,7 +42,7 @@ public class Order {
 	@ManyToOne
 	@JoinColumn(name = "restId", nullable = false)
 	private Restaurant resturant;
-	@OneToMany(cascade=CascadeType.ALL)
+	@ManyToMany
 	private List<MenuItem> items = new ArrayList<MenuItem>();
 	private String message; 
 	private Integer status; //1: user add order. 2:merchant received order. 3:merchant refused order.  4: order finished.
