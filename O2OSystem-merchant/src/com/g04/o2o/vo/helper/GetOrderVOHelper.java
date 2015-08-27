@@ -33,7 +33,9 @@ public class GetOrderVOHelper {
 	}
 	
 	public static Double getTotalPirce(List<MenuItem> mil){
-		Double totalPrice = null;
+		Double totalPrice = (double) 0;
+		
+//		System.out.println(mil.size());
 		for (MenuItem menuItem : mil) {
 			System.out.println("::::::::"+menuItem.getPrice());
 			totalPrice = totalPrice + menuItem.getPrice();
