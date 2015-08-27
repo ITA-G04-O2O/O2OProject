@@ -3,6 +3,7 @@ package com.g04.o2o.entity;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +15,7 @@ public class Merchant {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+	
 	@OneToOne(mappedBy="owner",fetch=FetchType.LAZY,cascade={CascadeType.ALL})
 	private Restaurant restaurant;
 	private String IDCard;
@@ -24,7 +26,7 @@ public class Merchant {
 	
 	private String realName;
 	@OneToOne
-	@JoinColumn(name="userId",unique=true,referencedColumnName="id")
+	@JoinColumn(foreignKey=@ForeignKey(name="user_id"))
 	private User user;
 	
 	/**
