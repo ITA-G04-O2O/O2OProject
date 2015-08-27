@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Transient;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.g04.o2o.dao.MenuItemDao;
 import com.g04.o2o.dao.MenuTypeDao;
@@ -43,7 +45,7 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	@Override
-	@Transient
+	@Transactional
 	public boolean addMenuType(String menuType) {
 		MenuType mt = new MenuType();
 		mt.setMenuTypeName(menuType);
@@ -74,6 +76,19 @@ public class MenuServiceImpl implements MenuService {
 	@Override
 	public List<MenuItem> findAllMenuItems() {
 		return mid.searchAll(MenuItem.class);
+	}
+	
+
+	@Override
+	public List<MenuItem> findMenuIeItemsByMenuType(String menuTypeString) {
+		List<MenuItem> allItems = mid.searchAll(MenuItem.class);
+		List<MenuItem> menuTypeItems = new ArrayList<MenuItem>();
+		for (MenuItem menuItem : allItems) {
+			if (menuTypeString.equals(menuItem.getType().getMenuTypeName())) {
+				menuTypeItems.add(menuItem);
+			}
+		}
+		return menuTypeItems;
 	}
 
 	@Override
@@ -176,7 +191,7 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	@Override
-	@Transient
+	@Transactional
 	public boolean delMenuType(Integer restID, Integer id) {
 		Restaurant rest = rd.search(Restaurant.class, restID);
 		Set<MenuItem> misSet = rest.getMenus();
@@ -192,4 +207,5 @@ public class MenuServiceImpl implements MenuService {
 		}
 		return false;
 	}
+
 }

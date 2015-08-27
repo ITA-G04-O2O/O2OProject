@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.g04.o2o.entity.JsonProtocol;
 import com.g04.o2o.entity.Merchant;
 import com.g04.o2o.entity.Restaurant;
 import com.g04.o2o.service.MerchantService;
 
-@RestController
+@Controller
 public class MerchantAction {
 
 	@Autowired
@@ -24,19 +24,16 @@ public class MerchantAction {
 	}
 
 	@RequestMapping(value = "/merchant", method = RequestMethod.POST)
-	public JsonProtocol regist(Integer uid, String nickName, String idCard,
-			byte[] idPic, HttpSession session) {
+	public String regist(String nickName, String idCard,
+			@RequestParam("file") MultipartFile file, HttpSession session) {
 		System.out.println("MerchantAction...");
 		System.out.println(nickName);
-		JsonProtocol js = new JsonProtocol();
 		Merchant mer = new Merchant();
 		mer.setIDCard(idCard);
-		mer.setId(uid);
-		Restaurant restaurant = (Restaurant) session.getAttribute("restrant");
+		mer.setId(2);
+		Restaurant restaurant = (Restaurant) session.getAttribute("restaurant");
 		mer.setRestaurant(restaurant);
-		int result = merchantService.addMerchant(mer);
-		boolean res = (result == 1 ? true : false);
-		js.setResult(res);
-		return js;
+		merchantService.addMerchant(mer);
+		return "waiting";
 	}
 }

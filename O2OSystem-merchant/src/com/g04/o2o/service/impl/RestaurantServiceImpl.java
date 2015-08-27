@@ -2,7 +2,7 @@ package com.g04.o2o.service.impl;
 
 import java.util.List;
 
-import javax.persistence.Transient;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,7 +30,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 	}
 
 	@Override
-	@Transient
+	@Transactional
 	public int updateRestName(Integer restId, String name) {
 		try {
 			dao.search(Restaurant.class, restId).setName(name);
