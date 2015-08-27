@@ -10,89 +10,99 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.OneToOne;
+
 @Entity
 public class Merchant {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-<<<<<<< HEAD
-	@OneToOne(mappedBy = "owner", fetch = FetchType.LAZY, cascade = { CascadeType.ALL})
-=======
-	
-	@OneToOne(mappedBy="owner",fetch=FetchType.LAZY,cascade={CascadeType.ALL})
->>>>>>> 9ed377664353ff7c738162c68f5c7aec7d3d1ad9
+	@OneToOne(mappedBy = "owner", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	private Restaurant restaurant;
 	private String IDCard;
 	@Lob
 	private byte[] IDimage;
 	@Lob
-	private byte[]  licenseImage;
-	
+	private byte[] licenseImage;
+
 	private String realName;
 	@OneToOne
-	@JoinColumn(foreignKey=@ForeignKey(name="user_id"))
+	@JoinColumn(foreignKey = @ForeignKey(name = "user_id"))
 	private User user;
-	
+
 	/**
 	 * @return the iDimage
 	 */
 	public byte[] getIDimage() {
 		return IDimage;
 	}
+
 	/**
-	 * @param iDimage the iDimage to set
+	 * @param iDimage
+	 *            the iDimage to set
 	 */
 	public void setIDimage(byte[] iDimage) {
 		IDimage = iDimage;
 	}
+
 	/**
 	 * @return the licenseImage
 	 */
 	public byte[] getLicenseImage() {
 		return licenseImage;
 	}
+
 	/**
-	 * @param licenseImage the licenseImage to set
+	 * @param licenseImage
+	 *            the licenseImage to set
 	 */
 	public void setLicenseImage(byte[] licenseImage) {
 		this.licenseImage = licenseImage;
 	}
+
 	public Restaurant getRestaurant() {
 		return restaurant;
 	}
+
 	public void setRestaurant(Restaurant restaurant) {
 		this.restaurant = restaurant;
 	}
+
 	/**
 	 * @return the iDCard
 	 */
 	public String getIDCard() {
 		return IDCard;
 	}
+
 	/**
-	 * @param iDCard the iDCard to set
+	 * @param iDCard
+	 *            the iDCard to set
 	 */
 	public void setIDCard(String iDCard) {
 		IDCard = iDCard;
 	}
+
 	/**
 	 * @return the realName
 	 */
 	public String getRealName() {
 		return realName;
 	}
+
 	/**
-	 * @param realName the realName to set
+	 * @param realName
+	 *            the realName to set
 	 */
 	public void setRealName(String realName) {
 		this.realName = realName;
 	}
+
 	public User getUser() {
 		return user;
 	}
+
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
+
 }
