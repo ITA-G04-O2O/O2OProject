@@ -22,6 +22,7 @@ public class Merchant {
 	@Lob
 	private byte[]  licenseImage;
 	
+	private String realName;
 	
 	@OneToOne
 	@JoinColumn(name="userId",unique=true)
@@ -68,6 +69,18 @@ public class Merchant {
 	 */
 	public void setIDCard(String iDCard) {
 		IDCard = iDCard;
+	}
+	/**
+	 * @return the realName
+	 */
+	public String getRealName() {
+		return realName;
+	}
+	/**
+	 * @param realName the realName to set
+	 */
+	public void setRealName(String realName) {
+		this.realName = realName;
 	}
 	
 	

@@ -50,12 +50,13 @@ public class Order {
 	@JoinColumn(name = "receiver", nullable = false)
 	private User user;
 	@ManyToOne
-	@JoinColumn(name = "receiveAddress", nullable = false)
+	@JoinColumn(name = "receiveAddress", nullable = true)
 	private Address address;
 	private String userDefineAddress;
 	private Double score;
 	private String comment;
 	private String tel;
+	private String contactName;
 	
 	public Date getCompletedTime() {
 		return completedTime;
@@ -230,6 +231,20 @@ public class Order {
 	 */
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	/**
+	 * @return the contactName
+	 */
+	public String getContactName() {
+		return contactName;
+	}
+
+	/**
+	 * @param contactName the contactName to set
+	 */
+	public void setContactName(String contactName) {
+		this.contactName = contactName;
 	}
 
 }
