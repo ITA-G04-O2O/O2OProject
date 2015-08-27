@@ -93,7 +93,7 @@ public class RestAction {
 			MenuTypeVo mtvo=new MenuTypeVo(mid, mName);
 			menuTypes.add(mtvo);
 		}
-		//change MenuItem to MenuItem
+		//change MenuItem to MenuItemVo
 		Set<MenuItem> mItems = r.getMenus();
 		for(MenuItem mi:mItems){
 			Integer mid=mi.getId();

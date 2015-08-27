@@ -10,6 +10,7 @@ var restInfoController = (function() {
             $('#restPrice').text(data.object.playPrice);
             $('#score').text(data.object.grade);
             $('#time').text(data.object.actualArrivalTime);
+            $('#restNotice').text(data.object.notice);
             
             $('div[name=menutype]').empty();
             $('div[name=menuItems]').empty();
