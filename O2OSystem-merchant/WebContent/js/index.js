@@ -7,10 +7,10 @@ $(function() {
 		if (loadhtml) {
 			$('#change').load('html/' + loadhtml + '.html');
 		}
-		
+
 	});
-	$("#accountInfo").live("click",function(){
-		alert("Hello");
+	$("#accountInfo").live("click", function() {
+		showAccount();
 	});
 
 });
