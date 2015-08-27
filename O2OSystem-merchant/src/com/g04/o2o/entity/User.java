@@ -43,6 +43,24 @@ public class User {
 	@OneToMany
 	private Set<Restaurant> restlikes = new HashSet<Restaurant>();
 	
+	private String nickName;
+	
+	@OneToMany(mappedBy="user",cascade={CascadeType.PERSIST,CascadeType.REMOVE,CascadeType.MERGE})
+	private List<Order> historyOrders = new ArrayList<>();
+	/**
+	 * @return the historyOrders
+	 */
+	public List<Order> getHistoryOrders() {
+		return historyOrders;
+	}
+
+	/**
+	 * @param historyOrders the historyOrders to set
+	 */
+	public void setHistoryOrders(List<Order> historyOrders) {
+		this.historyOrders = historyOrders;
+	}
+
 	/**
 	 * @return the restlikes
 	 */
@@ -128,5 +146,19 @@ public class User {
 
 	public void setAddress(List<Address> address) {
 		this.address = address;
+	}
+
+	/**
+	 * @return the nickName
+	 */
+	public String getNickName() {
+		return nickName;
+	}
+
+	/**
+	 * @param nickName the nickName to set
+	 */
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 }

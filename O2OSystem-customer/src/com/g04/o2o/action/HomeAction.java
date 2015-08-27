@@ -17,7 +17,8 @@ public class HomeAction {
 	@RequestMapping(value={"/","/index","/home"})
 	public String index(){
 		System.out.println("进入首页");
-		return "index";
+		return "order";
+
 	}
 	
 	@ResponseBody

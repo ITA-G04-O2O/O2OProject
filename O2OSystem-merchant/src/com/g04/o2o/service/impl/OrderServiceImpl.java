@@ -1,5 +1,6 @@
 package com.g04.o2o.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.g04.o2o.dao.OrderDao;
+import com.g04.o2o.entity.MenuItem;
 import com.g04.o2o.entity.Order;
 import com.g04.o2o.service.OrderService;
 
@@ -65,4 +67,51 @@ public class OrderServiceImpl implements OrderService {
 		return true;
 	}
 
+	@Override
+	public List<Order> getAllNewOrders() {
+		List<Order> allOrders = od.searchAll(Order.class);
+		List<Order> newOrders = new ArrayList<Order>();
+		for (Order order : allOrders) {
+			if (order.getStatus() == 1) {
+				newOrders.add(order);
+			}
+		}
+		return newOrders;
+	}
+
+	@Override
+	public List<Order> getAllReceiveOrders() {
+		List<Order> allOrders = od.searchAll(Order.class);
+		List<Order> receOrders = new ArrayList<Order>();
+		for (Order order : allOrders) {
+			if (order.getStatus() == 2) {
+				receOrders.add(order);
+			}
+		}
+		return receOrders;
+	}
+
+	@Override
+	public List<Order> getAllFinishedOrders() {
+		List<Order> allOrders = od.searchAll(Order.class);
+		List<Order> finishOrders = new ArrayList<Order>();
+		for (Order order : allOrders) {
+			if (order.getStatus() == 3) {
+				finishOrders.add(order);
+			}
+		}
+		return finishOrders;
+	}
+
+	@Override
+	public List<Order> getAllFailOrders() {
+		List<Order> allOrders = od.searchAll(Order.class);
+		List<Order> finishOrders = new ArrayList<Order>();
+		for (Order order : allOrders) {
+			if (order.getStatus() == 4) {
+				finishOrders.add(order);
+			}
+		}
+		return finishOrders;
+	}
 }

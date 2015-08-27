@@ -1,20 +1,26 @@
 package com.g04.o2o.action;
 
+import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.g04.o2o.entity.Address;
+import com.g04.o2o.entity.Area;
 import com.g04.o2o.entity.JsonProtocol;
 import com.g04.o2o.entity.Restaurant;
 import com.g04.o2o.entity.RestaurantType;
 import com.g04.o2o.service.RestaurantService;
 
-@RestController
+@Controller
 public class RestaurantAction {
 
 	@Autowired
@@ -24,17 +30,37 @@ public class RestaurantAction {
 		this.restaurantService = restaurantService;
 	}
 
-	@RequestMapping(value = "/restaurant", method = RequestMethod.POST, produces = { "application/json;charset=UTF-8" })
-	public JsonProtocol regist(String mName, HttpSession session) {
+	@RequestMapping(value = "/restaurant", method = RequestMethod.POST)
+	public String regist(String mName, int type, String provinceInput,
+			String cityInput, String detailInput, HttpSession session,
+			@RequestParam("file") MultipartFile file) {
 		System.out.println("RestaurantAction");
-		System.out.println(mName);
-		JsonProtocol js = new JsonProtocol();
+		byte[] pic = null;
+		try {
+			pic = file.getBytes();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		Restaurant rest = new Restaurant();
 		rest.setName(mName);
-		// rest.setType(type);
-		// rest.setAddress(addr);
+		rest.setType(restaurantService.getRestTypeById(type));
+		Address addr = new Address();
+		Area area = new Area();
+		area.setProvince(provinceInput);
+		area.setCity(cityInput);
+		addr.setArea(area);
+		addr.setDetail(detailInput);
+		rest.setAddress(addr);
+		rest.setImageBytes(pic);
 		session.setAttribute("restaurant", rest);
-		return js;
+		return "merchantRegist";
+	}
+
+	@RequestMapping(value = "/resttype", method = RequestMethod.GET, produces = { "application/json;charset=UTF-8" })
+	public List<RestaurantType> resttype() {
+		System.out.println("resttype");
+		List<RestaurantType> restType = restaurantService.getTypes();
+		return restType;
 	}
 
 	@RequestMapping(value = "/restaurant/{id}/name", method = RequestMethod.PUT)

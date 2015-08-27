@@ -1,5 +1,7 @@
 package com.g04.o2o.service;
 
+import java.util.List;
+
 import com.g04.o2o.entity.Address;
 import com.g04.o2o.entity.MenuItem;
 import com.g04.o2o.entity.Restaurant;
@@ -20,6 +22,13 @@ public interface RestaurantService {
 	 * @return
 	 */
 	public int addRestaurant(Restaurant rest);
+
+	/**
+	 * 获得所有餐厅类型
+	 * 
+	 * @return
+	 */
+	public List<RestaurantType> getTypes();
 
 	/**
 	 * 更新餐厅信息 基本类型信息
@@ -97,5 +106,13 @@ public interface RestaurantService {
 	 * @return
 	 */
 	public int updateOpenTime(Integer restId, String openTime);
+
+	/**
+	 * 通过restaurant的Id获得类型
+	 * 
+	 * @param restTypeId
+	 * @return
+	 */
+	public RestaurantType getRestTypeById(Integer restTypeId);
 
 }

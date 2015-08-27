@@ -1,9 +1,11 @@
 .clear {
 	clear: both;
 }
+
 body {
 	background: #fafafa;
 }
+
 .container-main {
 	background: #fff;
 	border: 1px solid #ddd;
@@ -11,68 +13,88 @@ body {
 	margin-bottom: 50px;
 	padding-bottom: 50px;
 }
+
 .container-main .text-muted {
 	color: #bbb;
 }
+
 .mealBox {
 	margin-bottom: 50px;
 	padding: 0 10px;
 	word-wrap: break-word;
 }
+
 .mealBox img {
 	width: 100%;
 }
+
 .breadcrumb-wrapper {
 	border-bottom: 1px solid #ddd;
 	margin-bottom: 20px;
 }
+
 .breadcrumb {
 	background: #fff;
 	margin-bottom: 0;
 }
+
 .main-wrapper {
 	border-right: 1px solid #ddd;
 	border-left: 1px solid #ddd;
 }
+
 .myCart {
 	position: relative;
 	padding: 5px 0 0 10px;
 }
+
 .myCart i {
 	font-size: 35px;
 	margin-right: 10px;
 }
+
 .myCart .badge {
 	position: absolute;
 	left: 0;
 	top: 0;
 	background-color: #e00;
 }
+
 .orders {
 	margin-top: 40px;
 	padding: 0 10px 50px;
 	overflow-y: auto;
 	overflow-x: hidden;
 }
+
 .orders .orderBox {
 	word-wrap: break-word;
 	margin-top: 40px;
 }
+
 .orders .orderBox input {
 	width: 60px;
 	display: inline-block;
 }
+
 .orders .orderBox button {
 	width: 30px;
 }
+
 .orders .orderBox .price {
 	font-weight: bold;
 	font-size: 23px;
 	float: right;
 }
+
 .pay .total {
 	font-weight: bold;
 	font-size: 40px;
 	position: relative;
 	top: -5px;
+}
+
+.active {
+	font-weight: bold;
+	font-size: 38px;
 }

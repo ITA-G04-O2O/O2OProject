@@ -134,4 +134,15 @@ public class  AbstractDaoImpl<T> implements AbstractDao<T>{
 		}
 		return 1;
 	}
+
+
+	@Override
+	public int update(T target) {
+		try{
+			manager.merge(target);
+		}catch(Exception e){
+		  return -1;	
+		}
+		return 1;
+	}
 }
