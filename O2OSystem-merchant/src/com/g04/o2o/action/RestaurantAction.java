@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.g04.o2o.dao.AreaDao;
 import com.g04.o2o.entity.Address;
 import com.g04.o2o.entity.Area;
 import com.g04.o2o.entity.JsonProtocol;
 import com.g04.o2o.entity.Restaurant;
 import com.g04.o2o.entity.RestaurantType;
+import com.g04.o2o.service.AreaService;
 import com.g04.o2o.service.RestaurantService;
 
 @Controller
@@ -25,6 +27,8 @@ public class RestaurantAction {
 
 	@Autowired
 	private RestaurantService restaurantService;
+	@Autowired
+	private AreaService areaService;
 
 	public void setRestaurantService(RestaurantService restaurantService) {
 		this.restaurantService = restaurantService;
@@ -45,11 +49,9 @@ public class RestaurantAction {
 		rest.setName(mName);
 		rest.setType(restaurantService.getRestTypeById(type));
 		Address addr = new Address();
-		Area area = new Area();
-		area.setProvince(provinceInput);
-		area.setCity(cityInput);
-		addr.setArea(area);
+		Area area = areaService.getAreaByCity(cityInput);
 		addr.setDetail(detailInput);
+		addr.setArea(area);
 		rest.setAddress(addr);
 		rest.setImageBytes(pic);
 		session.setAttribute("restaurant", rest);

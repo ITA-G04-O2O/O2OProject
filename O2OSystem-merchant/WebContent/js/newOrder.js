@@ -5,7 +5,7 @@ $(function() {
 		type:'GET',
 		dataType: 'json',
 		success: function(data) {
-			$("#jsonData").text(data.message);
+			$("#jsonData").text(data.object);
 		}
 	});
 });
