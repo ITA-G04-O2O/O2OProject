@@ -15,7 +15,7 @@ public class Merchant {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	@OneToOne(mappedBy = "owner", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+	@OneToOne(mappedBy = "owner", fetch = FetchType.LAZY, cascade = { CascadeType.ALL})
 	private Restaurant restaurant;
 	private String IDCard;
 	@Lob
