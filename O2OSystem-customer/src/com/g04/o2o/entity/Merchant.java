@@ -82,6 +82,11 @@ public class Merchant {
 	public void setRealName(String realName) {
 		this.realName = realName;
 	}
-	
+		public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	
 }
