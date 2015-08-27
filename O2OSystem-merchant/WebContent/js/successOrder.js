@@ -22,7 +22,7 @@ $(function() {
 		dataType: 'json',
 		success: function(data) {
 			console.log(data);
-			$("#failJsonData").text(data.id);
+			$("#failJsonData").text(data);
 		}
 	});
 

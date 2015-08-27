@@ -94,6 +94,7 @@ body {
 	top: -5px;
 }
 
-.avtive {
-	color: red;
+.active {
+	font-weight: bold;
+	font-size: 38px;
 }

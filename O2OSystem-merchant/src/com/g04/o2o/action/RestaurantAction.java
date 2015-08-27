@@ -41,7 +41,6 @@ public class RestaurantAction {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		JsonProtocol js = new JsonProtocol();
 		Restaurant rest = new Restaurant();
 		rest.setName(mName);
 		rest.setType(restaurantService.getRestTypeById(type));
@@ -54,8 +53,6 @@ public class RestaurantAction {
 		rest.setAddress(addr);
 		rest.setImageBytes(pic);
 		session.setAttribute("restaurant", rest);
-		js.setResult(true);
-		js.setObject(rest);
 		return "merchantRegist";
 	}
 

@@ -30,7 +30,7 @@ public class OrderVoHelper {
 		String restName = order.getResturant().getName();
 		String orderShowTime=order.getCompletedTime().toLocaleString();
 		String orderNumber=order.getId().toString();
-		String receiver=order.getUser().getLoginName();
+		String receiver=order.getContactName();
 		String receiverTel=order.getTel();
 		Integer myscore=order.getScore().intValue();
 		OrderVo vo = new OrderVo(id, merchantTel, orderStatus, items, address, mycomment, restName, orderShowTime, orderNumber, receiver, receiverTel, myscore);
