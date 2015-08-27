@@ -9,7 +9,7 @@ var restController = (function() {
 			for(var i=0;i<data.object.length;i++){
                  $('div[name=restType]')
 				.append(
-						'<div class="btn-group" role="group"><button type="button" class="btn btn-default typeBtn" id="'+data.object[i].id+'">'+data.object[i].type+'</button></div>');
+						'<div class="btn-group" role="group"><button type="button" class="btn btn-default typeBtn" onclick="getRestByType(this)" id="'+data.object[i].id+'">'+data.object[i].type+'</button></div>');
             }
            
 		}).fail(function (xhr, status, error) {
@@ -42,15 +42,14 @@ var restController = (function() {
 	
 })();
 
+function getRestByType(item){
+	var type = $(item).attr("id");
+	console.log(type);
+	restController.getRestByType(type);
+}
 
 $(document).ready(function() {
 
-	restController.getRestType();
-    $('.typeBtn').on("click",function(){
-    	var type = $(this).attr("id");
-    	console.log(type);
-    	restController.getRestByType(type);
-    });
-    
+	restController.getRestType();  
     
 });

@@ -26,7 +26,7 @@ var restInfoController = (function() {
                 for(var j=0;j<data.object.menuTypes[i].menuItems.length;j++){
                     $('div[name=menuMealBox]')
                         .append(
-                                '<div class="col-xs-4"><div class="mealBox"><a href="#" class="thumbnail"><img src="img/1.jpg"></a><h4 id="itemName">'+data.object.menuTypes[i].menuItems[j].itemName+'</h4><h5 class="text-muted">'+data.object.menuTypes[i].menuItems[j].description+'</h5><div class="row"><div class="col-xs-7"><h4>$<span id="itemPrice">'+data.object.menuTypes[i].menuItems[j].price+'</span></h4></div><div class="col-xs-5 text-right"><button class="btn btn-primary addbtn" id="addOrderBtn" item-name="'+data.object.menuTypes[i].menuItems[j].itemName+'" item-price="'+data.object.menuTypes[i].menuItems[j].price+'" onclick="addOrder">添加</button></div></div></div></div>');
+                                '<div class="col-xs-4"><div class="mealBox"><a href="#" class="thumbnail"><img src=/menuItem/"'+data.object.menuTypes[i].menuItems[j].id+'"></a><h4 id="itemName">'+data.object.menuTypes[i].menuItems[j].itemName+'</h4><h5 class="text-muted">'+data.object.menuTypes[i].menuItems[j].description+'</h5><div class="row"><div class="col-xs-7"><h4>$<span id="itemPrice">'+data.object.menuTypes[i].menuItems[j].price+'</span></h4></div><div class="col-xs-5 text-right"><button class="btn btn-primary addbtn" id="addOrderBtn" item-name="'+data.object.menuTypes[i].menuItems[j].itemName+'" item-price="'+data.object.menuTypes[i].menuItems[j].price+'" onclick="addOrder()">添加</button></div></div></div></div>');
                 }
             }
     
