@@ -12,6 +12,7 @@
     <script src="http://cdn.sencha.com/ext/gpl/4.2.1/ext-all.js"></script>
     <link rel="stylesheet"
           href="http://cdn.sencha.com/ext/gpl/4.2.1/packages/ext-theme-gray/build/resources/ext-theme-gray-all.css">
+    <script src="js/user.js"></script>
     <script type="text/javascript">
 
         Ext.require(['Ext.data.*', 'Ext.grid.*', 'Ext.selection.CellModel',
@@ -22,108 +23,6 @@
             'Ext.Container.*', 'Ext.tab.Panel']);
 
         Ext.onReady(function () {
-
-            Ext.define('UserData', {
-                extend: 'Ext.data.Model',
-                fields: [
-                    {name: "id", type: "int"},
-                    'name', 'phone'
-                ]
-            });
-
-            var userStore = Ext.create('Ext.data.Store', {
-                pageSize: 10,
-                model: 'UserData',
-                proxy: {
-                    type: 'ajax',
-                    url: 'loadgriddata.ashx',
-                    reader: {root: 'items', totalProperty: 'total'}
-                },
-                sorters: [{
-                    property: 'id',
-                    direction: 'asc'
-                }]
-            });
-
-            var userPanel = Ext.create('Ext.form.Panel', {
-                title: '搜索',
-                width: 880,
-                defaultType: 'textfield',
-                frame: true,
-                method: 'POST',
-                collapsible: true,//可折叠
-                bodyPadding: 5,
-                layout: 'column',
-                margin: '0 0 10 0',
-                items: [{
-                    fieldLabel: '电话',
-                    labelWidth: 40,
-                    id: 'phone'
-                }, {
-                    xtype: 'button',
-                    text: '搜索',
-                    margin: '0 0 0 5',
-                    handler: function () {
-                        var name = Ext.getCmp('name').getValue();
-                        if (name != "") {
-                            userStore.load({params: {name: name}});
-                        }
-                    }
-                }]
-            });
-
-            var userGrid = Ext.create('Ext.grid.Panel', {
-                title: '用戶信息',
-                width: 880,
-                store: userStore,
-                loadMask: true,
-                selModel: new Ext.selection.CheckboxModel, //添加checkbox列
-                columns: [{
-                    header: '姓名', dataIndex: 'name'
-                }, {
-                    header: '电话', dataIndex: 'phone'
-                }],
-                dockedItems: [
-                    {
-                        xtype: 'pagingtoolbar',
-                        store: userStore,
-                        dock: 'bottom',
-                        emptyMsg: '没有数据',
-                        displayInfo: true,
-                        displayMsg: '当前显示{0}-{1}条记录 / 共{2}条记录 ',
-                        beforePageText: '第',
-                        afterPageText: '页/共{0}页'
-                    }, {
-                        xtype: 'toolbar',
-                        items: [{
-                            iconCls: 'icon-add',
-                            text: '重置',
-                            scope: this, //添加
-                            handler: function () {
-                                var tels = Ext.getCmp('phone').getValue();
-                                Ext.MessageBox.confirm('Notice!', tels + 'will be reset', function (btn) {
-                                    if (btn == 'yes') {
-                                        Ext.MessageBox.alert(tels);
-                                    }
-                                });
-                            }
-                        }]
-                    }],
-                listeners: {
-                    //监听单击事件 records 当前行 对象
-                    itemclick: function (dv, records, item, index, e) {
-                        //alert(record.data.id);
-
-                    }, selectionchange: function (model, records) {
-                        if (records[0]) {
-                            Panel.show(); //显示
-                            Panel.loadRecord(records[0]);
-                        }
-                    }
-                }
-            });
-            //初始加载第1页
-            userStore.loadPage(1);
             Ext.define('MerchantData', {
                 extend: 'Ext.data.Model',
                 fields: [
@@ -136,8 +35,8 @@
                 model: 'MerchantData',
                 proxy: {
                     type: 'ajax',
-                    url: 'loadgriddata.ashx',
-                    reader: {root: 'items', totalProperty: 'total'}
+                    url: 'AdminService/restaurants',
+                    reader: {root: 'object', totalProperty: 'total'}
                 },
                 sorters: [{
                     property: 'id',
@@ -250,8 +149,8 @@
                         xtype: 'textfield',
                         fieldLabel: 'Service hot line',
                         allowBlank: false,
-                        id:'serviceHotLine',
-                        itemId:'serviceHotLineFiled'
+                        id: 'serviceHotLine',
+                        itemId: 'serviceHotLineFiled'
                     },
                     {
                         xtype: 'numberfield',
@@ -262,9 +161,9 @@
                         maxLength: 2,
                         maxValue: 24,
                         minValue: 0,
-                        value:0,
-                        id:'orderAutoConfirmFiled',
-                        itemId:'orderAutoConfirmFiled'
+                        value: 0,
+                        id: 'orderAutoConfirmFiled',
+                        itemId: 'orderAutoConfirmFiled'
                     },
                     {
                         xtype: 'numberfield',
@@ -275,9 +174,9 @@
                         maxLength: 2,
                         maxValue: 24,
                         minValue: 0,
-                        value:0,
-                        id:'orderAutoCancelFiled',
-                        itemId:'orderAutoCancelFiled'
+                        value: 0,
+                        id: 'orderAutoCancelFiled',
+                        itemId: 'orderAutoCancelFiled'
                     }]
             });
             var RestaurantGrid = Ext.create('Ext.grid.Panel', {
@@ -335,10 +234,10 @@
                     bodyPadding: 10
                 },
                 items: [
-                    {title: '用戶管理', items: [userPanel, userGrid]},
-                    {title: '商店管理', items: [ MerchantGrid]},
-                    {title: '系統管理', items: [systemPanel,RestaurantGrid]},
-                    {title: '商家审批', items: []}
+                    {title: '用戶管理', items: [userPanel, userGrid]}
+                    //{title: '商店管理', items: [MerchantGrid]},
+                    //{title: '系統管理', items: [systemPanel, RestaurantGrid]},
+                    //{title: '商家审批', items: []}
                 ]
             });
         })
