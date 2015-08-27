@@ -1,6 +1,9 @@
 package com.g04.o2o.action;
 
+import java.util.HashSet;
 import java.util.Set;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,11 +34,7 @@ public class RestAction {
 	public JsonProtocol getRestList(@PathVariable(value="type") String type){
 		System.out.println(type);
 		JsonProtocol jp = new JsonProtocol();
-<<<<<<< HEAD
-		Set<Restaurant> rs=restService.getRestByType(type);
-		
-//		jp.setObject();
-=======
+
 		Set<Restaurant> rs = restService.getRestByType(type);
 		Set<RestaurantVo> rsVO = new HashSet<RestaurantVo>();
 		for(Restaurant r:rs){
@@ -51,7 +50,7 @@ public class RestAction {
 		}
 //		System.out.println(restService.getRestByType(type));
 		jp.setObject(rsVO);
->>>>>>> f9aa65251d48b468983436cfec3e67f7fdbcae80
+
 		return jp;
 	}
 	
