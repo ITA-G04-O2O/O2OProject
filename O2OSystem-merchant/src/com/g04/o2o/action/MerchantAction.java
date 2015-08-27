@@ -30,7 +30,9 @@ public class MerchantAction {
 		System.out.println(nickName);
 		Merchant mer = new Merchant();
 		mer.setIDCard(idCard);
-		mer.setId(2);
+		
+//		mer.setId(2);
+		
 		Restaurant restaurant = (Restaurant) session.getAttribute("restaurant");
 		mer.setRestaurant(restaurant);
 		merchantService.addMerchant(mer);

@@ -9,7 +9,6 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.g04.o2o.dao.MenuItemDao;
 import com.g04.o2o.dao.MenuTypeDao;
@@ -97,7 +96,7 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	@Override
-	@Transient
+	@Transactional
 	public boolean addMenuItem(MenuItem menuItem) {
 		try {
 			mid.add(menuItem);
@@ -108,7 +107,7 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	@Override
-	@Transient
+	@Transactional
 	public boolean delMenuItem(Integer id) {
 		try {
 			mid.del(MenuItem.class, id);
@@ -119,7 +118,8 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	@Override
-	@Transient
+	@Transactional
+
 	public boolean updMenuItemName(Integer id, String itemName) {
 		try {
 			mid.search(MenuItem.class, id).setItemName(itemName);
@@ -130,7 +130,8 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	@Override
-	@Transient
+	@Transactional
+
 	public boolean updMenuItemPrice(Integer id, Double price) {
 		try {
 			mid.search(MenuItem.class, id).setPrice(price);
@@ -141,7 +142,8 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	@Override
-	@Transient
+	@Transactional
+
 	public boolean updMenuItemDescription(Integer id, String description) {
 		try {
 			mid.search(MenuItem.class, id).setDescription(description);
@@ -152,7 +154,8 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	@Override
-	@Transient
+	@Transactional
+
 	public boolean updMenuItemType(Integer id, String type) {
 		for (MenuType menuType : mtd.searchAll(MenuType.class)) {
 			if (type.equals(menuType.getMenuTypeName())) {
@@ -164,7 +167,8 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	@Override
-	@Transient
+	@Transactional
+
 	public boolean updMenuItemSalesVolume(Integer id, Integer volume) {
 		try {
 			mid.search(MenuItem.class, id).setSalesVolume(volume);
@@ -175,7 +179,8 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	@Override
-	@Transient
+	@Transactional
+
 	public boolean updMenuItemScore(Integer id, Double score) {
 		try {
 			mid.search(MenuItem.class, id).setScore(score);
