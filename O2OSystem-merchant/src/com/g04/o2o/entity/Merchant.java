@@ -3,11 +3,9 @@ package com.g04.o2o.entity;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 
@@ -26,7 +24,11 @@ public class Merchant {
 
 	private String realName;
 	@OneToOne
+<<<<<<< HEAD
 	@JoinColumn(foreignKey = @ForeignKey(name = "user_id"))
+=======
+//	@JoinColumn(foreignKey = @ForeignKey(name = "user_id"))
+>>>>>>> 97a0bd3f6fbd5f3c147b39ea9e98ece42349df8f
 	private User user;
 
 	/**

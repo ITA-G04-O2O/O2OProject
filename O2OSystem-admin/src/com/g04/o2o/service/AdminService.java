@@ -5,6 +5,7 @@ import java.util.List;
 import com.g04.o2o.entity.HotLine;
 import com.g04.o2o.entity.MainSystem;
 import com.g04.o2o.entity.RestaurantType;
+import com.g04.o2o.entity.User;
 
 public interface AdminService {
 	//
@@ -39,5 +40,8 @@ public interface AdminService {
 
 	public boolean resetPsd(String tel);
 
+	public List<User> getUsers();
+
 	public boolean setHot(Integer id, boolean isHot);
+
 }
