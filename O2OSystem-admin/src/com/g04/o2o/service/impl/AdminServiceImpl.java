@@ -34,9 +34,8 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	@Transactional
-	public MainSystem getSystemTimes() {
-		List<MainSystem> lists = mainSystemDao.searchAll(MainSystem.class);
-		return lists.get(0);
+	public List<MainSystem> getSystemTimes() {
+		return mainSystemDao.searchAll(MainSystem.class);
 	}
 
 	@Override
@@ -124,8 +123,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	@Transactional
 	public boolean setHot(Integer id, boolean isHot) {
-		restaurantDao.updateValue(id, Restaurant.class, "hot", isHot);
-		return false;
+		return restaurantDao.updateValue(id, Restaurant.class, "hot", isHot) == 1;
 	}
 
 	@Override
@@ -135,9 +133,15 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	// @Transactional
+	@Transactional
 	public List<Restaurant> getRestaurants() {
 		return restaurantDao.searchAll(Restaurant.class);
+	}
+
+	@Override
+	@Transactional
+	public boolean setClose(Integer id) {
+		return restaurantDao.updateValue(id, Restaurant.class, "online", false) == 1;
 	}
 
 }

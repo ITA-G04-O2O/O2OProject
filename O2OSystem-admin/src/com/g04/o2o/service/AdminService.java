@@ -19,7 +19,7 @@ public interface AdminService {
 	// public boolean setOriginalSetting(Integer autoExpirationTime,
 	// Integer autoCompletedTime);
 
-	public MainSystem getSystemTimes();
+	public List<MainSystem> getSystemTimes();
 
 	public boolean updateSystemTimes(MainSystem mainSystem);
 
@@ -46,5 +46,7 @@ public interface AdminService {
 	public boolean setHot(Integer id, boolean isHot);
 
 	public List<Restaurant> getRestaurants();
+
+	public boolean setClose(Integer id);
 
 }

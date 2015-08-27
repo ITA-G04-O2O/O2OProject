@@ -34,9 +34,11 @@ public class OrderAction {
 	public JsonProtocol getOrder(@PathVariable(value="id") Integer oid){
 		JsonProtocol jp = new JsonProtocol();
 		Order order=orderService.getOrder(oid);
+		Integer uid=order.getUser().getId();
 		OrderVo orderVo = null;
 		if(order!=null){
 			orderVo= OrderVoHelper.get(order);
+			orderVo.setUid(uid);
 		}
 		
 		jp.setObject(orderVo);
