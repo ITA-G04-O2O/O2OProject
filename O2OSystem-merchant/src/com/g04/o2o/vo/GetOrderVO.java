@@ -9,6 +9,13 @@ import com.g04.o2o.entity.MenuItem;
 public class GetOrderVO {
 	private Integer id;
 	private Date createDate;
+	private Date completedDate;
+	public Date getCompletedDate() {
+		return completedDate;
+	}
+	public void setCompletedDate(Date completedDate) {
+		this.completedDate = completedDate;
+	}
 	private Integer status;
 	private String connectPeople;
 	private String tel;
