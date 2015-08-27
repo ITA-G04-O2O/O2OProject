@@ -2,6 +2,21 @@
 var uid =0;
 var Order=(function(){
 	
+	var getAllOrdersID=function(userId){
+		$.ajax({
+			url : 'http://localhost:8888/O2OSystem-customer/users/'+userId+'/userOrder',
+			type : 'GET',
+			dataType : 'json',
+		}).done(function(data, status, xhr) {
+			var temp = data.object;
+			for(var i=0;i<temp.length;i++){
+				getOrderInfo(data.object[i]);			
+			}
+		}).fail(function(xhr, status, error) {
+			console.log('fail');
+		});
+	};
+	
 	var getOrderInfo=function(id){
 		$.ajax({
 			url : 'http://localhost:8888/O2OSystem-customer/orders/'+id,
@@ -16,35 +31,38 @@ var Order=(function(){
 	};
 	
 	var loadData=function(object){
+		var template = $("#order").clone();
 		var totalPrice=0;
 		for(var i=0;i<object.items.length;i++){
-			$(".table-hover tbody").append("<tr data-desc='menuItem'></tr>");
-			var TR=$("tr[data-desc=menuItem]:last");
+			template.find(".table-hover tbody").append("<tr data-desc='menuItem'></tr>");
+			var TR=template.find("tr[data-desc=menuItem]:last");
 			TR.append("<td>"+object.items[i].itemName+"</td>");
 			TR.append("<td>"+object.items[i].number+"</td>");
 			TR.append("<td data-desc='price'>"+object.items[i].price+"</td>");
-			totalPrice=totalPrice+parseFloat($("td[data-desc=price]:last").text());
+			totalPrice=totalPrice+parseFloat(template.find("td[data-desc=price]:last").text());
 //			alert(pay);
 		}
-		$("#totalPrice").text(totalPrice);
+		template.find("#totalPrice").text(totalPrice);
 		
 		/*设置饭点名字等*/
-		$(".content-center:first h4").text(object.restName);
-		$("#orderNumber").text(object.orderNumber);
-		$("#merchantTel").text(object.merchantTel);
-		$("#orderShowTime").text(object.orderShowTime);
-		$('#orderStatus').text(object.orderStatus);
-		$('#receiverTel').text(object.receiverTel);
-		$('#receiver').text(object.receiver);
-		$('#address').text(object.address);
-		$('#score').text(object.myscore);
-		$('#comment').text(object.mycomment);
+		template.find(".content-center:first h4").text(object.restName);
+		template.find("#orderNumber").text(object.orderNumber);
+		template.find("#merchantTel").text(object.merchantTel);
+		template.find("#orderShowTime").text(object.orderShowTime);
+		template.find('#orderStatus').text(object.orderStatus);
+		template.find('#receiverTel').text(object.receiverTel);
+		template.find('#receiver').text(object.receiver);
+		template.find('#address').text(object.address);
+		template.find('#score').text(object.myscore);
+		template.find('#comment').text(object.mycomment);
+		$("#allorders").append(template);
 //		alert(object.uid);
 		uid=object.uid;
 	};
 	
 	return {
 		getOrderInfo:getOrderInfo,
+		getAllOrdersID:getAllOrdersID
 	};
 	
 })();
@@ -67,8 +85,35 @@ var User=(function(){
 		$("#inf-tel").text(object.tel);
 		$("#inf-blance").text(object.blance);
 	};
+	
+	var changeUserName=function(){
+		
+		var newUsername = $("#newUsername").val();
+		var regex= new RegExp("^[0-9A-Za-z_]{6,15}$");
+		alert(regex.test(newUsername));
+		if(regex.test(newUsername)){
+			$.ajax({
+				url : 'http://localhost:8888/O2OSystem-customer/users/'+uid,
+				type : 'post',
+				dataType : 'json',
+				data:{
+					_method:'PUT',
+					newName:newUsername
+				}
+			}).done(function(data, status, xhr) {
+//				alert(data.object.mycomment);
+				loadData(data.object);
+			}).fail(function(xhr, status, error) {
+				console.log('fail');
+			});
+		}else{
+			alert("用户名只包含大小写英文、数字和下划线,长度在6-15之间");
+		}
+	};
+	
 	return {
-		getInfo:getInfo
+		getInfo:getInfo,
+		changeUserName:changeUserName
 	};
 })();
 
@@ -76,15 +121,17 @@ $(function(){
 	$("#submitBtn").on("click",function(){
 		location.href="order.html";
 	});
-	var url = window.location.search;
+	/*var url = window.location.search;
     var oid = url.substring(url.lastIndexOf('=')+1, url.length);
 //    alert(id);
-	Order.getOrderInfo(oid);
+	Order.getOrderInfo(oid);*/
+	Order.getAllOrdersID(10);
 	
-	
-	$("li[role=presentation]").eq(1).click(function(){
-//		alert(uid);
-		User.getInfo(uid);
+	$("#myorder-btn").click(function(){
+		Order.getAllOrdersID(10);
+	});
+	$("#modify-username-btn").click(function(){
+		User.changeUserName();
 	});
 });
 

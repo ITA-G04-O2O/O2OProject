@@ -4,6 +4,7 @@ package com.test.serviceTs;
 
 
 
+import java.util.Iterator;
 import java.util.Set;
 
 import org.junit.Assert;
@@ -71,6 +72,10 @@ public class TsOrderServie {
 		/*Order order=orderService.getOrder(1);
 		System.out.println(order.getMessage());*/
 		Set<MenuItem> tSet=restdao.getMenuItemByType(1, 3);
+		for (Iterator iterator = tSet.iterator(); iterator.hasNext();) {
+			MenuItem menuItem = (MenuItem) iterator.next();
+			System.out.println(menuItem.getItemName());
+		}
 		Assert.assertEquals(2, tSet.size());
 	}
 	
