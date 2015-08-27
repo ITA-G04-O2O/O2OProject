@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/table.css"/>
+    <link rel="stylesheet" href="./css/style.css"/>
+    <script type="text/javascript" src="./js/dist/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="./js/dist/bootstrap.min.js"></script>
+    <script src="http://cdn.sencha.com/ext/gpl/4.2.1/ext-all.js"></script>
+    <link rel="stylesheet"
+          href="http://cdn.sencha.com/ext/gpl/4.2.1/packages/ext-theme-gray/build/resources/ext-theme-gray-all.css">
+    <script type="text/javascript">
+
+        Ext.require(['Ext.data.*', 'Ext.grid.*', 'Ext.selection.CellModel',
+            'Ext.grid.*',
+            'Ext.data.*',
+            'Ext.util.*',
+            'Ext.form.*',
+            'Ext.Container.*', 'Ext.tab.Panel']);
+
+        Ext.onReady(function () {
+
+            Ext.define('UserData', {
+                extend: 'Ext.data.Model',
+                fields: [
+                    {name: "id", type: "int"},
+                    'name', 'phone'
+                ]
+            });
+
+            var userStore = Ext.create('Ext.data.Store', {
+                pageSize: 10,
+                model: 'UserData',
+                proxy: {
+                    type: 'ajax',
+                    url: 'loadgriddata.ashx',
+                    reader: {root: 'items', totalProperty: 'total'}
+                },
+                sorters: [{
+                    property: 'id',
+                    direction: 'asc'
+                }]
+            });
+
+            var userPanel = Ext.create('Ext.form.Panel', {
+                title: '搜索',
+                width: 880,
+                defaultType: 'textfield',
+                frame: true,
+                method: 'POST',
+                collapsible: true,//可折叠
+                bodyPadding: 5,
+                layout: 'column',
+                margin: '0 0 10 0',
+                items: [{
+                    fieldLabel: '电话',
+                    labelWidth: 40,
+                    id: 'phone'
+                }, {
+                    xtype: 'button',
+                    text: '搜索',
+                    margin: '0 0 0 5',
+                    handler: function () {
+                        var name = Ext.getCmp('name').getValue();
+                        if (name != "") {
+                            userStore.load({params: {name: name}});
+                        }
+                    }
+                }]
+            });
+
+            var userGrid = Ext.create('Ext.grid.Panel', {
+                title: '用戶信息',
+                width: 880,
+                store: userStore,
+                loadMask: true,
+                selModel: new Ext.selection.CheckboxModel, //添加checkbox列
+                columns: [{
+                    header: '姓名', dataIndex: 'name'
+                }, {
+                    header: '电话', dataIndex: 'phone'
+                }],
+                dockedItems: [
+                    {
+                        xtype: 'pagingtoolbar',
+                        store: userStore,
+                        dock: 'bottom',
+                        emptyMsg: '没有数据',
+                        displayInfo: true,
+                        displayMsg: '当前显示{0}-{1}条记录 / 共{2}条记录 ',
+                        beforePageText: '第',
+                        afterPageText: '页/共{0}页'
+                    }, {
+                        xtype: 'toolbar',
+                        items: [{
+                            iconCls: 'icon-add',
+                            text: '重置',
+                            scope: this, //添加
+                            handler: function () {
+                                var tels = Ext.getCmp('phone').getValue();
+                                Ext.MessageBox.confirm('Notice!', tels + 'will be reset', function (btn) {
+                                    if (btn == 'yes') {
+                                        Ext.MessageBox.alert(tels);
+                                    }
+                                });
+                            }
+                        }]
+                    }],
+                listeners: {
+                    //监听单击事件 records 当前行 对象
+                    itemclick: function (dv, records, item, index, e) {
+                        //alert(record.data.id);
+
+                    }, selectionchange: function (model, records) {
+                        if (records[0]) {
+                            Panel.show(); //显示
+                            Panel.loadRecord(records[0]);
+                        }
+                    }
+                }
+            });
+            //初始加载第1页
+            userStore.loadPage(1);
+            Ext.define('MerchantData', {
+                extend: 'Ext.data.Model',
+                fields: [
+                    {name: "id", type: "int"},
+                    'name', 'phone'
+                ]
+            });
+            var merchantStore = Ext.create('Ext.data.Store', {
+                pageSize: 10,
+                model: 'MerchantData',
+                proxy: {
+                    type: 'ajax',
+                    url: 'loadgriddata.ashx',
+                    reader: {root: 'items', totalProperty: 'total'}
+                },
+                sorters: [{
+                    property: 'id',
+                    direction: 'asc'
+                }]
+            });
+            var MerchantGrid = Ext.create('Ext.grid.Panel', {
+                title: 'Merchant',
+                width: 880,
+                store: merchantStore,
+                loadMask: true,
+                selModel: new Ext.selection.CheckboxModel, //添加checkbox列
+                columns: [{
+                    header: '店名', dataIndex: 'name'
+                }, {
+                    header: '销量', dataIndex: 'sale'
+                }, {
+                    header: '店主', dataIndex: 'user'
+                }, {
+                    header: '是否热门', dataIndex: 'hot'
+                }, {
+                    header: '是否营业', dataIndex: 'on'
+                }],
+                dockedItems: [
+                    {
+                        xtype: 'pagingtoolbar',
+                        store: merchantStore,
+                        dock: 'bottom',
+                        emptyMsg: '没有数据',
+                        displayInfo: true,
+                        displayMsg: '当前显示{0}-{1}条记录 / 共{2}条记录 ',
+                        beforePageText: '第',
+                        afterPageText: '页/共{0}页'
+                    }, {
+                        xtype: 'toolbar',
+                        items: [{
+                            iconCls: 'icon-add',
+                            text: '設為熱門',
+                            scope: this, //添加
+                            handler: function () {
+                                var tels = Ext.getCmp('phone').getValue();
+                                Ext.MessageBox.confirm('Notice!', tels + 'will be reset', function (btn) {
+                                    if (btn == 'yes') {
+                                        Ext.MessageBox.alert(tels);
+                                    }
+                                });
+                            }
+                        }, {
+                            iconCls: 'icon-add',
+                            text: '取消熱門',
+                            scope: this, //添加
+                            handler: function () {
+                                var tels = Ext.getCmp('phone').getValue();
+                                Ext.MessageBox.confirm('Notice!', tels + 'will be reset', function (btn) {
+                                    if (btn == 'yes') {
+                                        Ext.MessageBox.alert(tels);
+                                    }
+                                });
+                            }
+                        }, {
+                            iconCls: 'icon-add',
+                            text: '开始营业',
+                            scope: this, //添加
+                            handler: function () {
+                                var tels = Ext.getCmp('phone').getValue();
+                                Ext.MessageBox.confirm('Notice!', tels + 'will be reset', function (btn) {
+                                    if (btn == 'yes') {
+                                        Ext.MessageBox.alert(tels);
+                                    }
+                                });
+                            }
+                        }, {
+                            iconCls: 'icon-add',
+                            text: '暂停营业',
+                            scope: this, //添加
+                            handler: function () {
+                                var tels = Ext.getCmp('phone').getValue();
+                                Ext.MessageBox.confirm('Notice!', tels + 'will be reset', function (btn) {
+                                    if (btn == 'yes') {
+                                        Ext.MessageBox.alert(tels);
+                                    }
+                                });
+                            }
+                        }]
+                    }],
+                listeners: {
+                    //监听单击事件 records 当前行 对象
+                    itemclick: function (dv, records, item, index, e) {
+                        //alert(record.data.id);
+
+                    }, selectionchange: function (model, records) {
+                        if (records[0]) {
+
+                        }
+                    }
+                }
+            });
+            merchantStore.loadPage(1);
+            var systemPanel = Ext.create('Ext.panel.Panel', {
+                title: 'TimeSetting',
+                width: 880,
+                bodyPadding: 5,
+                frame: true,
+                layout: 'fit',
+                margin: '0 0 10 0',
+                xtype: 'panel',
+                region: 'center',
+                items: [
+                    {
+                        xtype: 'textfield',
+                        fieldLabel: 'Service hot line',
+                        allowBlank: false,
+                        id:'serviceHotLine',
+                        itemId:'serviceHotLineFiled'
+                    },
+                    {
+                        xtype: 'numberfield',
+                        fieldLabel: 'Order Auto Confirm Time',
+                        regex: /^[A-Za-z0-9]+$/,
+                        allowBlank: false,
+                        enforceMaxLength: true,
+                        maxLength: 2,
+                        maxValue: 24,
+                        minValue: 0,
+                        value:0,
+                        id:'orderAutoConfirmFiled',
+                        itemId:'orderAutoConfirmFiled'
+                    },
+                    {
+                        xtype: 'numberfield',
+                        fieldLabel: 'Order Auto Cancel Time',
+                        allowBlank: false,
+                        regex: /^[A-Za-z0-9]+$/,
+                        enforceMaxLength: true,
+                        maxLength: 2,
+                        maxValue: 24,
+                        minValue: 0,
+                        value:0,
+                        id:'orderAutoCancelFiled',
+                        itemId:'orderAutoCancelFiled'
+                    }]
+            });
+            var RestaurantGrid = Ext.create('Ext.grid.Panel', {
+                title: 'RestaurantType',
+                width: 880,
+                store: merchantStore,
+                loadMask: true,
+                selModel: new Ext.selection.CheckboxModel, //添加checkbox列
+                columns: [{
+                    header: '种类', dataIndex: 'name'
+                }],
+                dockedItems: [
+                    {
+                        xtype: 'pagingtoolbar',
+                        store: merchantStore,
+                        dock: 'bottom',
+                        emptyMsg: '没有数据',
+                        displayInfo: true,
+                        displayMsg: '当前显示{0}-{1}条记录 / 共{2}条记录 ',
+                        beforePageText: '第',
+                        afterPageText: '页/共{0}页'
+                    }, {
+                        xtype: 'toolbar',
+                        items: [{
+                            iconCls: 'icon-add',
+                            text: '添加種類',
+                            scope: this, //添加
+                            handler: function () {
+                                var tels = Ext.getCmp('phone').getValue();
+                                Ext.MessageBox.confirm('Notice!', tels + 'will be reset', function (btn) {
+                                    if (btn == 'yes') {
+                                        Ext.MessageBox.alert(tels);
+                                    }
+                                });
+                            }
+                        }]
+                    }],
+                listeners: {
+                    itemclick: function (dv, records, item, index, e) {
+
+                    }, selectionchange: function (model, records) {
+                        if (records[0]) {
+
+                        }
+                    }
+                }
+            });
+
+            var content = Ext.create('Ext.tab.Panel', {
+                renderTo: 'container',
+                tabPosition: 'top',
+                height: 600,
+                width: 900,
+                defaults: {
+                    bodyPadding: 10
+                },
+                items: [
+                    {title: '用戶管理', items: [userPanel, userGrid]},
+                    {title: '商店管理', items: [ MerchantGrid]},
+                    {title: '系統管理', items: [systemPanel,RestaurantGrid]},
+                    {title: '商家审批', items: []}
+                ]
+            });
+        })
+    </script>
+</head>
+
+<body>
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#home-nav-main"
+                    aria-expanded="false">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div>
+                <a href="#"><img src="img/logoshow.ico" width="50px"/></a>
+            </div>
+
+        </div>
+        <div id="home-nav-main" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav pull-right">
+                <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">
+                        <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                        <span class="badge msg-total">42</span>
+                    </a>
+                </li>
+                <li><a id="registUrl">欢迎您</a></li>
+                <li><a id="helpUrl">@name</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container" id="container">
+
+</div>
+<div id="map-footer" class="map-footer">
+    <div class="map-footer-entry">
+        <a rel="nofollow" target="_blank" href="http://weibo.com/u/3949575070" class="map-footer-link">关注微博</a>
+        <i class="map-footer-separator">|</i>
+        <a rel="nofollow" href="javascript:;" class="map-footer-link map-footer-weixing">关注微信</a>
+        <i class="map-footer-separator">|</i>
+        <a rel="nofollow" target="_blank" href="http://kaidian.waimai.meituan.com" class="map-footer-link">我要开店</a>
+    </div>
+</div>
+</body>
+
+
+</html>

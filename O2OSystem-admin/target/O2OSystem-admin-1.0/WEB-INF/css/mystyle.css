@@ -1,0 +1,44 @@
+body{
+	background: #FAFAFA;
+}
+.my-nav {
+    width: 100%;
+}
+
+.mytab-content {
+    border: 2px solid black;
+    height: 1000px;
+}
+
+#order {
+    text-align: center;
+}
+
+#information {
+    text-align: center;
+}
+.personal-Info {
+    margin: 0px auto;
+}
+
+#small-logo {
+    height: 100%;
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.border{
+    border: 2px solid black;
+}
+#score{
+    padding-left: 10px;
+}
+#sales{
+    padding-left: 10px;
+}
+#collectionNum{
+    padding-left: 10px;
+}
+.sum{
+    font-size: 20px;
+}
