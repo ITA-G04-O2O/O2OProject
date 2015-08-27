@@ -16,6 +16,7 @@ public class OrderVo {
 	private String receiver;
 	private String receiverTel;
 	private Integer myscore;
+	private Integer uid;
 	
 	public OrderVo(Integer id, String merchantTel, String orderStatus, List<OrderItemVo> items, String address, String mycomment, String restName, String orderShowTime, String orderNumber,
 			String receiver, String receiverTel, Integer myscore) {
@@ -176,5 +177,17 @@ public class OrderVo {
 	 */
 	public void setMyscore(Integer myscore) {
 		this.myscore = myscore;
+	}
+	/**
+	 * @return the uid
+	 */
+	public Integer getUid() {
+		return uid;
+	}
+	/**
+	 * @param uid the uid to set
+	 */
+	public void setUid(Integer uid) {
+		this.uid = uid;
 	}
 }

@@ -124,9 +124,9 @@
 								<caption>个人信息</caption>
 								<tr>
 									<td>用户名：</td>
-									<td id="inf-tel">Okar</td>
+									<td id="inf-nickName">Okar</td>
 									<td>
-										<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
+										<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modifyUsername">
 											修改用户名
 										</button>
 									</td>
@@ -147,7 +147,7 @@
 								</tr>
 								<tr>
 									<td>账户余额:</td>
-									<td>400元</td>
+									<td id="inf-blance">400元</td>
 									<td>
 										<button type="button" class="btn btn-default">
 											充值
@@ -237,6 +237,28 @@
 						<div class="form-group">
 							<label for="password">确认新密码</label>
 							<input type="password" class="form-control" id="conpsd" placeholder="确认新密码">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="modal fade" id="modifyUsername" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">修改用户名</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="name">新用户名</label>
+							<input type="text" class="form-control" id="newUsername" placeholder="输入新用户名">
 						</div>
 					</div>
 					<div class="modal-footer">

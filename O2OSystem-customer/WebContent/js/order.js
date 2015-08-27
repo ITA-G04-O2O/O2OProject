@@ -1,5 +1,5 @@
 
-
+var uid =0;
 var Order=(function(){
 	
 	var getOrderInfo=function(id){
@@ -39,22 +39,52 @@ var Order=(function(){
 		$('#address').text(object.address);
 		$('#score').text(object.myscore);
 		$('#comment').text(object.mycomment);
+//		alert(object.uid);
+		uid=object.uid;
 	};
 	
 	return {
-		getOrderInfo:getOrderInfo
+		getOrderInfo:getOrderInfo,
 	};
 	
 })();
 
+var User=(function(){
+	var getInfo=function(id){
+		$.ajax({
+			url : 'http://localhost:8888/O2OSystem-customer/users/'+id,
+			type : 'GET',
+			dataType : 'json',
+		}).done(function(data, status, xhr) {
+//			alert(data.object.mycomment);
+			loadData(data.object);
+		}).fail(function(xhr, status, error) {
+			console.log('fail');
+		});
+	};
+	var loadData=function(object){
+		$("#inf-nickName").text(object.uname);
+		$("#inf-tel").text(object.tel);
+		$("#inf-blance").text(object.blance);
+	};
+	return {
+		getInfo:getInfo
+	};
+})();
 
 $(function(){
 	$("#submitBtn").on("click",function(){
 		location.href="order.html";
 	});
 	var url = window.location.search;
-    var id = url.substring(url.lastIndexOf('=')+1, url.length);
+    var oid = url.substring(url.lastIndexOf('=')+1, url.length);
 //    alert(id);
-	Order.getOrderInfo(id);
+	Order.getOrderInfo(oid);
+	
+	
+	$("li[role=presentation]").eq(1).click(function(){
+//		alert(uid);
+		User.getInfo(uid);
+	});
 });
 

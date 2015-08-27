@@ -1,12 +1,18 @@
 package com.g04.o2o.action;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import vo.UserVo;
+import vo.helper.UserHelper;
+
 import com.g04.o2o.entity.JsonProtocol;
+import com.g04.o2o.entity.User;
 import com.g04.o2o.service.UserService;
 
 @RestController
@@ -21,17 +27,13 @@ public class UserAction {
 		return jp;
 	}
 	
-//	@RequestMapping(value="/users/{id}",method=RequestMethod.GET)
-//	public JsonProtocol login(String loginName, String psd){
-//		JsonProtocol jp = new JsonProtocol();
-//		jp.setObject(userService.login(loginName, psd));
-//		return jp;
-//	}
-	
+	@Transactional
 	@RequestMapping(value="/users/{id}",method=RequestMethod.GET)
 	public JsonProtocol getUserInfo(@PathVariable(value="id") Integer uid){
 		JsonProtocol jp = new JsonProtocol();
-		jp.setObject(userService.getUserInfo(uid));
+		User user = userService.getUserInfo(uid);
+		UserVo userVo=UserHelper.getUserVo(user);
+		jp.setObject(userVo);
 		return jp;
 	}
 	
