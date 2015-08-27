@@ -17,7 +17,7 @@ public class OrderVoHelper {
 		Integer var_status = order.getStatus();
 		String orderStatus=OrderStatusHelper.getStatusDesc(var_status);
 		List<OrderItemVo> items = new ArrayList<>();
-		System.out.println(order.getItems().size());
+//		System.out.println(order.getItems().size());
 		for(MenuItem it:order.getItems()){
 			String itemName=it.getItemName();
 			Double price = it.getPrice();

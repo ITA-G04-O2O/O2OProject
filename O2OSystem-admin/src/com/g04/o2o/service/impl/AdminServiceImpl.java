@@ -21,7 +21,7 @@ import com.g04.o2o.service.AdminService;
 
 @Service
 public class AdminServiceImpl implements AdminService {
-	@Autowired()
+	@Autowired
 	private MainSystemDao mainSystemDao;
 	@Autowired
 	private RestaurantTypeDao restaurantTypeDao;
