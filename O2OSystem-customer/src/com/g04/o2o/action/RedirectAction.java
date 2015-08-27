@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class RedirectAction {
 	@RequestMapping("/load/order")
-	public String send2orderPage(@RequestParam("uid")String uid){
-		return "redirect:html/order.html?uid="+uid;
+	public String send2orderPage(@RequestParam("oid")String uid){
+		return "redirect:html/order.html?oid="+uid;
 	}
 }

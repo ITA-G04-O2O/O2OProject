@@ -1,5 +1,5 @@
 
-
+var uid =0;
 var Order=(function(){
 	
 	var getOrderInfo=function(id){
@@ -39,15 +39,17 @@ var Order=(function(){
 		$('#address').text(object.address);
 		$('#score').text(object.myscore);
 		$('#comment').text(object.mycomment);
+//		alert(object.uid);
+		uid=object.uid;
 	};
 	
 	return {
-		getOrderInfo:getOrderInfo
+		getOrderInfo:getOrderInfo,
 	};
 	
 })();
 
-var UserInfo=(function(){
+var User=(function(){
 	var getInfo=function(id){
 		$.ajax({
 			url : 'http://localhost:8888/O2OSystem-customer/users/'+id,
@@ -75,13 +77,14 @@ $(function(){
 		location.href="order.html";
 	});
 	var url = window.location.search;
-    var id = url.substring(url.lastIndexOf('=')+1, url.length);
+    var oid = url.substring(url.lastIndexOf('=')+1, url.length);
 //    alert(id);
-	Order.getOrderInfo(id);
+	Order.getOrderInfo(oid);
 	
 	
 	$("li[role=presentation]").eq(1).click(function(){
-		UserInfo.getInfo(id);
+//		alert(uid);
+		User.getInfo(uid);
 	});
 });
 
