@@ -1,5 +1,6 @@
 package com.g04.o2o.vo.helper;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -18,19 +19,50 @@ public class GetOrderVOHelper {
 		goVo.setConnectPeople(order.getUser().getLoginName());
 		goVo.setTel(order.getTel());
 		goVo.setAddress(order.getAddress().getArea().getProvince()+order.getAddress().getArea().getCity()+order.getAddress().getDetail());
-		goVo.setMenuItemMap(GetOrderVOHelper.corventListToMap(order.getItems()));
+		goVo.setMenuItemAmountMap(GetOrderVOHelper.corventListToAmountMap(order.getItems()));
+		goVo.setMenuItemPriceMap(GetOrderVOHelper.corventListToPriceMap(order.getItems()));
 		goVo.setTotalPrices(GetOrderVOHelper.getTotalPirce(order.getItems()));
 		return goVo;
 	}
 	
-	public static Map<MenuItem, Integer> corventListToMap(List<MenuItem> mil){
-		Map<MenuItem,Integer> menuItemMap = new HashMap<MenuItem, Integer>();
+	/**
+	 * 獲取商品名字和數量
+	 * @param mil
+	 * @return
+	 */
+	public static Map<String, Integer> corventListToAmountMap(List<MenuItem> mil){
+		Map<String,Integer> menuItemAmountMap = new HashMap<String, Integer>();
+		List<String> nameList = new ArrayList<String>();
 		for (MenuItem menuItem : mil) {
-			menuItemMap.put(menuItem, Collections.frequency(mil, menuItem.getItemName()));
+			nameList.add(menuItem.getItemName());
 		}
-		return menuItemMap;
+		for (String name : nameList) {
+			menuItemAmountMap.put(name, Collections.frequency(nameList, name));
+		}
+		return menuItemAmountMap;
 	}
 	
+	/**
+	 * 獲取商品名字和價格（數量*單價）
+	 * @param mil
+	 * @return
+	 */
+	public static Map<String, Double> corventListToPriceMap(List<MenuItem> mil){
+		Map<String,Double> menuItemPriceMap = new HashMap<String, Double>();
+
+		Map<String,Integer> menuItemAmountMap = GetOrderVOHelper.corventListToAmountMap(mil);
+	
+		for (MenuItem menuItem : mil) {
+			menuItemPriceMap.put(menuItem.getItemName(), menuItemAmountMap.get(menuItem.getItemName())*menuItem.getPrice());
+		}
+		return menuItemPriceMap;
+	}
+	
+	/**
+	 * 獲取總價
+	 * @param mil
+	 * @return
+	 */
 	public static Double getTotalPirce(List<MenuItem> mil){
 		Double totalPrice = (double) 0;
 		for (MenuItem menuItem : mil) {

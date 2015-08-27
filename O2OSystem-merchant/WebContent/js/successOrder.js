@@ -21,7 +21,6 @@ $(function() {
 		type: 'GET',
 		dataType: 'json',
 		success: function(data) {
-			console.log(data);
 			$("#failJsonData").text(data);
 		}
 	});
