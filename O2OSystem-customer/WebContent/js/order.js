@@ -47,6 +47,28 @@ var Order=(function(){
 	
 })();
 
+var UserInfo=(function(){
+	var getInfo=function(id){
+		$.ajax({
+			url : 'http://localhost:8888/O2OSystem-customer/users/'+id,
+			type : 'GET',
+			dataType : 'json',
+		}).done(function(data, status, xhr) {
+//			alert(data.object.mycomment);
+			loadData(data.object);
+		}).fail(function(xhr, status, error) {
+			console.log('fail');
+		});
+	};
+	var loadData=function(object){
+		$("#inf-nickName").text(object.uname);
+		$("#inf-tel").text(object.tel);
+		$("#inf-blance").text(object.blance);
+	};
+	return {
+		getInfo:getInfo
+	};
+})();
 
 $(function(){
 	$("#submitBtn").on("click",function(){
@@ -56,5 +78,10 @@ $(function(){
     var id = url.substring(url.lastIndexOf('=')+1, url.length);
 //    alert(id);
 	Order.getOrderInfo(id);
+	
+	
+	$("li[role=presentation]").eq(1).click(function(){
+		UserInfo.getInfo(id);
+	});
 });
 

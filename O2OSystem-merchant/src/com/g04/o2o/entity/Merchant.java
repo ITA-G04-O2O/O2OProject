@@ -24,7 +24,11 @@ public class Merchant {
 
 	private String realName;
 	@OneToOne
+<<<<<<< HEAD
+	@JoinColumn(foreignKey = @ForeignKey(name = "user_id"))
+=======
 //	@JoinColumn(foreignKey = @ForeignKey(name = "user_id"))
+>>>>>>> 97a0bd3f6fbd5f3c147b39ea9e98ece42349df8f
 	private User user;
 
 	/**
