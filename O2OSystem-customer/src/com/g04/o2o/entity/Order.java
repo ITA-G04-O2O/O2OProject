@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,14 +34,13 @@ public class Order {
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date crDate;
 	@Temporal(value = TemporalType.TIMESTAMP)
-	private Date receiveTime; //���ȷ�϶���ʱ��
+	private Date receiveTime;
 	@Temporal(value = TemporalType.TIMESTAMP)
-	private Date completedTime; //�������ʱ��
+	private Date completedTime; 
 	@ManyToOne
 	@JoinColumn(name = "restId", nullable = false)
 	private Restaurant resturant;
-	@OneToMany
-	@JoinColumn(name = "item")
+	@OneToMany(cascade=CascadeType.ALL)
 	private List<MenuItem> items = new ArrayList<MenuItem>();
 	private String message; 
 	private Integer status; //1: user add order. 2:merchant received order. 3:merchant refused order.  4: order finished.

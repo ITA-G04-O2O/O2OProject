@@ -8,7 +8,7 @@ var getRestType = function () {
         for (var i = 0; i < data.object.length; i++) {
             $('div[name=restType]')
 			.append(
-					'<div class="btn-group" role="group"><button type="button" class="btn btn-default" name="typeBtn" id="'+data.object[i]+'">'+data.object[i]+'</button></div>');
+					'<div class="btn-group" role="group"><button type="button" class="btn btn-default typeBtn" id="'+data.object[i]+'">'+data.object[i]+'</button></div>');
         }
     }).fail(function (xhr, status, error) {
         console.log('fail');
@@ -36,10 +36,10 @@ $(function () {
 
     getRestType();
 
-    $('button[name=typeBtn]').on("click",function(){
-    	var restType=$(this).attr('id');
+    $('.typeBtn').on("click",function(){
+
     	alert(restType);
-    	getRestByType(restType);
+    	
     });
     
     

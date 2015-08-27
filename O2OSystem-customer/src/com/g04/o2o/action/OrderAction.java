@@ -1,10 +1,15 @@
 package com.g04.o2o.action;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import vo.OrderVo;
+import vo.helper.OrderVoHelper;
 
 import com.g04.o2o.entity.JsonProtocol;
 import com.g04.o2o.entity.Order;
@@ -23,10 +28,13 @@ public class OrderAction {
 		return jp;
 	}
 	
+
+	@Transactional
 	@RequestMapping(value="/orders/{id}",method=RequestMethod.GET)
 	public JsonProtocol getOrder(@PathVariable(value="id") Integer oid){
 		JsonProtocol jp = new JsonProtocol();
-		jp.setObject(orderService.getOrder(oid));
+		OrderVo orderVo= OrderVoHelper.get(orderService.getOrder(oid));
+		jp.setObject(orderVo);
 		return jp;
 	}
 
