@@ -1,6 +1,5 @@
 $(document).ready(
 	function() {
-		var count = 1;
 		$.ajax({
 			url: 'http://localhost:17236/o2osystem-merchant/area',
 			type: 'GET',

@@ -28,4 +28,22 @@ public class MerchantServiceImpl implements MerchantService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public Merchant findMerchant(Integer id) {
+		return dao.search(Merchant.class, id);
+	}
+
+	@Override
+	@Transactional
+	public int updateMerchantRealName(Integer id, String realName) {
+		return dao.updateValue(id, Merchant.class, "realName", realName);
+	}
+
+	@Override
+	@Transactional
+	public int updateMerchantIdCard(Integer id, String idCard) {
+		// TODO Auto-generated method stub
+		return dao.updateValue(id, Merchant.class, "IDCard", idCard);
+	}
 }
