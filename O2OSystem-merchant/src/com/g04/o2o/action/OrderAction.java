@@ -44,46 +44,57 @@ public class OrderAction {
 		return jp;
 	}
 	
+	@Transactional
 	@RequestMapping(value = "/orders/new", method = RequestMethod.GET)
 	public JsonProtocol getNewOrders() {
-//		System.out.println("newOrders");
 		JsonProtocol jp = new JsonProtocol();
-		
-		List<Order> newOrders = os.getAllNewOrders();
-		
-		System.out.println("newOrders size is "+newOrders.size());
-		
-		jp.setObject(newOrders);
+//		List<Order> newOrders = os.getAllNewOrders();
+//		System.out.println("newOrders size is "+newOrders.size());
+//		jp.setObject(newOrders);
+		List<GetOrderVO> goVoList = new ArrayList<GetOrderVO>();
+		for (Order order : os.getAllNewOrders()) {
+			GetOrderVO getVo = GetOrderVOHelper.setOrder2VO(order);
+			goVoList.add(getVo);
+		}
+		jp.setObject(goVoList);
 		return jp;
 	}
 	
+	@Transactional
 	@RequestMapping(value = "/orders/receive", method = RequestMethod.GET)
 	public JsonProtocol getAllReceiveOrders() {
 		JsonProtocol jp = new JsonProtocol();
-		jp.setObject(os.getAllReceiveOrders());
+//		jp.setObject(os.getAllReceiveOrders());
+		List<GetOrderVO> goVoList = new ArrayList<GetOrderVO>();
+		for (Order order : os.getAllReceiveOrders()) {
+			GetOrderVO getVo = GetOrderVOHelper.setOrder2VO(order);
+			goVoList.add(getVo);
+		}
+		jp.setObject(goVoList);
 		return jp;
 	}
 	
+	@Transactional
 	@RequestMapping(value = "/orders/finish", method = RequestMethod.GET)
 	public JsonProtocol getAllFinishedOrders() {
 		JsonProtocol jp = new JsonProtocol();
-		jp.setObject(os.getAllFinishedOrders());
+//		jp.setObject(os.getAllFinishedOrders());
+		List<GetOrderVO> goVoList = new ArrayList<GetOrderVO>();
+		for (Order order : os.getAllFinishedOrders()) {
+			GetOrderVO getVo = GetOrderVOHelper.setOrder2VO(order);
+			goVoList.add(getVo);
+		}
+		jp.setObject(goVoList);
 		return jp;
 	}
 	
 	@Transactional
 	@RequestMapping(value = "/orders/fail", method = RequestMethod.GET)
 	public JsonProtocol getAllFailOrders() {
-		JsonProtocol jp = new JsonProtocol();
-//		System.out.println("newOrders size is "+os.getAllFailOrders().size());
-		
+		JsonProtocol jp = new JsonProtocol();		
 		List<GetOrderVO> goVoList = new ArrayList<GetOrderVO>();
 		for (Order order : os.getAllFailOrders()) {
-//			System.out.println("order size is:"+order.getItems().size());
 			GetOrderVO getVo = GetOrderVOHelper.setOrder2VO(order);
-//			getVo.setMenuItemMap(GetOrderVOHelper.corventListToMap(order.getItems()));
-			System.out.println("order message is:"+order.getMessage());
-
 			goVoList.add(getVo);
 		}
 		jp.setObject(goVoList);

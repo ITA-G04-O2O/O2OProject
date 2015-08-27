@@ -24,7 +24,6 @@ public class GetOrderVOHelper {
 	}
 	
 	public static Map<MenuItem, Integer> corventListToMap(List<MenuItem> mil){
-		System.out.println("mil="+mil.size());
 		Map<MenuItem,Integer> menuItemMap = new HashMap<MenuItem, Integer>();
 		for (MenuItem menuItem : mil) {
 			menuItemMap.put(menuItem, Collections.frequency(mil, menuItem));
@@ -33,9 +32,8 @@ public class GetOrderVOHelper {
 	}
 	
 	public static Double getTotalPirce(List<MenuItem> mil){
-		Double totalPrice = null;
+		Double totalPrice = (double) 0;
 		for (MenuItem menuItem : mil) {
-			System.out.println("::::::::"+menuItem.getPrice());
 			totalPrice = totalPrice + menuItem.getPrice();
 		}
 		return totalPrice;
