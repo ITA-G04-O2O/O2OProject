@@ -1,7 +1,11 @@
 package com.g04.o2o.action;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,8 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.g04.o2o.entity.JsonProtocol;
 import com.g04.o2o.entity.MainSystem;
+import com.g04.o2o.entity.Restaurant;
+import com.g04.o2o.entity.RestaurantType;
 import com.g04.o2o.entity.User;
 import com.g04.o2o.service.AdminService;
+import com.g04.o2o.vo.RestaurantTypeVo;
+import com.g04.o2o.vo.RestaurantVo;
 import com.g04.o2o.vo.UserVo;
 
 @RestController
@@ -24,9 +32,8 @@ public class AdminAction {
 	@RequestMapping(value = "/sysSetting", method = RequestMethod.GET)
 	public JsonProtocol getSystemTimes() {
 		JsonProtocol jp = new JsonProtocol();
-		MainSystem m = systemService.getSystemTimes();
 		jp.setResult(true);
-		jp.setObject(m);
+		jp.setObject(systemService.getSystemTimes());
 		return jp;
 	}
 
@@ -38,11 +45,19 @@ public class AdminAction {
 		return jp;
 	}
 
-	@RequestMapping(value = "/restaurantType", method = RequestMethod.GET)
+	@RequestMapping(value = "/restaurantTypes", method = RequestMethod.GET)
+	@Transactional
 	public JsonProtocol getRestaurantType() {
 		JsonProtocol jp = new JsonProtocol();
 		jp.setResult(true);
-		jp.setObject(systemService.getAllRestType());
+		Set<RestaurantTypeVo> lists = new HashSet<>();
+		for (RestaurantType rt : systemService.getAllRestType()) {
+			RestaurantTypeVo restaurantType = new RestaurantTypeVo();
+			restaurantType.setId(rt.getId());
+			restaurantType.setType(rt.getType());
+			lists.add(restaurantType);
+		}
+		jp.setObject(lists);
 		return jp;
 	}
 
@@ -90,7 +105,7 @@ public class AdminAction {
 		return jp;
 	}
 
-	@RequestMapping(value = "/users/{tel}")
+	@RequestMapping(value = "/users/{tel}", method = RequestMethod.PUT)
 	public JsonProtocol updateUserPSD(@PathVariable String tel) {
 		JsonProtocol jp = new JsonProtocol();
 		jp.setResult(systemService.resetPsd(tel));
@@ -98,6 +113,7 @@ public class AdminAction {
 	}
 
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
+	@Transactional
 	public JsonProtocol getUserlist() {
 		JsonProtocol jp = new JsonProtocol();
 		jp.setResult(true);
@@ -127,6 +143,34 @@ public class AdminAction {
 	public JsonProtocol setHot(@PathVariable int id, boolean isHot) {
 		JsonProtocol jp = new JsonProtocol();
 		jp.setResult(systemService.setHot(id, isHot));
+		return jp;
+	}
+
+	@RequestMapping(value = "/state/{id}", method = RequestMethod.PUT)
+	public JsonProtocol setClose(@PathVariable int id) {
+		JsonProtocol jp = new JsonProtocol();
+		jp.setResult(systemService.setClose(id));
+		return jp;
+	}
+
+	@RequestMapping(value = "/restaurants", method = RequestMethod.GET)
+	@Transactional
+	public JsonProtocol getRestaurants() {
+		JsonProtocol jp = new JsonProtocol();
+		List<RestaurantVo> lists = new ArrayList<>();
+		if (systemService.getRestaurants() != null) {
+			for (Restaurant r : systemService.getRestaurants()) {
+				RestaurantVo rVo = new RestaurantVo();
+				rVo.setId(r.getId());
+				rVo.setGrade(r.getGrade());
+				rVo.setHot(r.isHot());
+				rVo.setName(r.getName());
+				rVo.setNum(r.getOrders().size());
+				rVo.setOnline(r.isOnline());
+				lists.add(rVo);
+			}
+		}
+		jp.setObject(lists);
 		return jp;
 	}
 }

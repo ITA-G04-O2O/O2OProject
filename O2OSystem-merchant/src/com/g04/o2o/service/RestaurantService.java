@@ -35,7 +35,7 @@ public interface RestaurantService {
 	 * 
 	 * @return
 	 */
-	public int updateRestName(Integer restId, String name);
+	public int updateRest(Integer restId, Restaurant rest);
 
 	/**
 	 * 添加菜单项
