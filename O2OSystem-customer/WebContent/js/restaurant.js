@@ -26,7 +26,7 @@ var restInfoController = (function() {
                 for(var j=0;j<data.object.menuTypes[i].menuItems.length;j++){
                     $('div[name=menuMealBox]')
                         .append(
-                                '<div class="col-xs-4"><div class="mealBox"><a href="#" class="thumbnail"><img src=/menuItem/"'+data.object.menuTypes[i].menuItems[j].id+'"></a><h4 id="itemName">'+data.object.menuTypes[i].menuItems[j].itemName+'</h4><h5 class="text-muted">'+data.object.menuTypes[i].menuItems[j].description+'</h5><div class="row"><div class="col-xs-7"><h4>$<span id="itemPrice">'+data.object.menuTypes[i].menuItems[j].price+'</span></h4></div><div class="col-xs-5 text-right"><button class="btn btn-primary addbtn" id="addOrderBtn" item-name="'+data.object.menuTypes[i].menuItems[j].itemName+'" item-price="'+data.object.menuTypes[i].menuItems[j].price+'" onclick="addOrder()">添加</button></div></div></div></div>');
+                                '<div class="col-xs-4"><div class="mealBox"><a href="#" class="thumbnail"><img src=/menuItem/"'+data.object.menuTypes[i].menuItems[j].id+'"></a><h4 id="itemName">'+data.object.menuTypes[i].menuItems[j].itemName+'</h4><h5 class="text-muted">'+data.object.menuTypes[i].menuItems[j].description+'</h5><div class="row"><div class="col-xs-7"><h4>$<span id="itemPrice">'+data.object.menuTypes[i].menuItems[j].price+'</span></h4></div><div class="col-xs-5 text-right"><button class="btn btn-primary addbtn" id="addOrderBtn" item-name="'+data.object.menuTypes[i].menuItems[j].itemName+'" item-price="'+data.object.menuTypes[i].menuItems[j].price+'" onclick="addOrder(this)">添加</button></div></div></div></div>');
                 }
             }
     
@@ -95,8 +95,17 @@ var restInfoController = (function() {
 	
 })();
 
-function addOrder(){
-    alert($(this).attr('item-name'));
+
+//order数据
+var sum=0;
+function addOrder(item){
+    var itemName=$(item).attr('item-name');
+    var itemPrice=$(item).attr('item-price');
+    $('#orderList').append(
+                        '<tr><td data-name="'+itemName+'">'+itemName+'</td><td><input type="number" value="1" class="form-control input-sm"></td><td data-price="'+itemPrice+'">'+itemPrice+'</td></tr>');
+    sum=sum+parseFloat(itemPrice);
+    
+    $('#sumPrice').text(sum);
 }
 
 $(document).ready(function() {
@@ -107,5 +116,16 @@ $(document).ready(function() {
 	restInfoController.getHGradeInfo(id);
     restInfoController.getMGradeInfo(id);
     restInfoController.getLGradeInfo(id);
+    
+    
+    $('#delivery').on("click",function(){
+        $('#orderList').empty();
+        $('#sumPrice').text('');
+        sum=0;
+    });
+    
+    $('#submitMenuBtn').on("click",function(){
+        
+    });
     
 });
