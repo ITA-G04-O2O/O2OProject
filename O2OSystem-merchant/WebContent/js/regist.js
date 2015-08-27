@@ -31,23 +31,17 @@ function addClickEvent(province) {
 					for (var i in data) {
 						var city = data[i];
 						$('#city').append(
-							"<li id=\"city" + city + "\"><a href=\"#\">" + city + "</a></li>");
-						alert("<li id=\"city" + city + "\"><a href=\"#\">" + city + "</a></li>");
-						addClickEvent2(city);
+							"<li id=\"" + province + city + "\"><a href=\"#\">" + city + "</a></li>");
+						$("#" + province + city).on("click", function() {
+							$('#cityBtn').text($(this).text());
+							var province = $("#proBtn").text();
+							$("#provinceInput").val(province);
+							$("#cityInput").val($(this).text());
+						});
 					}
 				}
 			});
 		});
-}
-
-function addClickEvent2(city) {
-	$("#city" + city).bind("click", function() {
-		$('#cityBtn').text(city);
-		var province = $("#proBtn").text();
-		var city = $("#cityBtn").text();
-		$("#provinceInput").val(province);
-		$("#cityInput").val(city);
-	});
 }
 
 $('.dropdown-menu li').on('click', function() {

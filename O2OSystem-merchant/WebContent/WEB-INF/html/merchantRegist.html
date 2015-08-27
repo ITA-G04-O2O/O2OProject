@@ -43,39 +43,40 @@
 				<div class="row">
 					<div class="form-horizontal">
 						<div id="section4">
-							<div class="form-group">
-								<label class="col-sm-3 col-md-3 control-label">真实姓名:</label>
-								<div class="col-sm-6 col-md-6">
-									<input type="text" class="form-control" id="author"
-										name="author">
+							<form enctype="multipart/form-data" action="merchant"
+								method="post">
+								<div class="form-group">
+									<label class="col-sm-3 col-md-3 control-label">真实姓名:</label>
+									<div class="col-sm-6 col-md-6">
+										<input type="text" class="form-control" id="nickName"
+											name="nickName">
+									</div>
 								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 col-md-3 control-label">身份证号:</label>
+								<div class="form-group">
+									<label class="col-sm-3 col-md-3 control-label">身份证号:</label>
 
-								<div class="col-sm-6 col-md-6">
-									<input type="text" class="form-control" id="author"
-										name="author">
+									<div class="col-sm-6 col-md-6">
+										<input type="text" class="form-control" id="idCard"
+											name="idCard">
+									</div>
+
 								</div>
+								<div class="form-group">
+									<label class="col-sm-3 col-md-3 control-label">身份证图片:</label>
 
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 col-md-3 control-label">身份证图片:</label>
+									<div class="col-sm-6 col-md-6">
+										<input type="file" class="form-control" id="file" name="file">
+									</div>
 
-								<div class="col-sm-6 col-md-6">
-									<input type="file" class="form-control" id="author"
-										name="author">
 								</div>
-
-							</div>
-							<div class="form-group">
-								<label for="author" class="col-sm-4 col-md-4 control-label"></label>
-
-								<div class="col-sm-4 col-md-4">
-									<button class="btn btn-lg btn-block btn-info nextStep"
-										id="merSubmit">下一步</button>
+								<div class="form-group">
+									<label for="author" class="col-sm-4 col-md-4 control-label"></label>
+									<div class="col-sm-4 col-md-4">
+										<input type="submit"
+											class="btn btn-lg btn-block btn-info nextStep" id="merSubmit">
+									</div>
 								</div>
-							</div>
+							</form>
 						</div>
 					</div>
 				</div>
