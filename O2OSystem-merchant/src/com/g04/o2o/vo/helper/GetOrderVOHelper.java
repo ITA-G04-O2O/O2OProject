@@ -26,7 +26,7 @@ public class GetOrderVOHelper {
 	public static Map<MenuItem, Integer> corventListToMap(List<MenuItem> mil){
 		Map<MenuItem,Integer> menuItemMap = new HashMap<MenuItem, Integer>();
 		for (MenuItem menuItem : mil) {
-			menuItemMap.put(menuItem, Collections.frequency(mil, menuItem));
+			menuItemMap.put(menuItem, Collections.frequency(mil, menuItem.getItemName()));
 		}
 		return menuItemMap;
 	}
