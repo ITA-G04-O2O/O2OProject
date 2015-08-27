@@ -1,6 +1,12 @@
 package com.g04.o2o.action;
 
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,9 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import vo.MenuItemVo;
+import vo.MenuTypeVo;
+import vo.OrderVo;
+import vo.RestTypeVo;
+import vo.RestaurantInfoVo;
 import vo.RestaurantVo;
 
+import com.g04.o2o.entity.Address;
 import com.g04.o2o.entity.JsonProtocol;
+import com.g04.o2o.entity.MenuItem;
+import com.g04.o2o.entity.MenuType;
 import com.g04.o2o.entity.Restaurant;
 import com.g04.o2o.entity.RestaurantType;
 import com.g04.o2o.service.RestaurantService;
@@ -19,27 +33,30 @@ public class RestAction {
 	@Autowired
 	private RestaurantService restService;
 	
+	@Transactional
 	@RequestMapping(value="/restaurantType",method=RequestMethod.GET)
 	public JsonProtocol getRestTypes(){
 		JsonProtocol jp = new JsonProtocol();
-		jp.setObject(restService.getRestTypes());
+		List<RestaurantType> rt=restService.getRestTypes();
+		List<RestTypeVo> rvo=new ArrayList<RestTypeVo>();
+		for(RestaurantType r:rt){
+			Integer rid=r.getId();
+			String type=r.getType();
+			RestTypeVo rtvo=new RestTypeVo(rid, type);
+			rvo.add(rtvo);
+		}
+		jp.setObject(rvo);
+		System.out.println(rvo);
 		return jp;
 	}
 	
 	@Transactional
-	@RequestMapping(value="/restaurant/restaurantType/{type}",method=RequestMethod.GET,produces = { "application/json;charset=UTF-8" })
-	public JsonProtocol getRestList(@PathVariable(value="type") String type){
-		System.out.println(type);
+	@RequestMapping(value="/restaurant/restaurantType/{id}",method=RequestMethod.GET)
+	public JsonProtocol getRestList(@PathVariable(value="id") Integer id) throws UnsupportedEncodingException{
 		JsonProtocol jp = new JsonProtocol();
-<<<<<<< HEAD
-		Set<Restaurant> rs=restService.getRestByType(type);
-		
-//		jp.setObject();
-=======
-		Set<Restaurant> rs = restService.getRestByType(type);
+		Set<Restaurant> rs = restService.getRestByType(id);
 		Set<RestaurantVo> rsVO = new HashSet<RestaurantVo>();
 		for(Restaurant r:rs){
-			Integer id=r.getId();
 			String name=r.getName();
 			String mtype=r.getType().getType();
 			Integer sum=r.getOrders().size();
@@ -49,16 +66,45 @@ public class RestAction {
 			RestaurantVo vo=new RestaurantVo(id, name, mtype, sum, playPrice, grade, actualArrivalTime);
 			rsVO.add(vo);
 		}
-//		System.out.println(restService.getRestByType(type));
 		jp.setObject(rsVO);
->>>>>>> f9aa65251d48b468983436cfec3e67f7fdbcae80
 		return jp;
 	}
 	
+	@Transactional
 	@RequestMapping(value="/restaurant/{id}",method=RequestMethod.GET)
 	public JsonProtocol getRestInfo(@PathVariable(value="id") Integer id){
 		JsonProtocol jp = new JsonProtocol();
-		jp.setObject(restService.getRestInfo(id));
+		Restaurant r=restService.getRestInfo(id);
+		
+		String name=r.getName();
+		String type=r.getType().getType();
+		Integer playPrice=r.getPlayPrice();
+		Double grade=r.getGrade();
+		Double actualArrivalTime=r.getActualArrivalTime();
+		String notice=r.getNotice();
+		List<MenuTypeVo> menuTypes = new ArrayList<MenuTypeVo>();
+		Set<MenuItemVo> menus=new HashSet<MenuItemVo>();
+		//change MenuType to MenuTypeVo
+		List<MenuType> mTypes=r.getMenuTypes();
+		for(MenuType mt:mTypes){
+			Integer mid=mt.getId();
+			String mName=mt.getMenuTypeName();
+			MenuTypeVo mtvo=new MenuTypeVo(mid, mName);
+			menuTypes.add(mtvo);
+		}
+		//change MenuItem to MenuItem
+		Set<MenuItem> mItems = r.getMenus();
+		for(MenuItem mi:mItems){
+			Integer mid=mi.getId();
+			String mitemName=mi.getItemName();
+			Double mprice=mi.getPrice();
+			String mdescription=mi.getDescription();
+			MenuItemVo mivo=new MenuItemVo(mid, mitemName, mprice, mdescription);
+			menus.add(mivo);
+		}
+		
+		RestaurantInfoVo rivo = new RestaurantInfoVo(id, name, type, playPrice, grade, actualArrivalTime, notice, menuTypes, menus);
+		jp.setObject(rivo);
 		return jp;
 	}
 	

@@ -8,6 +8,6 @@ import com.g04.o2o.entity.RestaurantType;
 
 public interface RestaurantTypeDao extends AbstractDao<RestaurantType>{
 
-	Set<Restaurant> getRestByTpe(String type);
+	
 
 }
