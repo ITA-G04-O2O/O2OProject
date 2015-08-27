@@ -35,7 +35,7 @@ public interface AdminService {
 
 	public List<User> getUsers();
 
-	public boolean setHot(Integer id, boolean isHot);
+	public boolean setHot(Integer id);
 
 	public List<Restaurant> getRestaurants();
 

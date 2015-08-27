@@ -119,8 +119,9 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	@Transactional
-	public boolean setHot(Integer id, boolean isHot) {
-		return restaurantDao.updateValue(id, Restaurant.class, "hot", isHot) == 1;
+	public boolean setHot(Integer id) {
+		return restaurantDao.updateValue(id, Restaurant.class, "hot",
+				!restaurantDao.search(Restaurant.class, id).isHot()) == 1;
 	}
 
 	@Override
@@ -138,7 +139,8 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	@Transactional
 	public boolean setClose(Integer id) {
-		return restaurantDao.updateValue(id, Restaurant.class, "online", false) == 1;
+		return restaurantDao.updateValue(id, Restaurant.class, "online",
+				!restaurantDao.search(Restaurant.class, id).isOnline()) == 1;
 	}
 
 	@Override

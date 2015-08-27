@@ -180,11 +180,8 @@
                             </td>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <td >Okar</td>
-                            <td><a class="detailUrl">详情...</a></td>
-                        </tr>
+                        <tbody id="verify">
+
                         </tbody>
                     </table>
                 </div>
@@ -406,7 +403,7 @@
                         + '   销量：'
                         + data[i].num
                         + '单</h5><button class="btn btn-default" id="close" name="AdminService/state/' + data[i].id + '">'+isClose+'</button>'
-                        + '<button class="btn btn-default" id="hot" name="AdminService/state/' + data[i].id + '">'+isHot+'</button></div></div></div></div>');
+                        + '<button class="btn btn-default" id="hot" name="AdminService/hot/' + data[i].id + '">'+isHot+'</button></div></div></div></div>');
             }
         };
         var setRestaurantClose = function (url) {
@@ -423,14 +420,13 @@
                 console.log('fail');
             });
         };
-        var setRestaurantHot = function (url,isHot) {
+        var setRestaurantHot = function (url) {
             $.ajax({
                 url: url,
                 type: 'POST',
                 dataType: 'json',
                 data: {
-                    _method: 'PUT',
-                    idHot:isHot
+                    _method: 'PUT'
                 }
             }).done(function (data, status, xhr) {
                 if (data.result)getRestaurant();
@@ -575,6 +571,22 @@
             }).fail(function (xhr, status, error) {
                 console.log('fail');
             });
+        };
+        var getVerifyName =function(){
+            $.ajax({
+                url: 'AdminService/restaurantVerify',
+                type: 'GET',
+                dataType: 'json'
+            }).done(function (data, status, xhr) {
+                if (data.result) renderVerifyName(data.object);
+            }).fail(function (xhr, status, error) {
+                console.log('fail');
+            });
+        };
+        var renderVerifyName = function(data){
+            for(var i=0;i<data.length;i++){
+                $('#verify').append('<tr><td>'+data[i].name+'</td><td><button class="btn btn-info" name="">详情</button></td><tr>')
+            }
         };
         var renderRestaurant = function(data){
             $('#restaurantName').val(data);

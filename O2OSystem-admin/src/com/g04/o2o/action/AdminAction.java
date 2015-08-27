@@ -193,9 +193,9 @@ public class AdminAction {
 	}
 
 	@RequestMapping(value = "/hot/{id}", method = RequestMethod.PUT, produces = { "application/json;charset=UTF-8" })
-	public JsonProtocol setHot(@PathVariable int id, boolean isHot) {
+	public JsonProtocol setHot(@PathVariable int id) {
 		JsonProtocol jp = new JsonProtocol();
-		jp.setResult(systemService.setHot(id, isHot));
+		jp.setResult(systemService.setHot(id));
 		return jp;
 	}
 
