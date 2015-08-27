@@ -8,6 +8,7 @@ import javax.persistence.Transient;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.g04.o2o.dao.OrderDao;
 import com.g04.o2o.entity.MenuItem;
@@ -57,7 +58,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	@Transient
+	@Transactional
 	public boolean updOrderStatus(Integer id, Integer status) {
 		try {
 			od.search(Order.class, id).setStatus(status);;
@@ -76,6 +77,7 @@ public class OrderServiceImpl implements OrderService {
 				newOrders.add(order);
 			}
 		}
+		System.out.println("newOrders size is::::::::"+newOrders.size());
 		return newOrders;
 	}
 

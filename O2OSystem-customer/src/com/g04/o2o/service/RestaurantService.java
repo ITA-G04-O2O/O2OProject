@@ -9,13 +9,13 @@ import com.g04.o2o.entity.MenuItem;
 import com.g04.o2o.entity.MenuType;
 import com.g04.o2o.entity.Order;
 import com.g04.o2o.entity.Restaurant;
+import com.g04.o2o.entity.RestaurantType;
 
 /**
  *  餐厅服务接口
  * @author CHENJA9
  *
  */
-@Transactional
 
 public interface RestaurantService {
 
@@ -30,12 +30,12 @@ public interface RestaurantService {
 	 * @param type
 	 * @return
 	 */	
-	Set<Restaurant> getRestByType(String type);
+	Set<Restaurant> getRestByType(Integer id);
 	/**
 	 * 获取餐厅类型
 	 * @return
 	 */
-	Set<String> getRestTypes();
+	List<RestaurantType> getRestTypes();
 	/**
 	 * 获取餐厅具体信息
 	 * @param id
@@ -73,4 +73,5 @@ public interface RestaurantService {
 	 */
 	List<Order> getLowOrders(Integer id);
 	
+	Set<MenuItem> getMenuItemByType(Integer rid,Integer menuTypeId);
 }

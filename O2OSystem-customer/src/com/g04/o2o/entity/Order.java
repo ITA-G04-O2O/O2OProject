@@ -47,7 +47,7 @@ public class Order {
 	private String message; 
 	private Integer status; //1: user add order. 2:merchant received order. 3:merchant refused order.  4: order finished.
 	@ManyToOne
-	@JoinColumn(name = "receiver", nullable = false)
+	@JoinColumn(name = "receiver", nullable = true)
 	private User user;
 	@ManyToOne
 	@JoinColumn(name = "receiveAddress", nullable = true)

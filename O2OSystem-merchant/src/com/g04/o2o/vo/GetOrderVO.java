@@ -13,20 +13,10 @@ public class GetOrderVO {
 	private String connectPeople;
 	private String tel;
 	private String address;
-	private Map<MenuItem,Integer> menuItemMap; 
+	private Map<String,Integer> menuItemAmountMap; 
+	private Map<String, Double> menuItemPriceMap;
 	private Double totalPrices;
-	public GetOrderVO(Integer id, Date createDate, Integer status,
-			String connectPeople, String tel, String address,
-			Map<MenuItem, Integer> menuItemMap, Double totalPrices) {
-		this.id = id;
-		this.createDate = createDate;
-		this.status = status;
-		this.connectPeople = connectPeople;
-		this.tel = tel;
-		this.address = address;
-		this.menuItemMap = menuItemMap;
-		this.totalPrices = totalPrices;
-	}
+
 	public GetOrderVO() {
 		super();
 	}
@@ -66,16 +56,40 @@ public class GetOrderVO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public Map<MenuItem, Integer> getMenuItemMap() {
-		return menuItemMap;
-	}
-	public void setMenuItemMap(java.util.Map<MenuItem, Integer> map) {
-		this.menuItemMap = map;
-	}
+
+
 	public Double getTotalPrices() {
 		return totalPrices;
 	}
 	public void setTotalPrices(Double totalPrices) {
 		this.totalPrices = totalPrices;
+	}
+
+	public GetOrderVO(Integer id, Date createDate, Integer status,
+			String connectPeople, String tel, String address,
+			Map<String, Integer> menuItemAmountMap,
+			Map<String, Double> menuItemPriceMap, Double totalPrices) {
+		super();
+		this.id = id;
+		this.createDate = createDate;
+		this.status = status;
+		this.connectPeople = connectPeople;
+		this.tel = tel;
+		this.address = address;
+		this.menuItemAmountMap = menuItemAmountMap;
+		this.menuItemPriceMap = menuItemPriceMap;
+		this.totalPrices = totalPrices;
+	}
+	public Map<String, Integer> getMenuItemAmountMap() {
+		return menuItemAmountMap;
+	}
+	public void setMenuItemAmountMap(Map<String, Integer> menuItemAmountMap) {
+		this.menuItemAmountMap = menuItemAmountMap;
+	}
+	public Map<String, Double> getMenuItemPriceMap() {
+		return menuItemPriceMap;
+	}
+	public void setMenuItemPriceMap(Map<String, Double> menuItemPriceMap) {
+		this.menuItemPriceMap = menuItemPriceMap;
 	}
 }

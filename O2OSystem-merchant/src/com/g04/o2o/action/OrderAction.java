@@ -51,6 +51,9 @@ public class OrderAction {
 //		List<Order> newOrders = os.getAllNewOrders();
 //		System.out.println("newOrders size is "+newOrders.size());
 //		jp.setObject(newOrders);
+		
+		System.out.println(os.getAllNewOrders().size());
+		
 		List<GetOrderVO> goVoList = new ArrayList<GetOrderVO>();
 		for (Order order : os.getAllNewOrders()) {
 			GetOrderVO getVo = GetOrderVOHelper.setOrder2VO(order);
@@ -124,8 +127,8 @@ public class OrderAction {
 	 * @param status
 	 * @return
 	 */
-	@RequestMapping(value = "/orders/{id}/status", method = RequestMethod.PUT)
-	public JsonProtocol updOrderStatus(@PathVariable Integer id, Integer status) {
+	@RequestMapping(value = "/orders/{id}/{status}", method = RequestMethod.PUT)
+	public JsonProtocol updOrderStatus(@PathVariable Integer id, @PathVariable Integer status) {
 		JsonProtocol jp = new JsonProtocol();
 		jp.setResult(os.updOrderStatus(id, status));
 		return jp;
