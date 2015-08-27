@@ -47,4 +47,6 @@ public interface AbstractDao<T> {
 	 */
 	List<T> getDefaultRecords(Class<T> clazz);
 	
+	int update(T target);
+	
 }

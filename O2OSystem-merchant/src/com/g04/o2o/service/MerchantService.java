@@ -26,5 +26,6 @@ public interface MerchantService {
 	 * @return
 	 */
 	public List<Merchant> findAllMerchant();
+	
 
 }

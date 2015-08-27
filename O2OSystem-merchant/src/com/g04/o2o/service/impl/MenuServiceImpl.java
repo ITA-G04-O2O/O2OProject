@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Transient;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,7 +45,7 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	@Override
-	@Transient
+	@Transactional
 	public boolean addMenuType(String menuType) {
 		MenuType mt = new MenuType();
 		mt.setMenuTypeName(menuType);
