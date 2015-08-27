@@ -10,7 +10,6 @@ import com.g04.o2o.entity.Order;
  *
  */
 
-@Service
 public interface OrderService {
 
 	/**

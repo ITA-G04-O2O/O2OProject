@@ -36,23 +36,15 @@ public class RestaurantServiceImpl implements RestaurantService {
 	}
 
 	@Override
-	public Set<Restaurant> getRestByType(String type) {
-		return restTypeDao.getRestByTpe(type);
+	public Set<Restaurant> getRestByType(Integer id) {
+		return restTypeDao.search(RestaurantType.class, id).getHasRestaurants();
 
 	}
 
-	@Transactional
 	@Override
-	public Set<String> getRestTypes() {
+	public List<RestaurantType> getRestTypes() {
 		List<RestaurantType> restTypes = restTypeDao.searchAll(RestaurantType.class);
-		
-		Set<String> targetSet = new HashSet<>();
-		
-		for (RestaurantType type : restTypes) {
-			targetSet.add(type.getType());
-		}
-		
-		return targetSet;
+		return restTypes;
 	}
 
 	@Override
@@ -108,11 +100,16 @@ public class RestaurantServiceImpl implements RestaurantService {
 		List<Order> rs=new ArrayList<>();
 		List<Order> allOrders=dao.search(Restaurant.class, id).getOrders();
 		for(Order order:allOrders){
-			if(order.getScore()<=2&&order.getScore()>1){
+			if(order.getScore()<=2&&order.getScore()>=1){
 				rs.add(order);
 			}
 		}
 		return rs;
+	}
+
+	@Override
+	public Set<MenuItem> getMenuItemByType(Integer rid, Integer menuTypeId) {
+		return dao.getMenuItemByType(rid, menuTypeId);
 	}
 
 }

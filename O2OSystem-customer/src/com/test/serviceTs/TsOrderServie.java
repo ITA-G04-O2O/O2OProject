@@ -4,12 +4,19 @@ package com.test.serviceTs;
 
 
 
+import java.util.Iterator;
+import java.util.Set;
+
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 import com.g04.o2o.dao.AreaDao;
+import com.g04.o2o.dao.RestaurantDao;
+import com.g04.o2o.dao.impl.RestaurantDaoImpl;
 import com.g04.o2o.entity.Address;
+import com.g04.o2o.entity.MenuItem;
 import com.g04.o2o.entity.Order;
 import com.g04.o2o.entity.Restaurant;
 import com.g04.o2o.entity.User;
@@ -24,7 +31,7 @@ public class TsOrderServie {
 	private static OrderService service;
 	private static AreaDao areaDao;
 	private static OrderService orderService;
-	
+	private static RestaurantDao restdao;
 	
 	@BeforeClass
 	public  static void init(){
@@ -32,6 +39,7 @@ public class TsOrderServie {
 		service=context.getBean(OrderServiceImpl.class);
 		areaDao= context.getBean(AreaDao.class);
 		orderService = context.getBean(OrderServiceImpl.class);
+		restdao=context.getBean(RestaurantDaoImpl.class);
 		
 	}
 	
@@ -61,8 +69,14 @@ public class TsOrderServie {
 	}
 	@Test
 	public void tss() throws Exception{
-		Order order=orderService.getOrder(1);
-		System.out.println(order.getMessage());
+		/*Order order=orderService.getOrder(1);
+		System.out.println(order.getMessage());*/
+		Set<MenuItem> tSet=restdao.getMenuItemByType(1, 3);
+		for (Iterator iterator = tSet.iterator(); iterator.hasNext();) {
+			MenuItem menuItem = (MenuItem) iterator.next();
+			System.out.println(menuItem.getItemName());
+		}
+		Assert.assertEquals(2, tSet.size());
 	}
 	
 	

@@ -11,8 +11,6 @@ import com.g04.o2o.entity.Order;
 import com.g04.o2o.entity.Restaurant;
 import com.g04.o2o.entity.User;
 
-@Transactional
-@Service
 /**
  * 用户服务接口
  * @author CHENJA9

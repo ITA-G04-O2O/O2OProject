@@ -31,9 +31,9 @@ public class RestaurantServiceImpl implements RestaurantService {
 
 	@Override
 	@Transactional
-	public int updateRestName(Integer restId, String name) {
+	public int updateRest(Integer restId, Restaurant rest) {
 		try {
-			dao.search(Restaurant.class, restId).setName(name);
+			dao.search(Restaurant.class, restId).setName(rest.getName());
 		} catch (Exception e) {
 			return 0;
 		}
@@ -61,7 +61,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 	@Override
 	public Restaurant getRestById(Integer restId) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.search(Restaurant.class, restId);
 	}
 
 	@Override

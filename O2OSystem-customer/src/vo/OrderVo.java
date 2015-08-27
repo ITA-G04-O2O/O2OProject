@@ -16,6 +16,8 @@ public class OrderVo {
 	private String receiver;
 	private String receiverTel;
 	private Integer myscore;
+	private Integer uid;
+	private Double score;
 	
 	public OrderVo(Integer id, String merchantTel, String orderStatus, List<OrderItemVo> items, String address, String mycomment, String restName, String orderShowTime, String orderNumber,
 			String receiver, String receiverTel, Integer myscore) {
@@ -33,6 +35,17 @@ public class OrderVo {
 		this.receiverTel = receiverTel;
 		this.myscore = myscore;
 	}
+	
+	public OrderVo(Integer id, String mycomment, String orderShowTime,
+			Double score) {
+		super();
+		this.id = id;
+		this.mycomment = mycomment;
+		this.orderShowTime = orderShowTime;
+		this.score = score;
+	}
+
+
 	/**
 	 * @return the id
 	 */
@@ -176,5 +189,25 @@ public class OrderVo {
 	 */
 	public void setMyscore(Integer myscore) {
 		this.myscore = myscore;
+	}
+	/**
+	 * @return the uid
+	 */
+	public Integer getUid() {
+		return uid;
+	}
+	/**
+	 * @param uid the uid to set
+	 */
+	public void setUid(Integer uid) {
+		this.uid = uid;
+	}
+
+	public Double getScore() {
+		return score;
+	}
+
+	public void setScore(Double score) {
+		this.score = score;
 	}
 }

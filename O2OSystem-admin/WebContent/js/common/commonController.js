@@ -27,7 +27,7 @@ Ext.define('commonController', {
         window.location.href = 'shopSearch.html';
     },
     systemPage: function () {
-        window.location.href = 'configView.html';
+        window.location.href = 'demo.html';
     },
     loadLogo: function (comp, eOpts) {
         comp.setSrc('img/logoshow.ico');

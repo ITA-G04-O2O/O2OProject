@@ -38,14 +38,14 @@
 			<div class="row">
 				<div class="col-md-2" id="myNav">
 					<ul class="nav nav-pills nav-stacked my-nav">
-						<li role="presentation" class="active"><a href="#order" aria-controls="order" role="tab" data-toggle="tab">我的订单</a></li>
+						<li role="presentation" class="active"><a href="#order" aria-controls="order" role="tab" data-toggle="tab" id="myorder-btn">我的订单</a></li>
 						<li role="presentation"><a href="#information" aria-controls="information" role="tab" data-toggle="tab">个人信息</a>
 						</li>
 						<li role="presentation"><a href="#collection" aria-controls="collection" role="tab" data-toggle="tab">我的收藏</a>
 						</li>
 					</ul>
 				</div>
-				<div class="tab-content col-md-10 mytab-content">
+				<div class="tab-content col-md-10 mytab-content" id="allorders">
 					<div role="tabpanel" class="tab-pane active" id="order">
 						<div class="detailDiv col-xs-10">
 							<div class="infoDiv col-xs-12">
@@ -126,7 +126,7 @@
 									<td>用户名：</td>
 									<td id="inf-nickName">Okar</td>
 									<td>
-										<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
+										<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modifyUsername">
 											修改用户名
 										</button>
 									</td>
@@ -207,16 +207,6 @@
 			</div>
 		</div>
 
-		<div id="map-footer" class="map-footer">
-			<div class="map-footer-entry">
-				<a rel="nofollow" target="_blank" href="http://weibo.com/u/3949575070" class="map-footer-link">关注微博</a>
-				<i class="map-footer-separator">|</i>
-				<a rel="nofollow" href="javascript:;" class="map-footer-link map-footer-weixing">关注微信</a>
-				<i class="map-footer-separator">|</i>
-				<a rel="nofollow" target="_blank" href="http://kaidian.waimai.meituan.com" class="map-footer-link">我要开店</a>
-			</div>
-		</div>
-
 		<!-- Modal -->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog" role="document">
@@ -242,6 +232,28 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 						<button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!--模板  -->
+		<div class="modal fade" id="modifyUsername" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">修改用户名</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="name">新用户名</label>
+							<input type="text" class="form-control" id="newUsername" placeholder="输入新用户名">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" id="modify-username-btn">确定</button>
 					</div>
 				</div>
 			</div>
