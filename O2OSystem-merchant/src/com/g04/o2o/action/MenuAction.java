@@ -31,7 +31,7 @@ public class MenuAction {
 	 * @return
 	 */
 	@RequestMapping(value = "/menuTypes", method = RequestMethod.GET)
-	public JsonProtocol getOrders() {
+	public JsonProtocol getMenuTypes() {
 		JsonProtocol jp = new JsonProtocol();
 		jp.setObject(ms.findAllMenuTypes());
 		return jp;
@@ -44,7 +44,7 @@ public class MenuAction {
 	 * @return
 	 */
 	@RequestMapping(value = "/menuTypes/{id}", method = RequestMethod.GET)
-	public JsonProtocol getOrderById(@PathVariable Integer id) {
+	public JsonProtocol getMenuTypeById(@PathVariable Integer id) {
 		JsonProtocol jp = new JsonProtocol();
 		jp.setObject(ms.findMenuTypeById(id));
 		return jp;
