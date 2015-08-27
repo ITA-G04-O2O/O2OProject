@@ -1,13 +1,10 @@
 package com.g04.o2o.action;
 
-<<<<<<< HEAD
+
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-=======
-import java.util.HashSet;
->>>>>>> bdb5707b20cc2ab73b4c4deea0b2a560e00feccf
 import java.util.Set;
 
 import javax.transaction.Transactional;
@@ -58,12 +55,7 @@ public class RestAction {
 	@RequestMapping(value="/restaurant/restaurantType/{id}",method=RequestMethod.GET)
 	public JsonProtocol getRestList(@PathVariable(value="id") Integer id) throws UnsupportedEncodingException{
 		JsonProtocol jp = new JsonProtocol();
-<<<<<<< HEAD
 		Set<Restaurant> rs = restService.getRestByType(id);
-=======
-
-		Set<Restaurant> rs = restService.getRestByType(type);
->>>>>>> bdb5707b20cc2ab73b4c4deea0b2a560e00feccf
 		Set<RestaurantVo> rsVO = new HashSet<RestaurantVo>();
 		for(Restaurant r:rs){
 			String name=r.getName();
@@ -76,10 +68,6 @@ public class RestAction {
 			rsVO.add(vo);
 		}
 		jp.setObject(rsVO);
-<<<<<<< HEAD
-=======
-
->>>>>>> bdb5707b20cc2ab73b4c4deea0b2a560e00feccf
 		return jp;
 	}
 	
