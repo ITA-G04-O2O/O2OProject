@@ -1,12 +1,12 @@
-<div class="panel panel-info">
-	<div class="panel-heading">订单基本信息</div>
+<div class="panel panel-primary">
+	<div class="panel-heading">新的订单</div>
 	<div class="panel-body">
 		<div class="container col-xs-12">
 			<div id="menusDiv" class="col-xs-5">
-				<div class="panel panel-success">
+				<div class="panel panel-info">
 					<div class="panel-heading"><span>订单</span></div>
 					<div class="panel-body" id="ordertable">
-						<table class="table table-bordered table-hover">
+						<table class="table table-bordered table-hover info">
 							<thead>
 								<tr class="active">
 									<td>餐点</td>
@@ -39,7 +39,13 @@
 							</tbody>
 							<tfoot>
 								<tr>
-									<td colspan="3" id="totalPriceTd" style="text-align:right;">总价：<a id="totalPrice">24</a></td>
+									<td colspan="3">
+										<!--<td colspan="3" id="totalPriceTd" style="text-align:right;">总价：<a id="totalPrice">24</a></td>-->
+										<div class="col-sm-offset-6 col-sm-6 row">
+											<span class="label label-default sum">总价：￥</span><span id="totalPrice" class="label label-default sum">14.00</span>
+											<span class="label label-info">配送费：￥</span><span id=" freight" class="label label-info">0.00</span>
+										</div>
+									</td>
 								</tr>
 							</tfoot>
 						</table>
@@ -51,38 +57,48 @@
 					<div class="panel-body">
 						<form class="form-horizontal">
 							<div class="form-group">
-								<label class="col-sm-3 control-label">联系人：</label>
+								<label class="col-sm-3 control-label">訂單號：</label>
 
 								<div class="col-sm-9">
-									<input type="text" class="form-control" id="inputPerson" placeholder="Person">
+									<input type="text" class="form-control" id="inputPerson" placeholder="Person" disabled="disabled">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">电话：</label>
+								<label class="col-sm-3 control-label">下單日期：</label>
 
 								<div class="col-sm-9">
-									<input type="text" class="form-control" id="inputTel" placeholder="Telephone">
+									<input type="text" class="form-control" id="inputPerson" placeholder="Person" disabled="disabled">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">訂單狀態：</label>
+
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="inputPerson" placeholder="Person" disabled="disabled">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">联系人：</label>
+
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="inputPerson" placeholder="Person" disabled="disabled">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">電話：</label>
+
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="inputPerson" placeholder="Person" disabled="disabled">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-3 control-label">地址：</label>
 
 								<div class="col-sm-9">
-									<input type="text" class="form-control" id="inputAddr" placeholder="Address">
+									<input type="text" class="form-control" id="inputPerson" placeholder="Person" disabled="disabled">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">留言：</label>
-
-								<div class="col-sm-9">
-									<input type="text" class="form-control" id="inputMsg" placeholder="Message">
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-sm-offset-2 col-sm-10 row">
-									<span class="label label-default sum">总价：￥</span><span class="label label-default sum">14.00</span>
-									<span class="label label-info">配送费：￥</span><span class="label label-info">0.00</span>
-								</div>
 								<div class="col-sm-offset-6 col-sm-6 row">
 									<br/>
 									<button type="button" id="submitOrderBtn" class="btn btn-success">確認接單</button>
