@@ -9,15 +9,12 @@ $(function() {
 //			console.log(data.object[i].menuItemAmountMap);
 //			console.log(data.object[i].menuItemPriceMap);
 //			console.log(data.object[i].totalPrices);
-	
-	
 	var loadReceiveOrders = function() {
 		$.ajax({
 			url: "http://localhost:17236/o2osystem-merchant/orders/receive",
 			type: 'GET',
 			dataType: 'json'
 		}).done(function(data, status, xhr) {
-//			$("#receJsonData").text(data.object.message);
 			console.log("rece"+data.object);
 		}).fail(function(xhr, status, error) {
 			console.log('fail');
@@ -30,7 +27,6 @@ $(function() {
 			type: 'GET',
 			dataType: 'json'
 		}).done(function(data, status, xhr) {
-//			$("#finishJsonData").text(data.object.message);
 			console.log("finish"+data.object);
 
 		}).fail(function(xhr, status, error) {
@@ -44,7 +40,6 @@ $(function() {
 			type: 'GET',
 			dataType: 'json'
 		}).done(function(data, status, xhr) {
-//			$("#failJsonData").text(data.object.message);
 			console.log("fail"+data.object);
 
 		}).fail(function(xhr, status, error) {
@@ -52,12 +47,18 @@ $(function() {
 		});
 	};
 	
-	var createTable = function(data){
+	var createTable = function(status,data){
 		
 	};
 
 	loadReceiveOrders();
 	loadFinishOrders();
 	loadFailOrders();
+	
+	var loadOrders = function(){
+		loadReceiveOrders();
+		loadFinishOrders();
+		loadFailOrders();
+	};
 	
 });
