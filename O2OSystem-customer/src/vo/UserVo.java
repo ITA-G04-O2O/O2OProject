@@ -10,6 +10,12 @@ public class UserVo {
 	public String getUname() {
 		return uname;
 	}
+	public UserVo(String uname, String tel, Double blance) {
+		super();
+		this.uname = uname;
+		this.tel = tel;
+		this.blance = blance;
+	}
 	/**
 	 * @param uname the uname to set
 	 */

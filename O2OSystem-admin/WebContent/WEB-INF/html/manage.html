@@ -28,7 +28,7 @@
 					extend: 'Ext.data.Model',
 					fields: [
 						{name: "id", type: "int"},
-						'name', 'phone'
+						'uname', 'tel'
 					]
 				});
 
@@ -38,7 +38,7 @@
 					proxy: {
 						type: 'ajax',
 						url: 'AdminService/users',
-						reader: {root: 'items', totalProperty: 'total'}
+						reader: {root: 'object', totalProperty: 'total'}
 					},
 					sorters: [{
 						property: 'id',
@@ -377,93 +377,13 @@
 				</div>
 				<!--商家管理-->
 				<div role="tabpanel" class="tab-pane" id="busimana">
-					<div class="row">
+					<div class="row" id="restaurant">
 						<div class="col-xs-8">
 							<div class="input-group">
 								<input type="text" class="form-control" placeholder="搜索商家名称">
 								<span class="input-group-btn">
         						<button class="btn btn-default" type="button">Go!</button>
       						</span>
-							</div>
-						</div>
-						<div class="restaurant col-xs-6">
-							<div class="panel panel-info">
-								<div class="panel-heading">商家信息</div>
-								<div class="panel-body">
-									<div class="col-xs-4">
-										<div class="thumbnail">
-											<a href="restaurant.html">
-												<img src="img/oocl_logo.gif">
-											</a>
-										</div>
-									</div>
-									<div class="col-xs-8">
-										<h4>XX汉堡店</h4>
-										<h5 class="text-muted">评分：4分   销量：888单</h5>
-										<button class="btn btn-default">停业处理</button>
-										<button class="btn btn-default">设为热门</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="restaurant col-xs-6">
-							<div class="panel panel-info">
-								<div class="panel-heading">商家信息</div>
-								<div class="panel-body">
-									<div class="col-xs-4">
-										<div class="thumbnail">
-											<a href="restaurant.html">
-												<img src="img/oocl_logo.gif">
-											</a>
-										</div>
-									</div>
-									<div class="col-xs-8">
-										<h4>XX汉堡店</h4>
-										<h5 class="text-muted">评分：4分   销量：888单</h5>
-										<button class="btn btn-default">停业处理</button>
-										<button class="btn btn-default">设为热门</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="restaurant col-xs-6">
-							<div class="panel panel-info">
-								<div class="panel-heading">商家信息</div>
-								<div class="panel-body">
-									<div class="col-xs-4">
-										<div class="thumbnail">
-											<a href="restaurant.html">
-												<img src="img/oocl_logo.gif">
-											</a>
-										</div>
-									</div>
-									<div class="col-xs-8">
-										<h4>XX汉堡店</h4>
-										<h5 class="text-muted">评分：4分   销量：888单</h5>
-										<button class="btn btn-default">停业处理</button>
-										<button class="btn btn-default">设为热门</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="restaurant col-xs-6">
-							<div class="panel panel-info">
-								<div class="panel-heading">商家信息</div>
-								<div class="panel-body">
-									<div class="col-xs-4">
-										<div class="thumbnail">
-											<a href="restaurant.html">
-												<img src="img/oocl_logo.gif">
-											</a>
-										</div>
-									</div>
-									<div class="col-xs-8">
-										<h4>XX汉堡店</h4>
-										<h5 class="text-muted">评分：4分   销量：888单</h5>
-										<button class="btn btn-default">停业处理</button>
-										<button class="btn btn-default">设为热门</button>
-									</div>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -741,6 +661,28 @@
 				<a rel="nofollow" target="_blank" href="http://kaidian.waimai.meituan.com" class="map-footer-link">我要开店</a>
 			</div>
 		</div>
+	<script>
+		$(document).ready(function(){
+			$.ajax({
+				url : 'AdminService/users',
+				type : 'get',
+				dataType : 'json'
+			}).done(function(data, status, xhr) {
+				
+			}).fail(function(xhr, status, error) {
+				console.log('fail');
+			});
+
+			var render = function(data){
+				for(var i=0;i<data.length;i++){
+					$('#resturant').append('<div class="restaurant col-xs-6"><div class="panel panel-info"><div class="panel-heading">'+商家信息+'</div><div class="panel-body"><div class="col-xs-4">'+
+							'<div class="thumbnail"><a href="restaurant.html"><img src="img/oocl_logo.gif"></a></div></div>'+
+							'<div class="col-xs-8"><h4>'+XX汉堡店+'</h4><h5 class="text-muted">评分：'+4+'分'+'   销量：'+888+'单</h5><button class="btn btn-default">停业处理</button>'+
+							'<button class="btn btn-default">设为热门</button></div></div></div></div>');
+				}
+			}
+		});
+	</script>
 	</body>
 
 </html>
