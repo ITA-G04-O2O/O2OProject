@@ -18,7 +18,7 @@ public class OrderServiceImpl implements OrderService {
 		return dao.add(o);
 	}
 
-	@Transactional
+	
 	@Override
 	public Order getOrder(Integer oid) {
 		return dao.search(Order.class, oid);

@@ -46,7 +46,7 @@
 			<value>com.mysql.jdbc.Driver</value>
 		</property>
 		<property name="url">
-			<value>jdbc:mysql://localhost:3306/o2olocal</value>
+			<value>jdbc:mysql://10.222.29.178:3306/o2olocal</value>
 		</property>
 		<property name="username">
 			<value>root</value>
@@ -112,4 +112,12 @@
         <property name="destination" ref="customer2Merchant" />  
         <property name="messageListener" ref="consumerMessageListener" />  
     </bean>  
+    
+    <bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">    
+       <property name="supportedMediaTypes">    
+          <list>    
+            <value>application/json;charset=UTF-8</value>    
+          </list>    
+       </property>  
+    </bean>
 </beans>
