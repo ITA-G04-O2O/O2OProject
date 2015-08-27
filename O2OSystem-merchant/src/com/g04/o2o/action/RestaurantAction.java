@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.g04.o2o.dao.AreaDao;
 import com.g04.o2o.entity.Address;
 import com.g04.o2o.entity.Area;
 import com.g04.o2o.entity.JsonProtocol;
@@ -21,6 +21,7 @@ import com.g04.o2o.entity.Restaurant;
 import com.g04.o2o.entity.RestaurantType;
 import com.g04.o2o.service.AreaService;
 import com.g04.o2o.service.RestaurantService;
+import com.g04.o2o.vo.RestaurantVO;
 
 @Controller
 public class RestaurantAction {
@@ -58,6 +59,18 @@ public class RestaurantAction {
 		return "merchantRegist";
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "/restaurant/{id}", method = RequestMethod.GET)
+	public Restaurant get(@PathVariable Integer id) {
+		System.out.println("RestaurantAction2...");
+		Restaurant rest = restaurantService.getRestById(id);
+		RestaurantVO restV = new RestaurantVO();
+		restV.setName(rest.getName());
+		restV.setType(rest.getType());
+		restV.setTel(rest.getTel());
+		return rest;
+	}
+
 	@RequestMapping(value = "/resttype", method = RequestMethod.GET, produces = { "application/json;charset=UTF-8" })
 	public List<RestaurantType> resttype() {
 		System.out.println("resttype");
@@ -65,15 +78,27 @@ public class RestaurantAction {
 		return restType;
 	}
 
-	@RequestMapping(value = "/restaurant/{id}/name", method = RequestMethod.PUT)
-	public JsonProtocol updateRestName(@PathVariable(value = "id") int id,
-			String name) {
-		System.out.println(name);
-		JsonProtocol js = new JsonProtocol();
-		int result = restaurantService.updateRestName(id, name);
-		boolean res = (result == 1 ? true : false);
-		js.setResult(res);
-		return js;
+	@RequestMapping(value = "/restaurant/{id}", method = RequestMethod.POST)
+	public String updateRest(@PathVariable(value = "id") int id, String name,
+			int type, String tel, String pro, String city, String detail) {
+		try {
+			System.out.println(name + type + tel + pro + city + detail);
+			
+			Restaurant rest = restaurantService.getRestById(id);
+			rest.setTel(tel);
+			Address addr =rest.getAddress();
+			addr.setDetail(detail);
+			Area area = addr.getArea();
+			area.setCity(city);
+			area.setProvince(pro);
+			rest.setAddress(addr);
+			rest.setType(restaurantService.getRestTypeById(type));
+			restaurantService.updateRest(id, rest);
+			return "true";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "false";
 	}
 
 	@RequestMapping(value = "/restaurant/{id}/addr", method = RequestMethod.PUT)

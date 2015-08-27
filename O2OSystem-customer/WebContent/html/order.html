@@ -38,14 +38,14 @@
 			<div class="row">
 				<div class="col-md-2" id="myNav">
 					<ul class="nav nav-pills nav-stacked my-nav">
-						<li role="presentation" class="active"><a href="#order" aria-controls="order" role="tab" data-toggle="tab" id="myorder-btn">我的订单</a></li>
-						<li role="presentation"><a href="#information" aria-controls="information" role="tab" data-toggle="tab" id="personalInfo-btn">个人信息</a>
+						<li role="presentation" class="active"><a href="#order" aria-controls="order" role="tab" data-toggle="tab">我的订单</a></li>
+						<li role="presentation"><a href="#information" aria-controls="information" role="tab" data-toggle="tab">个人信息</a>
 						</li>
 						<li role="presentation"><a href="#collection" aria-controls="collection" role="tab" data-toggle="tab">我的收藏</a>
 						</li>
 					</ul>
 				</div>
-				<div class="tab-content col-md-10 mytab-content" id="allorders">
+				<div class="tab-content col-md-10 mytab-content">
 					<div role="tabpanel" class="tab-pane active" id="order">
 						<div class="detailDiv col-xs-10">
 							<div class="infoDiv col-xs-12">
@@ -54,11 +54,11 @@
 								</div>
 								<div class="col-xs-3 content-center">
 									<h4>XX汉堡店</h4>
-									<h5>订单号：<a id="orderNumber">88888888</a></h5>
+									<h5>订单号：<a id="#">88888888</a></h5>
 								</div>
 								<div class="col-xs-6 content-center">
-									<h5>商家电话：<a id="merchantTel">15919111111</a></h5>
-									<h5>订单提交时间：<a id="orderShowTime">2015-9-9 12:59:59</a></h5>
+									<h5>商家电话：<a id="#">15919111111</a></h5>
+									<h5>订单提交时间：<a id="#">2015-9-9 12:59:59</a></h5>
 								</div>
 							</div>
 							<div class="row">
@@ -75,7 +75,27 @@
 													</tr>
 												</thead>
 												<tbody>
-													<!-- 增加订单内容 -->
+													<tr>
+														<td>XX鸡肉卷</td>
+														<td>
+															1
+														</td>
+														<td>8</td>
+													</tr>
+													<tr>
+														<td>XX鸡肉卷</td>
+														<td>
+															1
+														</td>
+														<td>8</td>
+													</tr>
+													<tr>
+														<td>XX鸡肉卷</td>
+														<td>
+															1
+														</td>
+														<td>8</td>
+													</tr>
 												</tbody>
 												<tfoot>
 													<tr>
@@ -90,12 +110,12 @@
 									<div id="takeoutInfoDiv" class="row">
 										<div class="panel panel-default">
 											<div class="panel-body">
-												<div class="panel-body"> 订单状态:<a id="orderStatus">已完成</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 完成时间:
+												<div class="panel-body"> 订单状态:<a id="#">已完成</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 完成时间:
 													<a id="#">2015-9-9 12:59:59</a></div>
 												<div class="panel-body">
-													<div>联系人:<a id="receiver">xxx</a></div>
-													<div>电话:<a  id="receiverTel">13000000000</a></div>
-													<div>地址:<a id="address">xxxxxxxxxxxxxxxxxxxx</a></div>
+													<div>联系人:<a>xxx</a></div>
+													<div>电话:<a>13000000000</a></div>
+													<div>地址:<a>xxxxxxxxxxxxxxxxxxxx</a></div>
 												</div>
 											</div>
 										</div>
@@ -104,8 +124,8 @@
 										<div class="panel panel-default">
 											<div class="panel-body">
 
-												<div class="panel-body">我的评分:<a id="score">1分</a></div>
-												<div class="panel-body">我的评价:<a id="comment">xxxxxxxxxxxxx</a></div>
+												<div class="panel-body">我的评分:<a id="#">1分</a></div>
+												<div class="panel-body">我的评价:<a id="#">xxxxxxxxxxxxx</a></div>
 												<button type="button" id="submitBtn" class="btn btn-success  col-xs-offset-9">
 													确认订单
 												</button>
@@ -124,9 +144,9 @@
 								<caption>个人信息</caption>
 								<tr>
 									<td>用户名：</td>
-									<td id="inf-nickName">Okar</td>
+									<td id="inf-tel">Okar</td>
 									<td>
-										<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modifyUsername">
+										<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
 											修改用户名
 										</button>
 									</td>
@@ -140,14 +160,14 @@
 									<td>密码：</td>
 									<td id="info-psd">*********</td>
 									<td>
-										<button type="button" id="cpwd-btn" class="btn btn-default" data-toggle="modal" data-target="#myModal">
+										<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
 											修改密码
 										</button>
 									</td>
 								</tr>
 								<tr>
 									<td>账户余额:</td>
-									<td id="inf-blance">400元</td>
+									<td>400元</td>
 									<td>
 										<button type="button" class="btn btn-default">
 											充值
@@ -167,7 +187,7 @@
 								</div>
 							</div>
 							<div class="col-xs-7">
-								<h3 id="restName"></h3>
+								<h3>XX汉堡店</h3>
 
 								<div>
 									<h4><span class="label label-default">评分：</span><span id="score">4</span></h4>
@@ -207,6 +227,16 @@
 			</div>
 		</div>
 
+		<div id="map-footer" class="map-footer">
+			<div class="map-footer-entry">
+				<a rel="nofollow" target="_blank" href="http://weibo.com/u/3949575070" class="map-footer-link">关注微博</a>
+				<i class="map-footer-separator">|</i>
+				<a rel="nofollow" href="javascript:;" class="map-footer-link map-footer-weixing">关注微信</a>
+				<i class="map-footer-separator">|</i>
+				<a rel="nofollow" target="_blank" href="http://kaidian.waimai.meituan.com" class="map-footer-link">我要开店</a>
+			</div>
+		</div>
+
 		<!-- Modal -->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog" role="document">
@@ -232,28 +262,6 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 						<button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<!--模板  -->
-		<div class="modal fade" id="modifyUsername" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="myModalLabel">修改用户名</h4>
-					</div>
-					<div class="modal-body">
-						<div class="form-group">
-							<label for="name">新用户名</label>
-							<input type="text" class="form-control" id="newUsername" placeholder="输入新用户名">
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-						<button type="button" class="btn btn-primary" data-dismiss="modal" id="modify-username-btn">确定</button>
 					</div>
 				</div>
 			</div>

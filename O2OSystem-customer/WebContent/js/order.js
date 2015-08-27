@@ -101,8 +101,7 @@ var User=(function(){
 					newName:newUsername
 				}
 			}).done(function(data, status, xhr) {
-//				alert(data.object.mycomment);
-				loadData(data.object);
+				getInfo(uid);
 			}).fail(function(xhr, status, error) {
 				console.log('fail');
 			});
@@ -111,9 +110,34 @@ var User=(function(){
 		}
 	};
 	
+	var changePsd=function(){
+		var password=$("#newpsd").val();
+		var oldPassword=$("#oldpsd").val();
+		var copyPassword=$("#conpsd").val();
+		if(oldPassword!=copyPassword){
+			alert("兩次密碼輸入不一致");
+		}else{
+			$.ajax({
+				url : 'http://localhost:8888/O2OSystem-customer/users/'+uid,
+				type : 'post',
+				dataType : 'json',
+				data:{
+					psd:password,
+					oldPassword:oldPassword
+				}
+			}).done(function(data, status, xhr) {
+				getInfo(uid);
+			}).fail(function(xhr, status, error) {
+				console.log('fail');
+			});
+		}
+		
+	};
+	
 	return {
 		getInfo:getInfo,
-		changeUserName:changeUserName
+		changeUserName:changeUserName,
+		changePsd:changePsd
 	};
 })();
 
@@ -130,8 +154,17 @@ $(function(){
 	$("#myorder-btn").click(function(){
 		Order.getAllOrdersID(10);
 	});
+	
+	$("#personalInfo-btn").click(function(){
+		User.getInfo(10);
+	});
+	
 	$("#modify-username-btn").click(function(){
 		User.changeUserName();
+	});
+	
+	$("#cpwd-btn").click(function(){
+		User.changePsd();
 	});
 });
 

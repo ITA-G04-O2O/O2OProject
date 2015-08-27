@@ -11,8 +11,6 @@ import com.g04.o2o.entity.Order;
 import com.g04.o2o.entity.Restaurant;
 import com.g04.o2o.entity.User;
 
-@Transactional
-@Service
 /**
  * 用户服务接口
  * @author CHENJA9
@@ -67,4 +65,8 @@ public interface UserService {
 	 * @return
 	 */
 	int delRestlikes(Integer uid, Integer id);
+	
+	Integer changNickName(Integer uid, String nickName);
+	
+	Integer changePwd(Integer uid, String psd);
 }

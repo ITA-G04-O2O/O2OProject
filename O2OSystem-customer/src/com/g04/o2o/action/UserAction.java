@@ -76,9 +76,21 @@ public class UserAction {
 		jp.setObject(userService.delRestlikes(uid, id));
 		return jp;
 	}
+	
 	@RequestMapping(value="/users/{id}",method=RequestMethod.PUT)
-	public JsonProtocol modifyNickName(@RequestParam("newName")String nickName,@PathVariable("id")Integer uid){
-		System.out.println(uid+" "+ nickName);
-		return new JsonProtocol();
+	public void modifyNickName(@RequestParam("newName")String nickName,@PathVariable("id")Integer uid){
+		userService.changNickName(uid,nickName);
+	}
+	
+	@RequestMapping(value="/user/{id}",method=RequestMethod.POST)
+	public JsonProtocol modifyPassword(@PathVariable Integer uid,@RequestParam("psd")String psd){
+		Integer rs=userService.changePwd(uid,psd);
+		JsonProtocol js=new JsonProtocol();
+		if(rs>=1){
+			js.setResult(true);
+		}else{
+			js.setResult(false);
+		}
+		return js;
 	}
 }
