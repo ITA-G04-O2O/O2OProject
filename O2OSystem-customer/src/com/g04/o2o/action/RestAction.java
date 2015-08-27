@@ -26,6 +26,7 @@ import com.g04.o2o.entity.Address;
 import com.g04.o2o.entity.JsonProtocol;
 import com.g04.o2o.entity.MenuItem;
 import com.g04.o2o.entity.MenuType;
+import com.g04.o2o.entity.Order;
 import com.g04.o2o.entity.Restaurant;
 import com.g04.o2o.entity.RestaurantType;
 import com.g04.o2o.service.RestaurantService;
@@ -76,7 +77,6 @@ public class RestAction {
 	public JsonProtocol getRestInfo(@PathVariable(value="id") Integer id){
 		JsonProtocol jp = new JsonProtocol();
 		Restaurant r=restService.getRestInfo(id);
-		
 		String name=r.getName();
 		String type=r.getType().getType();
 		Integer playPrice=r.getPlayPrice();
@@ -84,27 +84,28 @@ public class RestAction {
 		Double actualArrivalTime=r.getActualArrivalTime();
 		String notice=r.getNotice();
 		List<MenuTypeVo> menuTypes = new ArrayList<MenuTypeVo>();
-		Set<MenuItemVo> menus=new HashSet<MenuItemVo>();
+		
 		//change MenuType to MenuTypeVo
 		List<MenuType> mTypes=r.getMenuTypes();
 		for(MenuType mt:mTypes){
+			Set<MenuItemVo> menus=new HashSet<MenuItemVo>();
 			Integer mid=mt.getId();
 			String mName=mt.getMenuTypeName();
-			MenuTypeVo mtvo=new MenuTypeVo(mid, mName);
+			Set<MenuItem> mItems = restService.getMenuItemByType(id, mid);
+			System.out.println(mItems.size());
+			for(MenuItem mi:mItems){
+				Integer menuId=mi.getId();
+				String mitemName=mi.getItemName();
+				Double mprice=mi.getPrice();
+				String mdescription=mi.getDescription();
+				MenuItemVo mivo=new MenuItemVo(menuId, mitemName, mprice, mdescription);
+				menus.add(mivo);
+			}
+			MenuTypeVo mtvo=new MenuTypeVo(mid, mName, menus);
 			menuTypes.add(mtvo);
 		}
-		//change MenuItem to MenuItemVo
-		Set<MenuItem> mItems = r.getMenus();
-		for(MenuItem mi:mItems){
-			Integer mid=mi.getId();
-			String mitemName=mi.getItemName();
-			Double mprice=mi.getPrice();
-			String mdescription=mi.getDescription();
-			MenuItemVo mivo=new MenuItemVo(mid, mitemName, mprice, mdescription);
-			menus.add(mivo);
-		}
 		
-		RestaurantInfoVo rivo = new RestaurantInfoVo(id, name, type, playPrice, grade, actualArrivalTime, notice, menuTypes, menus);
+		RestaurantInfoVo rivo = new RestaurantInfoVo(id, name, type, playPrice, grade, actualArrivalTime, notice, menuTypes);
 		jp.setObject(rivo);
 		return jp;
 	}
@@ -123,24 +124,57 @@ public class RestAction {
 		return jp;
 	}
 	
+	@Transactional
 	@RequestMapping(value="/restaurant/{id}/highOrders",method=RequestMethod.GET)
 	public JsonProtocol getHighOrders(@PathVariable(value="id") Integer id){
 		JsonProtocol jp = new JsonProtocol();
-		jp.setObject(restService.getHighOrders(id));
+		List<Order> orders = restService.getHighOrders(id);
+		List<OrderVo> ordersVo = new ArrayList<OrderVo>();
+		for(Order o:orders){
+			Integer oid=o.getId();
+			Double score=o.getScore();
+			String comment=o.getComment();
+			String time=o.getCompletedTime().toString();
+			OrderVo ov=new OrderVo(oid, comment, time, score);
+			ordersVo.add(ov);
+		}
+		jp.setObject(ordersVo);
 		return jp;
 	}
 	
+	@Transactional
 	@RequestMapping(value="/restaurant/{id}/midOrders",method=RequestMethod.GET)
 	public JsonProtocol getMidOrders(@PathVariable(value="id") Integer id){
 		JsonProtocol jp = new JsonProtocol();
-		jp.setObject(restService.getMidOrders(id));
+		List<Order> orders = restService.getMidOrders(id);
+		List<OrderVo> ordersVo = new ArrayList<OrderVo>();
+		for(Order o:orders){
+			Integer oid=o.getId();
+			Double score=o.getScore();
+			String comment=o.getComment();
+			String time=o.getCompletedTime().toString();
+			OrderVo ov=new OrderVo(oid, comment, time, score);
+			ordersVo.add(ov);
+		}
+		jp.setObject(ordersVo);
 		return jp;
 	}
 	
+	@Transactional
 	@RequestMapping(value="/restaurant/{id}/lowOrders",method=RequestMethod.GET)
-	public JsonProtocol getLowOrders(Integer id){
+	public JsonProtocol getLowOrders(@PathVariable(value="id") Integer id){
 		JsonProtocol jp = new JsonProtocol();
-		jp.setObject(restService.getLowOrders(id));
+		List<Order> orders = restService.getLowOrders(id);
+		List<OrderVo> ordersVo = new ArrayList<OrderVo>();
+		for(Order o:orders){
+			Integer oid=o.getId();
+			Double score=o.getScore();
+			String comment=o.getComment();
+			String time=o.getCompletedTime().toString();
+			OrderVo ov=new OrderVo(oid, comment, time, score);
+			ordersVo.add(ov);
+		}
+		jp.setObject(ordersVo);
 		return jp;
 	}
 	

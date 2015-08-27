@@ -100,11 +100,16 @@ public class RestaurantServiceImpl implements RestaurantService {
 		List<Order> rs=new ArrayList<>();
 		List<Order> allOrders=dao.search(Restaurant.class, id).getOrders();
 		for(Order order:allOrders){
-			if(order.getScore()<=2&&order.getScore()>1){
+			if(order.getScore()<=2&&order.getScore()>=1){
 				rs.add(order);
 			}
 		}
 		return rs;
+	}
+
+	@Override
+	public Set<MenuItem> getMenuItemByType(Integer rid, Integer menuTypeId) {
+		return dao.getMenuItemByType(rid, menuTypeId);
 	}
 
 }

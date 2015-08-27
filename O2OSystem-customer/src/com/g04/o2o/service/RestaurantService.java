@@ -73,4 +73,5 @@ public interface RestaurantService {
 	 */
 	List<Order> getLowOrders(Integer id);
 	
+	Set<MenuItem> getMenuItemByType(Integer rid,Integer menuTypeId);
 }

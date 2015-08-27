@@ -21,8 +21,13 @@ var restInfoController = (function() {
                 
                 $('div[name=menuItems]')
                     .append(
-                            '<div class="panel panel-default"><div class="panel-heading" role="tab" id="heading'+i+'"><h4 class="panel-title"><a class="collapsed" role="button" data-toggle="collapse"data-parent="#accordion" href="menutype#'+i+'"aria-expanded="false" aria-controls="menutype'+i+'">'+data.object.menuTypes[i].menuTypeName+'</a></h4></div><div id="menutype'+i+'" class="panel-collapse collapse" role="tabpanel"aria-labelledby="heading'+i+'"><div class="panel-body"><div class="row" name="menuMealBox"></div></div></div></div>');
+                            '<div class="panel panel-default"><div class="panel-heading" role="tab" id="heading'+i+'"><h4 class="panel-title"><a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#menutype'+i+'"aria-expanded="false" aria-controls="menutype'+i+'">'+data.object.menuTypes[i].menuTypeName+'</a></h4></div><div id="menutype'+i+'" class="panel-collapse collapse" role="tabpanel"aria-labelledby="heading'+i+'"><div class="panel-body"><div class="row" name="menuMealBox"></div></div></div></div>');
             
+                for(var j=0;j<data.object.menuTypes[i].menuItems.length;j++){
+                    $('div[name=menuMealBox]')
+                        .append(
+                                '<div class="col-xs-4"><div class="mealBox"><a href="#" class="thumbnail"><img src="img/1.jpg"></a><h4 id="itemName">'+data.object.menuTypes[i].menuItems[j].itemName+'</h4><h5 class="text-muted">'+data.object.menuTypes[i].menuItems[j].description+'</h5><div class="row"><div class="col-xs-7"><h4>$<span id="itemPrice">'+data.object.menuTypes[i].menuItems[j].price+'</span></h4></div><div class="col-xs-5 text-right"><button class="btn btn-primary addbtn" id="addOrderBtn" item-name="'+data.object.menuTypes[i].menuItems[j].itemName+'" item-price="'+data.object.menuTypes[i].menuItems[j].price+'" onclick="addOrder">添加</button></div></div></div></div>');
+                }
             }
     
 		}).fail(function (xhr, status, error) {
@@ -30,13 +35,51 @@ var restInfoController = (function() {
 		});
 	};
     
-    var getGradeInfo = function (id) {
+    var getHGradeInfo = function (id) {
     	$.ajax({
-			url: 'http://localhost:8888/O2OSystem-customer/restaurant/'+id,
+			url: 'http://localhost:8888/O2OSystem-customer/restaurant/'+id+'/highOrders',
 			type: 'get',
 			dataType: 'json'
 		}).done(function (data, status, xhr) {
-			
+            $('#high-praise').empty();
+            for(var i=0;i<data.object.length;i++){
+                $('#high-praise').append(
+                                        '<div class="praise-content"><div>评分:<span>'+data.object[i].score+'</span></div><div>点评时间:<span>'+data.object[i].orderShowTime+'</span></div><div>评价内容:<span>'+data.object[i].mycomment+'</span></div></div><hr/>');
+            }
+    
+		}).fail(function (xhr, status, error) {
+			console.log('fail');
+		});
+    };
+    
+    var getMGradeInfo = function (id) {
+    	$.ajax({
+			url: 'http://localhost:8888/O2OSystem-customer/restaurant/'+id+'/midOrders',
+			type: 'get',
+			dataType: 'json'
+		}).done(function (data, status, xhr) {
+            $('#middle-praise').empty();
+            for(var i=0;i<data.object.length;i++){
+                $('#middle-praise').append(
+                                        '<div class="praise-content"><div>评分:<span>'+data.object[i].score+'</span></div><div>点评时间:<span>'+data.object[i].orderShowTime+'</span></div><div>评价内容:<span>'+data.object[i].mycomment+'</span></div></div><hr/>');
+            }
+    
+		}).fail(function (xhr, status, error) {
+			console.log('fail');
+		});
+    };
+    
+    var getLGradeInfo = function (id) {
+    	$.ajax({
+			url: 'http://localhost:8888/O2OSystem-customer/restaurant/'+id+'/lowOrders',
+			type: 'get',
+			dataType: 'json'
+		}).done(function (data, status, xhr) {
+            $('#bad-praise').empty();
+            for(var i=0;i<data.object.length;i++){
+                $('#bad-praise').append(
+                                        '<div class="praise-content"><div>评分:<span>'+data.object[i].score+'</span></div><div>点评时间:<span>'+data.object[i].orderShowTime+'</span></div><div>评价内容:<span>'+data.object[i].mycomment+'</span></div></div><hr/>');
+            }
     
 		}).fail(function (xhr, status, error) {
 			console.log('fail');
@@ -45,16 +88,24 @@ var restInfoController = (function() {
 	
 	return {
 		getRestInfo : getRestInfo,
-		getGradeInfo : getGradeInfo
+		getHGradeInfo : getHGradeInfo,
+        getMGradeInfo : getMGradeInfo,
+        getLGradeInfo : getLGradeInfo
 	};
 	
 })();
 
+function addOrder(){
+    alert($(this).attr('item-name'));
+}
 
 $(document).ready(function() {
 
     var url = window.location.search;
     var id = url.substring(url.lastIndexOf('=')+1, url.length);
 	restInfoController.getRestInfo(id);
+	restInfoController.getHGradeInfo(id);
+    restInfoController.getMGradeInfo(id);
+    restInfoController.getLGradeInfo(id);
     
 });
