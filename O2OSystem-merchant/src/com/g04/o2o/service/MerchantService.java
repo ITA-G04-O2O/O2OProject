@@ -26,6 +26,28 @@ public interface MerchantService {
 	 * @return
 	 */
 	public List<Merchant> findAllMerchant();
-	
 
+	/**
+	 * 通过id找到商家
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public Merchant findMerchant(Integer id);
+
+	/**
+	 * 更新商家真实姓名
+	 * 
+	 * @param realName
+	 * @return
+	 */
+	public int updateMerchantRealName(Integer id, String realName);
+
+	/**
+	 * 更新商家身份证号
+	 * 
+	 * @param idCard
+	 * @return
+	 */
+	public int updateMerchantIdCard(Integer id, String idCard);
 }

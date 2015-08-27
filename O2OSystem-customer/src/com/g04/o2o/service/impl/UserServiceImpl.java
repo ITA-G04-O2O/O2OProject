@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
 		return dao.search(User.class, uid);
 	}
 
-	@Transactional
+	
 	@Override
 	public List<Order> getUserOrder(Integer uid) {
 		return dao.search(User.class, uid).getHistoryOrders();

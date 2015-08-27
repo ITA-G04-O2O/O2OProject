@@ -1,17 +1,22 @@
 package com.g04.o2o.action;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import vo.UserVo;
 import vo.helper.UserHelper;
 
 import com.g04.o2o.entity.JsonProtocol;
+import com.g04.o2o.entity.Order;
 import com.g04.o2o.entity.User;
 import com.g04.o2o.service.UserService;
 
@@ -37,10 +42,17 @@ public class UserAction {
 		return jp;
 	}
 	
+	@Transactional
 	@RequestMapping(value="/users/{id}/userOrder",method=RequestMethod.GET)
 	public JsonProtocol getUserOrder(@PathVariable(value="id") Integer uid){
+		System.out.println("get orders by id");
 		JsonProtocol jp = new JsonProtocol();
-		jp.setObject(userService.getUserOrder(uid));
+	    List<Order> orders=userService.getUserOrder(uid);
+	    List<Integer> ordersId =new ArrayList<>();
+	    for(Order order:orders){
+	    	ordersId.add(order.getId());
+	    }
+	    jp.setObject(ordersId);
 		return jp;
 	}
 	
@@ -64,5 +76,9 @@ public class UserAction {
 		jp.setObject(userService.delRestlikes(uid, id));
 		return jp;
 	}
-	
+	@RequestMapping(value="/users/{id}",method=RequestMethod.PUT)
+	public JsonProtocol modifyNickName(@RequestParam("newName")String nickName,@PathVariable("id")Integer uid){
+		System.out.println(uid+" "+ nickName);
+		return new JsonProtocol();
+	}
 }
