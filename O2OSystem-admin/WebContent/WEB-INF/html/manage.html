@@ -182,7 +182,7 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td><a>Okar</a></td>
+                            <td >Okar</td>
                             <td><a class="detailUrl">详情...</a></td>
                         </tr>
                         </tbody>
@@ -386,6 +386,14 @@
                 } else {
                     grade = 0;
                 }
+                var isHot ='设为热门';
+                if(data[i].hot){
+                    isHot ='取消热门';
+                }
+                var isClose ='停业处理';
+                if(data[i].state){
+                    isClose='开始营业';
+                }
                 $('#restaurant')
                         .append(
                         '<div class="restaurant col-xs-6"><div class="panel panel-info"><div class="panel-heading">商家信息</div><div class="panel-body"><div class="col-xs-4">'
@@ -397,8 +405,8 @@
                         + '分'
                         + '   销量：'
                         + data[i].num
-                        + '单</h5><button class="btn btn-default" id="close" name="AdminService/state/' + data[i].id + '">停业处理</button>'
-                        + '<button class="btn btn-default" id="hot" name="AdminService/state/' + data[i].id + '">设为热门</button></div></div></div></div>');
+                        + '单</h5><button class="btn btn-default" id="close" name="AdminService/state/' + data[i].id + '">'+isClose+'</button>'
+                        + '<button class="btn btn-default" id="hot" name="AdminService/state/' + data[i].id + '">'+isHot+'</button></div></div></div></div>');
             }
         };
         var setRestaurantClose = function (url) {
@@ -415,13 +423,14 @@
                 console.log('fail');
             });
         };
-        var setRestaurantHot = function (url) {
+        var setRestaurantHot = function (url,isHot) {
             $.ajax({
                 url: url,
                 type: 'POST',
                 dataType: 'json',
                 data: {
-                    _method: 'PUT'
+                    _method: 'PUT',
+                    idHot:isHot
                 }
             }).done(function (data, status, xhr) {
                 if (data.result)getRestaurant();
@@ -569,10 +578,10 @@
         };
         var renderRestaurant = function(data){
             $('#restaurantName').val(data);
-            $('#restaurantType').val();
-            $('#restaurantAddress').val();
-            $('#NickName').val();
-            $('#idCard').val();
+            $('#restaurantType').val(data);
+            $('#restaurantAddress').val(data);
+            $('#NickName').val(data);
+            $('#idCard').val(data);
         };
         return {
             getRestaurant: getRestaurant,

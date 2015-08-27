@@ -9,16 +9,6 @@ import com.g04.o2o.entity.RestaurantType;
 import com.g04.o2o.entity.User;
 
 public interface AdminService {
-	//
-	// public Integer getAutoExpirationTime();
-	//
-	// public Integer getAutoCompleteTime();
-	//
-	// public int setDefaultSetting(MainSystem mainSystem);
-	//
-	// public boolean setOriginalSetting(Integer autoExpirationTime,
-	// Integer autoCompletedTime);
-
 	public List<MainSystem> getSystemTimes();
 
 	public boolean updateSystemTimes(MainSystem mainSystem);
@@ -50,5 +40,9 @@ public interface AdminService {
 	public List<Restaurant> getRestaurants();
 
 	public boolean setClose(Integer id);
+
+	public Restaurant getRestaurantInfo(Integer id);
+
+	public List<Restaurant> getAllRestaurant();
 
 }
