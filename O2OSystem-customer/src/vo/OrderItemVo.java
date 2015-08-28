@@ -1,6 +1,7 @@
 package vo;
 
 public class OrderItemVo {
+	private Integer id;
 	private String itemName;
 	private Integer number;
 	private Double price;
@@ -52,5 +53,19 @@ public class OrderItemVo {
 		this.itemName = itemName;
 		this.number = number;
 		this.price = price;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public Integer getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Integer id) {
+		this.id = id;
 	}
 }
