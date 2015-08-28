@@ -77,14 +77,6 @@ public class RestaurantAction {
 		RestaurantVO restV = new RestaurantVO();
 		restV.setName(rest.getName());
 		restV.setTel(rest.getTel());
-<<<<<<< HEAD
-		//Add in 20150828
-		restV.setCollectionTimes(rest.getCollectionTimes());
-		restV.setGrade(rest.getGrade());
-		restV.setOpenTime(rest.getOpenTime());
-		
-		return rest;
-=======
 		Address addr = rest.getAddress();
 		restV.setDetail(addr.getDetail());
 		restV.setPro(addr.getArea().getProvince());
@@ -95,8 +87,9 @@ public class RestaurantAction {
 		restV.setPlayPrice(rest.getPlayPrice());
 		restV.setOpenTime(rest.getOpenTime());
 		System.out.println(restV);
+		restV.setCollectionTimes(rest.getCollectionTimes());
+		restV.setGrade(rest.getGrade());
 		return restV;
->>>>>>> 48ee97c1ea115cad7d3fc2d685e83d487b127f68
 	}
 
 	@RequestMapping(value = "/resttype", method = RequestMethod.GET, produces = { "application/json;charset=UTF-8" })

@@ -14,12 +14,10 @@ public class RestaurantVO {
 	private Integer disCharge;// 配送费
 	private String openTime;// 营业时间
 	private String tel;
-<<<<<<< HEAD
-	//add in 2150828
+
 	private Double grade;
 	private Integer collectionTimes;
 	
-=======
 	private String pro;
 	private String city;
 	private int rtype;
@@ -56,7 +54,6 @@ public class RestaurantVO {
 	public void setRtype(int rtype) {
 		this.rtype = rtype;
 	}
->>>>>>> 48ee97c1ea115cad7d3fc2d685e83d487b127f68
 
 	public String getTel() {
 		return tel;
