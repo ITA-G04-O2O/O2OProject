@@ -28,7 +28,136 @@
 }
 </style>
 <script src="js/AcceptMerchant.js" type="text/javascript"></script>
-<script src="js/user.js"></script>
+<script>
+	Ext.require(['Ext.data.*', 'Ext.grid.*', 'Ext.selection.CellModel',
+		'Ext.grid.*',
+		'Ext.data.*',
+		'Ext.util.*',
+		'Ext.form.*',
+		'Ext.Container.*', 'Ext.tab.Panel']);
+
+	Ext.onReady(function () {
+
+		Ext.define('UserData', {
+			extend: 'Ext.data.Model',
+			fields: [
+				{name: "id", type: "int"},
+				{name: 'uname'}, {name: 'tel'}
+			]
+		});
+
+		var userStore = Ext.create('Ext.data.Store', {
+			pageSize: 10,
+			model: 'UserData',
+			proxy: {
+				type: 'ajax',
+				url: 'AdminService/users',
+				reader: {root: 'object', totalProperty: 'total'}
+			},
+			sorters: [{
+				property: 'id',
+				direction: 'asc'
+			}]
+		});
+
+		var userPanel = Ext.create('Ext.form.Panel', {
+			title: '搜索',
+			width: 880,
+			defaultType: 'textfield',
+			frame: true,
+			method: 'POST',
+			collapsible: true,//???
+			bodyPadding: 5,
+			layout: 'column',
+			margin: '0 0 10 0',
+			items: [{
+				fieldLabel: '电话',
+				labelWidth: 40,
+				id: 'tel'
+			}, {
+				xtype: 'button',
+				text: '??',
+				margin: '0 0 0 5',
+				handler: function () {
+					var name = Ext.getCmp('tel').getValue();
+					if (name != "") {
+						userStore.load({params: {name: name}});
+					}
+				}
+			}],
+			renderTo: 'users'
+		});
+
+		var userGrid = Ext.create('Ext.grid.Panel', {
+			title: 'User',
+			width: 880,
+			store: userStore,
+			loadMask: true,
+			selModel: new Ext.selection.CheckboxModel, //??checkbox?
+			columns: [{
+				header: '姓名', dataIndex: 'uname'
+			}, {
+				header: '电话', dataIndex: 'tel'
+			}],
+			dockedItems: [
+				{
+					xtype: 'pagingtoolbar',
+					store: userStore,
+					dock: 'bottom',
+					emptyMsg: '没有数据',
+					displayInfo: true,
+					displayMsg: '当前显示{0}-{1}条记录 / 共{2}条记录 ',
+					beforePageText: '第',
+					afterPageText: '页/共{0}页'
+				}, {
+					xtype: 'toolbar',
+					items: [{
+						iconCls: 'icon-add',
+						text: '重置',
+						scope: this, //??
+						handler: function () {
+							var tels = Ext.getCmp('tel').getValue();
+							Ext.MessageBox.confirm('Notice!', tels + 'will be reset', function (btn) {
+								if (btn == 'yes') {
+									Ext.Ajax.request({
+										url: 'AdminService/users/' + tels,
+										method: 'post',
+										params: {
+											_method: 'PUT'
+										},
+										success: function (response, options) {
+											if (response.result) {
+												Ext.MessageBox.alert('Success', 'reset Success!!!');
+											} else {
+												Ext.MessageBox.alert('Fail', 'reset Fail!!!');
+											}
+										},
+										failure: function () {
+											Ext.MessageBox.alert('Fail', 'reset Fail!!!');
+										}
+									});
+								}
+							});
+						}
+					}]
+				}],
+			renderTo: 'users',
+			listeners: {
+				//?????? records ??? ??
+				itemclick: function (dv, records, item, index, e) {
+					//alert(record.data.id);
+
+				}, selectionchange: function (model, records) {
+					if (records[0]) {
+						userPanel.show(); //??
+						userPanel.loadRecord(records[0]);
+					}
+				}
+			}
+		});
+		userStore.loadPage(1);
+	});
+</script>
 </head>
 
 <body>
@@ -362,269 +491,275 @@
                                                  class="map-footer-link">我要开店</a>
     </div>
 </div>
+	<script src="js/controller.js"></script>
 <script>
-    var controller = (function () {
-        var getRestaurants = function () {
-            $.ajax({
-                url: 'AdminService/restaurants',
-                type: 'GET',
-                dataType: 'json'
-            }).done(function (data, status, xhr) {
-                renderRestaurant(data.object);
-            }).fail(function (xhr, status, error) {
-                console.log('fail');
-            });
-        };
-        var renderRestaurant = function (data) {
-            $('#restaurant').empty();
-            for (var i = 0; i < data.length; i++) {
-                var grade = 0;
-                if (data[i].grade) {
-                    grade = data[i].grade;
-                } else {
-                    grade = 0;
-                }
-                var isHot ='设为热门';
-                if(data[i].hot){
-                    isHot ='取消热门';
-                }
-                var isClose ='停业处理';
-                if(data[i].state){
-                    isClose='开始营业';
-                }
-                $('#restaurant')
-                        .append(
-                        '<div class="restaurant col-xs-6"><div class="panel panel-info"><div class="panel-heading">商家信息</div><div class="panel-body"><div class="col-xs-4">'
-                        + '<div class="thumbnail"><img src="img/oocl_logo.gif"></div></div>'
-                        + '<div class="col-xs-8"><h4>'
-                        + data[i].name
-                        + '</h4><h5 class="text-muted">评分：'
-                        + grade
-                        + '分'
-                        + '   销量：'
-                        + data[i].num
-                        + '单</h5><button class="btn btn-default" id="close" name="AdminService/state/' + data[i].id + '">'+isClose+'</button>'
-                        + '<button class="btn btn-default" id="hot" name="AdminService/hot/' + data[i].id + '">'+isHot+'</button></div></div></div></div>');
-            }
-        };
-        var setRestaurantClose = function (url) {
-            $.ajax({
-                url: url,
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    _method: 'PUT'
-                }
-            }).done(function (data, status, xhr) {
-                if (data.result) getRestaurants();
-            }).fail(function (xhr, status, error) {
-                console.log('fail');
-            });
-        };
-        var setRestaurantHot = function (url) {
-            $.ajax({
-                url: url,
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    _method: 'PUT'
-                }
-            }).done(function (data, status, xhr) {
-                if (data.result)getRestaurants();
-            }).fail(function (xhr, status, error) {
-                console.log('fail');
-            });
-        };
-        var getSystemTime = function () {
-            $.ajax({
-                url: 'AdminService/sysSetting',
-                type: 'get',
-                dataType: 'json'
-            }).done(function (data, status, xhr) {
-                renderSystemTime(data.object);
-            }).fail(function (xhr, status, error) {
-                console.log('fail');
-            });
-        };
-        var renderSystemTime = function (data){
-           if(data.length!=0) {
-               $('#autoTime').text(data[0].autoExpirationTime);
-               $('#time').val(data[0].autoExpirationTime);
-               $('#exTime').text(data[0].autoCompleteTime);
-               $('#time1').val(data[0].autoCompleteTime);
-               $('#autoTime').attr('name', data[0].id);
-           }else {
-               $('#autoTime').text('0');
-               $('#time').val('0');
-               $('#exTime').text('0');
-               $('#time1').val('0');
-               $('#autoTime').attr('name', 'true');
-           }
-        };
-        var updateSystemTimes = function (id,data) {
-            $.ajax({
-                url: 'AdminService/sysSetting/'+id,
-                type: 'POST',
-                dataType: 'json',
-                data: data
-            }).done(function (data, status, xhr) {
-                if (data.result) getSystemTime();
-            }).fail(function (xhr, status, error) {
-                console.log('fail');
-            });
-        };
-        var addSystemTimes = function(data){
-            $.ajax({
-                url: 'AdminService/sysSetting',
-                type: 'POST',
-                dataType: 'json',
-                data: data
-            }).done(function (data, status, xhr) {
-                if (data.result) getSystemTime();
-            }).fail(function (xhr, status, error) {
-                console.log('fail');
-            });
-        };
-        var updateHotLine = function (id, data) {
-            $.ajax({
-                url: 'AdminService/hotlines/' + id,
-                type: 'POST',
-                dataType: 'json',
-                data: data
-            }).done(function (data, status, xhr) {
-                if (data.result) getHotLine();
-            }).fail(function (xhr, status, error) {
-                console.log('fail');
-            });
-        };
-        var getHotLine = function () {
-            $.ajax({
-                url: 'AdminService/hotlines',
-                type: 'GET',
-                dataType: 'json'
-            }).done(function (data, status, xhr) {
-                if (data.result) renderHotLine(data.object);
-            }).fail(function (xhr, status, error) {
-                console.log('fail');
-            });
-        };
-        var addHotLine = function (data) {
-            $.ajax({
-                url: 'AdminService/hotlines',
-                type: 'POST',
-                dataType: 'json',
-                data: data
-            }).done(function (data, status, xhr) {
-                if (data.result) getHotLine();
-            }).fail(function (xhr, status, error) {
-                console.log('fail');
-            });
-        };
-        var renderHotLine = function (data) {
-            if(data.length==0){
-                $('#hotlines').attr('name', 'true');
-            }
-            for (var i = 0; i < data.length; i++) {
-                $('#hotlines').text(data[i].tel);
-                if (data[i].id) {
-                    $('#hotlines').attr('name', data[i].id);
-                } else {
-                    $('#hotlines').attr('name', 'true');
-                }
-            }
-        };
-        var addRestaurantType = function (data) {
-            $.ajax({
-                url: 'AdminService/restaurantType',
-                type: 'POST',
-                dataType: 'json',
-                data: data
-            }).done(function (data, status, xhr) {
-                if (data.result) getRestaurantType();
-            }).fail(function (xhr, status, error) {
-                console.log('fail');
-            });
-        };
-        var getRestaurantType = function () {
-            $.ajax({
-                url: 'AdminService/restaurantTypes',
-                type: 'GET',
-                dataType: 'json'
-            }).done(function (data, status, xhr) {
-                if (data.result) renderRestaurantType(data.object);
-            }).fail(function (xhr, status, error) {
-                console.log('fail');
-            });
-        };
-        var renderRestaurantType = function (data) {
-            $('#mealTypeTable').empty();
-            for (var i = 0; i < data.length; i++) {
-                $('#mealTypeTable').append('<tr id="' + data[i].id + '"><td><label type="label">' + data[i].type + '</label></td><td><button type="button" class="btn btn-xs btn-danger" disabled>删除</button></td></tr>');
-            }
-        };
-        var getVerifyName =function(){
-            $.ajax({
-                url: 'AdminService/restaurantVerify',
-                type: 'GET',
-                dataType: 'json'
-            }).done(function (data, status, xhr) {
-                if (data.result) renderVerifyName(data.object);
-            }).fail(function (xhr, status, error) {
-                console.log('fail');
-            });
-        };
-        var getRestaurantDetail = function(url){
-            $.ajax({
-                url: url,
-                type: 'GET',
-                dataType: 'json'
-            }).done(function (data, status, xhr) {
-                if (data.result) renderRestaurantDetail(data.object);
-            }).fail(function (xhr, status, error) {
-                console.log('fail');
-            });
-        };
-        var updateVerifyState = function(id,data){
-            $.ajax({
-                url: 'AdminService/restaurantVerify/'+id,
-                type: 'POST',
-                dataType: 'json',
-                data:data
-            }).done(function (data, status, xhr) {
-                if (data.result) getVerifyName();
-            }).fail(function (xhr, status, error) {
-                console.log('fail');
-            });
-        };
-        var renderVerifyName = function(data){
-            for(var i=0;i<data.length;i++){
-                $('#verify').append('<tr><td>'+data[i].name+'</td><td><button class="btn btn-info" id="viewDetail" name="AdminService/restaurantVerify/'+data[i].id+'" data-toggle="modal" data-target=".bs-example-modal-sm">详情</button></td><tr>');
-            }
-        };
-        var renderRestaurantDetail = function(data){
-            $('#restaurantName').val(data.name);
-            $('#restaurantTypes').val(data.type);
-            $('#restaurantAddress').val(data.address);
-            $('#NickName').val(data.owner);
-            $('#idCard').val(data.idcard);
-        };
-        return {
+	/**
+	 * Created by HUANGVI2 on 8/28/2015.
+	 */
+	var controller = (function () {
+		var getRestaurants = function () {
+			$.ajax({
+				url: 'AdminService/restaurants',
+				type: 'GET',
+				dataType: 'json'
+			}).done(function (data, status, xhr) {
+				renderRestaurant(data.object);
+			}).fail(function (xhr, status, error) {
+				console.log('fail');
+			});
+		};
+		var renderRestaurant = function (data) {
+			$('#restaurant').empty();
+			for (var i = 0; i < data.length; i++) {
+				var grade = 0;
+				if (data[i].grade) {
+					grade = data[i].grade;
+				} else {
+					grade = 0;
+				}
+				var isHot ='设为热门';
+				if(data[i].hot){
+					isHot ='取消热门';
+				}
+				var isClose ='停业处理';
+				if(data[i].online){
+					isClose='开始营业';
+				}
+				$('#restaurant')
+						.append(
+						'<div class="restaurant col-xs-6"><div class="panel panel-info"><div class="panel-heading">商家信息</div><div class="panel-body"><div class="col-xs-4">'
+						+ '<div class="thumbnail"><img src="img/oocl_logo.gif"></div></div>'
+						+ '<div class="col-xs-8"><h4>'
+						+ data[i].name
+						+ '</h4><h5 class="text-muted">评分：'
+						+ grade
+						+ '分'
+						+ '   销量：'
+						+ data[i].num
+						+ '单</h5><button class="btn btn-default" id="close" name="AdminService/state/' + data[i].id + '">'+isClose+'</button>'
+						+ '<button class="btn btn-default" id="hot" name="AdminService/hot/' + data[i].id + '">'+isHot+'</button></div></div></div></div>');
+			}
+		};
+		var setRestaurantClose = function (url) {
+			$.ajax({
+				url: url,
+				type: 'POST',
+				dataType: 'json',
+				data: {
+					_method: 'PUT'
+				}
+			}).done(function (data, status, xhr) {
+				getRestaurants();
+			}).fail(function (xhr, status, error) {
+				console.log('fail');
+			});
+		};
+		var setRestaurantHot = function (url) {
+			$.ajax({
+				url: url,
+				type: 'POST',
+				dataType: 'json',
+				data: {
+					_method: 'PUT'
+				}
+			}).done(function (data, status, xhr) {
+				if (data.result)getRestaurants();
+			}).fail(function (xhr, status, error) {
+				console.log('fail');
+			});
+		};
+		var getSystemTime = function () {
+			$.ajax({
+				url: 'AdminService/sysSetting',
+				type: 'get',
+				dataType: 'json'
+			}).done(function (data, status, xhr) {
+				renderSystemTime(data.object);
+			}).fail(function (xhr, status, error) {
+				console.log('fail');
+			});
+		};
+		var renderSystemTime = function (data){
+			if(data.length!=0) {
+				$('#autoTime').text(data[0].autoExpirationTime);
+				$('#time').val(data[0].autoExpirationTime);
+				$('#exTime').text(data[0].autoCompleteTime);
+				$('#time1').val(data[0].autoCompleteTime);
+				$('#autoTime').attr('name', data[0].id);
+			}else {
+				$('#autoTime').text('0');
+				$('#time').val('0');
+				$('#exTime').text('0');
+				$('#time1').val('0');
+				$('#autoTime').attr('name', 'true');
+			}
+		};
+		var updateSystemTimes = function (id,data) {
+			$.ajax({
+				url: 'AdminService/sysSetting/'+id,
+				type: 'POST',
+				dataType: 'json',
+				data: data
+			}).done(function (data, status, xhr) {
+				if (data.result) getSystemTime();
+			}).fail(function (xhr, status, error) {
+				console.log('fail');
+			});
+		};
+		var addSystemTimes = function(data){
+			$.ajax({
+				url: 'AdminService/sysSetting',
+				type: 'POST',
+				dataType: 'json',
+				data: data
+			}).done(function (data, status, xhr) {
+				if (data.result) getSystemTime();
+			}).fail(function (xhr, status, error) {
+				console.log('fail');
+			});
+		};
+		var updateHotLine = function (id, data) {
+			$.ajax({
+				url: 'AdminService/hotlines/' + id,
+				type: 'POST',
+				dataType: 'json',
+				data: data
+			}).done(function (data, status, xhr) {
+				if (data.result) getHotLine();
+			}).fail(function (xhr, status, error) {
+				console.log('fail');
+			});
+		};
+		var getHotLine = function () {
+			$.ajax({
+				url: 'AdminService/hotlines',
+				type: 'GET',
+				dataType: 'json'
+			}).done(function (data, status, xhr) {
+				if (data.result) renderHotLine(data.object);
+			}).fail(function (xhr, status, error) {
+				console.log('fail');
+			});
+		};
+		var addHotLine = function (data) {
+			$.ajax({
+				url: 'AdminService/hotlines',
+				type: 'POST',
+				dataType: 'json',
+				data: data
+			}).done(function (data, status, xhr) {
+				if (data.result) getHotLine();
+			}).fail(function (xhr, status, error) {
+				console.log('fail');
+			});
+		};
+		var renderHotLine = function (data) {
+			if(data.length==0){
+				$('#hotlines').attr('name', 'true');
+			}
+			for (var i = 0; i < data.length; i++) {
+				$('#hotlines').text(data[i].tel);
+				if (data[i].id) {
+					$('#hotlines').attr('name', data[i].id);
+				} else {
+					$('#hotlines').attr('name', 'true');
+				}
+			}
+		};
+		var addRestaurantType = function (data) {
+			$.ajax({
+				url: 'AdminService/restaurantType',
+				type: 'POST',
+				dataType: 'json',
+				data: data
+			}).done(function (data, status, xhr) {
+				if (data.result) getRestaurantType();
+			}).fail(function (xhr, status, error) {
+				console.log('fail');
+			});
+		};
+		var getRestaurantType = function () {
+			$.ajax({
+				url: 'AdminService/restaurantTypes',
+				type: 'GET',
+				dataType: 'json'
+			}).done(function (data, status, xhr) {
+				if (data.result) renderRestaurantType(data.object);
+			}).fail(function (xhr, status, error) {
+				console.log('fail');
+			});
+		};
+		var renderRestaurantType = function (data) {
+			$('#mealTypeTable').empty();
+			for (var i = 0; i < data.length; i++) {
+				$('#mealTypeTable').append('<tr id="' + data[i].id + '"><td><label type="label">' + data[i].type + '</label></td><td><button type="button" class="btn btn-xs btn-danger" disabled>删除</button></td></tr>');
+			}
+		};
+		var getVerifyName =function(){
+			$.ajax({
+				url: 'AdminService/restaurantVerify',
+				type: 'GET',
+				dataType: 'json'
+			}).done(function (data, status, xhr) {
+				if (data.result) renderVerifyName(data.object);
+			}).fail(function (xhr, status, error) {
+				console.log('fail');
+			});
+		};
+		var getRestaurantDetail = function(url){
+			$.ajax({
+				url: url,
+				type: 'GET',
+				dataType: 'json'
+			}).done(function (data, status, xhr) {
+				if (data.result) renderRestaurantDetail(data.object);
+			}).fail(function (xhr, status, error) {
+				console.log('fail');
+			});
+		};
+		var updateVerifyState = function(id,data){
+			$.ajax({
+				url: 'AdminService/restaurantVerify/'+id,
+				type: 'POST',
+				dataType: 'json',
+				data:data
+			}).done(function (data, status, xhr) {
+				if (data.result) getVerifyName();
+			}).fail(function (xhr, status, error) {
+				console.log('fail');
+			});
+		};
+		var renderVerifyName = function(data){
+			$('#verify').empty();
+			for(var i=0;i<data.length;i++){
+				$('#verify').append('<tr><td>'+data[i].name+'</td><td><button class="btn btn-info" id="viewDetail" name="AdminService/restaurantVerify/'+data[i].id+'" data-toggle="modal" data-target=".bs-example-modal-sm">详情</button></td><tr>');
+			}
+		};
+		var renderRestaurantDetail = function(data){
+			$('input[name=id]').val(data.id);
+			$('#restaurantName').val(data.name);
+			$('#restaurantTypes').val(data.type);
+			$('#restaurantAddress').val(data.address);
+			$('#NickName').val(data.owner);
+			$('#idCard').val(data.idcard);
+		};
+		return {
 			getRestaurant: getRestaurants,
-            setRestaurantClose: setRestaurantClose,
-            setRestaurantHot: setRestaurantHot,
-            getSystemTime: getSystemTime,
-            addSystemTimes:addSystemTimes,
-            updateSystemTimes: updateSystemTimes,
-            addRestaurantType: addRestaurantType,
-            getRestaurantType: getRestaurantType,
-            updateHotLine: updateHotLine,
-            getHotLine: getHotLine,
-            addHotLine:addHotLine,
-            updateVerifyState:updateVerifyState,
-            getVerifyName:getVerifyName,
-            getRestaurantDetail:getRestaurantDetail
-        }
-    })();
+			setRestaurantClose: setRestaurantClose,
+			setRestaurantHot: setRestaurantHot,
+			getSystemTime: getSystemTime,
+			addSystemTimes:addSystemTimes,
+			updateSystemTimes: updateSystemTimes,
+			addRestaurantType: addRestaurantType,
+			getRestaurantType: getRestaurantType,
+			updateHotLine: updateHotLine,
+			getHotLine: getHotLine,
+			addHotLine:addHotLine,
+			updateVerifyState:updateVerifyState,
+			getVerifyName:getVerifyName,
+			getRestaurantDetail:getRestaurantDetail
+		}
+	})();
     $('#userManager').click(function () {
         $('.tab-content>.tab-pane').each(function () {
             $(this).removeClass('active');
@@ -633,6 +768,7 @@
     });
     $('#close').live('click', function () {
         var url = $(this).attr('name');
+		console.log(url);
         controller.setRestaurantClose(url);
     });
     $('#hot').live('click', function () {
