@@ -225,19 +225,15 @@ public class AdminAction {
 		return jp;
 	}
 
+	@Transactional
 	@RequestMapping(value = "/jms", method = RequestMethod.GET)
-	public List<JmsProtocol> getJMS() {
-		List<JmsProtocol> pros = new ArrayList<JmsProtocol>();
+	public List<String> getJMS() {
+		List<String> msgs = null;
 		try {
 			JMSUtil jms = new JMSUtil("g04_que");
-			List<String> msgs = jms.receiveMsg();
-			JmsProtocol pro;
-			for (int i = 0; i < msgs.size(); i++) {
-				pro = JsonUtil.readValue(msgs.get(i), JmsProtocol.class);
-				pros.add(pro);
-			}
+			msgs = jms.receiveMsg();
 		} catch (Exception e) {
 		}
-		return pros;
+		return msgs;
 	}
 }
