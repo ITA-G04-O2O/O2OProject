@@ -11,21 +11,25 @@ $(function () {
     });
 
     var checkUser = function (name, psd) {
-        $.post("ls", {
-                username: name,
-                password: psd
-            },
-            function (data) {
-                var result = data.result;
-                if (result) {
-                    $.cookie("uname", name);
-                    //					location.href = "mms";
-                    location.href = "WEB-INF/html/manage.html";
-                } else {
-                    //					$.cookie("event", "login");
-                    location.href = "fail.html";
-                    //					$("loginBtn").prepend("<div><a>Login Fail</a>< /div>");
-                }
-            }, "json");
+    	console.log("login");
+    	if(name=="admin" && psd == "admin"){
+    		location.href = "http://localhost:17236/O2OSystem-admin/index";
+    	}else{
+    		alert("賬號或密碼錯誤")
+    		location.href = "http://localhost:17236/O2OSystem-admin/login";
+    	}
+//      $.post("ls", {
+//              username: name,
+//              password: psd
+//          },
+//          function (data) {
+//              var result = data.result;
+//              if (result) {
+//                  $.cookie("uname", name);
+//                  location.href = "WEB-INF/html/manage.html";
+//              } else {
+//                  location.href = "fail.html";
+//              }
+//          }, "json");
     }
 });

@@ -3,7 +3,9 @@
         <div class="row">
             <div class="col-xs-2"><span>分類</span></div>
             <div class="col-xs-10">
-                <Button class="btn btn-primary pull-right">Add</Button>
+                <Button class="btn btn-primary pull-right"  data-toggle="modal" data-target=".type-modal-sm">
+                    Add
+                </Button>
             </div>
         </div>
     </div>
@@ -11,6 +13,32 @@
 
     </div>
 </div>
+<div class="modal fade type-modal-sm" tabindex="-1" role="dialog"
+     aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">添加种类</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="hotline">種類</label> <input type="text"
+                                                             class="form-control" placeholder="输入种类" id="hotline">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="addType">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/menuManager.js"></script>
 <!--<div class="panel panel-primary">
     <div class="panel-heading">
         <div class="row"><div class="col-xs-2"><span>单点</span></div><div class="col-xs-10"><Button class="btn btn-primary pull-right">Add</Button></div> </div>
