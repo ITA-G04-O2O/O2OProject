@@ -18,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.g04.o2o.entity.Address;
 import com.g04.o2o.entity.Area;
 import com.g04.o2o.entity.JsonProtocol;
-import com.g04.o2o.entity.Merchant;
 import com.g04.o2o.entity.Restaurant;
 import com.g04.o2o.entity.RestaurantType;
 import com.g04.o2o.service.AreaService;
@@ -31,22 +30,20 @@ public class RestaurantAction {
 
 	@Autowired
 	private RestaurantService restaurantService;
-	
+
 	@Autowired
 	private MerchantService merchantService;
-	
+
 	@Autowired
 	private AreaService areaService;
 
 	public void setRestaurantService(RestaurantService restaurantService) {
 		this.restaurantService = restaurantService;
 	}
-	
+
 	public void setMerchantService(MerchantService merchantService) {
 		this.merchantService = merchantService;
 	}
-
-
 
 	@RequestMapping(value = "/restaurant", method = RequestMethod.POST)
 	public String regist(String mName, int type, String provinceInput,
@@ -73,15 +70,28 @@ public class RestaurantAction {
 	}
 
 	@ResponseBody
+	@Transactional
 	@RequestMapping(value = "/restaurant/{id}", method = RequestMethod.GET)
-	public Restaurant get(@PathVariable Integer id) {
+	public RestaurantVO get(@PathVariable Integer id) {
 		System.out.println("RestaurantAction2...");
-		Restaurant rest = restaurantService.getRestById(id);
+		Restaurant rest = restaurantService.findRestByUserId(id);
 		RestaurantVO restV = new RestaurantVO();
 		restV.setName(rest.getName());
-		restV.setType(rest.getType());
 		restV.setTel(rest.getTel());
-		return rest;
+		Address addr = rest.getAddress();
+		restV.setDetail(addr.getDetail());
+		restV.setPro(addr.getArea().getProvince());
+		restV.setCity(addr.getArea().getCity());
+		restV.setRtype(rest.getType().getId());
+		restV.setNotice(rest.getNotice());
+		restV.setDisCharge(rest.getDisCharge());
+		restV.setPlayPrice(rest.getPlayPrice());
+		restV.setOpenTime(rest.getOpenTime());
+		restV.setCollectionTimes(rest.getCollectionTimes());
+		restV.setGrade(rest.getGrade());
+		System.out.println(restV);
+
+		return restV;
 	}
 
 	@RequestMapping(value = "/resttype", method = RequestMethod.GET, produces = { "application/json;charset=UTF-8" })
@@ -98,13 +108,13 @@ public class RestaurantAction {
 			int type, String tel, String pro, String city, String detail) {
 		System.out.println("RestaurantAction3...");
 		try {
-			Restaurant rest =restaurantService.findRestByUserId(id);
-			int restId= rest.getId();
+			Restaurant rest = restaurantService.findRestByUserId(id);
+			int restId = rest.getId();
 			restaurantService.updateRestName(restId, name);
 			restaurantService.updateTel(restId, tel);
 			RestaurantType t = restaurantService.getRestTypeById(type);
 			restaurantService.updateRestType(restId, t);
-			Address addr =rest.getAddress();
+			Address addr = rest.getAddress();
 			addr.setDetail(detail);
 			Area area = addr.getArea();
 			area.setCity(city);

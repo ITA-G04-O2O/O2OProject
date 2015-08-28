@@ -108,6 +108,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 		return tdao.search(RestaurantType.class, restTypeId);
 	}
 
+	
 	@Override
 	public Restaurant findRestByUserId(int id) {
 		Merchant mer = getMerchantById(id);
