@@ -1,4 +1,4 @@
-$(function() {
+//$(function() {
 
 	var loadReceiveOrders = function() {
 		$.ajax({
@@ -132,4 +132,4 @@ $(function() {
 		loadFailOrders();
 	};
 
-});
+//});

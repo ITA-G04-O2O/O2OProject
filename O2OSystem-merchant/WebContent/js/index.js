@@ -7,10 +7,6 @@ $(function() {
 		if (loadhtml) {
 			$('#change').load('html/' + loadhtml + '.html');
 		}
-<<<<<<< HEAD
-=======
-
->>>>>>> a69ceeba5ec6d654cc159769040e4344c4cafda8
 	});
 	$("#accountInfo").live("click", function() {
 		showAccount();
