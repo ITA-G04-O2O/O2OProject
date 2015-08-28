@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,9 +18,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.g04.o2o.entity.Address;
 import com.g04.o2o.entity.Area;
 import com.g04.o2o.entity.JsonProtocol;
+import com.g04.o2o.entity.Merchant;
 import com.g04.o2o.entity.Restaurant;
 import com.g04.o2o.entity.RestaurantType;
 import com.g04.o2o.service.AreaService;
+import com.g04.o2o.service.MerchantService;
 import com.g04.o2o.service.RestaurantService;
 import com.g04.o2o.vo.RestaurantVO;
 
@@ -28,12 +31,22 @@ public class RestaurantAction {
 
 	@Autowired
 	private RestaurantService restaurantService;
+	
+	@Autowired
+	private MerchantService merchantService;
+	
 	@Autowired
 	private AreaService areaService;
 
 	public void setRestaurantService(RestaurantService restaurantService) {
 		this.restaurantService = restaurantService;
 	}
+	
+	public void setMerchantService(MerchantService merchantService) {
+		this.merchantService = merchantService;
+	}
+
+
 
 	@RequestMapping(value = "/restaurant", method = RequestMethod.POST)
 	public String regist(String mName, int type, String provinceInput,
@@ -78,22 +91,26 @@ public class RestaurantAction {
 		return restType;
 	}
 
+	@ResponseBody
 	@RequestMapping(value = "/restaurant/{id}", method = RequestMethod.POST)
+	@Transactional
 	public String updateRest(@PathVariable(value = "id") int id, String name,
 			int type, String tel, String pro, String city, String detail) {
+		System.out.println("RestaurantAction3...");
 		try {
-			System.out.println(name + type + tel + pro + city + detail);
-			
-			Restaurant rest = restaurantService.getRestById(id);
-			rest.setTel(tel);
+			Restaurant rest =restaurantService.findRestByUserId(id);
+			int restId= rest.getId();
+			restaurantService.updateRestName(restId, name);
+			restaurantService.updateTel(restId, tel);
+			RestaurantType t = restaurantService.getRestTypeById(type);
+			restaurantService.updateRestType(restId, t);
 			Address addr =rest.getAddress();
 			addr.setDetail(detail);
 			Area area = addr.getArea();
 			area.setCity(city);
 			area.setProvince(pro);
 			rest.setAddress(addr);
-			rest.setType(restaurantService.getRestTypeById(type));
-			restaurantService.updateRest(id, rest);
+			restaurantService.updateRestAddr(restId, addr);
 			return "true";
 		} catch (Exception e) {
 			e.printStackTrace();

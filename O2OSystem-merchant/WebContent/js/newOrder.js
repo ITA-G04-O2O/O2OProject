@@ -1,7 +1,11 @@
-$(function() {
-	
-	
+
+
+//$(function() {
+
+
 	var loadNewOrderFunction = function() {
+				console.log("no");
+
 		$.ajax({
 			url: "http://localhost:17236/o2osystem-merchant/orders/new",
 			type: 'GET',
@@ -16,17 +20,17 @@ $(function() {
 	loadNewOrderFunction();
 
 	var createPanel = function(data) {
-		
+
 		for (var i = 0; i < data.object.length; i++) {
-			console.log(data.object[i].id);
-			console.log(data.object[i].createDate);
-			console.log(data.object[i].status);
-			console.log(data.object[i].connectPeople);
-			console.log(data.object[i].tel);
-			console.log(data.object[i].address);
-			console.log(data.object[i].menuItemAmountMap);
-			console.log(data.object[i].menuItemPriceMap);
-			console.log(data.object[i].totalPrices);
+			//			console.log(data.object[i].id);
+			//			console.log(data.object[i].createDate);
+			//			console.log(data.object[i].status);
+			//			console.log(data.object[i].connectPeople);
+			//			console.log(data.object[i].tel);
+			//			console.log(data.object[i].address);
+			//			console.log(data.object[i].menuItemAmountMap);
+			//			console.log(data.object[i].menuItemPriceMap);
+			//			console.log(data.object[i].totalPrices);
 
 			var status = "";
 			if (data.object[i].status == 1) {
@@ -144,6 +148,19 @@ $(function() {
 		}).fail(function(xhr, status, error) {
 			console.log('fail');
 		});
+
+		$.ajax({
+			url: "http://localhost:17236/o2osystem-merchant/orders/"+id+"/rece",
+			type: 'POST',
+			dataType: 'json',
+			data: {
+				_method: "PUT"
+			}
+		}).done(function(data, status, xhr) {
+			console.log('suc');
+		}).fail(function(xhr, status, error) {
+			console.log('fail');
+		});
 	};
 
 	var rejectOrderAction = function(id) {
@@ -161,7 +178,20 @@ $(function() {
 		}).fail(function(xhr, status, error) {
 			console.log('fail');
 		});
+		
+		$.ajax({
+			url: "http://localhost:17236/o2osystem-merchant/orders/"+id+"/comp",
+			type: 'POST',
+			dataType: 'json',
+			data: {
+				_method: "PUT"
+			}
+		}).done(function(data, status, xhr) {
+			console.log('suc');
+		}).fail(function(xhr, status, error) {
+			console.log('fail');
+		});
 	};
 
 
-});
+//});

@@ -105,18 +105,16 @@ public class OrderAction {
 	}
 
 	@RequestMapping(value = "/orders/{id}/rece", method = RequestMethod.PUT)
-	public JsonProtocol updateOrderReceiveTime(@PathVariable Integer id,
-			Date recevieTime) {
+	public JsonProtocol updateOrderReceiveTime(@PathVariable Integer id) {
 		JsonProtocol jp = new JsonProtocol();
-		jp.setResult(os.updOrderReceiveTime(id, recevieTime));
+		jp.setResult(os.updOrderReceiveTime(id, new Date()));
 		return jp;
 	}
 
 	@RequestMapping(value = "/orders/{id}/comp", method = RequestMethod.PUT)
-	public JsonProtocol updOrderCompleteTime(@PathVariable Integer id,
-			Date completedTime) {
+	public JsonProtocol updOrderCompleteTime(@PathVariable Integer id) {
 		JsonProtocol jp = new JsonProtocol();
-		jp.setResult(os.updOrderCompleteTime(id, completedTime));
+		jp.setResult(os.updOrderCompleteTime(id, new Date()));
 		return jp;
 	}
 

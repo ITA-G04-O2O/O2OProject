@@ -1,6 +1,6 @@
 $(function() {
 	$("#restInfoEditBtn").live("click", function() {
-		alert($("#name").val());
+		alert($("#detail").val());
 		$.ajax({
 			type : "post",
 			url : "http://localhost:17236/o2osystem-merchant/restaurant/" + 2,
