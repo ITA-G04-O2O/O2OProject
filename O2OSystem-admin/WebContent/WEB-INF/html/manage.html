@@ -608,7 +608,7 @@
         };
         var renderVerifyName = function(data){
             for(var i=0;i<data.length;i++){
-                $('#verify').append('<tr><td>'+data[i].name+'</td><td><button class="btn btn-info" id="viewDetail" name="AdminService/restaurantVerify/'+data[i].id+'">详情</button></td><tr>');
+                $('#verify').append('<tr><td>'+data[i].name+'</td><td><button class="btn btn-info" id="viewDetail" name="AdminService/restaurantVerify/'+data[i].id+'" data-toggle="modal" data-target=".bs-example-modal-sm">详情</button></td><tr>');
             }
         };
         var renderRestaurant = function(data){

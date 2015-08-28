@@ -1,15 +1,12 @@
 package com.g04.o2o.vo;
 
-import com.g04.o2o.entity.Address;
-import com.g04.o2o.entity.RestaurantType;
-
 public class VeriftyRestaurant {
 	private Integer id;
 	private String tel;
 	private String name;
-	private RestaurantType type;
+	private String type;
 	private String owner;
-	private Address address;
+	private String address;
 	private String IDCard;
 
 	public Integer getId() {
@@ -36,11 +33,11 @@ public class VeriftyRestaurant {
 		this.name = name;
 	}
 
-	public RestaurantType getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(RestaurantType type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
@@ -52,11 +49,11 @@ public class VeriftyRestaurant {
 		this.owner = string;
 	}
 
-	public Address getAddress() {
+	public String getAddress() {
 		return address;
 	}
 
-	public void setAddress(Address address) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
 
