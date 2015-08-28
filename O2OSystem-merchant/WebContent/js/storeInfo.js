@@ -27,7 +27,6 @@ var loadRestInfo = function() {
 			}
 
 		}).done(function(data, status, xhr) {
-			alert(data);
 		}).fail(function(xhr, status, error) {
 			console.log('fail');
 		});
