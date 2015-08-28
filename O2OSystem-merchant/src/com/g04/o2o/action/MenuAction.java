@@ -30,25 +30,25 @@ public class MenuAction {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/menuTypes/{restId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/menuTypes/{restId}/", method = RequestMethod.GET)
 	public JsonProtocol getMenuTypes(@PathVariable Integer restId) {
 		JsonProtocol jp = new JsonProtocol();
 		jp.setObject(ms.findAllMenuTypes(restId));
 		return jp;
 	}
 
-	/**
-	 * get one order by id
-	 * 
-	 * @param id
-	 * @return
-	 */
-	@RequestMapping(value = "/menuTypes/{id}", method = RequestMethod.GET)
-	public JsonProtocol getMenuTypeById(@PathVariable Integer id) {
-		JsonProtocol jp = new JsonProtocol();
-		jp.setObject(ms.findMenuTypeById(id));
-		return jp;
-	}
+//	/**
+//	 * get one order by id
+//	 * 
+//	 * @param id
+//	 * @return
+//	 */
+//	@RequestMapping(value = "/menuTypes/{id}", method = RequestMethod.GET)
+//	public JsonProtocol getMenuTypeById(@PathVariable Integer id) {
+//		JsonProtocol jp = new JsonProtocol();
+//		jp.setObject(ms.findMenuTypeById(id));
+//		return jp;
+//	}
 
 	/**
 	 * add menu type with a string.
@@ -98,7 +98,7 @@ public class MenuAction {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/menuItems/{menuTypeId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/menuItems/{menuTypeId}/all", method = RequestMethod.GET)
 	public JsonProtocol getMenuItems(@PathVariable Integer menuTypeId) {
 		JsonProtocol jp = new JsonProtocol();
 		jp.setObject(ms.findAllMenuItems(menuTypeId));
@@ -111,7 +111,7 @@ public class MenuAction {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "/menuItems/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/menuItems/{id}/menuItemId", method = RequestMethod.GET)
 	public JsonProtocol getMenuItemById(@PathVariable Integer id) {
 		JsonProtocol jp = new JsonProtocol();
 		jp.setObject(ms.getMenuItemById(id));
@@ -124,7 +124,7 @@ public class MenuAction {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "/menuItems/{menuTypeId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/menuItems/{menuTypeId}/menuType", method = RequestMethod.GET)
 	public JsonProtocol getMenuItemsByMenuTypeId(
 			@PathVariable Integer menuTypeId) {
 		JsonProtocol jp = new JsonProtocol();
