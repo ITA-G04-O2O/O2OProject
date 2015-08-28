@@ -1,4 +1,4 @@
-$(function() {
+//$(function() {
 	
 //			console.log(data.object[i].id);
 //			console.log(data.object[i].createDate);
@@ -61,4 +61,4 @@ $(function() {
 		loadFailOrders();
 	};
 	
-});
+//});
