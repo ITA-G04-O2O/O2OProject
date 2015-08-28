@@ -30,18 +30,15 @@ $(function () {
         };
         var renderMenuItems = function (data) {
             for (var i = 0; i < data.length; i++) {
-                $('#change').append('<div class="panel panel-primary"><div class="panel-heading"><div class="row"><div class="col-xs-2"><span>' + +'</span></div><div class="col-xs-10">'
+                $('#change').append('<div class="panel panel-primary"><div class="panel-heading"><div class="row"><div class="col-xs-2"><span>' + data[id].name+'</span></div><div class="col-xs-10">'
                     +'<Button class="btn btn-primary pull-right">Add</Button>'
                     +'</div></div></div><div class="panel-body" id="menuType" >' +
-                    '<>' +
-                    '' +
-                    '</div></div>')
+                    '<div class="row"><div class="col-sm-6 col-md-4"><div class="thumbnail"><img src="..." alt="..."><div class="caption"><h3>' + data[i].name
+                    +'</h3> <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>'+
+                    ' </div></div></div></div>' +
+                    '</div></div>');
             }
         };
-        var getMenuByType = function () {
-
-        };
-
         return {
             getMenuTypes: getMenuTypes
         }
