@@ -26,7 +26,7 @@ var restInfoController = (function() {
                 for(var j=0;j<data.object.menuTypes[i].menuItems.length;j++){
                     $('div[name=menuMealBox]')
                         .append(
-                                '<div class="col-xs-4"><div class="mealBox"><a href="#" class="thumbnail"><img src=/menuItem/"'+data.object.menuTypes[i].menuItems[j].id+'"></a><h4 id="itemName">'+data.object.menuTypes[i].menuItems[j].itemName+'</h4><h5 class="text-muted">'+data.object.menuTypes[i].menuItems[j].description+'</h5><div class="row"><div class="col-xs-7"><h4>$<span id="itemPrice">'+data.object.menuTypes[i].menuItems[j].price+'</span></h4></div><div class="col-xs-5 text-right"><button class="btn btn-primary addbtn" id="addOrderBtn" item-name="'+data.object.menuTypes[i].menuItems[j].itemName+'" item-price="'+data.object.menuTypes[i].menuItems[j].price+'" onclick="addOrder(this)">添加</button></div></div></div></div>');
+                                '<div class="col-xs-4"><div class="mealBox"><a href="#" class="thumbnail"><img src=/menuItem/"'+data.object.menuTypes[i].menuItems[j].id+'"></a><h4 id="itemName">'+data.object.menuTypes[i].menuItems[j].itemName+'</h4><h5 class="text-muted">'+data.object.menuTypes[i].menuItems[j].description+'</h5><div class="row"><div class="col-xs-7"><h4>$<span id="itemPrice">'+data.object.menuTypes[i].menuItems[j].price+'</span></h4></div><div class="col-xs-5 text-right"><button class="btn btn-primary addbtn" id="addOrderBtn" item-name="'+data.object.menuTypes[i].menuItems[j].itemName+'" item-price="'+data.object.menuTypes[i].menuItems[j].price+'" item-id="'+data.object.menuTypes[i].menuItems[j].id+'" onclick="addOrder(this)">添加</button></div></div></div></div>');
                 }
             }
     
@@ -85,12 +85,53 @@ var restInfoController = (function() {
 			console.log('fail');
 		});
     };
+   
+    
+   
+	var menuItem =function(id,name,price){
+		this.id=id;
+		this.name=name;
+		this.price=price;
+		this.number=1;
+	};
 	
+	var addmenuItem2Order=function(){
+		 var length=$("[data-name=tr-order-item]").length;
+		 var myorder=new Array(length);
+		 var count=0;
+		 $("tr[data-name=tr-order-item]").each(function(){
+		    	var id=$(this).find("td[data-name=itemId]").text();
+		    	var name=$(this).find("td[data-name=itemName]").text();
+		    	var price=$(this).find("td[data-name=itemPrice]").text();
+		    	var item=new menuItem(id,name,price);
+		    	myorder[count]=item;
+		    	console.log(myorder[count].price);
+		    	console.log(myorder[count].name);
+		    	console.log(myorder[count].id);
+		    	count++;
+		    	myorder[count]=item;
+		 });
+		 
+		 $.ajax({
+				url: 'http://localhost:8888/O2OSystem-customer/order/save',
+				type: 'POST',
+				dataType: 'json',
+				data: JSON.stringify(myorder),
+				contentType: "application/json; charset=utf-8",
+			}).done(function (data, status, xhr) {
+				alert(".......");
+				window.location.href="http://localhost:8888/O2OSystem-customer/rest/go";
+			}).fail(function (xhr, status, error) {
+				console.log('fail');
+			});
+		 
+	};
 	return {
 		getRestInfo : getRestInfo,
 		getHGradeInfo : getHGradeInfo,
         getMGradeInfo : getMGradeInfo,
-        getLGradeInfo : getLGradeInfo
+        getLGradeInfo : getLGradeInfo,
+        addmenuItem2Order:addmenuItem2Order
 	};
 	
 })();
@@ -101,8 +142,9 @@ var sum=0;
 function addOrder(item){
     var itemName=$(item).attr('item-name');
     var itemPrice=$(item).attr('item-price');
+    var itemId=$(item).attr('item-id');
     $('#orderList').append(
-                        '<tr><td data-name="'+itemName+'">'+itemName+'</td><td><input type="number" value="1" class="form-control input-sm"></td><td data-price="'+itemPrice+'">'+itemPrice+'</td></tr>');
+                        '<tr data-name=tr-order-item><td data-name=itemId style="display:none">'+itemId+'</td><td data-name=itemName>'+itemName+'</td><td><input type="number" value="1" class="form-control input-sm"></td><td data-name=itemPrice>'+itemPrice+'</td></tr>');
     sum=sum+parseFloat(itemPrice);
     
     $('#sumPrice').text(sum);
@@ -125,7 +167,7 @@ $(document).ready(function() {
     });
     
     $('#submitMenuBtn').on("click",function(){
-        
+    	restInfoController.addmenuItem2Order();
     });
     
 });
