@@ -53,6 +53,7 @@ public class MerchantAction {
 		mer.setUser(user);
 		mer.setIDimage(file.getBytes());
 		Restaurant restaurant = (Restaurant) session.getAttribute("restaurant");
+		restaurant.setTel(user.getTel());
 		mer.setRestaurant(restaurant);
 		restaurant.setOwner(mer);
 		merchantService.addMerchant(mer);

@@ -7,6 +7,7 @@
 			type: 'GET',
 			dataType: 'json'
 		}).done(function(data, status, xhr) {
+			console.log("21212121");
 			createPanel(data);
 		}).fail(function(xhr, status, error) {
 			console.log('fail');
@@ -88,7 +89,7 @@
 			var confirmList = $("<div class='confirmList col-xs-7'></div>");
 			var confirm_panel = $("<div class='panel panel-default'></div>");
 			var confirm_panel_body = $("<div class='panel-body'></div>");
-			var confirm_panel_body_orderNum = $("<div class='form-group row'><label class='col-sm-3 control-label'>訂單號：</label><div class='col-sm-9'><input type='text' class='form-control' id='inputOrderNum' value='" + data.object[i].id + "' disabled='disabled'></div></div>");
+			var confirm_panel_body_orderNum = $("<div class='form-group row col-sm-12'><label class='col-sm-3 control-label'>訂單號：</label><div class='col-sm-9'><input type='text' class='form-control' id='inputOrderNum' value='" + data.object[i].id + "' disabled='disabled'></div></div>");
 			var confirm_panel_body_receTime = $("<div class='form-group row'><label class='col-sm-3 control-label'>下單日期：</label><div class='col-sm-9'><input type='text' class='form-control' id='inputCreTime' value='" + data.object[i].createDate + "' disabled='disabled'></div></div>");
 			var confirm_panel_body_orderStatus = $("<div class='form-group row'><label class='col-sm-3 control-label'>訂單狀態：</label><div class='col-sm-9'><input type='text' class='form-control' id='inputStatus' value='" + status + "' disabled='disabled'></div></div>");
 			var confirm_panel_body_contact = $("<div class='form-group row'><label class='col-sm-3 control-label'>联系人：</label><div class='col-sm-9'><input type='text' class='form-control' id='inputContact' value='" + data.object[i].connectPeople + "' disabled='disabled'></div></div>");
