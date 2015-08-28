@@ -11,10 +11,14 @@ $(function() {
 						url: 'http://localhost:17236/O2OSystem-admin/AdminService/jms',
 						type: 'get',
 						dataType: 'json',
-					}).done(function(data, status, xhr) {
-						var size = $("#jmsMsg").val();
-						$("#jmsMsg").text(size + data.length);
-					});
+					})
+					.done(
+						function(data, status, xhr) {
+							var size = $("#jmsMsg").text();
+							$("#jmsMsg")
+								.text(
+									parseInt(size) + parseInt(data.length));
+						});
 			}
 		});
 	setInterval("$.a()", 2000);
