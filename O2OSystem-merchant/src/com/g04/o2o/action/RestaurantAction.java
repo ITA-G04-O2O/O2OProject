@@ -90,7 +90,6 @@ public class RestaurantAction {
 		restV.setCollectionTimes(rest.getCollectionTimes());
 		restV.setGrade(rest.getGrade());
 		System.out.println(restV);
-
 		return restV;
 	}
 
