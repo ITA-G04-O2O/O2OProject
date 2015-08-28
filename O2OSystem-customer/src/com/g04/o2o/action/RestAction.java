@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,8 +74,9 @@ public class RestAction {
 	}
 	
 	@Transactional
-	@RequestMapping(value="/restaurant/{id}",method=RequestMethod.GET)
-	public JsonProtocol getRestInfo(@PathVariable(value="id") Integer id){
+	@RequestMapping(value="/restaurant",method=RequestMethod.GET)
+	public JsonProtocol getRestInfo(HttpSession session){
+		Integer id=(Integer)session.getAttribute("restId");
 		JsonProtocol jp = new JsonProtocol();
 		Restaurant r=restService.getRestInfo(id);
 		String name=r.getName();

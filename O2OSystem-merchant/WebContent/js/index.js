@@ -32,7 +32,6 @@ $(function() {
 		type: 'GET',
 		dataType: 'json'
 	}).done(function(data, status, xhr) {
-
 		$("#restName").text(data.name);
 		$("#restGrade").text(data.grade);
 		$("#restOpenTime").text(data.openTime);
