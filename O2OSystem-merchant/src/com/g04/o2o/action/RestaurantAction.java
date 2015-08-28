@@ -58,6 +58,9 @@ public class RestaurantAction {
 		}
 		Restaurant rest = new Restaurant();
 		rest.setName(mName);
+		rest.setExamine(0);
+		rest.setDisCharge(0);
+		rest.setPlayPrice(0);
 		rest.setType(restaurantService.getRestTypeById(type));
 		Address addr = new Address();
 		Area area = areaService.getAreaByCity(cityInput);
