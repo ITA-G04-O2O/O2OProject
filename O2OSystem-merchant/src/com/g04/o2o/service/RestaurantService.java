@@ -115,4 +115,11 @@ public interface RestaurantService {
 	 */
 	public RestaurantType getRestTypeById(Integer restTypeId);
 
+	public Restaurant findRestByUserId(int id);
+
+	public int updateRestName(int restId, String name);
+
+	public int updateTel(int restId, String tel);
+
+
 }
