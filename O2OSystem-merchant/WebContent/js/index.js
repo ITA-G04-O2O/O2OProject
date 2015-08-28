@@ -11,14 +11,14 @@ $(function() {
 	$("#accountInfo").live("click", function() {
 		showAccount();
 	});
-	
-	$("#newOrder").live("click",function(){
-//		alert("Hello");
+
+	$("#newOrder").live("click", function() {
+		// alert("Hello");
 		loadNewOrderFunction();
 	});
-	
-	$("#successOrder").live("click",function(){
-//		alert("Hello");
+
+	$("#successOrder").live("click", function() {
+		// alert("Hello");
 		loadOrders();
 	});
 
@@ -30,6 +30,10 @@ $(function() {
 	$("#successOrder").live("click", function() {
 		// alert("Hello");
 		loadOrders();
+	});
+	$("#storeInfo").live("click", function() {
+		
+		loadRestInfo();
 	});
 
 });

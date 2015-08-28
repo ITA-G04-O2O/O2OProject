@@ -1,4 +1,18 @@
-$(function() {
+var loadRestInfo = function() {
+	$.ajax({
+		url : "http://localhost:17236/o2osystem-merchant/restaurant/" + 2,
+		type : 'GET',
+		dataType : 'json',
+		success : function(data) {
+			$("#name").val(data.name);
+			$("#tel").val(data.tel);
+			$("#detail").val(data.detail);
+			$("#radio-group input[value=" + data.detail + "]:checked");
+			$("#proBtn").val(data.pro);
+			$("#cityBtn").val(data.city);
+		}
+	});
+
 	$("#restInfoEditBtn").live("click", function() {
 		alert($("#detail").val());
 		$.ajax({
@@ -7,7 +21,6 @@ $(function() {
 			dataType : 'json',
 			data : {
 				name : $("#name").val(),
-				type : $('#radio-group input[name="type"]:checked').val(),
 				tel : $("#tel").val(),
 				pro : $("#proBtn").text(),
 				city : $("#cityBtn").text(),
@@ -80,4 +93,4 @@ $(function() {
 				});
 	}
 
-});
+};

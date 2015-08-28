@@ -14,6 +14,42 @@ public class RestaurantVO {
 	private Integer disCharge;// 配送费
 	private String openTime;// 营业时间
 	private String tel;
+	private String pro;
+	private String city;
+	private int rtype;
+	private String detail;
+
+	public String getDetail() {
+		return detail;
+	}
+
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
+
+	public String getPro() {
+		return pro;
+	}
+
+	public void setPro(String pro) {
+		this.pro = pro;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public int getRtype() {
+		return rtype;
+	}
+
+	public void setRtype(int rtype) {
+		this.rtype = rtype;
+	}
 
 	public String getTel() {
 		return tel;
@@ -85,6 +121,14 @@ public class RestaurantVO {
 
 	public void setOpenTime(String openTime) {
 		this.openTime = openTime;
+	}
+
+	@Override
+	public String toString() {
+		return "RestaurantVO [id=" + id + ", name=" + name + ", type=" + type
+				+ ", address=" + address + ", notice=" + notice
+				+ ", playPrice=" + playPrice + ", disCharge=" + disCharge
+				+ ", openTime=" + openTime + ", tel=" + tel + "]";
 	}
 
 }

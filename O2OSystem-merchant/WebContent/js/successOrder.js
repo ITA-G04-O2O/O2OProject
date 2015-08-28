@@ -131,9 +131,4 @@
 		loadFinishOrders();
 		loadFailOrders();
 	};
-<<<<<<< HEAD
-	
-=======
-
->>>>>>> 03367ce4f7637ab2c2d648e79b36fcda48b9bc52
 //});
