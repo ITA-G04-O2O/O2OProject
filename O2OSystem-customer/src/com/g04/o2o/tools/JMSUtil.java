@@ -24,6 +24,12 @@ public class JMSUtil {
 	static {
 		factory = new ActiveMQConnectionFactory(
 				"failover://tcp://10.222.29.153:61616");
+		try {
+			conn = factory.createConnection();
+			session = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
+		} catch (JMSException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public JMSUtil(String queueName) {
@@ -33,8 +39,6 @@ public class JMSUtil {
 	public void sendMsg(String msg) {
 		MessageProducer producer = null;
 		try {
-			conn = factory.createConnection();
-			session = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
 			producer = session.createProducer(queue);
 			TextMessage newmsg = session.createTextMessage(msg);
 			producer.send(newmsg);
@@ -44,12 +48,6 @@ public class JMSUtil {
 			try {
 				if (producer != null) {
 					producer.close();
-				}
-				if (session != null) {
-					session.close();
-				}
-				if (conn != null) {
-					conn.close();
 				}
 			} catch (JMSException e) {
 				e.printStackTrace();
@@ -61,8 +59,6 @@ public class JMSUtil {
 		MessageConsumer consumer = null;
 		List<String> list = new ArrayList<String>();
 		try {
-			conn = factory.createConnection();
-			session = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
 			consumer = session.createConsumer(queue);
 			conn.start();
 			Message msg = null;
@@ -78,17 +74,47 @@ public class JMSUtil {
 				if (consumer != null) {
 					consumer.close();
 				}
-				if (session != null) {
-					session.close();
-				}
-				if (conn != null) {
-					conn.close();
-				}
 			} catch (JMSException e) {
 				e.printStackTrace();
 			}
 		}
 		return list;
+	}
+
+	public String receiveOne() {
+		MessageConsumer consumer = null;
+		try {
+			consumer = session.createConsumer(queue);
+			conn.start();
+			Message msg = consumer.receive();
+			TextMessage tmsg = (TextMessage) msg;
+			String str = tmsg.getText();
+			return str;
+		} catch (JMSException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (consumer != null) {
+					consumer.close();
+				}
+			} catch (JMSException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+
+	public void free() {
+		try {
+			if (session != null) {
+				session.close();
+			}
+			if (conn != null) {
+				conn.close();
+			}
+		} catch (JMSException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
