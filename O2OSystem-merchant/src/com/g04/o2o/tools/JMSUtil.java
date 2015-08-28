@@ -18,6 +18,8 @@ import org.apache.activemq.command.ActiveMQQueue;
 import org.springframework.jms.support.JmsUtils;
 
 import com.g04.o2o.entity.Area;
+import com.g04.o2o.entity.JmsProtocol;
+import com.g04.o2o.entity.JmsType;
 
 public class JMSUtil {
 	static ConnectionFactory factory = null;
@@ -122,10 +124,11 @@ public class JMSUtil {
 	
 	public static void main(String[] args) {
 		JMSUtil jms =new JMSUtil("g04_que");
-		Area area =new Area();
-		area.setCity("beijing");
-		area.setProvince("beijing");
-		jms.sendMsg(JsonUtil.toJSon(area));
+		JmsProtocol pro = new JmsProtocol();
+		pro.setType(JmsType.regist);
+		jms.sendMsg(JsonUtil.toJSon(pro));
+		jms.free();
+		
 	}
 
 }
