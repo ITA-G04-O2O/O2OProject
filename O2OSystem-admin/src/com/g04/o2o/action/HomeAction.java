@@ -12,7 +12,7 @@ public class HomeAction {
 	}
 	
 	@RequestMapping(value="/login")
-	public void login(){
-		System.out.println("验证登陆");
+	public String login(){
+		return "login";
 	}
 }
