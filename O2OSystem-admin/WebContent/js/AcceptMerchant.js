@@ -8,7 +8,7 @@ $(function() {
 			a: function(t) {
 				$
 					.ajax({
-						url: 'http://localhost:17236/O2OSystem-admin/AdminService/jms',
+						url: 'http://localhost:8888/O2OSystem-admin/AdminService/jms',
 						type: 'get',
 						dataType: 'json',
 					})
