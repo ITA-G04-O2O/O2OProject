@@ -19,7 +19,7 @@ public class GetOrderVOHelper {
 		goVo.setStatus(order.getStatus());
 		goVo.setConnectPeople(order.getUser().getLoginName());
 		goVo.setTel(order.getTel());
-		goVo.setAddress(order.getAddress().getArea().getProvince()+order.getAddress().getArea().getCity()+order.getAddress().getDetail());
+//		goVo.setAddress(order.getAddress().getArea().getProvince()+order.getAddress().getArea().getCity()+order.getAddress().getDetail());
 		goVo.setMenuItemAmountMap(GetOrderVOHelper.corventListToAmountMap(order.getItems()));
 		goVo.setMenuItemPriceMap(GetOrderVOHelper.corventListToPriceMap(order.getItems()));
 		goVo.setTotalPrices(GetOrderVOHelper.getTotalPirce(order.getItems()));
