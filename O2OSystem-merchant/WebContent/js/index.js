@@ -32,7 +32,6 @@ $(function() {
 		type: 'GET',
 		dataType: 'json'
 	}).done(function(data, status, xhr) {
-
 		$("#restName").text(data.name);
 		$("#restGrade").text(data.grade);
 		$("#restOpenTime").text(data.openTime);
@@ -41,21 +40,5 @@ $(function() {
 		console.log('fail');
 	});
 	//};
-
-	$("#newOrder").live("click", function() {
-		// alert("Hello");
-		loadNewOrderFunction();
-	});
-
-	$("#successOrder").live("click", function() {
-		// alert("Hello");
-		loadOrders();
-	});
-	$("#storeInfo").live("click", function() {
-		loadRestInfo();
-	});
-	$("#basicInfo").live("click", function() {
-		loadBasicInfo();
-	});
 
 });

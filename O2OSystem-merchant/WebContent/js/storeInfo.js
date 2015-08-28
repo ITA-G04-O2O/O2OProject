@@ -7,7 +7,6 @@ var loadRestInfo = function() {
 			$("#name").val(data.name);
 			$("#tel").val(data.tel);
 			$("#detail").val(data.detail);
-			$("#radio-group input[value=" + data.detail + "]:checked");
 			$("#proBtn").val(data.pro);
 			$("#cityBtn").val(data.city);
 		}
