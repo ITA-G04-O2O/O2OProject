@@ -70,6 +70,7 @@ public class RestaurantAction {
 	}
 
 	@ResponseBody
+	@Transactional
 	@RequestMapping(value = "/restaurant/{id}", method = RequestMethod.GET)
 	public RestaurantVO get(@PathVariable Integer id) {
 		System.out.println("RestaurantAction2...");
@@ -89,7 +90,6 @@ public class RestaurantAction {
 		restV.setCollectionTimes(rest.getCollectionTimes());
 		restV.setGrade(rest.getGrade());
 		System.out.println(restV);
-
 		return restV;
 	}
 
