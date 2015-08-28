@@ -60,7 +60,6 @@ public class MerchantAction {
 		JmsProtocol msg = new JmsProtocol();
 		msg.setType(JmsType.regist);
 		jms.sendMsg(JsonUtil.toJSon(msg));
-		jms.free();
 		return "waiting";
 	}
 

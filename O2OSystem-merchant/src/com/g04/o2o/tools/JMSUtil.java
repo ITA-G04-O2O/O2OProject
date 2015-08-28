@@ -15,11 +15,6 @@ import javax.jms.TextMessage;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQQueue;
-import org.springframework.jms.support.JmsUtils;
-
-import com.g04.o2o.entity.Area;
-import com.g04.o2o.entity.JmsProtocol;
-import com.g04.o2o.entity.JmsType;
 
 public class JMSUtil {
 	static ConnectionFactory factory = null;
@@ -29,12 +24,6 @@ public class JMSUtil {
 	static {
 		factory = new ActiveMQConnectionFactory(
 				"failover://tcp://10.222.29.153:61616");
-		try {
-			conn = factory.createConnection();
-			session = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
-		} catch (JMSException e) {
-			e.printStackTrace();
-		}
 	}
 
 	public JMSUtil(String queueName) {
@@ -44,6 +33,8 @@ public class JMSUtil {
 	public void sendMsg(String msg) {
 		MessageProducer producer = null;
 		try {
+			conn = factory.createConnection();
+			session = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
 			producer = session.createProducer(queue);
 			TextMessage newmsg = session.createTextMessage(msg);
 			producer.send(newmsg);
@@ -53,6 +44,12 @@ public class JMSUtil {
 			try {
 				if (producer != null) {
 					producer.close();
+				}
+				if (session != null) {
+					session.close();
+				}
+				if (conn != null) {
+					conn.close();
 				}
 			} catch (JMSException e) {
 				e.printStackTrace();
@@ -64,6 +61,8 @@ public class JMSUtil {
 		MessageConsumer consumer = null;
 		List<String> list = new ArrayList<String>();
 		try {
+			conn = factory.createConnection();
+			session = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
 			consumer = session.createConsumer(queue);
 			conn.start();
 			Message msg = null;
@@ -79,56 +78,17 @@ public class JMSUtil {
 				if (consumer != null) {
 					consumer.close();
 				}
-			} catch (JMSException e) {
-				e.printStackTrace();
-			}
-		}
-		return list;
-	}
-
-	public String receiveOne() {
-		MessageConsumer consumer = null;
-		try {
-			consumer = session.createConsumer(queue);
-			conn.start();
-			Message msg = consumer.receive();
-			TextMessage tmsg = (TextMessage) msg;
-			String str = tmsg.getText();
-			return str;
-		} catch (JMSException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (consumer != null) {
-					consumer.close();
+				if (session != null) {
+					session.close();
+				}
+				if (conn != null) {
+					conn.close();
 				}
 			} catch (JMSException e) {
 				e.printStackTrace();
 			}
 		}
-		return null;
-	}
-
-	public void free() {
-		try {
-			if (session != null) {
-				session.close();
-			}
-			if (conn != null) {
-				conn.close();
-			}
-		} catch (JMSException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public static void main(String[] args) {
-		JMSUtil jms =new JMSUtil("g04_que");
-		JmsProtocol pro = new JmsProtocol();
-		pro.setType(JmsType.regist);
-		jms.sendMsg(JsonUtil.toJSon(pro));
-		jms.free();
-		
+		return list;
 	}
 
 }
