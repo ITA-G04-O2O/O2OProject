@@ -73,7 +73,7 @@ public class RestaurantAction {
 	@RequestMapping(value = "/restaurant/{id}", method = RequestMethod.GET)
 	public RestaurantVO get(@PathVariable Integer id) {
 		System.out.println("RestaurantAction2...");
-		Restaurant rest = restaurantService.getRestById(id);
+		Restaurant rest = restaurantService.findRestByUserId(id);
 		RestaurantVO restV = new RestaurantVO();
 		restV.setName(rest.getName());
 		restV.setTel(rest.getTel());
