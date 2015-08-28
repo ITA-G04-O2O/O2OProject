@@ -18,7 +18,7 @@ public interface MenuService {
 	 * 
 	 * @return
 	 */
-	public List<String> findAllMenuTypes();
+	public List<String> findAllMenuTypes(Integer restID);
 
 	/**
 	 * 获取某一个菜品种类
@@ -33,7 +33,7 @@ public interface MenuService {
 	 * @param menuType
 	 * @return
 	 */
-	public boolean addMenuType(String menuType);
+	public boolean addMenuType(Integer restId, String menuType);
 
 	/**
 	 * 删除菜品种类
@@ -59,7 +59,7 @@ public interface MenuService {
 	 * 
 	 * @return
 	 */
-	public List<MenuItem> findAllMenuItems();
+	public List<MenuItem> findAllMenuItems(Integer restId);
 
 	/**
 	 * 获取某个菜品信息
@@ -68,13 +68,14 @@ public interface MenuService {
 	 * @return
 	 */
 	public MenuItem getMenuItemById(Integer id);
-	
+
 	/**
 	 * 找对应菜品种类的所有菜品
+	 * 
 	 * @param menuTypeString
 	 * @return
 	 */
-	public List<MenuItem> findMenuIeItemsByMenuType(String menuTypeString);
+	public List<MenuItem> findMenuItemsByMenuType(Integer menuTypeId);
 
 	/**
 	 * 添加新的菜品
@@ -82,7 +83,7 @@ public interface MenuService {
 	 * @param menuItem
 	 * @return
 	 */
-	public boolean addMenuItem(MenuItem menuItem);
+	public boolean addMenuItem(Integer restId, MenuItem menuItem);
 
 	/**
 	 * 删除新的菜品

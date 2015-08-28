@@ -34,19 +34,21 @@ public class MenuServiceImpl implements MenuService {
 	private RestaurantDao rd;
 
 	@Override
-	public List<String> findAllMenuTypes() {
+	public List<String> findAllMenuTypes(Integer restId) {
 		List<MenuType> mtl = mtd.searchAll(MenuType.class);
 		List<String> types = new ArrayList<String>();
 		for (MenuType menuType : mtl) {
-			types.add(menuType.getMenuTypeName());
+			if (menuType.getRest().getId() == restId)
+				types.add(menuType.getMenuTypeName());
 		}
 		return types;
 	}
 
 	@Override
 	@Transactional
-	public boolean addMenuType(String menuType) {
+	public boolean addMenuType(Integer restId, String menuType) {
 		MenuType mt = new MenuType();
+		mt.setRest(rd.search(Restaurant.class, restId));
 		mt.setMenuTypeName(menuType);
 		try {
 			mtd.add(mt);
@@ -73,32 +75,43 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	@Override
-	public List<MenuItem> findAllMenuItems() {
-		return mid.searchAll(MenuItem.class);
-	}
-	
-
-	@Override
-	public List<MenuItem> findMenuIeItemsByMenuType(String menuTypeString) {
-		List<MenuItem> allItems = mid.searchAll(MenuItem.class);
-		List<MenuItem> menuTypeItems = new ArrayList<MenuItem>();
-		for (MenuItem menuItem : allItems) {
-			if (menuTypeString.equals(menuItem.getType().getMenuTypeName())) {
-				menuTypeItems.add(menuItem);
+	public List<MenuItem> findAllMenuItems(Integer restId) {
+		List<MenuItem> menuItems = mid.searchAll(MenuItem.class);
+		for (MenuItem menuItem : menuItems) {
+			if (menuItem.getResturant().getId() != restId) {
+				menuItems.remove(menuItem);
 			}
 		}
-		return menuTypeItems;
+		return menuItems;
 	}
 
 	@Override
-	public MenuItem getMenuItemById(Integer id) {
-		return mid.search(MenuItem.class, id);
+	public List<MenuItem> findMenuItemsByMenuType(Integer menuTypeId) {
+		List<MenuItem> allItems = mid.searchAll(MenuItem.class);
+		for (MenuItem menuItem : allItems) {
+			if (menuItem.getType().getId() != menuTypeId) {
+				allItems.remove(menuItem);
+			}
+		}
+		// List<MenuItem> menuTypeItems = new ArrayList<MenuItem>();
+		// for (MenuItem menuItem : allItems) {
+		// if (menuTypeString.equals(menuItem.getType().getMenuTypeName())) {
+		// menuTypeItems.add(menuItem);
+		// }
+		// }
+		return allItems;
+	}
+
+	@Override
+	public MenuItem getMenuItemById(Integer menuItemId) {
+		return mid.search(MenuItem.class, menuItemId);
 	}
 
 	@Override
 	@Transactional
-	public boolean addMenuItem(MenuItem menuItem) {
+	public boolean addMenuItem(Integer restId, MenuItem menuItem) {
 		try {
+			menuItem.setResturant(rd.search(Restaurant.class, restId));
 			mid.add(menuItem);
 		} catch (Exception e) {
 			return false;
@@ -119,7 +132,6 @@ public class MenuServiceImpl implements MenuService {
 
 	@Override
 	@Transactional
-
 	public boolean updMenuItemName(Integer id, String itemName) {
 		try {
 			mid.search(MenuItem.class, id).setItemName(itemName);
@@ -131,7 +143,6 @@ public class MenuServiceImpl implements MenuService {
 
 	@Override
 	@Transactional
-
 	public boolean updMenuItemPrice(Integer id, Double price) {
 		try {
 			mid.search(MenuItem.class, id).setPrice(price);
@@ -143,7 +154,6 @@ public class MenuServiceImpl implements MenuService {
 
 	@Override
 	@Transactional
-
 	public boolean updMenuItemDescription(Integer id, String description) {
 		try {
 			mid.search(MenuItem.class, id).setDescription(description);
@@ -155,7 +165,6 @@ public class MenuServiceImpl implements MenuService {
 
 	@Override
 	@Transactional
-
 	public boolean updMenuItemType(Integer id, String type) {
 		for (MenuType menuType : mtd.searchAll(MenuType.class)) {
 			if (type.equals(menuType.getMenuTypeName())) {
@@ -168,7 +177,6 @@ public class MenuServiceImpl implements MenuService {
 
 	@Override
 	@Transactional
-
 	public boolean updMenuItemSalesVolume(Integer id, Integer volume) {
 		try {
 			mid.search(MenuItem.class, id).setSalesVolume(volume);
@@ -180,7 +188,6 @@ public class MenuServiceImpl implements MenuService {
 
 	@Override
 	@Transactional
-
 	public boolean updMenuItemScore(Integer id, Double score) {
 		try {
 			mid.search(MenuItem.class, id).setScore(score);
