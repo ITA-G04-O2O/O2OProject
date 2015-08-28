@@ -2,6 +2,7 @@ package com.g04.o2o.vo.helper;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,15 @@ public class GetOrderVOHelper {
 		goVo.setTotalPrices(GetOrderVOHelper.getTotalPirce(order.getItems()));
 		if (!("".equals(order.getCompletedTime())||order.getCompletedTime() == null)) {
 			goVo.setCompletedDate(order.getCompletedTime());
+		}else {
+			goVo.setCompletedDate(new Date());
+
+		}
+		if (!("".equals(order.getReceiveTime())||order.getReceiveTime() == null)) {
+			goVo.setCompletedDate(order.getReceiveTime());
+		}else {
+			goVo.setCompletedDate(new Date());
+
 		}
 		return goVo;
 	}

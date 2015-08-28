@@ -1,4 +1,4 @@
-$(function() {
+//$(function() {
 
 
 	var loadNewOrderFunction = function() {
@@ -190,4 +190,4 @@ $(function() {
 	};
 
 
-});
+//});

@@ -38,9 +38,9 @@ public class AdminAction {
 		return jp;
 	}
 
-	@RequestMapping(value = "/sysSetting/{id}", method = RequestMethod.PUT, produces = {
-			"application/json;charset=UTF-8" })
-	public JsonProtocol updateSystemTimes(@PathVariable(value = "id") int id, MainSystem mainSystem) {
+	@RequestMapping(value = "/sysSetting/{id}", method = RequestMethod.PUT, produces = { "application/json;charset=UTF-8" })
+	public JsonProtocol updateSystemTimes(@PathVariable(value = "id") int id,
+			MainSystem mainSystem) {
 		JsonProtocol jp = new JsonProtocol();
 		jp.setResult(systemService.updateSystemTimes(mainSystem));
 		return jp;
@@ -56,8 +56,7 @@ public class AdminAction {
 		return jp;
 	}
 
-	@RequestMapping(value = "/restaurantTypes", method = RequestMethod.GET, produces = {
-			"application/json;charset=UTF-8" })
+	@RequestMapping(value = "/restaurantTypes", method = RequestMethod.GET, produces = { "application/json;charset=UTF-8" })
 	@Transactional
 	public JsonProtocol getRestaurantType() {
 		JsonProtocol jp = new JsonProtocol();
@@ -73,16 +72,15 @@ public class AdminAction {
 		return jp;
 	}
 
-	@RequestMapping(value = "/restaurantType/{id}", method = RequestMethod.PUT, produces = {
-			"application/json;charset=UTF-8" })
-	public JsonProtocol updateRestaurantType(@PathVariable(value = "id") int id, String type) {
+	@RequestMapping(value = "/restaurantType/{id}", method = RequestMethod.PUT, produces = { "application/json;charset=UTF-8" })
+	public JsonProtocol updateRestaurantType(
+			@PathVariable(value = "id") int id, String type) {
 		JsonProtocol jp = new JsonProtocol();
 		jp.setResult(systemService.updateRestaurantType(id, type));
 		return jp;
 	}
 
-	@RequestMapping(value = "/restaurantType", method = RequestMethod.POST, produces = {
-			"application/json;charset=UTF-8" })
+	@RequestMapping(value = "/restaurantType", method = RequestMethod.POST, produces = { "application/json;charset=UTF-8" })
 	public JsonProtocol addRestaurantType(String type) {
 		JsonProtocol jp = new JsonProtocol();
 		jp.setResult(systemService.addRestaurantType(type));
@@ -96,8 +94,7 @@ public class AdminAction {
 		return jp;
 	}
 
-	@RequestMapping(value = "/hotlines/{id}", method = RequestMethod.PUT, produces = {
-			"application/json;charset=UTF-8" })
+	@RequestMapping(value = "/hotlines/{id}", method = RequestMethod.PUT, produces = { "application/json;charset=UTF-8" })
 	public JsonProtocol updateHotLine(@PathVariable int id, String tel) {
 		JsonProtocol jp = new JsonProtocol();
 		jp.setResult(systemService.updateHotLines(id, tel));
@@ -112,8 +109,7 @@ public class AdminAction {
 		return jp;
 	}
 
-	@RequestMapping(value = "/hotlines/{id}", method = RequestMethod.DELETE, produces = {
-			"application/json;charset=UTF-8" })
+	@RequestMapping(value = "/hotlines/{id}", method = RequestMethod.DELETE, produces = { "application/json;charset=UTF-8" })
 	public JsonProtocol deleteHotLine(@PathVariable int id) {
 		JsonProtocol jp = new JsonProtocol();
 		jp.setResult(systemService.deleteHotLine(id));
@@ -147,8 +143,7 @@ public class AdminAction {
 		return jp;
 	}
 
-	@RequestMapping(value = "/restaurantVerify/{id}", method = RequestMethod.GET, produces = {
-			"application/json;charset=UTF-8" })
+	@RequestMapping(value = "/restaurantVerify/{id}", method = RequestMethod.GET, produces = { "application/json;charset=UTF-8" })
 	public JsonProtocol getRestaurant(@PathVariable int id) {
 		JsonProtocol jp = new JsonProtocol();
 		jp.setResult(true);
@@ -165,27 +160,27 @@ public class AdminAction {
 		return jp;
 	}
 
-	@RequestMapping(value = "/restaurantVerify", method = RequestMethod.GET, produces = {
-			"application/json;charset=UTF-8" })
+	@RequestMapping(value = "/restaurantVerify", method = RequestMethod.GET, produces = { "application/json;charset=UTF-8" })
 	public JsonProtocol getAllRestaurantVerify() {
 		JsonProtocol jp = new JsonProtocol();
 		jp.setResult(true);
 		List<VeriftyRestaurant> restaurantsVo = new ArrayList<>();
 		List<Restaurant> restaurants = systemService.getAllRestaurant();
-		for (Restaurant restaurant : restaurants) {
-			if (restaurant.getExamine() == 0) {
-				VeriftyRestaurant vr = new VeriftyRestaurant();
-				vr.setId(restaurant.getId());
-				vr.setName(restaurant.getName());
-				restaurantsVo.add(vr);
+		if (restaurants != null) {
+			for (Restaurant restaurant : restaurants) {
+				if (restaurant.getExamine() == 0) {
+					VeriftyRestaurant vr = new VeriftyRestaurant();
+					vr.setId(restaurant.getId());
+					vr.setName(restaurant.getName());
+					restaurantsVo.add(vr);
+				}
 			}
 		}
 		jp.setObject(restaurantsVo);
 		return jp;
 	}
 
-	@RequestMapping(value = "/restaurantVerify/{id}", method = RequestMethod.PUT, produces = {
-			"application/json;charset=UTF-8" })
+	@RequestMapping(value = "/restaurantVerify/{id}", method = RequestMethod.PUT, produces = { "application/json;charset=UTF-8" })
 	public JsonProtocol verifyRestaurant(@PathVariable int id, int state) {
 		JsonProtocol jp = new JsonProtocol();
 		jp.setResult(systemService.verifyRestaurant(id, state));

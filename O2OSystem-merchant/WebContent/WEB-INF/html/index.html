@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title>商家管理系统</title>
@@ -8,12 +9,13 @@
 		<script src="//cdn.bootcss.com/jquery/1.7/jquery.min.js"></script>
 		<!--<script src="js/dist/bootstrap.min.js"></script>-->
 		<script src="//cdn.bootcss.com/bootstrap/2.3.1/js/bootstrap.min.js"></script>
-		<script src="js/index.js"></script>
 		<script src="js/successOrder.js"></script>
 		<script src="js/newOrder.js"></script>
 		<script src="js/menuManager.js"></script>
 		<script src="js/accountInfo.js"></script>
 		<script src="js/storeInfo.js"></script>
+		<script src="js/index.js"></script>
+		<script src="js/basicInfo.js"></script>
 		<link rel="stylesheet" src="css/index.css" />
 	</head>
 
@@ -22,20 +24,15 @@
 			<div class="container">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
+						<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 					</button>
-					<a href="index.html"><img src="img/logoshow.ico" width="50px" style="margin-top:8px"></a>
+					<a href="index.html"><img src="img/logoshow.ico" width="50px" style="margin-top: 8px"></a>
 				</div>
 				<div class="collapse navbar-collapse" id="main-nav">
 					<ul class="nav navbar-nav navbar-right">
-						<li>
-							<a>Hello，Okar</a>
-						</li>
-						<li>
-							<a href="http://localhost:8889/O2OSystem-customer/index"><i class="glyphicon glyphicon-log-out"></i></a>
-						</li>
+						<li><a>Hello，Okar</a></li>
+						<li><a href="http://localhost:8889/O2OSystem-customer/index"><i
+							class="glyphicon glyphicon-log-out"></i></a></li>
 					</ul>
 				</div>
 			</div>
@@ -45,24 +42,23 @@
 				<div class="col-xs-12">
 					<div class="row breadcrumb-wrapper">
 						<div class="col-xs-12">
-							<div class="col-xs-2"><img src="img/logoshow.ico">
+							<div class="col-xs-2">
+								<img src="img/logoshow.ico">
 							</div>
 							<div class="col-xs-6">
-								<h2 class="col-xs-6">Okar之家</h2>
+								<h2 class="col-xs-6" id="restName">Okar之家</h2>
 								<div class="center">
-									<span class="label label-default col-xs-6">评分</span>
-									<span class="label label-default col-xs-6">4.0</span>
+									<span class="label label-default col-xs-6">评分</span> <span class="label label-default col-xs-6" id="restGrade">4.0</span>
 								</div>
 							</div>
 							<div class="col-xs-2">
 								<div class="center">
-									<span class="label label-default col-xs-12">平均送餐时间</span>
-									<span class="label label-default col-xs-12">20分</span>
+									<span class="label label-default col-xs-12">营业时间</span> <span class="label label-default col-xs-12" id="restOpenTime">6:00-23:00</span>
 								</div>
 							</div>
 							<div class="col-xs-2">
 								<div class="row center">
-									<i class="glyphicon glyphicon-star "></i><span class="label label-default col-xs-10">收藏数</span><span class="label label-default col-xs-12">666666</span>
+									<i class="glyphicon glyphicon-star "></i><span class="label label-default col-xs-10">收藏数</span><span class="label label-default col-xs-12" id="collectionTimes">666666</span>
 								</div>
 							</div>
 						</div>
@@ -71,39 +67,27 @@
 						<div class="col-xs-3">
 							<ul class="nav nav-pills nav-stacked">
 								<div class="list-group">
-									<li role="presentation" class="list-group-item">
-										<b class="text-default"><i
-										class="glyphicon glyphicon-fire"></i>&emsp;订单中心</b>
+									<li role="presentation" class="list-group-item"><b class="text-default"><i class="glyphicon glyphicon-fire"></i>&emsp;订单中心</b>
 									</li>
 									<li role="presentation" class="list-group-item" id="newOrder">
-										<b class="text-info"><i
-										class="glyphicon glyphicon-cutlery"></i>&emsp;新订单</b>
+										<b class="text-info"><i class="glyphicon glyphicon-cutlery"></i>&emsp;新订单</b>
 									</li>
-									<li role="presentation" class="list-group-item" id="successOrder">
-										<b class="text-info"><i
-										class="glyphicon glyphicon-fire"></i>&emsp;已完成订单</b>
-									</li>
+									<li role="presentation" class="list-group-item" id="successOrder"><b class="text-info"><i
+										class="glyphicon glyphicon-fire"></i>&emsp;已完成订单</b></li>
 
-									<li role="presentation" class="list-group-item">
-										<b class="text-default"><i
-										class="glyphicon glyphicon-cutlery"></i>&emsp;餐品中心</b>
+									<li role="presentation" class="list-group-item"><b class="text-default"><i class="glyphicon glyphicon-cutlery"></i>&emsp;餐品中心</b>
 									</li>
 									<li role="presentation" class="list-group-item" id="menuManager">
-										<b class="text-info"><i
-										class="glyphicon glyphicon-cutlery"></i>&emsp;餐品管理</b>
+										<b class="text-info"><i class="glyphicon glyphicon-cutlery"></i>&emsp;餐品管理</b>
 									</li>
 
-									<li role="presentation" class="list-group-item">
-										<b class="text-default"><i
-										class="glyphicon glyphicon-cutlery"></i>&emsp;账户中心</b>
+									<li role="presentation" class="list-group-item"><b class="text-default"><i class="glyphicon glyphicon-cutlery"></i>&emsp;账户中心</b>
 									</li>
 									<li role="presentation" class="list-group-item" id="accountInfo">
-										<b class="text-info"><i
-										class="glyphicon glyphicon-fire"></i>&emsp;个人信息</b>
+										<b class="text-info"><i class="glyphicon glyphicon-fire"></i>&emsp;个人信息</b>
 									</li>
 									<li role="presentation" class="list-group-item" id="storeInfo">
-										<b class="text-info"><i
-										class="glyphicon glyphicon-cutlery"></i>&emsp;店铺信息</b>
+										<b class="text-info"><i class="glyphicon glyphicon-cutlery"></i>&emsp;店铺信息</b>
 									</li>
 									<li role="presentation" class="list-group-item" id="basicInfo">
 										<b class="text-info "><i
@@ -112,9 +96,7 @@
 								</div>
 							</ul>
 						</div>
-						<div class="col-xs-9 main-wrapper" id="change">
-
-						</div>
+						<div class="col-xs-9 main-wrapper" id="change"></div>
 					</div>
 				</div>
 			</div>
