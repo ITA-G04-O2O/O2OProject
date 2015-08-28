@@ -1,6 +1,7 @@
 package com.g04.o2o.action;
 
-import java.util.List;
+
+
 
 import javax.servlet.http.HttpSession;
 
@@ -12,10 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import vo.MenuItemVo;
-import vo.OrderVo;
-
 import com.g04.o2o.entity.JsonProtocol;
+
 
 @Controller
 public class RedirectAction {
@@ -36,10 +35,10 @@ public class RedirectAction {
 	}
 
 	//get order from session.
+	@ResponseBody
 	@RequestMapping("/order/get")
 	public JsonProtocol getSaveOrder(HttpSession session) {
-		@SuppressWarnings("unchecked")
-		List<MenuItemVo> order=(List<MenuItemVo>) session.getAttribute("userOrder");
+		String order=(String) session.getAttribute("userOrder");
 		JsonProtocol js=new JsonProtocol();
 		js.setObject(order);
 		return js;
