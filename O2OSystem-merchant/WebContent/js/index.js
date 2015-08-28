@@ -21,14 +21,14 @@ $(function() {
 		// alert("Hello");
 		loadOrders();
 	});
-	
-	
+
+
 	var restid = 2;
-	
+
 	//title  restaurant/{id}
-//	var loadFailOrders = function() {
+	//	var loadFailOrders = function() {
 	$.ajax({
-		url: "http://localhost:17236/o2osystem-merchant/restaurant/"+restid,
+		url: "http://localhost:17236/o2osystem-merchant/restaurant/" + restid,
 		type: 'GET',
 		dataType: 'json'
 	}).done(function(data, status, xhr) {
@@ -40,6 +40,25 @@ $(function() {
 	}).fail(function(xhr, status, error) {
 		console.log('fail');
 	});
-//};
+	//};
 
+<<<<<<< HEAD
+=======
+	$("#newOrder").live("click", function() {
+		// alert("Hello");
+		loadNewOrderFunction();
+	});
+
+	$("#successOrder").live("click", function() {
+		// alert("Hello");
+		loadOrders();
+	});
+	$("#storeInfo").live("click", function() {
+		loadRestInfo();
+	});
+	$("#basicInfo").live("click", function() {
+		loadBasicInfo();
+	});
+
+>>>>>>> af9dd08bb280a91abeab9b610331d242c7b4a5f1
 });
