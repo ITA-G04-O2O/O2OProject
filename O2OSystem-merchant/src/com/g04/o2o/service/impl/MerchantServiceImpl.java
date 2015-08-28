@@ -8,8 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.g04.o2o.dao.MerchantDao;
+import com.g04.o2o.entity.JmsProtocol;
+import com.g04.o2o.entity.JmsType;
 import com.g04.o2o.entity.Merchant;
 import com.g04.o2o.service.MerchantService;
+import com.g04.o2o.tools.JMSUtil;
+import com.g04.o2o.tools.JsonUtil;
 
 @Service
 public class MerchantServiceImpl implements MerchantService {

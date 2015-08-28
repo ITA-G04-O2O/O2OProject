@@ -3,6 +3,7 @@ package vo.helper;
 import java.util.ArrayList;
 import java.util.List;
 
+import vo.MenuItemVo;
 import vo.OrderItemVo;
 import vo.OrderVo;
 
@@ -36,6 +37,11 @@ public class OrderVoHelper {
 		OrderVo vo = new OrderVo(id, merchantTel, orderStatus, items, address, mycomment, restName, orderShowTime, orderNumber, receiver, receiverTel, myscore);
 		return vo;
 		
+	}
+
+	public static Order getOrderFromVo(List<MenuItemVo> orderVo, Integer restId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
