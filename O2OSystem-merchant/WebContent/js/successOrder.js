@@ -59,12 +59,15 @@ var createOrdersDiv = function(status, data) {
 		var receTBody = $("#receOrdersDiv").find("div").eq(1).find("table").eq(0).find("tbody").eq(0);
 		for (var i = 0; i < data.object.length; i++) {
 
+			//			console.log("::::::"+data.object.length);
+
 			var trs = $("<tr></tr>");
-			var order_id_td = $("<td><a>" + data.object[i].id + "</a><input type='hidden' id='dataObject' value='" + data.object[i] + "'/></td>");
+			var order_id_td = $("<td><a>" + data.object[i].id + "</a>");
 			var order_recetime_td = $("<td>" + data.object[i].receDate + "</td>");
 			var order_people_td = $("<td>" + data.object[i].connectPeople + "</td>");
 			var order_status_td = $("<td>" + data.object[i].status + "</td>");
-			var order_operation_td = $("<td><button type='button' class='detailBtn btn-primary'>詳情..</button></td>");
+			var order_operation_td = $("<td><button type='button' id='" + i + "receDetailBtn' class='detailBtn btn-primary'>詳情..</button></td>");
+
 
 			order_id_td.appendTo(trs);
 			order_recetime_td.appendTo(trs);
@@ -73,23 +76,32 @@ var createOrdersDiv = function(status, data) {
 			order_operation_td.appendTo(trs);
 
 			trs.appendTo(receTBody);
-			$(".detailBtn").on("click", function() {
-				var data = $(this).parent().parent().find("td").eq(0).find("input").val();
 
-				$("#OrderMID").val(data.id);
-				$("#OrderMCreateDate").val(data.createDate);
-				$("#OrderMChangeDate").val(data.completedDate);
-				$("#OrderMStatus").val(data.status);
-				$("#OrderMContact").val(data.connectPeople);
-				$("#OrderMTel").val(data.tel);
-				$("#OrderMAddr").val(data.address);
+			var id = data.object[i].id;
+			var createDate = data.object[i].createDate;
+			var completedDate = data.object[i].completedDate;
+			var status = data.object[i].status;
+			var connectPeople = data.object[i].connectPeople;
+			var tel = data.object[i].tel;
+			var address = data.object[i].address;
+
+			var menuList = "";
+
+			$("#" + i + "receDetailBtn").on("click", function() {
+				$("#OrderMID").val(id);
+				$("#OrderMCreateDate").val(createDate);
+				$(" #OrderMChangeDate").val(completedDate);
+				$("#OrderMStatus").val(status);
+				$("#OrderMContact").val(connectPeople);
+				$("#OrderMTel").val(tel);
+				$("#OrderMAddr").val(address);
 				$("OrderMMenuList").val("");
 
 				$("#detailModal").modal("show");
 
 			});
-
 		}
+
 	} else if (status == "finish") {
 		var failTBody = $("#failOrdersDiv").find("div").eq(1).find("table").eq(0).find("tbody").eq(0);
 		for (var i = 0; i < data.object.length; i++) {
@@ -98,7 +110,7 @@ var createOrdersDiv = function(status, data) {
 			var order_recetime_td = $("<td>" + data.object[i].receDate + "</td>");
 			var order_people_td = $("<td>" + data.object[i].connectPeople + "</td>");
 			var order_status_td = $("<td>" + data.object[i].status + "</td>");
-			var order_operation_td = $("<td><button type='button' class='detailBtn btn-primary'>詳情..</button></td>");
+			var order_operation_td = $("<td><button type='button' id='" + i + "failDetailBtn' class='detailBtn btn-primary'>詳情..</button></td>");
 
 			order_id_td.appendTo(trs);
 			order_recetime_td.appendTo(trs);
@@ -108,21 +120,28 @@ var createOrdersDiv = function(status, data) {
 
 			trs.appendTo(failTBody);
 
-			//			$(".detailBtn").on("click", function() {
-			//				//				var data = $(this).parent().parent().find("td").eq(0).find("input").val();
-			//
-			//				$("#OrderMID").val(data.object[i].id);
-			//				$("#OrderMCreateDate").val(data.object[i].createDate);
-			//				$("#OrderMChangeDate").val(data.object[i].completedDate);
-			//				$("#OrderMStatus").val(data.object[i].status);
-			//				$("#OrderMContact").val(data.object[i].connectPeople);
-			//				$("#OrderMTel").val(data.object[i].tel);
-			//				$("#OrderMAddr").val(data.object[i].address);
-			//				$("OrderMMenuList").val("");
-			//
-			//				$("#detailModal").modal("show");
-			//
-			//			});
+			var id = data.object[i].id;
+			var createDate = data.object[i].createDate;
+			var completedDate = data.object[i].completedDate;
+			var status = data.object[i].status;
+			var connectPeople = data.object[i].connectPeople;
+			var tel = data.object[i].tel;
+			var address = data.object[i].address;
+
+
+			$("#" + i + "failDetailBtn").on("click", function() {
+				$("#OrderMID").val(id);
+				$("#OrderMCreateDate").val(createDate);
+				$(" #OrderMChangeDate").val(completedDate);
+				$("#OrderMStatus").val(status);
+				$("#OrderMContact").val(connectPeople);
+				$("#OrderMTel").val(tel);
+				$("#OrderMAddr").val(address);
+				$("OrderMMenuList").val("");
+
+				$("#detailModal").modal("show");
+
+			});
 		}
 	} else if (status == "fail") {
 		var succTBody = $("#succOrdersDiv").find("div").eq(1).find("table").eq(0).find("tbody").eq(0);
@@ -132,7 +151,7 @@ var createOrdersDiv = function(status, data) {
 			var order_recetime_td = $("<td>" + data.object[i].receDate + "</td>");
 			var order_people_td = $("<td>" + data.object[i].connectPeople + "</td>");
 			var order_status_td = $("<td>" + data.object[i].status + "</td>");
-			var order_operation_td = $("<td><button type='button' class='detailBtn btn-primary'>詳情..</button></td>");
+			var order_operation_td = $("<td><button type='button' id='" + i + "succDetailBtn' class='detailBtn btn-primary'>詳情..</button></td>");
 
 			order_id_td.appendTo(trs);
 			order_recetime_td.appendTo(trs);
@@ -142,21 +161,28 @@ var createOrdersDiv = function(status, data) {
 			$("<td type=>" + data + "</td>").appendTo(trs);
 			trs.appendTo(succTBody);
 
-			//			$(".detailBtn").on("click", function() {
-			//				//				var data = $(this).parent().parent().find("td").eq(0).find("input").val();
-			//
-			//				$("#OrderMID").val(data.object[i].id);
-			//				$("#OrderMCreateDate").val(data.object[i].createDate);
-			//				$("#OrderMChangeDate").val(data.object[i].completedDate);
-			//				$("#OrderMStatus").val(data.object[i].status);
-			//				$("#OrderMContact").val(data.object[i].connectPeople);
-			//				$("#OrderMTel").val(data.object[i].tel);
-			//				$("#OrderMAddr").val(data.object[i].address);
-			//				$("OrderMMenuList").val("");
-			//
-			//				$("#detailModal").modal("show");
-			//
-			//			});
+			var id = data.object[i].id;
+			var createDate = data.object[i].createDate;
+			var completedDate = data.object[i].completedDate;
+			var status = data.object[i].status;
+			var connectPeople = data.object[i].connectPeople;
+			var tel = data.object[i].tel;
+			var address = data.object[i].address;
+
+
+			$("#" + i + "succDetailBtn").on("click", function() {
+				$("#OrderMID").val(id);
+				$("#OrderMCreateDate").val(createDate);
+				$(" #OrderMChangeDate").val(completedDate);
+				$("#OrderMStatus").val(status);
+				$("#OrderMContact").val(connectPeople);
+				$("#OrderMTel").val(tel);
+				$("#OrderMAddr").val(address);
+				$("OrderMMenuList").val("");
+
+				$("#detailModal").modal("show");
+
+			});
 		}
 	}
 };
@@ -166,11 +192,11 @@ var createOrdersDiv = function(status, data) {
 //	loadFailOrders();
 
 
-	var loadOrders = function() {
-		console.log("so");
-		
-		loadReceiveOrders();
-		loadFinishOrders();
-		loadFailOrders();
-	};
+var loadOrders = function() {
+	console.log("so");
+
+	loadReceiveOrders();
+	loadFinishOrders();
+	loadFailOrders();
+};
 //});
