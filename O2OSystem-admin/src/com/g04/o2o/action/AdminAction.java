@@ -152,13 +152,14 @@ public class AdminAction {
 		jp.setResult(true);
 		VeriftyRestaurant vr = new VeriftyRestaurant();
 		Restaurant restaurant = systemService.getRestaurantInfo(id);
-		vr.setAddress(restaurant.getAddress());
+		vr.setAddress(restaurant.getAddress().getArea().getProvince()
+				+ restaurant.getAddress().getArea().getCity());
 		vr.setId(restaurant.getId());
 		vr.setIDCard(restaurant.getOwner().getIDCard());
 		vr.setName(restaurant.getName());
 		vr.setOwner(restaurant.getOwner().getRealName());
 		vr.setTel(restaurant.getTel());
-		vr.setType(restaurant.getType());
+		vr.setType(restaurant.getType().getType());
 		jp.setObject(vr);
 		return jp;
 	}
