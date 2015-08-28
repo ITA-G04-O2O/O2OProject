@@ -12,7 +12,7 @@ $(function() {
 						type: 'get',
 						dataType: 'json',
 					}).done(function(data, status, xhr) {
-						var size = $("jmsMsg").text();
+						var size = $("#jmsMsg").text();
 						$("#jmsMsg").text(size + data.length);
 					});
 			}
