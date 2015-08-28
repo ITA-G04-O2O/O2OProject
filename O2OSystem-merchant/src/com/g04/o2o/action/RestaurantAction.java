@@ -87,6 +87,8 @@ public class RestaurantAction {
 		restV.setPlayPrice(rest.getPlayPrice());
 		restV.setOpenTime(rest.getOpenTime());
 		System.out.println(restV);
+		restV.setCollectionTimes(rest.getCollectionTimes());
+		restV.setGrade(rest.getGrade());
 		return restV;
 	}
 

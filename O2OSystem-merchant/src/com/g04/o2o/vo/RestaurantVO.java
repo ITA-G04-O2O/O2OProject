@@ -14,6 +14,10 @@ public class RestaurantVO {
 	private Integer disCharge;// 配送费
 	private String openTime;// 营业时间
 	private String tel;
+
+	private Double grade;
+	private Integer collectionTimes;
+	
 	private String pro;
 	private String city;
 	private int rtype;
@@ -53,6 +57,22 @@ public class RestaurantVO {
 
 	public String getTel() {
 		return tel;
+	}
+
+	public Double getGrade() {
+		return grade;
+	}
+
+	public void setGrade(Double grade) {
+		this.grade = grade;
+	}
+
+	public Integer getCollectionTimes() {
+		return collectionTimes;
+	}
+
+	public void setCollectionTimes(Integer collectionTimes) {
+		this.collectionTimes = collectionTimes;
 	}
 
 	public void setTel(String tel) {
