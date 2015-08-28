@@ -22,15 +22,21 @@ $(function() {
 		loadOrders();
 	});
 
+	$("#storeInfo").live("click", function() {
+		loadRestInfo();
+	});
 
+	$("#basicInfo").live("click", function() {
+		loadBasicInfo();
+	});
 	var restid = 2;
 
-	//title  restaurant/{id}
-	//	var loadFailOrders = function() {
+	// title restaurant/{id}
+	// var loadFailOrders = function() {
 	$.ajax({
-		url: "http://localhost:17236/o2osystem-merchant/restaurant/" + restid,
-		type: 'GET',
-		dataType: 'json'
+		url : "http://localhost:17236/o2osystem-merchant/restaurant/" + restid,
+		type : 'GET',
+		dataType : 'json'
 	}).done(function(data, status, xhr) {
 		$("#restName").text(data.name);
 		$("#restGrade").text(data.grade);
@@ -39,6 +45,6 @@ $(function() {
 	}).fail(function(xhr, status, error) {
 		console.log('fail');
 	});
-	//};
+	// };
 
 });
