@@ -45,6 +45,17 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	@Override
+	public List<MenuType> findAllMenuTypeList(Integer restId) {
+		List<MenuType> mtl = mtd.searchAll(MenuType.class);
+		List<MenuType> types = new ArrayList<MenuType>();
+		for (MenuType menuType : mtl) {
+			if (menuType.getRest().getId() == restId)
+				types.add(menuType);
+		}
+		return types;
+	}
+
+	@Override
 	@Transactional
 	public boolean addMenuType(Integer restId, String menuType) {
 		MenuType mt = new MenuType();
@@ -77,12 +88,15 @@ public class MenuServiceImpl implements MenuService {
 	@Override
 	public List<MenuItem> findAllMenuItems(Integer restId) {
 		List<MenuItem> menuItems = mid.searchAll(MenuItem.class);
+		List<MenuItem> dataItems = new ArrayList<>();
 		for (MenuItem menuItem : menuItems) {
-			if (menuItem.getResturant().getId() != restId) {
-				menuItems.remove(menuItem);
+			if (menuItem != null) {
+				if (menuItem.getType().getId() == restId) {
+					dataItems.add(menuItem);
+				}
 			}
 		}
-		return menuItems;
+		return dataItems;
 	}
 
 	@Override

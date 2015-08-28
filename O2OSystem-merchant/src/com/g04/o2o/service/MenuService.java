@@ -3,6 +3,7 @@ package com.g04.o2o.service;
 import java.util.List;
 
 import com.g04.o2o.entity.MenuItem;
+import com.g04.o2o.entity.MenuType;
 
 /**
  * MenuService
@@ -19,6 +20,8 @@ public interface MenuService {
 	 * @return
 	 */
 	public List<String> findAllMenuTypes(Integer restID);
+
+	public List<MenuType> findAllMenuTypeList(Integer restID);
 
 	/**
 	 * 获取某一个菜品种类
