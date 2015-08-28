@@ -38,9 +38,11 @@ public class OrderAction {
 	}
 
 	@RequestMapping(value = "/orders/{id}", method = RequestMethod.GET)
+	@Transactional
 	public JsonProtocol getOrder(@PathVariable Integer id) {
 		JsonProtocol jp = new JsonProtocol();
-		jp.setObject(os.getOrderById(id));
+		GetOrderVO getVo = GetOrderVOHelper.setOrder2VO(os.getOrderById(id));
+		jp.setObject(getVo);
 		return jp;
 	}
 	

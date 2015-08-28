@@ -40,27 +40,11 @@ var loadFailOrders = function() {
 	});
 };
 
-
-
-//			console.log(data.object[i].id);
-//			console.log(data.object[i].createDate);	
-//			console.log(data.object[i].receDate);
-//			console.log(data.object[i].completedDate);
-//			console.log(data.object[i].status);
-//			console.log(data.object[i].connectPeople);
-//			console.log(data.object[i].tel);
-//			console.log(data.object[i].address);
-//			console.log(data.object[i].menuItemAmountMap);
-//			console.log(data.object[i].menuItemPriceMap);
-//			console.log(data.object[i].totalPrices);
-
 var createOrdersDiv = function(status, data) {
 	if (status == "rece") {
 		var receTBody = $("#receOrdersDiv").find("div").eq(1).find("table").eq(0).find("tbody").eq(0);
+		console.log("::::::" + data.object.length);
 		for (var i = 0; i < data.object.length; i++) {
-
-			//			console.log("::::::"+data.object.length);
-
 			var trs = $("<tr></tr>");
 			var order_id_td = $("<td><a>" + data.object[i].id + "</a>");
 			var order_recetime_td = $("<td>" + data.object[i].receDate + "</td>");
@@ -68,42 +52,49 @@ var createOrdersDiv = function(status, data) {
 			var order_status_td = $("<td>" + data.object[i].status + "</td>");
 			var order_operation_td = $("<td><button type='button' id='" + i + "receDetailBtn' class='detailBtn btn-primary'>詳情..</button></td>");
 
-
 			order_id_td.appendTo(trs);
 			order_recetime_td.appendTo(trs);
 			order_people_td.appendTo(trs);
 			order_status_td.appendTo(trs);
 			order_operation_td.appendTo(trs);
-
 			trs.appendTo(receTBody);
 
-			var id = data.object[i].id;
-			var createDate = data.object[i].createDate;
-			var completedDate = data.object[i].completedDate;
-			var status = data.object[i].status;
-			var connectPeople = data.object[i].connectPeople;
-			var tel = data.object[i].tel;
-			var address = data.object[i].address;
-
-			var menuList = "";
 
 			$("#" + i + "receDetailBtn").on("click", function() {
-				$("#OrderMID").val(id);
-				$("#OrderMCreateDate").val(createDate);
-				$(" #OrderMChangeDate").val(completedDate);
-				$("#OrderMStatus").val(status);
-				$("#OrderMContact").val(connectPeople);
-				$("#OrderMTel").val(tel);
-				$("#OrderMAddr").val(address);
-				$("OrderMMenuList").val("");
-
-				$("#detailModal").modal("show");
-
+				var id = $(this).parent().parent().find("td").eq(0).find("a").eq(0).text();
+				$.ajax({
+					url: "http://localhost:17236/o2osystem-merchant/orders/" + id,
+					type: 'GET',
+					dataType: 'json'
+				}).done(function(data, status, xhr) {
+					var createDate = data.object.createDate;
+					var completedDate = data.object.completedDate;
+					var status = data.object.status;
+					var connectPeople = data.object.connectPeople;
+					var tel = data.object.tel;
+					var address = data.object.address;
+					var menuList = "";
+					$.each(data.object.menuItemAmountMap, function(key, values) {
+						var row = key + "*" + values;
+						menuList = menuList + row + " ";
+					});
+					$("#OrderMID").val(id);
+					$("#OrderMCreateDate").val(createDate);
+					$("#OrderMChangeDate").val(completedDate);
+					$("#OrderMStatus").val(status);
+					$("#OrderMContact").val(connectPeople);
+					$("#OrderMTel").val(tel);
+					$("#OrderMAddr").val(address);
+					$("#OrderMMenuList").val(menuList);
+					$("#detailModal").modal("show");
+				}).fail(function(xhr, status, error) {
+					console.log('fail');
+				});
 			});
 		}
 
 	} else if (status == "finish") {
-		var failTBody = $("#failOrdersDiv").find("div").eq(1).find("table").eq(0).find("tbody").eq(0);
+		var failTBody = $("#succOrdersDiv").find("div").eq(1).find("table").eq(0).find("tbody").eq(0);
 		for (var i = 0; i < data.object.length; i++) {
 			var trs = $("<tr></tr>");
 			var order_id_td = $("<td><a>" + data.object[i].id + "</a><input type='hidden' value='" + data + "'/></td>");
@@ -120,31 +111,40 @@ var createOrdersDiv = function(status, data) {
 
 			trs.appendTo(failTBody);
 
-			var id = data.object[i].id;
-			var createDate = data.object[i].createDate;
-			var completedDate = data.object[i].completedDate;
-			var status = data.object[i].status;
-			var connectPeople = data.object[i].connectPeople;
-			var tel = data.object[i].tel;
-			var address = data.object[i].address;
-
-
 			$("#" + i + "failDetailBtn").on("click", function() {
-				$("#OrderMID").val(id);
-				$("#OrderMCreateDate").val(createDate);
-				$(" #OrderMChangeDate").val(completedDate);
-				$("#OrderMStatus").val(status);
-				$("#OrderMContact").val(connectPeople);
-				$("#OrderMTel").val(tel);
-				$("#OrderMAddr").val(address);
-				$("OrderMMenuList").val("");
-
-				$("#detailModal").modal("show");
-
+				var id = $(this).parent().parent().find("td").eq(0).find("a").eq(0).text();
+				$.ajax({
+					url: "http://localhost:17236/o2osystem-merchant/orders/" + id,
+					type: 'GET',
+					dataType: 'json'
+				}).done(function(data, status, xhr) {
+					var createDate = data.object.createDate;
+					var completedDate = data.object.completedDate;
+					var status = data.object.status;
+					var connectPeople = data.object.connectPeople;
+					var tel = data.object.tel;
+					var address = data.object.address;
+					var menuList = "";
+					$.each(data.object.menuItemAmountMap, function(key, values) {
+						var row = key + "*" + values;
+						menuList = menuList + row + " ";
+					});
+					$("#OrderMID").val(id);
+					$("#OrderMCreateDate").val(createDate);
+					$("#OrderMChangeDate").val(completedDate);
+					$("#OrderMStatus").val(status);
+					$("#OrderMContact").val(connectPeople);
+					$("#OrderMTel").val(tel);
+					$("#OrderMAddr").val(address);
+					$("#OrderMMenuList").val(menuList);
+					$("#detailModal").modal("show");
+				}).fail(function(xhr, status, error) {
+					console.log('fail');
+				});
 			});
 		}
 	} else if (status == "fail") {
-		var succTBody = $("#succOrdersDiv").find("div").eq(1).find("table").eq(0).find("tbody").eq(0);
+		var succTBody = $("#failOrdersDiv").find("div").eq(1).find("table").eq(0).find("tbody").eq(0);
 		for (var i = 0; i < data.object.length; i++) {
 			var trs = $("<tr></tr>");
 			var order_id_td = $("<td><a>" + data.object[i].id + "</a><input type='hidden' value='" + data + "'/></td>");
@@ -161,39 +161,42 @@ var createOrdersDiv = function(status, data) {
 			$("<td type=>" + data + "</td>").appendTo(trs);
 			trs.appendTo(succTBody);
 
-			var id = data.object[i].id;
-			var createDate = data.object[i].createDate;
-			var completedDate = data.object[i].completedDate;
-			var status = data.object[i].status;
-			var connectPeople = data.object[i].connectPeople;
-			var tel = data.object[i].tel;
-			var address = data.object[i].address;
-
-
 			$("#" + i + "succDetailBtn").on("click", function() {
-				$("#OrderMID").val(id);
-				$("#OrderMCreateDate").val(createDate);
-				$(" #OrderMChangeDate").val(completedDate);
-				$("#OrderMStatus").val(status);
-				$("#OrderMContact").val(connectPeople);
-				$("#OrderMTel").val(tel);
-				$("#OrderMAddr").val(address);
-				$("OrderMMenuList").val("");
-
-				$("#detailModal").modal("show");
-
+				var id = $(this).parent().parent().find("td").eq(0).find("a").eq(0).text();
+				$.ajax({
+					url: "http://localhost:17236/o2osystem-merchant/orders/" + id,
+					type: 'GET',
+					dataType: 'json'
+				}).done(function(data, status, xhr) {
+					var createDate = data.object.createDate;
+					var completedDate = data.object.completedDate;
+					var status = data.object.status;
+					var connectPeople = data.object.connectPeople;
+					var tel = data.object.tel;
+					var address = data.object.address;
+					var menuList = "";
+					$.each(data.object.menuItemAmountMap, function(key, values) {
+						var row = key + "*" + values;
+						menuList = menuList + row + " ";
+					});
+					$("#OrderMID").val(id);
+					$("#OrderMCreateDate").val(createDate);
+					$("#OrderMChangeDate").val(completedDate);
+					$("#OrderMStatus").val(status);
+					$("#OrderMContact").val(connectPeople);
+					$("#OrderMTel").val(tel);
+					$("#OrderMAddr").val(address);
+					$("#OrderMMenuList").val(menuList);
+					$("#detailModal").modal("show");
+				}).fail(function(xhr, status, error) {
+					console.log('fail');
+				});
 			});
 		}
 	}
 };
 
-//	loadReceiveOrders();
-//	loadFinishOrders();
-//	loadFailOrders();
-
-
 var loadOrders = function() {
-	console.log("so");
 
 	loadReceiveOrders();
 	loadFinishOrders();

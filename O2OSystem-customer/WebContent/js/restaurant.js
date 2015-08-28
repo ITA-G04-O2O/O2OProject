@@ -1,7 +1,7 @@
 var restInfoController = (function() {
-	var getRestInfo = function (id) {
+	var getRestInfo = function () {
 		$.ajax({
-			url: 'http://localhost:8888/O2OSystem-customer/restaurant/'+id,
+			url: 'http://localhost:8888/O2OSystem-customer/restaurant',
 			type: 'get',
 			dataType: 'json'
 		}).done(function (data, status, xhr) {
@@ -154,7 +154,7 @@ $(document).ready(function() {
 
     var url = window.location.search;
     var id = url.substring(url.lastIndexOf('=')+1, url.length);
-	restInfoController.getRestInfo(id);
+	restInfoController.getRestInfo();
 	restInfoController.getHGradeInfo(id);
     restInfoController.getMGradeInfo(id);
     restInfoController.getLGradeInfo(id);

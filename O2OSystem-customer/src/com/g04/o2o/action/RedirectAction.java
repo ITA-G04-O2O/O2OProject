@@ -44,13 +44,18 @@ public class RedirectAction {
 		return js;
 	}
 
-	@RequestMapping("/rest/{id}")
-	public void saveRestId(@PathVariable Integer id, HttpSession session) {
+	@RequestMapping(value="rest/{id}")
+	public String saveRestId(@PathVariable Integer id, HttpSession session) {
 		session.setAttribute("restId", id);
+		System.out.println(id);
+		return "restaurant";
 	}
 	
+<<<<<<< HEAD
+=======
 	@RequestMapping("/rest/go")
 	public String goConfirm(){
 		return "confirm";
 	}
+>>>>>>> 22ab5b8465c979087932a62f52c7908683643e62
 }
