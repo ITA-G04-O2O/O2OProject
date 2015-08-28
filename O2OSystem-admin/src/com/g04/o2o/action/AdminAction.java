@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.g04.o2o.entity.JmsProtocol;
 import com.g04.o2o.entity.JsonProtocol;
 import com.g04.o2o.entity.MainSystem;
 import com.g04.o2o.entity.Restaurant;
@@ -21,7 +20,6 @@ import com.g04.o2o.entity.RestaurantType;
 import com.g04.o2o.entity.User;
 import com.g04.o2o.service.AdminService;
 import com.g04.o2o.tools.JMSUtil;
-import com.g04.o2o.tools.JsonUtil;
 import com.g04.o2o.vo.RestaurantTypeVo;
 import com.g04.o2o.vo.RestaurantVo;
 import com.g04.o2o.vo.UserVo;
@@ -147,6 +145,7 @@ public class AdminAction {
 	}
 
 	@RequestMapping(value = "/restaurantVerify/{id}", method = RequestMethod.GET, produces = { "application/json;charset=UTF-8" })
+	@Transactional
 	public JsonProtocol getRestaurant(@PathVariable int id) {
 		JsonProtocol jp = new JsonProtocol();
 		jp.setResult(true);
@@ -165,6 +164,7 @@ public class AdminAction {
 	}
 
 	@RequestMapping(value = "/restaurantVerify", method = RequestMethod.GET, produces = { "application/json;charset=UTF-8" })
+	@Transactional
 	public JsonProtocol getAllRestaurantVerify() {
 		JsonProtocol jp = new JsonProtocol();
 		jp.setResult(true);
