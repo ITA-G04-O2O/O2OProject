@@ -13,12 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.g04.o2o.entity.JmsProtocol;
 import com.g04.o2o.entity.JsonProtocol;
 import com.g04.o2o.entity.MainSystem;
 import com.g04.o2o.entity.Restaurant;
 import com.g04.o2o.entity.RestaurantType;
 import com.g04.o2o.entity.User;
 import com.g04.o2o.service.AdminService;
+import com.g04.o2o.tools.JMSUtil;
+import com.g04.o2o.tools.JsonUtil;
 import com.g04.o2o.vo.RestaurantTypeVo;
 import com.g04.o2o.vo.RestaurantVo;
 import com.g04.o2o.vo.UserVo;
@@ -220,5 +223,21 @@ public class AdminAction {
 		}
 		jp.setObject(lists);
 		return jp;
+	}
+
+	@RequestMapping(value = "/jms", method = RequestMethod.GET)
+	public List<JmsProtocol> getJMS() {
+		List<JmsProtocol> pros = new ArrayList<JmsProtocol>();
+		try {
+			JMSUtil jms = new JMSUtil("g04_que");
+			List<String> msgs = jms.receiveMsg();
+			JmsProtocol pro;
+			for (int i = 0; i < msgs.size(); i++) {
+				pro = JsonUtil.readValue(msgs.get(i), JmsProtocol.class);
+				pros.add(pro);
+			}
+		} catch (Exception e) {
+		}
+		return pros;
 	}
 }

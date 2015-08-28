@@ -15,11 +15,6 @@ import javax.jms.TextMessage;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQQueue;
-import org.springframework.jms.support.JmsUtils;
-
-import com.g04.o2o.entity.Area;
-import com.g04.o2o.entity.JmsProtocol;
-import com.g04.o2o.entity.JmsType;
 
 public class JMSUtil {
 	static ConnectionFactory factory = null;
@@ -86,29 +81,6 @@ public class JMSUtil {
 		return list;
 	}
 
-	public String receiveOne() {
-		MessageConsumer consumer = null;
-		try {
-			consumer = session.createConsumer(queue);
-			conn.start();
-			Message msg = consumer.receive();
-			TextMessage tmsg = (TextMessage) msg;
-			String str = tmsg.getText();
-			return str;
-		} catch (JMSException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (consumer != null) {
-					consumer.close();
-				}
-			} catch (JMSException e) {
-				e.printStackTrace();
-			}
-		}
-		return null;
-	}
-
 	public void free() {
 		try {
 			if (session != null) {
@@ -122,13 +94,4 @@ public class JMSUtil {
 		}
 	}
 	
-	public static void main(String[] args) {
-		JMSUtil jms =new JMSUtil("g04_que");
-		JmsProtocol pro = new JmsProtocol();
-		pro.setType(JmsType.regist);
-		jms.sendMsg(JsonUtil.toJSon(pro));
-		jms.free();
-		
-	}
-
 }

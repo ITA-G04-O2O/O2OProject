@@ -2,6 +2,8 @@
  * Created by OUOK on 8/15/2015.
  */
 $(function () {
+	
+	
     $("#loginBtn").on("click", function () {
         location.href = "WEB-INF/html/manage.html";
         console.log("loginbtn click");
