@@ -1,8 +1,5 @@
 package com.g04.o2o.action;
 
-
-
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -51,11 +48,10 @@ public class RedirectAction {
 		return "restaurant";
 	}
 	
-<<<<<<< HEAD
-=======
+
 	@RequestMapping("/rest/go")
 	public String goConfirm(){
 		return "confirm";
 	}
->>>>>>> 22ab5b8465c979087932a62f52c7908683643e62
+
 }
