@@ -27,9 +27,9 @@ var showAccount = function() {
 			}
 
 		}).done(function(data, status, xhr) {
-			console.log("更新成功")
+			console.log("更新成功");
 		}).fail(function(xhr, status, error) {
-			console.log("更新失败")
+			console.log("更新失败");
 		});
 	});
 
