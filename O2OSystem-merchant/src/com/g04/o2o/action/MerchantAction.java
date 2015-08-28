@@ -13,11 +13,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.g04.o2o.entity.JmsProtocol;
+import com.g04.o2o.entity.JmsType;
 import com.g04.o2o.entity.Merchant;
 import com.g04.o2o.entity.Restaurant;
 import com.g04.o2o.entity.User;
 import com.g04.o2o.service.MerchantService;
 import com.g04.o2o.service.UserService;
+import com.g04.o2o.tools.JMSUtil;
+import com.g04.o2o.tools.JsonUtil;
 import com.g04.o2o.vo.MerchantInfoVO;
 
 @Controller
@@ -52,6 +56,11 @@ public class MerchantAction {
 		mer.setRestaurant(restaurant);
 		restaurant.setOwner(mer);
 		merchantService.addMerchant(mer);
+		JMSUtil jms = new JMSUtil("g04_que");
+		JmsProtocol msg = new JmsProtocol();
+		msg.setType(JmsType.regist);
+		jms.sendMsg(JsonUtil.toJSon(msg));
+		jms.free();
 		return "waiting";
 	}
 

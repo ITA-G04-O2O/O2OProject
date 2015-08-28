@@ -11,15 +11,35 @@ $(function() {
 	$("#accountInfo").live("click", function() {
 		showAccount();
 	});
-	
-	$("#newOrder").live("click",function(){
-//		alert("Hello");
+
+	$("#newOrder").live("click", function() {
+		// alert("Hello");
 		loadNewOrderFunction();
 	});
-	
-	$("#successOrder").live("click",function(){
-//		alert("Hello");
+
+	$("#successOrder").live("click", function() {
+		// alert("Hello");
 		loadOrders();
 	});
+
+
+	var restid = 2;
+
+	//title  restaurant/{id}
+	//	var loadFailOrders = function() {
+	$.ajax({
+		url: "http://localhost:17236/o2osystem-merchant/restaurant/" + restid,
+		type: 'GET',
+		dataType: 'json'
+	}).done(function(data, status, xhr) {
+
+		$("#restName").text(data.name);
+		$("#restGrade").text(data.grade);
+		$("#restOpenTime").text(data.openTime);
+		$("#collectionTimes").text(data.collectionTimes);
+	}).fail(function(xhr, status, error) {
+		console.log('fail');
+	});
+	//};
 
 });

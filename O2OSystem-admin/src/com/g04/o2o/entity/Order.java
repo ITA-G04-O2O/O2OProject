@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -38,14 +35,15 @@ public class Order {
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date receiveTime;
 	@Temporal(value = TemporalType.TIMESTAMP)
-	private Date completedTime; 
+	private Date completedTime;
 	@ManyToOne
 	@JoinColumn(name = "restId", nullable = false)
 	private Restaurant resturant;
 	@ManyToMany
 	private List<MenuItem> items = new ArrayList<MenuItem>();
-	private String message; 
-	private Integer status; //1: user add order. 2:merchant received order. 3:merchant refused order.  4: order finished.
+	private String message;
+	private Integer status; // 1: user add order. 2:merchant received order.
+							// 3:merchant refused order. 4: order finished.
 	@ManyToOne
 	@JoinColumn(name = "receiver", nullable = false)
 	private User user;
@@ -57,7 +55,7 @@ public class Order {
 	private String comment;
 	private String tel;
 	private String contactName;
-	
+
 	public Date getCompletedTime() {
 		return completedTime;
 	}
@@ -65,7 +63,7 @@ public class Order {
 	public void setCompletedTime(Date completedTime) {
 		this.completedTime = completedTime;
 	}
-	
+
 	/**
 	 * @return the userDefineAddress
 	 */
@@ -95,8 +93,6 @@ public class Order {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-
-
 
 	/**
 	 * @return the receiveTime
@@ -213,7 +209,8 @@ public class Order {
 	}
 
 	/**
-	 * @param score the score to set
+	 * @param score
+	 *            the score to set
 	 */
 	public void setScore(Double score) {
 		this.score = score;
@@ -227,7 +224,8 @@ public class Order {
 	}
 
 	/**
-	 * @param comment the comment to set
+	 * @param comment
+	 *            the comment to set
 	 */
 	public void setComment(String comment) {
 		this.comment = comment;
@@ -241,7 +239,8 @@ public class Order {
 	}
 
 	/**
-	 * @param contactName the contactName to set
+	 * @param contactName
+	 *            the contactName to set
 	 */
 	public void setContactName(String contactName) {
 		this.contactName = contactName;
