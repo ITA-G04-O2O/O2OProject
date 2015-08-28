@@ -49,7 +49,7 @@ public class MerchantAction {
 		System.out.println(nickName);
 		Merchant mer = new Merchant();
 		mer.setIDCard(idCard);
-		User user = userService.getUserById(3);
+		User user = userService.getUserById(5);
 		mer.setUser(user);
 		mer.setIDimage(file.getBytes());
 		Restaurant restaurant = (Restaurant) session.getAttribute("restaurant");
