@@ -14,9 +14,29 @@ public class RestaurantVO {
 	private Integer disCharge;// 配送费
 	private String openTime;// 营业时间
 	private String tel;
+	//add in 2150828
+	private Double grade;
+	private Integer collectionTimes;
+	
 
 	public String getTel() {
 		return tel;
+	}
+
+	public Double getGrade() {
+		return grade;
+	}
+
+	public void setGrade(Double grade) {
+		this.grade = grade;
+	}
+
+	public Integer getCollectionTimes() {
+		return collectionTimes;
+	}
+
+	public void setCollectionTimes(Integer collectionTimes) {
+		this.collectionTimes = collectionTimes;
 	}
 
 	public void setTel(String tel) {

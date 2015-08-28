@@ -81,6 +81,11 @@ public class RestaurantAction {
 		restV.setName(rest.getName());
 		restV.setType(rest.getType());
 		restV.setTel(rest.getTel());
+		//Add in 20150828
+		restV.setCollectionTimes(rest.getCollectionTimes());
+		restV.setGrade(rest.getGrade());
+		restV.setOpenTime(rest.getOpenTime());
+		
 		return rest;
 	}
 
