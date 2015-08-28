@@ -1,7 +1,7 @@
 var controller = (function () {
     var getMenuTypes = function (restId) {
         $.ajax({
-            url: "http://localhost:8888/o2osystem-merchant/menuTypes/" + restId,
+            url: "http://localhost:17236/o2osystem-merchant/menuTypes/" + restId,
             type: 'GET',
             dataType: 'json'
         }).done(function (data, status, xhr) {
@@ -12,7 +12,7 @@ var controller = (function () {
     };
     var addMenuType = function (restId, data) {
         $.ajax({
-            url: "http://localhost:8888/o2osystem-merchant/menuTypes/" + restId,
+            url: "http://localhost:17236/o2osystem-merchant/menuTypes/" + restId,
             type: 'POST',
             dataType: 'json',
             data: data
@@ -24,7 +24,7 @@ var controller = (function () {
     };
     var getMenuItems = function (menuTypeId) {
         $.ajax({
-            url: "http://localhost:8888/o2osystem-merchant/menuItems/" + menuTypeId,
+            url: "http://localhost:17236/o2osystem-merchant/menuItems/" + menuTypeId,
             type: 'GET',
             dataType: 'json'
         }).done(function (data, status, xhr) {
@@ -35,7 +35,7 @@ var controller = (function () {
     };
     var addMenuItem = function (menuTypeId, data) {
         $.ajax({
-            url: "http://localhost:8888/o2osystem-merchant/menuTypes" + id,
+            url: "http://localhost:17236/o2osystem-merchant/menuTypes" + id,
             type: 'POST',
             dataType: 'json',
             data: data
@@ -47,7 +47,7 @@ var controller = (function () {
     };
     var updateMenuItem = function (menuTypeId, data) {
         $.ajax({
-            url: "http://localhost:8888/o2osystem-merchant/menuItems" + menuTypeId,
+            url: "http://localhost:17236/o2osystem-merchant/menuItems" + menuTypeId,
             type: 'POST',
             dataType: 'json',
             data: data
@@ -59,7 +59,7 @@ var controller = (function () {
     };
     var deleteMenuItem = function (menuItemsId, menuTypeId) {
         $.ajax({
-            url: "http://localhost:8888/o2osystem-merchant/menuItems/" + menuItemsId,
+            url: "http://localhost:17236/o2osystem-merchant/menuItems/" + menuItemsId,
             type: 'DELETE',
             dataType: 'json',
             data: data
