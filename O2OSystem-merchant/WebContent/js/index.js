@@ -42,23 +42,4 @@ $(function() {
 	});
 	//};
 
-<<<<<<< HEAD
-=======
-	$("#newOrder").live("click", function() {
-		// alert("Hello");
-		loadNewOrderFunction();
-	});
-
-	$("#successOrder").live("click", function() {
-		// alert("Hello");
-		loadOrders();
-	});
-	$("#storeInfo").live("click", function() {
-		loadRestInfo();
-	});
-	$("#basicInfo").live("click", function() {
-		loadBasicInfo();
-	});
-
->>>>>>> af9dd08bb280a91abeab9b610331d242c7b4a5f1
 });
