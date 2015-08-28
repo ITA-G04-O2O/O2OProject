@@ -1,5 +1,9 @@
 package com.g04.o2o.action;
 
+import java.beans.Transient;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,7 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.g04.o2o.entity.JsonProtocol;
 import com.g04.o2o.entity.MenuItem;
+import com.g04.o2o.entity.MenuType;
 import com.g04.o2o.service.MenuService;
+import com.g04.o2o.vo.MenuItemVo;
+import com.g04.o2o.vo.MenuTypeVo;
 
 /**
  * Menu handler function
@@ -30,25 +37,36 @@ public class MenuAction {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/menuTypes/{restId}/", method = RequestMethod.GET)
+	@RequestMapping(value = "/menuTypes/{restId}", method = RequestMethod.GET)
+	@Transient
 	public JsonProtocol getMenuTypes(@PathVariable Integer restId) {
 		JsonProtocol jp = new JsonProtocol();
-		jp.setObject(ms.findAllMenuTypes(restId));
+		List<MenuTypeVo> lists = new ArrayList<>();
+		List<MenuType> mentList = ms.findAllMenuTypeList(restId);
+		if (mentList != null)
+			for (MenuType menuType : mentList) {
+				MenuTypeVo mVo = new MenuTypeVo();
+				mVo.setId(menuType.getId());
+				mVo.setMenuTypeName(menuType.getMenuTypeName());
+				mVo.setRestId(menuType.getRest().getId());
+				lists.add(mVo);
+			}
+		jp.setObject(lists);
 		return jp;
 	}
 
-//	/**
-//	 * get one order by id
-//	 * 
-//	 * @param id
-//	 * @return
-//	 */
-//	@RequestMapping(value = "/menuTypes/{id}", method = RequestMethod.GET)
-//	public JsonProtocol getMenuTypeById(@PathVariable Integer id) {
-//		JsonProtocol jp = new JsonProtocol();
-//		jp.setObject(ms.findMenuTypeById(id));
-//		return jp;
-//	}
+	// /**
+	// * get one order by id
+	// *
+	// * @param id
+	// * @return
+	// */
+	// @RequestMapping(value = "/menuTypes/{id}", method = RequestMethod.GET)
+	// public JsonProtocol getMenuTypeById(@PathVariable Integer id) {
+	// JsonProtocol jp = new JsonProtocol();
+	// jp.setObject(ms.findMenuTypeById(id));
+	// return jp;
+	// }
 
 	/**
 	 * add menu type with a string.
@@ -57,6 +75,7 @@ public class MenuAction {
 	 * @return
 	 */
 	@RequestMapping(value = "/menuTypes/{restId}", method = RequestMethod.POST)
+	@Transient
 	public JsonProtocol addMenuType(@PathVariable Integer restId,
 			String menuType) {
 		JsonProtocol jp = new JsonProtocol();
@@ -71,6 +90,7 @@ public class MenuAction {
 	 * @return
 	 */
 	@RequestMapping(value = "/restaurant/{restId}/menuTypes/{menuTypeId}", method = RequestMethod.DELETE)
+	@Transient
 	public JsonProtocol delMenuType(@PathVariable Integer restId,
 			@PathVariable Integer menuTypeId) {
 		JsonProtocol jp = new JsonProtocol();
@@ -86,6 +106,7 @@ public class MenuAction {
 	 * @return
 	 */
 	@RequestMapping(value = "/restaurant/{restId}/menuTypes/{menuTypeId}", method = RequestMethod.PUT)
+	@Transient
 	public JsonProtocol updMenuType(@PathVariable Integer restId,
 			@PathVariable Integer menuTypeId, String menuType) {
 		JsonProtocol jp = new JsonProtocol();
@@ -98,10 +119,21 @@ public class MenuAction {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "/menuItems/{menuTypeId}/all", method = RequestMethod.GET)
+	@RequestMapping(value = "/menuItems/{menuTypeId}", method = RequestMethod.GET)
+	@Transient
 	public JsonProtocol getMenuItems(@PathVariable Integer menuTypeId) {
 		JsonProtocol jp = new JsonProtocol();
-		jp.setObject(ms.findAllMenuItems(menuTypeId));
+		List<MenuItem> list = ms.findAllMenuItems(menuTypeId);
+		List<MenuItemVo> lists = new ArrayList<>();
+		for (MenuItem menuItem : list) {
+			MenuItemVo vo = new MenuItemVo();
+			vo.setId(menuItem.getId());
+			vo.setItemName(menuItem.getItemName());
+			vo.setTypeId(menuItem.getType().getId());
+			vo.setResturantId(menuItem.getResturant().getId());
+			lists.add(vo);
+		}
+		jp.setObject(lists);
 		return jp;
 	}
 
@@ -112,6 +144,7 @@ public class MenuAction {
 	 * @return
 	 */
 	@RequestMapping(value = "/menuItems/{id}/menuItemId", method = RequestMethod.GET)
+	@Transient
 	public JsonProtocol getMenuItemById(@PathVariable Integer id) {
 		JsonProtocol jp = new JsonProtocol();
 		jp.setObject(ms.getMenuItemById(id));
@@ -125,6 +158,7 @@ public class MenuAction {
 	 * @return
 	 */
 	@RequestMapping(value = "/menuItems/{menuTypeId}/menuType", method = RequestMethod.GET)
+	@Transient
 	public JsonProtocol getMenuItemsByMenuTypeId(
 			@PathVariable Integer menuTypeId) {
 		JsonProtocol jp = new JsonProtocol();
@@ -139,6 +173,7 @@ public class MenuAction {
 	 * @return
 	 */
 	@RequestMapping(value = "/menuItems/{restId}", method = RequestMethod.POST)
+	@Transient
 	public JsonProtocol addMenuItem(@PathVariable Integer restId,
 			MenuItem menuItem) {
 		JsonProtocol jp = new JsonProtocol();
@@ -152,10 +187,11 @@ public class MenuAction {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "/menuItems/{id}", method = RequestMethod.DELETE)
-	public JsonProtocol delMenuItem(@PathVariable Integer id) {
+	@RequestMapping(value = "/menuItems/{menuItemsId}", method = RequestMethod.DELETE)
+	@Transient
+	public JsonProtocol delMenuItem(@PathVariable Integer menuItemsId) {
 		JsonProtocol jp = new JsonProtocol();
-		jp.setResult(ms.delMenuItem(id));
+		jp.setResult(ms.delMenuItem(menuItemsId));
 		return jp;
 	}
 
@@ -166,12 +202,12 @@ public class MenuAction {
 	 * @param itemName
 	 * @return
 	 */
-	@RequestMapping(value = "/menuItems/{id}/name", method = RequestMethod.PUT)
-	public JsonProtocol updMenuItemName(@PathVariable Integer id,
+	@RequestMapping(value = "/menuItems/{menuTypeId}", method = RequestMethod.PUT)
+	@Transient
+	public JsonProtocol updMenuItemName(@PathVariable Integer menuTypeId,
 			String itemName) {
-
 		JsonProtocol jp = new JsonProtocol();
-		jp.setResult(ms.updMenuItemName(id, itemName));
+		jp.setResult(ms.updMenuItemName(menuTypeId, itemName));
 		return jp;
 	}
 
@@ -183,6 +219,7 @@ public class MenuAction {
 	 * @return
 	 */
 	@RequestMapping(value = "/menuItems/{id}/price", method = RequestMethod.PUT)
+	@Transient
 	public JsonProtocol updMenuItemPrice(@PathVariable Integer id, Double price) {
 		JsonProtocol jp = new JsonProtocol();
 		jp.setResult(ms.updMenuItemPrice(id, price));
@@ -197,6 +234,7 @@ public class MenuAction {
 	 * @return
 	 */
 	@RequestMapping(value = "/menuItems/{id}/descr", method = RequestMethod.PUT)
+	@Transient
 	public JsonProtocol updMenuItemDescription(@PathVariable Integer id,
 			String description) {
 		JsonProtocol jp = new JsonProtocol();
@@ -212,6 +250,7 @@ public class MenuAction {
 	 * @return
 	 */
 	@RequestMapping(value = "/menuItems/{id}/type", method = RequestMethod.PUT)
+	@Transient
 	public JsonProtocol updMenuItemType(@PathVariable Integer id, String type) {
 		JsonProtocol jp = new JsonProtocol();
 		jp.setResult(ms.updMenuItemDescription(id, type));
@@ -226,6 +265,7 @@ public class MenuAction {
 	 * @return
 	 */
 	@RequestMapping(value = "/menuItems/{id}/volume", method = RequestMethod.PUT)
+	@Transient
 	public JsonProtocol updMenuItemSalesVolume(@PathVariable Integer id,
 			Integer volume) {
 		JsonProtocol jp = new JsonProtocol();
@@ -241,6 +281,7 @@ public class MenuAction {
 	 * @return
 	 */
 	@RequestMapping(value = "/menuItems/{id}/score", method = RequestMethod.PUT)
+	@Transient
 	public JsonProtocol updMenuItemScore(@PathVariable Integer id, Double score) {
 		JsonProtocol jp = new JsonProtocol();
 		jp.setResult(ms.updMenuItemScore(id, score));
