@@ -165,16 +165,7 @@ var createOrdersDiv = function(status, data) {
 //	loadFinishOrders();
 //	loadFailOrders();
 
-<<<<<<< HEAD
-var loadOrders = function() {
-	console.log("so");
 
-	loadReceiveOrders();
-	loadFinishOrders();
-	loadFailOrders();
-};
-
-=======
 	var loadOrders = function() {
 		console.log("so");
 		
@@ -182,5 +173,4 @@ var loadOrders = function() {
 		loadFinishOrders();
 		loadFailOrders();
 	};
->>>>>>> 48ee97c1ea115cad7d3fc2d685e83d487b127f68
 //});
