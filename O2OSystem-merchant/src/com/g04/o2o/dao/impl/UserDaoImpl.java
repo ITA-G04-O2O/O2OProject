@@ -15,7 +15,7 @@ public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao{
 	public User searchUser(String username) {
 
 		String hql = "from User where loginName=:name";
-		Query query=manager.createQuery(hql);
+		Query query=manager.createQuery(hql); 
 		query.setParameter("name", username);
 		return (User) query.getSingleResult();
 	}
