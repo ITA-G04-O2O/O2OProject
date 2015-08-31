@@ -1,10 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
 Build-Jdk: 1.7.0_21
-Built-By: HUANGVI2
-=======
-Built-By: OUOK
-Build-Jdk: 1.8.0_40
->>>>>>> 448adadfff698f0c26b67940e362b3fd462699e0
+Built-By: LILE8
 Created-By: Maven Integration for Eclipse
 
